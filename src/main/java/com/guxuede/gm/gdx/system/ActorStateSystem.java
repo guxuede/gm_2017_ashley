@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.guxuede.gm.gdx.Mappers;
 import com.guxuede.gm.gdx.component.ActorComponent;
-import com.guxuede.gm.gdx.component.ActorStateComponent;
+import com.guxuede.gm.gdx.component.PositionComponent;
 
 /**
  * ActorComponent 与其他组件的连接
@@ -14,7 +14,7 @@ import com.guxuede.gm.gdx.component.ActorStateComponent;
 public class ActorStateSystem extends IteratingSystem {
 
 
-    private static final Family family = Family.all(ActorComponent.class,ActorStateComponent.class).get();
+    private static final Family family = Family.all(ActorComponent.class,PositionComponent.class).get();
 
     public ActorStateSystem(){
         super(family);
@@ -23,7 +23,7 @@ public class ActorStateSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         ActorComponent actorComponent = Mappers.actorCM.get(entity);
-        ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(entity);
-        actorComponent.setPosition(actorStateComponent.position.x,actorStateComponent.position.y);
+        PositionComponent positionComponent = Mappers.positionCM.get(entity);
+        actorComponent.setPosition(positionComponent.position.x,positionComponent.position.y);
     }
 }

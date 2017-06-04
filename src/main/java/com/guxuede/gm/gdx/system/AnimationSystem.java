@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.guxuede.gm.gdx.Mappers;
 import com.guxuede.gm.gdx.component.AnimationComponent;
+import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.component.PresentableComponent;
 
 /**
@@ -12,7 +13,7 @@ import com.guxuede.gm.gdx.component.PresentableComponent;
  */
 public class AnimationSystem extends IteratingSystem {
 
-    private static final Family family = Family.all(AnimationComponent.class,PresentableComponent.class).get();
+    private static final Family family = Family.all(AnimationComponent.class,PresentableComponent.class, PositionComponent.class).get();
 
     public AnimationSystem(){
         super(family);
@@ -20,11 +21,12 @@ public class AnimationSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        AnimationComponent animationComponent = Mappers.animationCM.get(entity);
-        animationComponent.stateTime += deltaTime;
+        PositionComponent positionComponent = Mappers.positionCM.get(entity);
         PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
+        AnimationComponent animationComponent = Mappers.animationCM.get(entity);
+
+        animationComponent.stateTime += deltaTime;
         presentableComponent.region = animationComponent.animation.getKeyFrame(animationComponent.stateTime,true);
-        presentableComponent.renderPosition.set(animationComponent.animationPosition);
-        presentableComponent.zIndex = animationComponent.animationPosition.y;
+        presentableComponent.zIndex = -positionComponent.position.y;
     }
 }

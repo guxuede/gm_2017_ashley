@@ -21,18 +21,20 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
+import com.guxuede.gm.gdx.Mappers;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
+import com.guxuede.gm.gdx.component.PositionComponent;
 
 import static com.guxuede.gm.gdx.Mappers.actorStateCM;
 
 public class MovementSystem extends IteratingSystem {
 
-    public static final float MOVE_VELOCITY = 10;
+    public static final float MOVE_VELOCITY = 20;
 
     private Vector2 tmp = new Vector2();
 
     public MovementSystem() {
-        super(Family.all(ActorStateComponent.class).get());
+        super(Family.all(ActorStateComponent.class, PositionComponent.class).get());
     }
 
     @Override
@@ -42,7 +44,8 @@ public class MovementSystem extends IteratingSystem {
         actorStateComponent.velocity.y = -actorStateComponent.acceleration.y / 10.0f * MOVE_VELOCITY;
         tmp.set(actorStateComponent.velocity).scl(deltaTime);
 
-        actorStateComponent.position.add(tmp);
+        PositionComponent positionComponent = Mappers.positionCM.get(entity);
+        positionComponent.position.add(tmp);
 
         actorStateComponent.isMoving = tmp.x != 0 || tmp.y!=0;
         if (actorStateComponent.isMoving){

@@ -22,7 +22,6 @@ public class ActorStateActorAnimationSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(entity);
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(entity);
-        actorAnimationComponent.animationPosition.set(actorStateComponent.position);
         actorAnimationComponent.direction = actorStateComponent.direction;
         actorAnimationComponent.isMoving = actorStateComponent.isMoving;
     }

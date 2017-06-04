@@ -5,8 +5,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.CameraComponent;
+import com.guxuede.gm.gdx.component.PositionComponent;
 
 public class CameraSystem extends IteratingSystem {
 
@@ -30,7 +30,7 @@ public class CameraSystem extends IteratingSystem {
 			return;
 		}
 
-        ActorStateComponent target = Mappers.actorStateCM.get(cam.target);
+        PositionComponent target = Mappers.positionCM.get(cam.target);
 
 		if (target == null) {
 			return;

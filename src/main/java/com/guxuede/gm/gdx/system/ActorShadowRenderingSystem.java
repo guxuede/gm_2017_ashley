@@ -7,13 +7,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.guxuede.gm.gdx.Mappers;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
+import com.guxuede.gm.gdx.component.PositionComponent;
 
 /**
  * Created by guxuede on 2017/5/31 .
  */
 public class ActorShadowRenderingSystem extends IteratingSystem {
 
-    private static final Family family = Family.all(ActorStateComponent.class).get();
+    private static final Family family = Family.all(ActorStateComponent.class, PositionComponent.class).get();
 
     SpriteBatch spriteBatch;
 
@@ -33,6 +34,7 @@ public class ActorShadowRenderingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         ActorStateComponent actorComponent = Mappers.actorStateCM.get(entity);
-        spriteBatch.draw(ResourceManager.shadow,actorComponent.position.x,actorComponent.position.y);
+        PositionComponent positionComponent = Mappers.positionCM.get(entity);
+        spriteBatch.draw(ResourceManager.shadow,positionComponent.position.x,positionComponent.position.y);
     }
 }

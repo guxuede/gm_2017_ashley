@@ -23,6 +23,7 @@ public class ActionsSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         ActionsComponent actionsComponent = Mappers.actionCM.get(entity);
+        actionsComponent.engine = getEngine();
         act(actionsComponent.actions,deltaTime);
     }
 

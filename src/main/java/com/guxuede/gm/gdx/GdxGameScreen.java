@@ -8,13 +8,18 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.guxuede.gm.gdx.actions.DelayAction;
+import com.guxuede.gm.gdx.actions.RemoveAction;
+import com.guxuede.gm.gdx.actions.RemoveActorAction;
 import com.guxuede.gm.gdx.actions.SequenceAction;
+import com.guxuede.gm.gdx.actions.animation.AnimationAttachAction;
+import com.guxuede.gm.gdx.actions.appearance.AlphaAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
 import com.guxuede.gm.gdx.actions.movement.MoveAction;
 import com.guxuede.gm.gdx.component.*;
 import com.guxuede.gm.gdx.system.*;
 import com.guxuede.gm.gdx.system.CameraSystem;
 import com.guxuede.gm.gdx.system.MovementSystem;
+import javafx.geometry.Pos;
 
 /**
  * Created by guxuede on 2017/5/30 .
@@ -38,11 +43,11 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new PresentableRenderingSystem(300,spriteBatch));
         engine.addSystem(new ActorShadowRenderingSystem(200,spriteBatch));
         engine.addSystem(new ActorLifeBarRenderingSystem(400,spriteBatch));
-        createActor();
         createPresentableComponentEntity();
         createPresentableComponentAnimationComponentEntity();
         createPresentableComponentAnimationComponentActorAnimationComponentEntity();
         createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
+        createActor();
     }
 
     @Override
@@ -55,11 +60,14 @@ public class GdxGameScreen extends ScreenAdapter {
     private Entity createPresentableComponentEntity() {
         Entity entity = engine.createEntity();
         PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
-        presentableComponent.renderPosition.set(100,100);
         presentableComponent.region = ResourceManager.getTextureRegion("Aquatic");
         presentableComponent.zIndex = -1;
-
         entity.add(presentableComponent);
+
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.position.set(100,100);
+        entity.add(positionComponent);
+
         engine.addEntity(entity);
         return entity;
     }
@@ -68,9 +76,11 @@ public class GdxGameScreen extends ScreenAdapter {
         Entity entity = engine.createEntity();
         AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
         animationComponent.animation = ResourceManager.getAnimationHolder("Undead").getAnimation(AnimationHolder.WALK_DOWN_ANIMATION);
-        animationComponent.animationPosition.set(20,20);
         PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
 
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.position.set(20,20);
+        entity.add(positionComponent);
         entity.add(animationComponent);
         entity.add(presentableComponent);
         engine.addEntity(entity);
@@ -83,11 +93,13 @@ public class GdxGameScreen extends ScreenAdapter {
         actorAnimationComponent.animationHolder = ResourceManager.getAnimationHolder("Undead");
         actorAnimationComponent.isMoving = true;
         actorAnimationComponent.direction = ActorAnimationComponent.LEFT;
-        actorAnimationComponent.animationPosition.set(30,30);
 
         AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
         PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
 
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.position.set(100,20);
+        entity.add(positionComponent);
         entity.add(actorAnimationComponent);
         entity.add(animationComponent);
         entity.add(presentableComponent);
@@ -101,7 +113,6 @@ public class GdxGameScreen extends ScreenAdapter {
         ActorStateComponent actorStateComponent = engine.createComponent(ActorStateComponent.class);
         actorStateComponent.isMoving = true;
         actorStateComponent.direction = ActorAnimationComponent.RIGHT;
-        actorStateComponent.position.set(50,50);
         actorStateComponent.velocity.set(5,5);
         actorStateComponent.acceleration.set(10,10);
         ActorAnimationComponent actorAnimationComponent = engine.createComponent(ActorAnimationComponent.class);
@@ -113,6 +124,10 @@ public class GdxGameScreen extends ScreenAdapter {
         ActionsComponent actionsComponent = engine.createComponent(ActionsComponent.class);
         actionsComponent.addAction(entity, new SequenceAction(new DelayAction(2),new BlinkAction()));
         entity.add(actionsComponent);
+
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.position.set(50,50);
+        entity.add(positionComponent);
 
         entity.add(actorStateComponent);
         entity.add(actorAnimationComponent);
@@ -132,12 +147,15 @@ public class GdxGameScreen extends ScreenAdapter {
         ActorStateComponent actorStateComponent = engine.createComponent(ActorStateComponent.class);
         ActorComponent gdxActorComponent = engine.createComponent(ActorComponent.class);
         ActorShadowComponent actorShadowComponent = engine.createComponent(ActorShadowComponent.class);
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.position.set(0,0);
 
         CameraComponent cameraComponent = engine.createComponent(CameraComponent.class);
         cameraComponent.camera = new MovableOrthographicCamera();
         cameraComponent.target = entity;
-        entity.add(cameraComponent);
 
+        entity.add(positionComponent);
+        entity.add(cameraComponent);
         entity.add(animationHolder);
         entity.add(animationComponent);
         entity.add(actorStateComponent);
@@ -145,6 +163,25 @@ public class GdxGameScreen extends ScreenAdapter {
         entity.add(presentableComponent);
         entity.add(actorShadowComponent);
         engine.addEntity(entity);
+
+        Entity entity1 = engine.createEntity();
+        AnimationComponent animationComponent1 = engine.createComponent(AnimationComponent.class);
+        animationComponent1.animation = ResourceManager.getAnimationHolder("yuanQuan").getStopDownAnimation();
+        PresentableComponent presentableComponent1 = engine.createComponent(PresentableComponent.class);
+        presentableComponent1.baseZIndex = -99999999f;
+        ActionsComponent actionsComponent = engine.createComponent(ActionsComponent.class);
+        AlphaAction alphaAction = new AlphaAction();
+        alphaAction.setDuration(5);
+        alphaAction.setAlpha(0.0f);
+        actionsComponent.addAction(entity1,new SequenceAction(alphaAction,new AnimationAttachAction(50,entity),new RemoveActorAction()));
+        PositionComponent positionComponent1 = engine.createComponent(PositionComponent.class);
+        positionComponent1.position.set(20,20);
+        entity1.add(positionComponent1);
+        entity1.add(animationComponent1);
+        entity1.add(presentableComponent1);
+        entity1.add(actionsComponent);
+        engine.addEntity(entity1);
+
         return entity;
     }
 
@@ -176,11 +213,12 @@ public class GdxGameScreen extends ScreenAdapter {
                 accelY = 0;
             }
         }
-        Entity entity = engine.getEntities().first();
-        if(entity!=null){
-            ActorStateComponent actorStateComponent = entity.getComponent(ActorStateComponent.class);
-            if(actorStateComponent!=null)
-            actorStateComponent.acceleration.set(accelX*10,accelY*10);
+        for(Entity entity :engine.getEntities()){
+            ActorComponent actorComponent = entity.getComponent(ActorComponent.class);
+                if(actorComponent!=null){
+                    Mappers.actorStateCM.get(entity).acceleration.set(accelX*11,accelY*11);
+                    break;
+                }
         }
     }
 }

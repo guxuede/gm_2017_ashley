@@ -1,6 +1,7 @@
 package com.guxuede.gm.gdx.component;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
 import com.guxuede.gm.gdx.actions.Action;
@@ -10,6 +11,7 @@ import com.guxuede.gm.gdx.actions.Action;
  */
 public class ActionsComponent implements Component {
 
+    public Engine engine;
     public final Array<Action> actions = new Array(0);
 
     public void addAction (Entity entity,Action action) {

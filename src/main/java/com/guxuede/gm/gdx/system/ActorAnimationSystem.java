@@ -65,6 +65,5 @@ public class ActorAnimationSystem extends IteratingSystem {
         AnimationComponent animationComponent = Mappers.animationCM.get(entity);
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(entity);
         animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(animationName);
-        animationComponent.animationPosition.set(actorAnimationComponent.animationPosition);
     }
 }

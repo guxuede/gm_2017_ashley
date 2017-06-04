@@ -11,5 +11,4 @@ public class ActorAnimationComponent implements Component {
 	public AnimationHolder animationHolder;
     public int direction;
     public boolean isMoving;
-    public final Vector2 animationPosition = new Vector2();
 }
