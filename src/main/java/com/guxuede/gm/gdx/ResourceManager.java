@@ -8,11 +8,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ResourceManager {
+    private static ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("nashorn");
     private static final Map<String,Sound> soundMap = new HashMap<String, Sound>();
     private static final Map<String,Texture> TEXTURE_MAP = new HashMap<String, Texture>();
     private static final Map<String,TextureRegion> TEXTURE_REGION_MAP =  new HashMap<String, TextureRegion>();
@@ -92,4 +95,7 @@ public class ResourceManager {
         return soundMap.get(soundFile);
     }
 
+    public static ScriptEngine getScriptEngine() {
+        return scriptEngine;
+    }
 }

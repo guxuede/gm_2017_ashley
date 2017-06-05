@@ -18,10 +18,11 @@ import java.util.Comparator;
  */
 public class PresentableRenderingSystem extends SortedIteratingSystem {
 
-    public static final float alphaModulation = 0.5f;
+    public static final float alphaModulation = 1f;
     private static final Family family = Family.all(PresentableComponent.class, PositionComponent.class).get();
     private SpriteBatch batch;
     private Color tmpColor = new Color();
+
     private static final Comparator<Entity> comparator = new Comparator<Entity>() {
         @Override
         public int compare(Entity entityA, Entity entityB) {
