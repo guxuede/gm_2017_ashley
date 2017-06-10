@@ -1,10 +1,6 @@
 package com.guxuede.gm.gdx.actions.appearance;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.GdxSprite;
 import com.guxuede.gm.gdx.Mappers;
 import com.guxuede.gm.gdx.MathUtils;
 import com.guxuede.gm.gdx.actions.RelativeTemporalAction;
@@ -16,7 +12,7 @@ import com.guxuede.gm.gdx.component.PresentableComponent;
  */
 public class ScaleToLineAction  extends RelativeTemporalAction {
 
-    Entity e1,e2;
+    private Entity e1,e2;
 
     public ScaleToLineAction(Entity e1,Entity e2,float duration) {
         this.e1 = e1;
@@ -29,25 +25,19 @@ public class ScaleToLineAction  extends RelativeTemporalAction {
         PositionComponent p1 = Mappers.positionCM.get(e2);
         PositionComponent p2 = Mappers.positionCM.get(e1);
 
-
         float degrees = MathUtils.getAngle(p1.position.x,p1.position.y,p2.position.x,p2.position.y);
+        float distance = p1.position.dst(p2.position);//2单位之间的距离
+        float lightLen = 128;//闪电素材的长度
 
-        float distance = (float) MathUtils.distance(p1.position.x,p1.position.y,p2.position.x,p2.position.y);//2单位之间的距离
-        float lightLen = 192;//闪电素材的长度
-
-        float drxa = p1.position.x + com.badlogic.gdx.math.MathUtils.cosDeg(degrees) * (distance/2);
-        float drya = p1.position.y + com.badlogic.gdx.math.MathUtils.sinDeg(degrees) * (distance/2);
-
-        float tsaclex = 1;
-        float tscalex = distance/lightLen;
-        float rotation = degrees+90;
+        float targetX = p1.position.x + com.badlogic.gdx.math.MathUtils.cosDeg(degrees) * (distance/2);
+        float targetY = p1.position.y + com.badlogic.gdx.math.MathUtils.sinDeg(degrees) * (distance/2);
 
         PositionComponent p = Mappers.positionCM.get(actor);
         PresentableComponent pc = Mappers.presentableCM.get(actor);
-        p.position.set(drxa,drya);
-        pc.rotation = rotation;
-        pc.scaleX = tsaclex;
-        pc.scaleY = tscalex;
+        p.position.set(targetX,targetY);
+        pc.rotation = degrees+90;
+        pc.scaleX = 1;
+        pc.scaleY = distance/lightLen;
     }
 
 }

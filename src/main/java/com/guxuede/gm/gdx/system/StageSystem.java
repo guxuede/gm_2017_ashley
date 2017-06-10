@@ -70,6 +70,10 @@ public class StageSystem extends IteratingSystem {
         return stage;
     }
 
+    public Entity getViewActor() {
+        return viewActor;
+    }
+
     @Override
     public void addedToEngine(final Engine engine) {
         super.addedToEngine(engine);

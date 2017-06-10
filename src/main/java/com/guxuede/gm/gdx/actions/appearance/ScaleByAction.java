@@ -9,7 +9,14 @@ import com.guxuede.gm.gdx.component.PresentableComponent;
 /** Scales an actor's scale to a relative size.
  * @author Nathan Sweet */
 public class ScaleByAction extends RelativeTemporalAction {
-	private float amountX, amountY;
+
+    private float amountX, amountY;
+
+    public ScaleByAction(float amountX,float amountY,float duration){
+        this.amountX = amountX;
+        this.amountY = amountY;
+        setDuration(duration);
+    }
 
 	protected void updateRelative (float percentDelta) {
         PresentableComponent presentableComponent = Mappers.presentableCM.get(actor);

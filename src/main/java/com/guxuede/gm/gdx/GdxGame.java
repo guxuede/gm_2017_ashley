@@ -18,6 +18,7 @@ package com.guxuede.gm.gdx;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 
 public class GdxGame extends Game {
@@ -26,11 +27,12 @@ public class GdxGame extends Game {
 	public void create () {
 		setScreen(new GdxGameScreen());
 	}
-	
+    Color color = Color.valueOf("969291");
+
 	@Override
 	public void render() {
 		GL20 gl = Gdx.gl;
-		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		gl.glClearColor(color.r,color.g,color.b,color.a);
 		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render();
 	}

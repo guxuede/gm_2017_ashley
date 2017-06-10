@@ -13,13 +13,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.guxuede.gm.gdx.actions.DelayAction;
 import com.guxuede.gm.gdx.actions.RemoveActorAction;
 import com.guxuede.gm.gdx.actions.SequenceAction;
-import com.guxuede.gm.gdx.actions.animation.AnimationAttachAction;
-import com.guxuede.gm.gdx.actions.appearance.AlphaAction;
+import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actions.appearance.ScaleToLineAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
-import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.system.*;
-import com.guxuede.gm.gdx.system.MovementSystem;
 
 /**
  * Created by guxuede on 2017/5/30 .
@@ -45,7 +43,12 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem( new StageSystem(spriteBatch,viewport));
         engine.addSystem(new PresentableRenderingSystem(300,spriteBatch));
         engine.addSystem(new ActorShadowRenderingSystem(200,spriteBatch));
-        engine.addSystem(new ActorLifeBarRenderingSystem(400,spriteBatch));
+        engine.addSystem(new ActorLifeBarRenderingSystem(500,spriteBatch));
+        MapSystem mapSystem = new MapSystem("data/desert1.tmx",spriteBatch,camera);
+        engine.addSystem(mapSystem);
+        engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{0}));//优先级越低，先画到最底部
+        engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{1}));
+        engine.addSystem(new MapRenderingSystem(101,mapSystem,new int[]{2}));
         createPresentableComponentEntity();
         createPresentableComponentAnimationComponentEntity();
         createPresentableComponentAnimationComponentActorAnimationComponentEntity();
@@ -61,149 +64,27 @@ public class GdxGameScreen extends ScreenAdapter {
 
     //测试只有一个PresentableComponent 时可以画出静态图片
     private Entity createPresentableComponentEntity() {
-        Entity entity = engine.createEntity();
-        PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
-        presentableComponent.region = ResourceManager.getTextureRegion("Aquatic");
-        presentableComponent.zIndex = -1;
-        entity.add(presentableComponent);
-
-        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.position.set(100,100);
-        entity.add(positionComponent);
-
-        engine.addEntity(entity);
-        return entity;
+        return E.create(engine).presentable("Aquatic",-1).pos(100,100).buildToWorld();
     }
     //测试只有一个PresentableComponent+一个AnimationComponent时可以画出动态动画
     private Entity createPresentableComponentAnimationComponentEntity() {
-        Entity entity = engine.createEntity();
-        AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
-        animationComponent.animation = ResourceManager.getAnimationHolder("Undead").getAnimation(AnimationHolder.WALK_DOWN_ANIMATION);
-        PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
-
-        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.position.set(20,20);
-        entity.add(positionComponent);
-        entity.add(animationComponent);
-        entity.add(presentableComponent);
-        engine.addEntity(entity);
-        return entity;
+        return E.create(engine).animation("Undead").pos(300,300).buildToWorld();
     }
     //测试只有一个PresentableComponent+一个AnimationComponent+一个ActorAnimationComponent时可以画出角色状态动态动画
     private Entity createPresentableComponentAnimationComponentActorAnimationComponentEntity() {
-        Entity entity = engine.createEntity();
-        ActorAnimationComponent actorAnimationComponent = engine.createComponent(ActorAnimationComponent.class);
-        actorAnimationComponent.animationHolder = ResourceManager.getAnimationHolder("Undead");
-        actorAnimationComponent.isMoving = true;
-        actorAnimationComponent.direction = ActorAnimationComponent.LEFT;
-
-        AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
-        PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
-
-        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.position.set(100,20);
-        entity.add(positionComponent);
-        entity.add(actorAnimationComponent);
-        entity.add(animationComponent);
-        entity.add(presentableComponent);
-        engine.addEntity(entity);
-        return entity;
+        return E.create(engine).actorAnimation("Undead",ActorAnimationComponent.DOWN,true,0).pos(100,20).buildToWorld();
     }
 
     //测试只有一个PresentableComponent+一个AnimationComponent+一个ActorAnimationComponent+一个ActorStateComponent时可以画出以一定速度移动地角色状态动态动画
     private Entity createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity() {
-        Entity entity = engine.createEntity();
-        ActorStateComponent actorStateComponent = engine.createComponent(ActorStateComponent.class);
-        actorStateComponent.isMoving = true;
-        actorStateComponent.direction = ActorAnimationComponent.RIGHT;
-        actorStateComponent.velocity.set(5,5);
-        actorStateComponent.acceleration.set(10,10);
-        ActorAnimationComponent actorAnimationComponent = engine.createComponent(ActorAnimationComponent.class);
-        actorAnimationComponent.animationHolder = ResourceManager.getAnimationHolder("Undead");
-
-        AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
-        PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
-
-        ActionsComponent actionsComponent = engine.createComponent(ActionsComponent.class);
-        actionsComponent.addAction(entity, new SequenceAction(new DelayAction(2),new BlinkAction()));
-        entity.add(actionsComponent);
-
-        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.position.set(50,50);
-        entity.add(positionComponent);
-
-        entity.add(actorStateComponent);
-        entity.add(actorAnimationComponent);
-        entity.add(animationComponent);
-        entity.add(presentableComponent);
-        engine.addEntity(entity);
-        return entity;
+        return E.create(engine).actorState(ActorAnimationComponent.RIGHT,true,5f,5f,10f,10f)
+                .actorAnimation("Undead").pos(0,0).actions(new SequenceAction(new DelayAction(2),new BlinkAction(),new ScaleByAction(1,1,10f))).buildToWorld();
     }
 
     private void createActor() {
-        Entity entity = engine.createEntity();
-        {
-        ActorAnimationComponent animationHolder = engine.createComponent(ActorAnimationComponent.class);
-        animationHolder.animationHolder = ResourceManager.getAnimationHolder("Undead");
-        AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
-        PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
-
-        ActorStateComponent actorStateComponent = engine.createComponent(ActorStateComponent.class);
-        ActorComponent gdxActorComponent = engine.createComponent(ActorComponent.class);
-        ActorShadowComponent actorShadowComponent = engine.createComponent(ActorShadowComponent.class);
-        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.position.set(0,0);
-
-        entity.add(positionComponent);
-        entity.add(animationHolder);
-        entity.add(animationComponent);
-        entity.add(actorStateComponent);
-        entity.add(gdxActorComponent);
-        entity.add(presentableComponent);
-        entity.add(actorShadowComponent);
-        engine.addEntity(entity);
-        }
-        Entity entity0 = engine.createEntity();
-        {
-            ActorAnimationComponent animationHolder = engine.createComponent(ActorAnimationComponent.class);
-            animationHolder.animationHolder = ResourceManager.getAnimationHolder("Undead");
-            AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
-            PresentableComponent presentableComponent = engine.createComponent(PresentableComponent.class);
-
-            ActorStateComponent actorStateComponent = engine.createComponent(ActorStateComponent.class);
-            ActorComponent gdxActorComponent = engine.createComponent(ActorComponent.class);
-            ActorShadowComponent actorShadowComponent = engine.createComponent(ActorShadowComponent.class);
-            PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-            positionComponent.position.set(0,0);
-
-            entity0.add(positionComponent);
-            entity0.add(animationHolder);
-            entity0.add(animationComponent);
-            entity0.add(actorStateComponent);
-            entity0.add(gdxActorComponent);
-            entity0.add(presentableComponent);
-            entity0.add(actorShadowComponent);
-            engine.addEntity(entity0);
-        }
-        {
-            Entity entity1 = engine.createEntity();
-            AnimationComponent animationComponent1 = engine.createComponent(AnimationComponent.class);
-            animationComponent1.animation = ResourceManager.getAnimationHolder("lightningLine1").getStopDownAnimation();
-            PresentableComponent presentableComponent1 = engine.createComponent(PresentableComponent.class);
-            presentableComponent1.baseZIndex = -999999989f;
-            ActionsComponent actionsComponent = engine.createComponent(ActionsComponent.class);
-            AlphaAction alphaAction = new AlphaAction();
-            alphaAction.setDuration(5);
-            alphaAction.setAlpha(0.5f);
-            actionsComponent.addAction(entity1, new SequenceAction(new ScaleToLineAction(entity,entity0, 100), new RemoveActorAction()));
-            PositionComponent positionComponent1 = engine.createComponent(PositionComponent.class);
-            positionComponent1.position.set(20, 20);
-            entity1.add(positionComponent1);
-            entity1.add(animationComponent1);
-            entity1.add(presentableComponent1);
-            entity1.add(actionsComponent);
-            engine.addEntity(entity1);
-        }
+        Entity entity = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(0,0).buildToWorld();
+        Entity entity0 = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(300,0).buildToWorld();
+        E.create(engine).animation("lightningLine1").pos(0,0).actions(new SequenceAction(new ScaleToLineAction(entity,entity0, 100), new RemoveActorAction())).buildToWorld();
     }
 
 
@@ -234,12 +115,9 @@ public class GdxGameScreen extends ScreenAdapter {
                 accelY = 0;
             }
         }
-        for(Entity entity :engine.getEntities()){
-            ActorComponent actorComponent = entity.getComponent(ActorComponent.class);
-                if(actorComponent!=null){
-                    Mappers.actorStateCM.get(entity).acceleration.set(accelX*11,accelY*11);
-                    break;
-                }
+       final Entity viewActor = engine.getSystem(StageSystem.class).getViewActor();
+        if(viewActor!=null){
+            Mappers.actorStateCM.get(viewActor).acceleration.set(accelX*11,accelY*11);
         }
     }
 
