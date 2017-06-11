@@ -24,7 +24,7 @@ public class MapMask {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         v = new boolean[height][width];
-        generate(layers, propertyKey);
+        generate(layers,1);
     }
 
     /**
@@ -65,6 +65,18 @@ public class MapMask {
                 }
             }
         }
+    }
+
+    private void generate(Array<TiledMapTileLayer> layers,int layerIndex) {
+        TiledMapTileLayer layer = layers.get(layerIndex);
+            for (int ty = 0; ty < height; ty++) {
+                for (int tx = 0; tx < width; tx++) {
+                    final TiledMapTileLayer.Cell cell = layer.getCell(tx, ty);
+                    if ( cell != null && cell.getTile() != null) {
+                        v[ty][tx] = true;
+                    }
+                }
+            }
     }
 }
 
