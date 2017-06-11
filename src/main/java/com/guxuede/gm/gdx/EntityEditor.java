@@ -106,6 +106,11 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
+    public EntityEditor bounds(){
+        entity.add(edit.create(BoundsComponent.class));
+        return this;
+    }
+
 
 
     public Entity build() {

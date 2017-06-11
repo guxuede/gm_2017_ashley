@@ -35,6 +35,7 @@ public class MovementSystem extends IteratingSystem {
 
     public MovementSystem() {
         super(Family.all(ActorStateComponent.class, PositionComponent.class).get());
+        this.priority = 1;
     }
 
     @Override

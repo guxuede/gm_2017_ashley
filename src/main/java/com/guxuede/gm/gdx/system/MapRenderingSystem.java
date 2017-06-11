@@ -8,6 +8,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 /**
+ * 使用它画第一层地板第二层人物的效果
+ *         engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{0}));//优先级越低，先画到最底部
+            engine.addSystem(new MapRenderingSystem(101,mapSystem,new int[]{1}));
+            engine.addSystem(new MapRenderingSystem(400,mapSystem,new int[]{2}));
+    但是engine不支持增加相同类型的system。
  * Created by guxuede on 2017/6/10 .
  */
 public class MapRenderingSystem extends EntitySystem {
@@ -23,8 +28,6 @@ public class MapRenderingSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-       // mapSystem.renderer.render(layers);
-        mapSystem.renderer.render(new int[]{0});
-        mapSystem.renderer.render(new int[]{1});
+        mapSystem.renderer.render(layers);
     }
 }

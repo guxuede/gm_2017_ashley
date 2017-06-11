@@ -33,26 +33,26 @@ public class GdxGameScreen extends ScreenAdapter {
         spriteBatch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),camera);
+        viewport.apply();
         engine = new PooledEngine();
         engine.addSystem(new ActorAnimationSystem());
         engine.addSystem(new ActorStateActorAnimationSystem());
         engine.addSystem(new ActionsSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new ActorStateSystem());
-        engine.addSystem(new MovementSystem());
         engine.addSystem( new StageSystem(spriteBatch,viewport));
         engine.addSystem(new PresentableRenderingSystem(300,spriteBatch));
         engine.addSystem(new ActorShadowRenderingSystem(200,spriteBatch));
         engine.addSystem(new ActorLifeBarRenderingSystem(500,spriteBatch));
-        MapSystem mapSystem = new MapSystem("data/desert1.tmx",spriteBatch,camera);
+        MapSystem mapSystem = new MapSystem("data/desert1.tmx",spriteBatch,camera);//24,14  27,5
+        engine.addSystem(new MapCollisionSystem(mapSystem));
+        engine.addSystem(new MovementSystem());
         engine.addSystem(mapSystem);
-        engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{0}));//优先级越低，先画到最底部
-        engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{1}));
-        engine.addSystem(new MapRenderingSystem(101,mapSystem,new int[]{2}));
-        createPresentableComponentEntity();
-        createPresentableComponentAnimationComponentEntity();
-        createPresentableComponentAnimationComponentActorAnimationComponentEntity();
-        createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
+        engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{0,1,2}));//优先级越低，先画到最底部
+        //createPresentableComponentEntity();
+        //createPresentableComponentAnimationComponentEntity();
+        //createPresentableComponentAnimationComponentActorAnimationComponentEntity();
+        //createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
         createActor();
     }
 
@@ -82,9 +82,9 @@ public class GdxGameScreen extends ScreenAdapter {
     }
 
     private void createActor() {
-        Entity entity = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(0,0).buildToWorld();
-        Entity entity0 = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(300,0).buildToWorld();
-        E.create(engine).animation("lightningLine1").pos(0,0).actions(new SequenceAction(new ScaleToLineAction(entity,entity0, 100), new RemoveActorAction())).buildToWorld();
+        Entity entity = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(0,0).bounds().buildToWorld();
+        //Entity entity0 = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(300,0).bounds().buildToWorld();
+        //E.create(engine).animation("lightningLine1").pos(0,0).actions(new SequenceAction(new ScaleToLineAction(entity,entity0, 100), new RemoveActorAction())).buildToWorld();
     }
 
 

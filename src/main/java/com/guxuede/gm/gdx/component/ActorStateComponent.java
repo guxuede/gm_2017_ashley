@@ -38,6 +38,7 @@ public class ActorStateComponent implements Component{
     public boolean hasShadow = true;
 
 
+    public float bounce = 0;
     public final Vector2 velocity = new Vector2();//速度
     public final Vector2 acceleration = new Vector2();//加速度，要有加速度才能有速度
 
