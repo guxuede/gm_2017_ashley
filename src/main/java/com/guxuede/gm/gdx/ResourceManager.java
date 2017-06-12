@@ -3,6 +3,8 @@ package com.guxuede.gm.gdx;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -23,6 +25,16 @@ public class ResourceManager {
     private static final List<AnimationHolder> ANIMATION_HOLDER_LIST = ActorJsonParse.parse(Gdx.files.internal("data/actors"));
 
     public static Sprite shadow = new Sprite(getTextureRegion("data/180-Switch03",96,96,32,32));
+
+    public static Sprite mouseAreaIndicator=new GdxSprite(getTextureRegion("data/Gun2", 0, 0, 192, 192));
+    public static Sprite mouseTargetIndicator=new GdxSprite(getTextureRegion("data/Gun2", 84, 84, 24, 24));
+    static {
+        mouseAreaIndicator.setOriginCenter();
+        mouseTargetIndicator.setOriginCenter();
+    }
+
+    public static Cursor customCursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("data/cursor_1.gif")), 0, 0);
+
 
     public static Texture getTexture(String name){
         Texture texture = null;

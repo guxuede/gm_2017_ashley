@@ -9,12 +9,18 @@ import com.guxuede.gm.gdx.component.*;
 
 public final class EntityEdit {
 
-    protected PooledEngine engine;
+    protected PooledEngine engine = SingletonPooledEngine.instance;
 
-    EntityEdit(PooledEngine engine) {
-        this.engine = engine;
+    EntityEdit() {
     }
 
+    public Entity createEntity(){
+        return engine.createEntity();
+    }
+
+    public void addToEngine(Entity entity){
+        engine.addEntity(entity);
+    }
 
     public <T extends Component> T create(Class<T> componentKlazz) {
         return engine.createComponent(componentKlazz);

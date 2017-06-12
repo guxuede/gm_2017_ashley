@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,13 +33,13 @@ public class StageSystem extends IteratingSystem {
     private Stage stage;
     private Entity viewActor;
 
-    public StageSystem(SpriteBatch batch, Viewport viewport) {
+    public StageSystem(SpriteBatch batch, Viewport viewport, InputMultiplexer inputMultiplexer) {
         super(family);
         this.camera = (OrthographicCamera) viewport.getCamera();
         this.stage = new Stage(viewport,batch);
         this.stage.setDebugAll(true);
         this.spriteBatch = batch;
-        Gdx.input.setInputProcessor(stage);
+        inputMultiplexer.addProcessor(this.stage);
         InputListenerMultiplexer inputListenerMultiplexer = new InputListenerMultiplexer();
         inputListenerMultiplexer.addListener(new InputListener() {
             @Override

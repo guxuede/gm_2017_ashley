@@ -1,6 +1,7 @@
 package com.guxuede.gm.gdx;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.guxuede.gm.gdx.actions.Action;
@@ -11,17 +12,21 @@ import com.guxuede.gm.gdx.component.*;
  */
 public abstract class EntityEditor<T extends EntityEditor>{
 
-    private EntityEdit edit;
+    private EntityEdit edit = new EntityEdit();
     private Entity entity;
 
-    protected T editEntity(PooledEngine engine, Entity entity) {
+    public T editEntity(Entity entity) {
         this.entity = entity;
-        this.edit = new EntityEdit(engine);
         return (T) this;
     }
 
-    protected final T createEntity(PooledEngine engine) {
-        editEntity(engine,engine.createEntity());
+    public final T createEntity() {
+        editEntity(edit.createEntity());
+        return (T) this;
+    }
+
+    public final T removeEntity(Entity entity) {
+        edit.engine.removeEntity(entity);
         return (T) this;
     }
 
@@ -116,15 +121,13 @@ public abstract class EntityEditor<T extends EntityEditor>{
     public Entity build() {
         final Entity tmp = this.entity;
         entity = null;
-        edit = null;
         return tmp;
     }
 
     public Entity buildToWorld() {
-        edit.engine.addEntity(this.entity);
+        edit.addToEngine(this.entity);
         final Entity tmp = this.entity;
         entity = null;
-        edit = null;
         return tmp;
     }
 

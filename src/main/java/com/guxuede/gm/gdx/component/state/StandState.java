@@ -2,12 +2,16 @@ package com.guxuede.gm.gdx.component.state;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.SingletonPooledEngine;
 import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.component.skill.Skill;
+import com.guxuede.gm.gdx.system.MouseSystem;
 
 import static com.guxuede.gm.gdx.component.ActorStateComponent.*;
+import static com.guxuede.gm.gdx.component.skill.SkillTargetTypeEnum.TARGET_TYPE_AREA;
 
 /**
  * Created by guxuede on 2016/6/15 .
@@ -44,7 +48,30 @@ public class StandState extends ActorState {
             if(skillComponent!=null){
                 for (final Skill skill : skillComponent.skills) {
                     if (skill.getHotKey() == event.getKeyCode() && skill.isAvailable) {
-
+                        MouseSystem.MouseIndicatorListener listener = new MouseSystem.MouseIndicatorListener() {
+                            @Override
+                            public boolean onHoner(Entity animationEntity, Vector2 center, float r) {
+                                return true;
+                            }
+                            @Override
+                            public void onActive(Entity animationEntity, Vector2 center, float r) {
+                                if(skill.verifyTarget(animationEntity,center,r)){
+                                    skill.targetEntry = animationEntity;
+                                    skill.owner = entity;
+                                    skill.targetPos = center==null?null:center.cpy();
+                                    AttackState actorState = new AttackState(direction);
+                                    actorState.skill = skill;
+                                    skill.enter();
+                                    skill.isAvailable = false;
+                                    Mappers.actorStateCM.get(animationEntity).goingToNewState(animationEntity,actorState,null);
+                                }
+                            }
+                        };
+                        if (skill.getTargetType() == TARGET_TYPE_AREA) {
+                            SingletonPooledEngine.instance.getSystem(MouseSystem.class).enterToAreaChoiceStatus(100, listener);
+                        } else {
+                            SingletonPooledEngine.instance.getSystem(MouseSystem.class).enterToTargetChoiceStatus(listener);
+                        }
                         break;
                     }
                 }

@@ -18,14 +18,18 @@ public class E extends EntityEditor<E> {
 
     private static final E instance=new E();
 
-    public static E create(PooledEngine engine)
+    public static E create()
     {
-        return instance.createEntity(engine);
+        return instance.createEntity();
+    }
+    public static E remove(Entity entity)
+    {
+        return instance.removeEntity(entity);
+    }
+    public static E edit(Entity e)
+    {
+        return instance.editEntity(e);
     }
 
-    public static E edit(PooledEngine engine,Entity e)
-    {
-        return instance.editEntity(engine,e);
-    }
 
 }
