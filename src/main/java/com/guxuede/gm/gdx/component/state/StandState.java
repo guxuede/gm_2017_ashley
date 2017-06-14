@@ -62,8 +62,8 @@ public class StandState extends ActorState {
                                     AttackState actorState = new AttackState(direction);
                                     actorState.skill = skill;
                                     skill.enter();
-                                    skill.isAvailable = false;
-                                    Mappers.actorStateCM.get(animationEntity).goingToNewState(animationEntity,actorState,null);
+                                    //skill.isAvailable = false;
+                                    Mappers.actorStateCM.get(entity).goingToNewState(animationEntity,actorState,null);
                                 }
                             }
                         };

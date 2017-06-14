@@ -4,13 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-import com.guxuede.gm.gdx.actions.Action;
-import com.guxuede.gm.gdx.actions.AfterAction;
-import com.guxuede.gm.gdx.actions.DelayAction;
-import com.guxuede.gm.gdx.actions.ParallelAction;
-import com.guxuede.gm.gdx.actions.RepeatAction;
-import com.guxuede.gm.gdx.actions.RunnableAction;
-import com.guxuede.gm.gdx.actions.SequenceAction;
+import com.guxuede.gm.gdx.actions.*;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
 
@@ -174,6 +168,111 @@ public final class A {
         RemoveEntityAction removeEntityAction = action(RemoveEntityAction.class);
         return removeEntityAction;
     }
+    //////////////////////////////////////////////////////////////工具类 START///////////////////////////////////////////////////////////////////////
+    static public GdxSequenceAction gdxSequence (Action action1) {
+        GdxSequenceAction action = action(GdxSequenceAction.class);
+        action.addAction(action1);
+        return action;
+    }
+
+
+    static public GdxSequenceAction gdxSequence (Action action1, Action action2) {
+        GdxSequenceAction action = action(GdxSequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        return action;
+    }
+
+    static public GdxSequenceAction gdxSequence (Action action1, Action action2, Action action3) {
+        GdxSequenceAction action = action(GdxSequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        return action;
+    }
+
+    static public GdxSequenceAction gdxSequence (Action action1, Action action2, Action action3, Action action4) {
+        GdxSequenceAction action = action(GdxSequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        return action;
+    }
+
+    static public GdxSequenceAction gdxSequence (Action action1, Action action2, Action action3, Action action4, Action action5) {
+        GdxSequenceAction action = action(GdxSequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        action.addAction(action5);
+        return action;
+    }
+
+    static public GdxSequenceAction gdxSequence (Action... actions) {
+        GdxSequenceAction action = action(GdxSequenceAction.class);
+        for (int i = 0, n = actions.length; i < n; i++)
+            action.addAction(actions[i]);
+        return action;
+    }
+
+    static public GdxSequenceAction gdxSequence () {
+        return action(GdxSequenceAction.class);
+    }
+
+    static public GdxParallelAction gdxParallel (Action action1) {
+        GdxParallelAction action = action(GdxParallelAction.class);
+        action.addAction(action1);
+        return action;
+    }
+
+    static public GdxParallelAction gdxParallel (Action action1, Action action2) {
+        GdxParallelAction action = action(GdxParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        return action;
+    }
+
+    static public GdxParallelAction gdxParallel (Action action1, Action action2, Action action3) {
+        GdxParallelAction action = action(GdxParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        return action;
+    }
+
+    static public GdxParallelAction gdxParallel (Action action1, Action action2, Action action3, Action action4) {
+        GdxParallelAction action = action(GdxParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        return action;
+    }
+
+    static public GdxParallelAction gdxParallel (Action action1, Action action2, Action action3, Action action4, Action action5) {
+        GdxParallelAction action = action(GdxParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        action.addAction(action5);
+        return action;
+    }
+
+    static public GdxParallelAction gdxParallel (Action... actions) {
+        GdxParallelAction action = action(GdxParallelAction.class);
+        for (int i = 0, n = actions.length; i < n; i++)
+            action.addAction(actions[i]);
+        return action;
+    }
+
+    static public GdxParallelAction gdxParallel () {
+        return action(GdxParallelAction.class);
+    }
+    //////////////////////////////////////////////////////////////工具类 END///////////////////////////////////////////////////////////////////////
+
 
     /**
      * 创建单位的action

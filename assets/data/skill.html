@@ -87,10 +87,8 @@
             在你前面产生一拍爆裂雷
         </description>
         <script>
-            var af = Java.type('com.guxuede.game.action.ActionsFactory');
-            var ac = Java.type('com.badlogic.gdx.scenes.scene2d.actions.Actions');
-            owner.faceToTarget(targetPos);
-            af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"special14",0.05,100,5));
+            var af = Java.type('com.guxuede.gm.gdx.A');
+            af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"special10",0.05,100,5));
         </script>
     </skill>
     <skill id="fireTornado" name="Fire Tornado" hotKey="E" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="5">

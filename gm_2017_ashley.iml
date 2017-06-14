@@ -36,5 +36,6 @@
     <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-controllers-desktop:1.9.4" level="project" />
     <orderEntry type="library" name="Maven: com.badlogicgames.ashley:ashley:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-all:4.1.11.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.8.2" level="project" />
   </component>
 </module>

@@ -9,9 +9,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.guxuede.gm.gdx.component.skill.ScriptSkill;
+import com.guxuede.gm.gdx.component.skill.Skill;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,7 @@ public class ResourceManager {
     private static final Map<String,TextureRegion> TEXTURE_REGION_MAP =  new HashMap<String, TextureRegion>();
     private static final TextureAtlas TEXTURE_ATLAS_PACK =new TextureAtlas(Gdx.files.internal("data/pack"));
     private static final List<AnimationHolder> ANIMATION_HOLDER_LIST = ActorJsonParse.parse(Gdx.files.internal("data/actors"));
+    public static final Map<String, Skill> SKILLS =ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
 
     public static Sprite shadow = new Sprite(getTextureRegion("data/180-Switch03",96,96,32,32));
 
@@ -105,6 +109,18 @@ public class ResourceManager {
             soundMap.put(soundFile,sound);
         }
         return soundMap.get(soundFile);
+    }
+
+    public static Skill getSkillById(String id){
+        return SKILLS.get(id);
+    }
+
+    public static List<Skill> getSkillByIds(String... ids){
+        List<Skill> skills = new ArrayList<Skill>();
+        for(String id:ids){
+            skills.add(((ScriptSkill)SKILLS.get(id)).clone());
+        }
+        return skills;
     }
 
     public static ScriptEngine getScriptEngine() {

@@ -12,6 +12,7 @@ import com.guxuede.gm.gdx.actions.SequenceAction;
 import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
+import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.system.*;
 
 /**
@@ -33,6 +34,7 @@ public class GdxGameScreen extends ScreenAdapter {
         viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),camera);
         viewport.apply();
         engine = SingletonPooledEngine.instance;
+        engine.addSystem(new MouseSystem(1000,spriteBatch,viewport,inputMultiplexer));
         engine.addSystem(new ActorAnimationSystem());
         engine.addSystem(new ActorStateActorAnimationSystem());
         engine.addSystem(new ActionsSystem());
@@ -47,7 +49,6 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new MovementSystem());
         engine.addSystem(mapSystem);
         engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{0,1,2}));//优先级越低，先画到最底部
-        engine.addSystem(new MouseSystem(1000,spriteBatch,viewport,inputMultiplexer));
 
         //createPresentableComponentEntity();
         //createPresentableComponentAnimationComponentEntity();
@@ -84,6 +85,9 @@ public class GdxGameScreen extends ScreenAdapter {
     private void createActor() {
         Entity entity = E.create().actorState().actorAnimation("Undead").asActor().pos(0,0).bounds().buildToWorld();
         E.edit(entity).actions(A.createLineEffectEntriesAction(entity,TempObjects.temp0Vector2.set(400,400),"special10",0.5f,100,5));
+        SkillComponent skillComponent = engine.createComponent(SkillComponent.class);
+        skillComponent.skills.add(ResourceManager.getSkillById("burstFire"));
+        entity.add(skillComponent);
         //Entity entity0 = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(300,0).bounds().buildToWorld();
         //E.create(engine).animation("lightningLine1").pos(0,0).actions(new SequenceAction(new ScaleToLineAction(entity,entity0, 100), new RemoveActorAction())).buildToWorld();
     }
