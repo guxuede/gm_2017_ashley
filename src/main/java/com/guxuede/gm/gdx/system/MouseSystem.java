@@ -93,13 +93,13 @@ public class MouseSystem extends EntitySystem {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
+            viewport.unproject(TempObjects.temp0Vector2.set(x,y));
             if (status != MOUSE_STTUS_NORMAL) {
                 if (button == 1) {
                     cancelIfNeed();
                     return true;
                 } else if (button == 0 && listener!=null) {
                     Entity animationTarget =  null;
-                    TempObjects.temp0Vector2.set(x, y);
                     if (status == MOUSE_STTUS_AREA_Indicator) {
                         if (listener != null && listener.onHoner(animationTarget, TempObjects.temp0Vector2, r)) {
                             listener.onActive(animationTarget, TempObjects.temp0Vector2, r);
