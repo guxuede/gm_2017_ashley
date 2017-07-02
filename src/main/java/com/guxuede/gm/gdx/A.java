@@ -305,6 +305,21 @@ public final class A {
     }
 
     /**
+     * 在一点上创建特效
+     * @param owner             特效施放者
+     * @param pos               释放位置
+     * @param effectName       特效名字
+     * @return
+     */
+    public static Action createEffectAction(Entity owner, Vector2 pos, String effectName, float intervalTime){
+        SequenceAction sequenceAction = sequence();
+        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        sequenceAction.addAction(delay(intervalTime));
+        sequenceAction.addAction(parallel(effectsActorAction(effectName,pos)));
+        return sequenceAction;
+    }
+
+    /**
      * 在一条线上创建特效
      * @param owner             特效施放者
      * @param pos               释放位置
