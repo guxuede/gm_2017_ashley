@@ -50,7 +50,6 @@ public class MapCollisionSystem extends IteratingSystem {
             if ((physics.acceleration.x > 0 && collides(px + bounds.maxx, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f)) ||
                     (physics.acceleration.x < 0 && collides(px + bounds.minx, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f))) {
                 physics.acceleration.x = physics.bounce > 0 ? -physics.velocity.x * physics.bounce : 0;
-                px = pos.position.x;
             }
 
             if ((physics.acceleration.y > 0 && collides(px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.maxy)) ||

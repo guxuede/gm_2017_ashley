@@ -31,10 +31,13 @@ public class ActorShadowRenderingSystem extends IteratingSystem {
         spriteBatch.end();
     }
 
+    static final float w = ResourceManager.shadow.getWidth();
+    static final float h = ResourceManager.shadow.getWidth();
+
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         ActorStateComponent actorComponent = Mappers.actorStateCM.get(entity);
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
-        spriteBatch.draw(ResourceManager.shadow,positionComponent.position.x,positionComponent.position.y);
+        spriteBatch.draw(ResourceManager.shadow,positionComponent.position.x - w,positionComponent.position.y-h-16,64,32);
     }
 }

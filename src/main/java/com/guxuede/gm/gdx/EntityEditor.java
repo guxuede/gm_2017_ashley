@@ -70,6 +70,9 @@ public abstract class EntityEditor<T extends EntityEditor>{
     public EntityEditor animation(String animationName, int zIndex) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         animationComponent.animation = ResourceManager.getAnimationHolder(animationName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION);
+        animationComponent.maxStateTime = animationComponent.animation.getAnimationDuration();
+        animationComponent.animationName = animationName;
+        animationComponent.stateTime = 0;
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
         presentableComponent.zIndex = zIndex;
         entity.add(animationComponent);
@@ -116,7 +119,15 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
-
+    public EntityEditor bounds(int w,int h){
+        BoundsComponent component = edit.create(BoundsComponent.class);
+        component.minx = 0;
+        component.miny = 0;
+        component.maxx = w;
+        component.maxy = h;
+        entity.add(component);
+        return this;
+    }
 
     public Entity build() {
         final Entity tmp = this.entity;

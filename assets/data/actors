@@ -152,7 +152,7 @@
    "animations":[
      {
        "name":"walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation",
-       "frameDuration":0.1,
+       "frameDuration":1,
        "frames":[
          {
            "y":200,"x":100,"rotation":-30,
@@ -183,8 +183,7 @@
          {
            "y":0,"x":0,"rotation":-0,
            "frame":14
-         },
-         1,2,3,4
+         }
        ]
      }
    ]
