@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.IntMap;
+import com.badlogic.gdx.utils.LongMap;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
 
@@ -22,6 +24,7 @@ import java.util.Map;
 public class ResourceManager {
     private static ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("nashorn");
     private static final Map<String,Sound> soundMap = new HashMap<String, Sound>();
+    private static final LongMap<Sound> spriteSoundMap = new LongMap<Sound>();
     private static final Map<String,Texture> TEXTURE_MAP = new HashMap<String, Texture>();
     private static final Map<String,TextureRegion> TEXTURE_REGION_MAP =  new HashMap<String, TextureRegion>();
     private static final TextureAtlas TEXTURE_ATLAS_PACK =new TextureAtlas(Gdx.files.internal("data/pack"));
@@ -104,11 +107,19 @@ public class ResourceManager {
         if(soundMap.containsKey(soundFile)){
             return soundMap.get(soundFile);
         }
-        if(Gdx.files.internal("sounds/"+soundFile).exists()){
-            Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/"+soundFile));
+        if(Gdx.files.internal("data/sounds/"+soundFile).exists()){
+            Sound sound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/"+soundFile));
             soundMap.put(soundFile,sound);
         }
         return soundMap.get(soundFile);
+    }
+
+    public static void putSpriteSound(long spriteId,Sound sound ){
+        spriteSoundMap.put(spriteId,sound);
+    }
+
+    public static Sound getSpriteSound(long spriteId){
+        return spriteSoundMap.get(spriteId);
     }
 
     public static Skill getSkillById(String id){

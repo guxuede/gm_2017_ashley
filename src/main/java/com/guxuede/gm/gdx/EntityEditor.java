@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.audio.Sound;
 import com.guxuede.gm.gdx.actions.Action;
 import com.guxuede.gm.gdx.component.*;
 
@@ -128,6 +129,20 @@ public abstract class EntityEditor<T extends EntityEditor>{
         entity.add(component);
         return this;
     }
+
+    public EntityEditor sound(String sound,boolean loop){
+        return sound(ResourceManager.getSoundOrLoad(sound),loop);
+    }
+
+    public EntityEditor sound(Sound sound,boolean loop){
+        SoundComponent component = edit.create(SoundComponent.class);
+        component.soundId = -1;
+        component.sound = sound;
+        component.isLoop = loop;
+        entity.add(component);
+        return this;
+    }
+
 
     public Entity build() {
         final Entity tmp = this.entity;

@@ -392,6 +392,18 @@
             "frame": 14
           },
           {
+            "y": 80,
+            "x": 15,
+            "rotation": -6,
+            "frame": 14
+          } ,
+          {
+            "y": 60,
+            "x": 13,
+            "rotation": -4,
+            "frame": 14
+          },
+          {
             "y": 50,
             "x": 10,
             "rotation": -0,
@@ -425,7 +437,8 @@
             "x": 10,
             "frameDuration": 0.1,
             "rotation": -0,
-            "frame": 1
+            "frame": 1,
+            "sound":"thunder1.wav"
           }
         ]
       },

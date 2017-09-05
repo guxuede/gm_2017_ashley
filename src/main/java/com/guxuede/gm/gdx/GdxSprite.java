@@ -6,14 +6,18 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 /**
  * Created by guxuede on 2016/6/1 .
  */
 public class GdxSprite extends Sprite {
-
+    private static AtomicLong atomicLong = new AtomicLong();
+    public final long id = atomicLong.getAndIncrement();
     public float offSetX, offSetY;
 
     public GdxSprite() {
+        super();
     }
 
     public GdxSprite(Texture texture) {

@@ -146,11 +146,22 @@ public class ActorJsonParse {
                 }else{
                     frames[i]=parseMultiSprite(localParseContext,frameJ);
                 }
+                if(frames[i]!=null && frameJ.has("sound")){
+                    parseSound(i,frames[i],frameJ.get("sound"));
+                }
             }
         }
 
         final Animation animation = new Animation(localParseContext.frameDuration,frames);
         return animation;
+    }
+
+    private static void parseSound(int frameIndex,GdxSprite gdxSprite,JsonValue soundJ){
+        String soundName = soundJ.asString();
+        Sound sound = ResourceManager.getSoundOrLoad(soundName);
+        if(sound!=null){
+            ResourceManager.putSpriteSound(gdxSprite.id,sound);
+        }
     }
 
     /**

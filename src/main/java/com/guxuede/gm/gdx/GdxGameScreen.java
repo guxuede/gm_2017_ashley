@@ -49,7 +49,8 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new MovementSystem());
         engine.addSystem(mapSystem);
         engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{0,1,2}));//优先级越低，先画到最底部
-
+        engine.addSystem(new SoundSystem());
+        engine.addSystem(new Sound3DSystem(camera));
         //createPresentableComponentEntity();
         //createPresentableComponentAnimationComponentEntity();
         //createPresentableComponentAnimationComponentActorAnimationComponentEntity();

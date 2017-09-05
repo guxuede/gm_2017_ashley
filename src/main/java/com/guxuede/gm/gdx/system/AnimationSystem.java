@@ -28,4 +28,8 @@ public class AnimationSystem extends IteratingSystem {
         presentableComponent.region = animationComponent.getNextKeyFrame(deltaTime,true);
         presentableComponent.zIndex = -positionComponent.position.y;
     }
+
+    public void playFrameSound(AnimationComponent animationComponent){
+        //animationComponent.currentFrameIndex
+    }
 }
