@@ -19,7 +19,7 @@ public class EffectsActorAction extends Action {
 
     @Override
     public boolean act(float delta) {
-        effectsEntity = E.create().animation(actorName).pos(pos.x,pos.y).actions(actions).sound("fire_hited.wav",false).buildToWorld();
+        effectsEntity = E.create().animation(actorName).pos(pos.x,pos.y).actions(actions).buildToWorld();
         return true;
     }
 

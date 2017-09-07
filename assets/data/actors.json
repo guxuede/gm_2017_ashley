@@ -341,7 +341,8 @@
             "y": 200,
             "x": 100,
             "rotation": -30,
-            "frame": 14
+            "frame": 14,
+            "sound":"fire_spell.ogg"
           },
           {
             "y": 190,
@@ -438,7 +439,7 @@
             "frameDuration": 0.1,
             "rotation": -0,
             "frame": 1,
-            "sound":"thunder1.wav"
+            "sound":"fire_hited.wav"
           }
         ]
       },

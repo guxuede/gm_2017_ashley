@@ -103,11 +103,24 @@ public class ActorJsonParse {
                 String soundFile = soundJ.getString("sound");
                 boolean isLoop = soundJ.getBoolean("loop",false);
                 Sound sound = ResourceManager.getSoundOrLoad(soundFile);
-                if(!soundName.contains(",")){
-                    //animationHolder.addSound(soundName,new SoundHolder(sound,isLoop));
-                }else{
-                    for(String sn : soundName.split(",")){
-                        //animationHolder.addSound(sn,new SoundHolder(sound,isLoop));
+                if(sound!=null){
+                    if(!soundName.contains(",")){
+                        //animationHolder.getAnimation(S)
+                        //animationHolder.addSound(soundName,new SoundHolder(sound,isLoop));
+                    }else{
+                        for(String sn : soundName.split(",")){
+                            Animation animation = animationHolder.getAnimation(sn.hashCode());
+                            if(animation!=null){
+                                final TextureRegion sptite = animation.getKeyFrames()[0];
+                                if(sptite instanceof GdxSprite){
+                                    ResourceManager.putSpriteSound(((GdxSprite) sptite).id,sound);
+                                }
+                                final TextureRegion sptite2 = animation.getKeyFrames()[2];
+                                if(sptite2 instanceof GdxSprite){
+                                    ResourceManager.putSpriteSound(((GdxSprite) sptite2).id,sound);
+                                }
+                            }
+                        }
                     }
                 }
             }

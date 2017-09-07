@@ -3,6 +3,7 @@ package com.guxuede.gm.gdx.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.IntMap;
 import com.guxuede.gm.gdx.AnimationHolder;
 import com.guxuede.gm.gdx.GdxSprite;
 import com.guxuede.gm.gdx.ResourceManager;
+import com.guxuede.gm.gdx.SoundUtils;
 
 public class AnimationComponent implements Component {
     public static final int STOP=0, DOWN=1,LEFT=2,RIGHT=3,UP=4;
@@ -18,7 +20,9 @@ public class AnimationComponent implements Component {
     public float maxStateTime = Float.MAX_VALUE;
     public String animationName;
 
-    public int currentFrameIndex;
+    public TextureRegion currentFrameIndex;
+    public long soundId = -1;
+    public Sound sound = null;
 
     public TextureRegion getNextKeyFrame (float deltaTime, boolean looping) {
         stateTime += deltaTime;
@@ -26,7 +30,7 @@ public class AnimationComponent implements Component {
             return null;
         }
         TextureRegion textureRegion = this.animation.getKeyFrame(stateTime,looping);
-        int currentFrameIndex = animation.getKeyFrameIndex(stateTime);
+        TextureRegion currentFrameIndex = textureRegion;
         if(currentFrameIndex!=this.currentFrameIndex){
             this.currentFrameIndex = currentFrameIndex;
             onFrameChange(textureRegion);
@@ -40,11 +44,17 @@ public class AnimationComponent implements Component {
      */
     public void onFrameChange(TextureRegion textureRegion){
         if(textureRegion instanceof GdxSprite){
-            Sound sound = ResourceManager.getSpriteSound(((GdxSprite) textureRegion).id);
+            sound = ResourceManager.getSpriteSound(((GdxSprite) textureRegion).id);
             if(sound!=null){
-                sound.play();
+                soundId = sound.play();
             }
         }
+    }
 
+    //解决位置为负时声音反而变大的问题
+    public void threeDSound(Vector2 soundPos, Camera camera){
+        if (sound != null && soundId != -1) {
+            SoundUtils.set3dPan(sound, soundId, soundPos.x,soundPos.y,camera);
+        }
     }
 }
