@@ -23,7 +23,6 @@ public class ActorStateComponent implements Component{
 
     public long id;
     public int direction=DOWN;
-    public float degrees;
     public float speed=1200000;
     public boolean isMoving;
     public float visualRadius=100;
@@ -33,8 +32,6 @@ public class ActorStateComponent implements Component{
     public boolean isSensor = false;
     public boolean isHover = false;
     public float collisionSize = 0;
-    public float hitPoint = 100;
-    public float currentHitPoint = 100;
     public boolean hasShadow = true;
 
 

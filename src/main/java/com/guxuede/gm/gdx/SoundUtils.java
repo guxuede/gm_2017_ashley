@@ -23,10 +23,10 @@ public class SoundUtils {
         set3dPan(sound,soundId,soundX,soundY,camera.position.x,camera.position.y,camera.viewportHeight);
     }
 
-    public static final void set3dPan(Sound sound, long soundId, float soundX, float soundY, float screenX, float screenY , float screenR){
-        float pan=(soundX - screenX)/screenR;
-        float volume = (float) (1f - MathUtils.distance(soundX,soundY,screenX,screenY)/screenR);
-        //System.out.println("volume = " + volume+"，pan = " + pan);
-        sound.setPan(soundId, pan, volume);
+    public static final void set3dPan(Sound sound, long soundId, float soundX, float soundY, float screenX, float screenY, float screenR) {
+        float pan = (soundX - screenX) / screenR;
+        float volume = (float) (1f - MathUtils.distance(soundX, soundY, screenX, screenY) / screenR);
+        //System.out.println("volume = " + volume + "，pan = " + pan);
+        sound.setPan(soundId, pan, volume < 0 ? 0 : volume);
     }
 }

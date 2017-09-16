@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.component.ActorStateComponent;
+import com.guxuede.gm.gdx.component.BloodComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
 
 /**
@@ -18,7 +18,7 @@ public class ActorLifeBarRenderingSystem extends IteratingSystem {
 
     public static final float BLOOD_WIDTH = 50;
     public static final float BLOOD_HEIGHT = 6;
-    private static final Family family = Family.all(PositionComponent.class,ActorStateComponent.class).get();
+    private static final Family family = Family.all(PositionComponent.class,BloodComponent.class).get();
     SpriteBatch batch;
     private ShapeRenderer shapes;
 
@@ -43,7 +43,7 @@ public class ActorLifeBarRenderingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
-        ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(entity);
+        BloodComponent bloodComponent = Mappers.bloodCM.get(entity);
 
         //if(!animationActor.isInScreen)continue;
         Vector2 p = positionComponent.position.cpy();
@@ -56,7 +56,7 @@ public class ActorLifeBarRenderingSystem extends IteratingSystem {
 
         shapes.set(ShapeRenderer.ShapeType.Filled);
         shapes.setColor(Color.GREEN);
-        shapes.rect(p.x + 1, p.y + 1, BLOOD_WIDTH * (actorStateComponent.currentHitPoint / actorStateComponent.hitPoint) - 1, 4f);
+        shapes.rect(p.x + 1, p.y + 1, BLOOD_WIDTH * (bloodComponent.currentHitPoint / bloodComponent.hitPoint) - 1, 4f);
     }
 
 }

@@ -143,6 +143,11 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
+    public EntityEditor dynamicDirection(){
+        DynamicDirectionComponent component = edit.create(DynamicDirectionComponent.class);
+        entity.add(component);
+        return this;
+    }
 
     public Entity build() {
         final Entity tmp = this.entity;

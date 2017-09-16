@@ -28,4 +28,14 @@
             af.gdxSequence(af.createEffectAction(owner,targetPos,"fire1",0.05));
         </script>
     </skill>
+
+    <skill id="fireBall" name="FireBall" hotKey="F" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+        <description>
+            扔出个火球
+        </description>
+        <script>
+            var af = Java.type('com.guxuede.gm.gdx.A');
+            af.gdxSequence(af.createFireBall(owner,targetPos,"fire1"));
+        </script>
+    </skill>
 </skills>

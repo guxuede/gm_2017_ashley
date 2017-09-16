@@ -462,5 +462,24 @@
         ]
       }
     ]
+  },
+  {
+    "name": "fireBall",
+    "width": 16,
+    "height": 16,
+    "texture": "data/fireBall",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [0,1,2,1]
+      }
+    ],
+    "sounds": [
+    {
+      "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation",
+      "sound": "fire_flying.wav",
+      "loop": "true"
+    }]
   }
 ]

@@ -5,8 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.guxuede.gm.gdx.actions.*;
+import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
+import com.guxuede.gm.gdx.actions.movement.BezierMoveAction;
+import com.guxuede.gm.gdx.actions.movement.BlinkAction;
+import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 
 /**
  * Created by guxuede on 2017/6/8 .
@@ -369,6 +373,15 @@ public final class A {
                     )
             );
         }
+        return sequenceAction;
+    }
+
+    public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
+        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        Vector2 nor = TempObjects.temp0Vector2.set(ownerPos).sub(pos).nor().scl(50f);
+        E.create().animation("fireBall").pos(ownerPos.x,ownerPos.y);
+        E.create().actions(new BezierMoveAction(pos.x,pos.y)).actorState(ActorAnimationComponent.RIGHT,true,0,0,0,0).dynamicDirection().actorAnimation("fireBall").pos(ownerPos.x,ownerPos.y).buildToWorld();
+        SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }
 }

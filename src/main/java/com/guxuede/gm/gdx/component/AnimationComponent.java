@@ -15,7 +15,8 @@ import com.guxuede.gm.gdx.SoundUtils;
 
 public class AnimationComponent implements Component {
     public static final int STOP=0, DOWN=1,LEFT=2,RIGHT=3,UP=4;
-	public Animation animation;
+
+    public Animation animation;
     public float stateTime;
     public float maxStateTime = Float.MAX_VALUE;
     public String animationName;
