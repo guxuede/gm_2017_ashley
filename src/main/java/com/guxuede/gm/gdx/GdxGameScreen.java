@@ -34,22 +34,27 @@ public class GdxGameScreen extends ScreenAdapter {
         viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),camera);
         viewport.apply();
         engine = SingletonPooledEngine.instance;
+        engine.addSystem(new ScreenClearSystem(1));
         engine.addSystem(new MouseSystem(1000,spriteBatch,viewport,inputMultiplexer));
-        engine.addSystem(new ActorAnimationSystem());
-        engine.addSystem(new ActorStateActorAnimationSystem());
-        engine.addSystem(new ActionsSystem());
-        engine.addSystem(new AnimationSystem());
         engine.addSystem(new ActorStateSystem());
-        engine.addSystem( new StageSystem(spriteBatch,viewport,inputMultiplexer));
+        engine.addSystem(new ActorStateActorAnimationSystem());
+        engine.addSystem(new ActorAnimationSystem());
+        engine.addSystem(new ActionsSystem());
+        engine.addSystem(new StageSystem(spriteBatch,viewport,inputMultiplexer));
+        engine.addSystem(new AnimationSystem());
         engine.addSystem(new PresentableRenderingSystem(300,spriteBatch));
         engine.addSystem(new ActorShadowRenderingSystem(200,spriteBatch));
         engine.addSystem(new ActorLifeBarRenderingSystem(500,spriteBatch));
+        engine.addSystem(new MovementSystem());
         engine.addSystem(new DynamicDirectionSystem());
+        /*MAP*/
         MapSystem mapSystem = new MapSystem("data/desert1.tmx",spriteBatch,camera);//24,14  27,5
         engine.addSystem(new MapCollisionSystem(mapSystem));
-        engine.addSystem(new MovementSystem());
         engine.addSystem(mapSystem);
-        engine.addSystem(new MapRenderingSystem(100,mapSystem,new int[]{0,1,2}));//优先级越低，先画到最底部
+        //不能同時增加2個相同類型的system
+        engine.addSystem(new MapRenderingSystem(101,mapSystem,new int[]{0,1}){});//优先级越低，先画到最底部
+        engine.addSystem(new MapRenderingSystem(600,mapSystem,new int[]{2}){});//优先级越低，先画到最底部
+        /*SOUND*/
         engine.addSystem(new SoundSystem());
         engine.addSystem(new Sound3DSystem(camera));
         engine.addSystem(new SoundOnAnimationSystem(camera));
@@ -126,7 +131,8 @@ public class GdxGameScreen extends ScreenAdapter {
                 accelY = 0;
             }
         }
-       final Entity viewActor = engine.getSystem(StageSystem.class).getViewActor();
+        StageSystem stageSystem = engine.getSystem(StageSystem.class);
+        final Entity viewActor = stageSystem==null?null:stageSystem.getViewActor();
         if(viewActor!=null){
             Mappers.actorStateCM.get(viewActor).acceleration.set(accelX*11,accelY*11);
         }

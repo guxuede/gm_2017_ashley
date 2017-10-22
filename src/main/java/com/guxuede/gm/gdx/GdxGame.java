@@ -27,13 +27,9 @@ public class GdxGame extends Game {
 	public void create () {
 		setScreen(new GdxGameScreen());
 	}
-    Color color = Color.valueOf("969291");
 
 	@Override
 	public void render() {
-		GL20 gl = Gdx.gl;
-		gl.glClearColor(color.r,color.g,color.b,color.a);
-		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render();
 	}
 }

@@ -27,12 +27,5 @@ public class MapSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         renderer.setView(camera);
-//        renderer.render();
-//
-//        for (MapLayer layer : tiledMap.getLayers()) {
-//            if (layer.isVisible()) {
-//                renderer.renderTileLayer((TiledMapTileLayer) layer);
-//            }
-//        }
     }
 }

@@ -14,7 +14,7 @@ public class BezierMoveAction extends TemporalAction{
 
     public BezierMoveAction(float x, float y){
         targetPoint.set(x,y);
-        this.setDuration(1);
+        this.setDuration(10);
     }
 
 
@@ -26,7 +26,7 @@ public class BezierMoveAction extends TemporalAction{
         Vector2 v = TempObjects.temp0Vector2.set(startPoint).sub(endPoint);
         Vector2 p1 = new Vector2(startPoint.x+(endPoint.x-startPoint.x)*0.95f, startPoint.y+(endPoint.y-startPoint.y)*-0.31f);
         Vector2 p2 =  new Vector2(startPoint.x+(endPoint.x-startPoint.x)*0.00f, startPoint.y+(endPoint.y-startPoint.y)*1.14f);
-        bezier = new Bezier<Vector2>(startPoint, p2, p1,endPoint);
+        bezier = new Bezier<Vector2>(endPoint, p2, p1,startPoint);
     }
 
     @Override
@@ -34,9 +34,9 @@ public class BezierMoveAction extends TemporalAction{
         //bezier.valueAt(TempObjects.temp0Vector2, percent);
         //Vector2 nor = TempObjects.temp0Vector2.set(ownerPos).sub(pos).nor().scl(50f);
         Vector2 vector2 =bezier.derivativeAt(TempObjects.temp0Vector2,percent).nor().scl(50f);
-        //Mappers.actorStateCM.get(actor).acceleration.set(vector2);
-        bezier.valueAt(TempObjects.temp0Vector2, percent);
-        Mappers.positionCM.get(actor).position.set(TempObjects.temp0Vector2);
+        Mappers.actorStateCM.get(actor).acceleration.set(vector2);
+//        bezier.valueAt(TempObjects.temp0Vector2, percent);
+//        Mappers.positionCM.get(actor).position.set(TempObjects.temp0Vector2);
     }
 
 }

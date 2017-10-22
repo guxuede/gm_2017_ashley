@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
             engine.addSystem(new MapRenderingSystem(101,mapSystem,new int[]{1}));
             engine.addSystem(new MapRenderingSystem(400,mapSystem,new int[]{2}));
     但是engine不支持增加相同类型的system。
+    2017-10-20 可以使用内部類的方式
  * Created by guxuede on 2017/6/10 .
  */
 public class MapRenderingSystem extends EntitySystem {
