@@ -98,6 +98,7 @@ public class GdxGameScreen extends ScreenAdapter {
         skillComponent.skills.add(ResourceManager.getSkillById("burstFire1"));
         skillComponent.skills.add(ResourceManager.getSkillById("meteorite"));
         skillComponent.skills.add(ResourceManager.getSkillById("fireBall"));
+        skillComponent.skills.add(ResourceManager.getSkillById("blink"));
         entity.add(skillComponent);
         //Entity entity0 = E.create(engine).actorState().actorAnimation("Undead").asActor().pos(300,0).bounds().buildToWorld();
         //E.create(engine).animation("lightningLine1").pos(0,0).actions(new SequenceAction(new ScaleToLineAction(entity,entity0, 100), new RemoveActorAction())).buildToWorld();

@@ -277,6 +277,11 @@ public final class A {
     }
     //////////////////////////////////////////////////////////////工具类 END///////////////////////////////////////////////////////////////////////
 
+    public static  BlinkAction blink(Entity owner, Vector2 pos, String effectName){
+        BlinkAction blinkAction = action(BlinkAction.class);
+        blinkAction.setTargetPosition(pos);
+        return blinkAction;
+    }
 
     /**
      * 创建单位的action

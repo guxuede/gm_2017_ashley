@@ -38,4 +38,14 @@
             af.gdxSequence(af.createFireBall(owner,targetPos,"fire1"));
         </script>
     </skill>
+
+    <skill id="blink" name="blink" hotKey="V" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+        <description>
+            blink
+        </description>
+        <script>
+            var af = Java.type('com.guxuede.gm.gdx.A');
+            af.gdxSequence(af.blink(owner,targetPos,"fire1"));
+        </script>
+    </skill>
 </skills>
