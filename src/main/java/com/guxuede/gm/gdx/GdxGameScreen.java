@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.guxuede.gm.gdx.actions.DelayAction;
 import com.guxuede.gm.gdx.actions.SequenceAction;
 import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
+import com.guxuede.gm.gdx.actions.movement.ActorMoveToPointAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.component.SkillComponent;
