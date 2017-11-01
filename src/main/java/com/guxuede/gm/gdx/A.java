@@ -284,6 +284,17 @@ public final class A {
         return blinkAction;
     }
 
+    public  static Action effectsActorOnActorPosAction(final String effectName){
+        Action runnableAction = new Action() {
+            @Override
+            public boolean act(float delta) {
+                Mappers.actionCM.get(actor).addAction(actor,effectsActorAction(effectName,Mappers.positionCM.get(actor).position));
+                return true;
+            }
+        };
+        return runnableAction;
+    }
+
     /**
      * 创建单位的action
      * @param effectName
@@ -387,7 +398,7 @@ public final class A {
         Vector2 nor = TempObjects.temp0Vector2.set(ownerPos).sub(pos).nor().scl(50f);
         E.create().animation("fireBall").pos(ownerPos.x,ownerPos.y);
 
-        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x/2,pos.y/2),new ActorMoveAsSnackToPointAction(pos.x,pos.y))).actorState(ActorAnimationComponent.RIGHT,true,0,0,0,0).dynamicDirection().actorAnimation("fireBall").pos(ownerPos.x,ownerPos.y).buildToWorld();
+        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x/2,pos.y/2),new ActorMoveAsSnackToPointAction(pos.x,pos.y), effectsActorOnActorPosAction("special10"))).actorState(ActorAnimationComponent.RIGHT,true,0,0,0,0).dynamicDirection().actorAnimation("fireBall").pos(ownerPos.x,ownerPos.y).buildToWorld();
         SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }

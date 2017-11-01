@@ -31,7 +31,6 @@ public class ActorMoveAsSnackToPointAction extends ActorMoveToAction {
 
     @Override
     protected void begin() {
-        System.out.println("ActorMoveAsSnackToPointAction:begin");
         super.begin();
         Vector2 startPoint = Mappers.positionCM.get(actor).position.cpy();
         Vector2 endPoint = targetPoint;
@@ -52,7 +51,6 @@ public class ActorMoveAsSnackToPointAction extends ActorMoveToAction {
         Vector2 actP = Mappers.positionCM.get(actor).position;
         if(actP.dst2(temPoint) < 1){
             percent=percent+0.1f;
-            Mappers.actionCM.get(actor).addAction(actor,A.effectsActorAction("special10",temPoint));
             bezier.valueAt(temPoint, percent);
         }
         return temPoint;
