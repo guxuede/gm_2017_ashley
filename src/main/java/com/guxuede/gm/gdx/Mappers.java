@@ -19,6 +19,7 @@ public class Mappers {
     public static final ComponentMapper<BoundsComponent> boundsCM = ComponentMapper.getFor(BoundsComponent.class);
     public static final ComponentMapper<SoundComponent> soundCM = ComponentMapper.getFor(SoundComponent.class);
     public static final ComponentMapper<BloodComponent> bloodCM = ComponentMapper.getFor(BloodComponent.class);
+    public static final ComponentMapper<SensorComponent> sensorCM = ComponentMapper.getFor(SensorComponent.class);
 
 
 }

@@ -154,9 +154,9 @@ public class MouseSystem extends EntitySystem {
 //        if(ActorMoveToPathAction.path!=null){
 //            IntArray path = ActorMoveToPathAction.path;
 //            for (int i = 0, n = path.size; i < n; i += 2) {
-//                int x = path.get(i);
-//                int y = path.get(i + 1);
-//                shapes.rect(x, y, MAP_CELL_W, MAP_CELL_H);
+//                int drawOffSetX = path.get(i);
+//                int drawOffSetY = path.get(i + 1);
+//                shapes.rect(drawOffSetX, drawOffSetY, MAP_CELL_W, MAP_CELL_H);
 //            }
 //        }
     }

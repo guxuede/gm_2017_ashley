@@ -43,20 +43,17 @@ public class MapCollisionSystem extends IteratingSystem {
 
         //  no math required here.
         if (physics.acceleration.x != 0 || physics.acceleration.y != 0) {
-            TempObjects.temp0Vector2.set(-physics.acceleration.x / 10.0f * MOVE_VELOCITY, -physics.acceleration.y / 10.0f * MOVE_VELOCITY).scl(delta).add(pos.position);
+            //calculate predicts position
+            TempObjects.temp0Vector2.set(physics.acceleration.x / 10.0f * MOVE_VELOCITY, physics.acceleration.y / 10.0f * MOVE_VELOCITY).scl(delta).add(pos.position);
             float px = TempObjects.temp0Vector2.x;
             float py = TempObjects.temp0Vector2.y;
-
-            if ((physics.acceleration.x > 0 && collides(px + bounds.maxx, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f)) ||
-                    (physics.acceleration.x < 0 && collides(px + bounds.minx, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f))) {
+            //check position is collided
+            if ((physics.acceleration.x > 0 && collides(px + bounds.maxx/2 , py)) ||  (physics.acceleration.x < 0 && collides(px- bounds.maxx/2 , py))) {
                 physics.acceleration.x = physics.bounce > 0 ? -physics.velocity.x * physics.bounce : 0;
             }
-
-            if ((physics.acceleration.y > 0 && collides(px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.maxy)) ||
-                    (physics.acceleration.y < 0 && collides(px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.miny))) {
+            if ((physics.acceleration.y > 0 && collides(px, py + bounds.maxy/2)) || (physics.acceleration.y < 0 && collides(px, py - bounds.maxy/2))) {
                 physics.acceleration.y = physics.bounce > 0 ? -physics.velocity.y * physics.bounce : 0;
             }
-
         }
 
     }

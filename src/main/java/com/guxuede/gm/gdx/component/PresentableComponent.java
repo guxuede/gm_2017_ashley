@@ -14,4 +14,8 @@ public class PresentableComponent implements Component {
     public TextureRegion region = null;
     public float zIndex; //值越大画的越靠前(越高，越在其他基色之上，不易遮挡)
     public float baseZIndex;
+
+    //偏移值
+    public float drawOffSetX;
+    public float drawOffSetY;
 }

@@ -5,6 +5,9 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.guxuede.gm.gdx.actions.Action;
 import com.guxuede.gm.gdx.component.*;
 
@@ -85,14 +88,24 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return presentable(presentableName, 0);
     }
 
-    public EntityEditor presentable(String presentableName, int zIndex) {
+    public EntityEditor presentable(String presentableName, float zIndex) {
+        textureRegionPresentable(ResourceManager.getTextureRegion(presentableName),zIndex);
+        return this;
+    }
+
+    public EntityEditor textureRegionPresentable(TextureRegion textureRegion, float zIndex) {
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
-        presentableComponent.region = ResourceManager.getTextureRegion(presentableName);
+        presentableComponent.region = textureRegion;
         presentableComponent.zIndex = zIndex;
         entity.add(presentableComponent);
         return this;
     }
 
+    public EntityEditor sensor() {
+        SensorComponent sensorComponent = edit.create(SensorComponent.class);
+        entity.add(sensorComponent);
+        return this;
+    }
 
     public EntityEditor actions(Action... actions) {
         ActionsComponent actionsComponent = edit.create(ActionsComponent.class);

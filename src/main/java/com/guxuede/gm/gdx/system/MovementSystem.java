@@ -41,8 +41,8 @@ public class MovementSystem extends IteratingSystem {
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         ActorStateComponent actorStateComponent = actorStateCM.get(entity);
-        actorStateComponent.velocity.x = -actorStateComponent.acceleration.x / 10.0f * MOVE_VELOCITY;
-        actorStateComponent.velocity.y = -actorStateComponent.acceleration.y / 10.0f * MOVE_VELOCITY;
+        actorStateComponent.velocity.x = actorStateComponent.acceleration.x / 10.0f * MOVE_VELOCITY;
+        actorStateComponent.velocity.y = actorStateComponent.acceleration.y / 10.0f * MOVE_VELOCITY;
         tmp.set(actorStateComponent.velocity).scl(deltaTime);
 
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
@@ -52,7 +52,6 @@ public class MovementSystem extends IteratingSystem {
         if (actorStateComponent.isMoving){
             positionComponent.degrees = tmp.angle();
             actorStateComponent.direction = convertDegreesToDirection(positionComponent.degrees);
-//            System.out.println("degrees = [" + positionComponent.degrees + "], direction = [" + actorStateComponent.direction + "]");
         }
     }
 

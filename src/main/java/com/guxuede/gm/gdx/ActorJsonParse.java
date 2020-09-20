@@ -1,6 +1,5 @@
 package com.guxuede.gm.gdx;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -36,8 +35,8 @@ public class ActorJsonParse {
 
         protected float scaleX;
         protected float scaleY;
-        //精灵展示位置
-        protected float x,y;
+        //精灵展示位置偏移
+        protected float drawOffSetX, drawOffSetY;
 
         protected float textureOffSetX = 0;
         protected float textureOffSetY = 0;
@@ -188,7 +187,7 @@ public class ActorJsonParse {
         TextureRegion frame = getTextureRegionByNumber(parentParseContext, posInt.asInt());
         GdxSprite sprite = new GdxSprite(frame);
         sprite.setSize(parentParseContext.width, parentParseContext.height);
-        sprite.setOffSet(parentParseContext.x, parentParseContext.y);
+        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
         sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
         sprite.setRotation(parentParseContext.rotation);
         sprite.setAlpha(parentParseContext.alpha);
@@ -211,7 +210,7 @@ public class ActorJsonParse {
         TextureRegion frame = getTextureRegion(parentParseContext, posIntArrayJ);
         GdxSprite sprite = new GdxSprite(frame);
         sprite.setSize(parentParseContext.width, parentParseContext.height);
-        sprite.setOffSet(parentParseContext.x, parentParseContext.y);
+        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
         sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
         sprite.setRotation(parentParseContext.rotation);
         sprite.setAlpha(parentParseContext.alpha);
@@ -223,12 +222,12 @@ public class ActorJsonParse {
      *   "frames":[
                 {
                     "scale":1.5,
-                    "y":1,
+                    "drawOffSetY":1,
                     "frame":1
                 },
                 {
                      "scale":1.5,
-                     "y":1,
+                     "drawOffSetY":1,
                      "frame":2
                 },
          ]
@@ -266,7 +265,7 @@ public class ActorJsonParse {
              * frameElements 支持一下格式：
              *             "frameElements":[
                              {
-                                 "y":20,                    //详细的位置描述
+                                 "drawOffSetY":20,                    //详细的位置描述
                                  "scale":1.5,
                                  "frame":[576,192,192,192]
                              }
@@ -346,8 +345,8 @@ public class ActorJsonParse {
         }
         float frameDuration = animJ.getFloat("frameDuration", parseContext.frameDuration);
         String textureName = animJ.getString("texture", parseContext.textureName);
-        float x = animJ.getFloat("x", parseContext.x);
-        float y = animJ.getFloat("y", parseContext.y);
+        float drawOffSetX = animJ.getFloat("drawOffSetX", parseContext.drawOffSetX);
+        float drawOffSetY = animJ.getFloat("drawOffSetY", parseContext.drawOffSetY);
         float width = animJ.getFloat("width", parseContext.width);
         float height = animJ.getFloat("height", parseContext.height);
         float alpha = animJ.getFloat("alpha", parseContext.alpha);
@@ -376,8 +375,8 @@ public class ActorJsonParse {
         localParseContext.rotation =rotation;
         localParseContext.scaleX = scaleX;
         localParseContext.scaleY = scaleY;
-        localParseContext.x =x;
-        localParseContext.y =y;
+        localParseContext.drawOffSetX =drawOffSetX;
+        localParseContext.drawOffSetY =drawOffSetY;
         localParseContext.frameDuration = frameDuration;
         localParseContext.textureOffSetX = textureOffSetX;
         localParseContext.textureOffSetY = textureOffSetY;
@@ -387,7 +386,7 @@ public class ActorJsonParse {
 
     private static void applyDefaultValueToSprite(ParseContext parseContext,GdxSprite sprite){
         sprite.setSize(parseContext.width, parseContext.height);
-        sprite.setOffSet(parseContext.x, parseContext.y);
+        sprite.setDrawOffSetX(parseContext.drawOffSetX, parseContext.drawOffSetY);
         sprite.setScale(parseContext.scaleX,parseContext.scaleY);
         sprite.setRotation(parseContext.rotation);
         sprite.setAlpha(parseContext.alpha);

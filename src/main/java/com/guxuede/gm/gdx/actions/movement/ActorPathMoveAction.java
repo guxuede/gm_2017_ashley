@@ -12,8 +12,8 @@
 //    private Vector2 targetPoint = new Vector2();
 //    private static final float duration = 2;
 //
-//    public ActorPathMoveAction(float x, float y){
-//        targetPoint.set(x,y);
+//    public ActorPathMoveAction(float x, float drawOffSetY){
+//        targetPoint.set(x,drawOffSetY);
 //        this.setDuration(duration);
 //    }
 //
@@ -25,8 +25,8 @@
 //        Vector2 v = TempObjects.temp0Vector2.set(entity.getPhysicsPosition()).sub(targetPoint);
 //        bezier = new Bezier<Vector2>(
 //                startPoint,
-//                new Vector2(startPoint.x+(endPoint.x-startPoint.x)*0.95f, startPoint.y+(endPoint.y-startPoint.y)*-0.31f),
-//                new Vector2(startPoint.x+(endPoint.x-startPoint.x)*0.00f, startPoint.y+(endPoint.y-startPoint.y)*1.14f),
+//                new Vector2(startPoint.drawOffSetX+(endPoint.drawOffSetX-startPoint.drawOffSetX)*0.95f, startPoint.drawOffSetY+(endPoint.drawOffSetY-startPoint.drawOffSetY)*-0.31f),
+//                new Vector2(startPoint.drawOffSetX+(endPoint.drawOffSetX-startPoint.drawOffSetX)*0.00f, startPoint.drawOffSetY+(endPoint.drawOffSetY-startPoint.drawOffSetY)*1.14f),
 //                endPoint);
 //    }
 //
@@ -35,7 +35,7 @@
 //    protected void update(float percent) {
 //        final AnimationEntity entity = (AnimationEntity) getTarget();
 //        bezier.valueAt(TempObjects.temp0Vector2, percent);
-//        entity.setPhysicsPosition(TempObjects.temp0Vector2.x,TempObjects.temp0Vector2.y);
+//        entity.setPhysicsPosition(TempObjects.temp0Vector2.x,TempObjects.temp0Vector2.drawOffSetY);
 //        float an = bezier.derivativeAt(TempObjects.temp0Vector2,percent).angle();
 //        entity.turnDirection(an);
 //        entity.doMoveAnimation();
@@ -53,8 +53,8 @@
 //		super.reset();
 //	}
 //
-//	public void setPosition (float x, float y) {
-//        targetPoint.set(x,y);
+//	public void setPosition (float x, float drawOffSetY) {
+//        targetPoint.set(x,drawOffSetY);
 //	}
 //
 //

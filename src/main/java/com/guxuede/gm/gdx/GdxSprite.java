@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class GdxSprite extends Sprite {
     private static AtomicLong atomicLong = new AtomicLong();
     public final long id = atomicLong.getAndIncrement();
-    public float offSetX, offSetY;
+    public float drawOffSetX, drawOffSetY;
 
     public GdxSprite() {
         super();
@@ -44,24 +44,24 @@ public class GdxSprite extends Sprite {
         super(sprite);
     }
 
-    public void setOffSet(float offSetX, float offSetY) {
-        this.offSetX = offSetX;
-        this.offSetY = offSetY;
+    public void setDrawOffSetX(float offSetX, float offSetY) {
+        this.drawOffSetX = offSetX;
+        this.drawOffSetY = offSetY;
     }
 
     @Override
     public void setX(float x) {
-        super.setX(x  - this.getRegionWidth() / 2 + offSetX);
+        super.setX(x  - this.getRegionWidth() / 2 + drawOffSetX);
     }
 
     @Override
     public void setY(float y) {
-        super.setY(y  - this.getRegionHeight() / 2 + offSetY);
+        super.setY(y  - this.getRegionHeight() / 2 + drawOffSetY);
     }
 
     @Override
     public void setPosition(float x, float y) {
-        super.setPosition(x - this.getRegionWidth() / 2 + offSetX, y - this.getRegionHeight()/2 + offSetY);
+        super.setPosition(x - this.getRegionWidth() / 2 + drawOffSetX, y - this.getRegionHeight()/2 + drawOffSetY);
     }
 
 

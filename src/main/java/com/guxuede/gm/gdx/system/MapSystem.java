@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
@@ -22,6 +23,10 @@ public class MapSystem extends EntitySystem {
         tiledMap = new TmxMapLoader().load(mapFileName);
         renderer = new OrthogonalTiledMapRenderer(tiledMap,spriteBatch);
         this.spriteBatch = spriteBatch;
+    }
+
+    public TiledMapTileLayer getTiledMapLayer(int layer) {
+        return (TiledMapTileLayer) tiledMap.getLayers().get(layer);
     }
 
     @Override

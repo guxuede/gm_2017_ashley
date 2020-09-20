@@ -10,13 +10,14 @@ import com.guxuede.gm.gdx.Mappers;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
+import com.guxuede.gm.gdx.component.PresentableComponent;
 
 /**
  * Created by guxuede on 2017/5/31 .
  */
 public class ActorShadowRenderingSystem extends IteratingSystem {
 
-    private static final Family family = Family.all(ActorStateComponent.class, PositionComponent.class).get();
+    private static final Family family = Family.all(ActorStateComponent.class, PositionComponent.class, PresentableComponent.class).get();
 
     SpriteBatch spriteBatch;
     Sprite shadow;
@@ -35,18 +36,19 @@ public class ActorShadowRenderingSystem extends IteratingSystem {
         spriteBatch.end();
     }
 
-    static final float w = 64;
     static final float h = 32;
 
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
-        float scale = positionComponent.height /100;
-//        spriteBatch.draw(ResourceManager.shadow, positionComponent.position.x-w/2, positionComponent.position.y-16-h, w/2, h/2, 64, 32, 1-scale, 1-scale, 0);
-        drawTextureAtCenterPosWithOwnWH(spriteBatch,ResourceManager.shadow,positionComponent.position.x,positionComponent.position.y-h, w,h, 1-scale, 1-scale);
-        //spriteBatch.draw(ResourceManager.shadow,positionComponent.position.x - w,positionComponent.position.y-h-16,64,32);
-//        drawTextureAtCenterPos(spriteBatch,ResourceManager.shadow,positionComponent.position.x,positionComponent.position.y-16,3,2);
+        PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
+        float scaleY = positionComponent.height /100;
+        float scaleX = positionComponent.height /100;
+//        spriteBatch.draw(ResourceManager.shadow, positionComponent.position.drawOffSetX-w/2, positionComponent.position.drawOffSetY-16-h, w/2, h/2, 64, 32, 1-scale, 1-scale, 0);
+        drawTextureAtCenterPosWithOwnWH(spriteBatch,ResourceManager.shadow,positionComponent.position.x,positionComponent.position.y, presentableComponent.region.getRegionWidth(),h, 1-scaleY, 1-scaleX);
+        //spriteBatch.draw(ResourceManager.shadow,positionComponent.position.drawOffSetX - w,positionComponent.position.drawOffSetY-h-16,64,32);
+//        drawTextureAtCenterPos(spriteBatch,ResourceManager.shadow,positionComponent.position.drawOffSetX,positionComponent.position.drawOffSetY-16,3,2);
     }
 
     public static void drawTextureAtCenterPosWithOwnWH(SpriteBatch spriteBatch, TextureRegion textureRegion,float x,float y, float w,float h,  float scalex, float scaley){

@@ -64,7 +64,7 @@ public class ResourceManager {
 
     public static TextureRegion getTextureRegion(String name, int x, int y, int w, int h){
         TextureRegion textureRegion = null;
-        String key = name+"_"+x+"x"+y+"x"+"x"+w+"x"+h;
+        String key = name+"_"+x+"drawOffSetX"+y+"drawOffSetX"+"drawOffSetX"+w+"drawOffSetX"+h;
         textureRegion = getTextureRegion(key);
         if(textureRegion==null){
             TextureRegion fullTextureRegion = getTextureRegion(name);

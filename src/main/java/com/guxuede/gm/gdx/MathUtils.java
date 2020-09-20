@@ -143,7 +143,7 @@ public class MathUtils {
 //        for(Actor actor : sourceActorList){
 //            if(actor instanceof AnimationEntity && !(actor instanceof AnimationProjection)){
 //                AnimationEntity entity = (AnimationEntity) actor;
-//                float d = Vector2.dst(entity.getCenterX(),entity.getCenterY(),point.x,point.y);
+//                float d = Vector2.dst(entity.getCenterX(),entity.getCenterY(),point.drawOffSetX,point.drawOffSetY);
 //                if(d < radius){
 //                    foundList.add(entity);
 //                }
@@ -158,7 +158,7 @@ public class MathUtils {
 
         float crossproduct = (c.y - a.y) * (b.x - a.x) - (c.x - a.x) * (b.y - a.y);
         return false;
-        //return -epsilon < crossproduct < epsilon && min(a.x, b.x) <= c.x <= max(a.x, b.x) && min(a.y, b.y) <= c.y <= max(a.y, b.y)
+        //return -epsilon < crossproduct < epsilon && min(a.drawOffSetX, b.drawOffSetX) <= c.drawOffSetX <= max(a.drawOffSetX, b.drawOffSetX) && min(a.drawOffSetY, b.drawOffSetY) <= c.drawOffSetY <= max(a.drawOffSetY, b.drawOffSetY)
     }
     /**
      * 判断点c是否落在【点a和点b】的直线段上

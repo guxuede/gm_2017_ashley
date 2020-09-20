@@ -5,6 +5,9 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.guxuede.gm.gdx.actions.DelayAction;
@@ -48,29 +51,33 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new ActorLifeBarRenderingSystem(500,spriteBatch));
         engine.addSystem(new MovementSystem());
         engine.addSystem(new DynamicDirectionSystem());
+        engine.addSystem(new SensorSystem());
         /*MAP*/
         MapSystem mapSystem = new MapSystem("data/desert1.tmx",spriteBatch,camera);//24,14  27,5
         engine.addSystem(new MapCollisionSystem(mapSystem));
         engine.addSystem(mapSystem);
         //不能同時增加2個相同類型的system
         engine.addSystem(new MapRenderingSystem(101,mapSystem,new int[]{0,1}){});//优先级越低，先画到最底部
-        engine.addSystem(new MapRenderingSystem(600,mapSystem,new int[]{2}){});//优先级越低，先画到最底部
+//        engine.addSystem(new MapRenderingSystem(600,mapSystem,new int[]{2}){});//优先级越低，先画到最底部
+        addLayerAsPresntable(mapSystem.getTiledMapLayer(2));
         /*SOUND*/
         engine.addSystem(new SoundSystem());
         engine.addSystem(new Sound3DSystem(camera));
         engine.addSystem(new SoundOnAnimationSystem(camera));
-        //createPresentableComponentEntity();
-        //createPresentableComponentAnimationComponentEntity();
-        //createPresentableComponentAnimationComponentActorAnimationComponentEntity();
-        //createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
-        createActor();
-        //createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
+//        E.create().presentable("Aquatic",-1).pos(100,100).buildToWorld();
+//        createPresentableComponentEntity();
+//        createPresentableComponentAnimationComponentEntity();
+//        createPresentableComponentAnimationComponentActorAnimationComponentEntity();
+//        createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
+        createActor("Aquatic",100,100);
+        createActor("Undead",200,200);
+        createActor("Farmer",300,300);
+//        createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
     }
 
     @Override
     public void render(float delta) {
         engine.update(delta);
-        processKeyEvent();
     }
 
     //测试只有一个PresentableComponent 时可以画出静态图片
@@ -88,12 +95,12 @@ public class GdxGameScreen extends ScreenAdapter {
 
     //测试只有一个PresentableComponent+一个AnimationComponent+一个ActorAnimationComponent+一个ActorStateComponent时可以画出以一定速度移动地角色状态动态动画
     private Entity createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity() {
-        return E.create().actorState(ActorAnimationComponent.RIGHT,true,0,0,200f,200f)
+        return E.create().actorState(ActorAnimationComponent.RIGHT,true,0,0,-200f,-200f)
                 .actorAnimation("Undead").pos(0,0).actions(new SequenceAction(new DelayAction(2),new BlinkAction(),new ScaleByAction(1,1,10f))).buildToWorld();
     }
 
-    private void createActor() {
-        Entity entity = E.create().actorState().actorAnimation("Undead").asActor().pos(0,0).actions().bounds().buildToWorld();
+    private void createActor(String name, float x,float y) {
+        Entity entity = E.create().actorState().actorAnimation(name).asActor().pos(x,y).actions().bounds(32,32).sensor().buildToWorld();
         SkillComponent skillComponent = engine.createComponent(SkillComponent.class);
         skillComponent.skills.add(ResourceManager.getSkillById("burstFire"));
         skillComponent.skills.add(ResourceManager.getSkillById("burstFire1"));
@@ -106,40 +113,6 @@ public class GdxGameScreen extends ScreenAdapter {
     }
 
 
-    private void processKeyEvent(){
-        Application.ApplicationType appType = Gdx.app.getType();
-        // should work also with Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer)
-        float accelX;
-        if (appType == Application.ApplicationType.Android || appType == Application.ApplicationType.iOS) {
-            accelX = Gdx.input.getAccelerometerX();
-        } else {
-            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
-                accelX = 5f;
-            }else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
-                accelX = -5f;
-            }else{
-                accelX = 0;
-            }
-        }
-        float accelY;
-        if (appType == Application.ApplicationType.Android || appType == Application.ApplicationType.iOS) {
-            accelY = Gdx.input.getAccelerometerY();
-        } else {
-            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
-                accelY = 5f;
-            }else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
-                accelY = -5f;
-            }else{
-                accelY = 0;
-            }
-        }
-        StageSystem stageSystem = engine.getSystem(StageSystem.class);
-        final Entity viewActor = stageSystem==null?null:stageSystem.getViewActor();
-        if(viewActor!=null){
-            Mappers.actorStateCM.get(viewActor).acceleration.set(accelX*11,accelY*11);
-        }
-    }
-
 //    @Override
 //    public void resize(int width, int height) {
 //        TempObjects.temp0Vector3.set(camera.position);
@@ -151,4 +124,38 @@ public class GdxGameScreen extends ScreenAdapter {
 //        camera.update();
 //        spriteBatch.setProjectionMatrix(camera.combined);
 //    }
+
+
+
+    public void addLayerAsPresntable(TiledMapTileLayer layer){
+        float unitScale = 1;
+        final int layerWidth = layer.getWidth();
+        final int layerHeight = layer.getHeight();
+
+        final float layerTileWidth = layer.getTileWidth() * unitScale;
+        final float layerTileHeight = layer.getTileHeight() * unitScale;
+
+        final int minX = 0;
+        final int maxX = layerWidth;
+
+        final int minY = 0;
+        final int maxY = layerHeight;
+
+        for (int y = maxY - 1; y >= minY; y--) {
+            for (int x = maxX - 1; x >= minX; x--) {
+                final TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                if (cell == null) continue;
+                final TiledMapTile tile = cell.getTile();
+
+                if (tile != null) {
+                    float x1 = x * layerTileWidth;
+                    float y1 = y * layerTileHeight;
+                    int zOffSet = tile.getProperties().get("zOffSet",0,Integer.class);
+                    float z = (int) -(y1+ layerTileHeight) + (layerTileHeight*zOffSet);
+                    E.create().textureRegionPresentable(tile.getTextureRegion(), z).pos(x1,y1).buildToWorld();
+                }
+            }
+        }
+    }
+
 }
