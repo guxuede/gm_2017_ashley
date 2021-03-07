@@ -362,6 +362,16 @@ public final class A {
         return sequenceAction;
     }
 
+    public static Action deleteSelf(){
+        return new Action() {
+            @Override
+            public boolean act(float delta) {
+                E.remove(getActor());
+                return true;
+            }
+        };
+    }
+
     /**
      * 在一条线上创建特效
      * @param owner             特效施放者
@@ -395,8 +405,7 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        System.out.println(ownerPos+ " " + pos);
-        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x,pos.y)))
+        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
                 .actorState()
                 .dynamicDirection()
                 .actorAnimation("fireBall")
