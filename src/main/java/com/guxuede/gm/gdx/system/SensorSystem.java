@@ -15,6 +15,7 @@ import com.guxuede.gm.gdx.component.SensorComponent;
 public class SensorSystem extends IteratingSystem {
 
     private static final Family family = Family.all(SensorComponent.class, ActorStateComponent.class).get();
+    public static final int ACC = 10;
 
     public SensorSystem() {
         super(family);
@@ -35,9 +36,9 @@ public class SensorSystem extends IteratingSystem {
             accelX = Gdx.input.getAccelerometerX();
         } else {
             if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
-                accelX = -5f;
+                accelX = -1f;
             }else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
-                accelX = 5f;
+                accelX = 1f;
             }else{
                 accelX = 0;
             }
@@ -47,14 +48,14 @@ public class SensorSystem extends IteratingSystem {
             accelY = Gdx.input.getAccelerometerY();
         } else {
             if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
-                accelY = -5f;
+                accelY = -1f;
             }else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
-                accelY = 5f;
+                accelY = 1f;
             }else{
                 accelY = 0;
             }
         }
-        TempObjects.temp0Vector2.set(accelX*11,accelY*11);
+        TempObjects.temp0Vector2.set(accelX* ACC,accelY*ACC);
         return TempObjects.temp0Vector2;
     }
 }

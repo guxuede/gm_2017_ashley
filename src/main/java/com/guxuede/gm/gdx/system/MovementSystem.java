@@ -29,7 +29,7 @@ import static com.guxuede.gm.gdx.Mappers.actorStateCM;
 
 public class MovementSystem extends IteratingSystem {
 
-    public static final float MOVE_VELOCITY = 20;
+    public static final float friction = 0.95f;
 
     private Vector2 tmp = new Vector2();
 
@@ -41,18 +41,32 @@ public class MovementSystem extends IteratingSystem {
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         ActorStateComponent actorStateComponent = actorStateCM.get(entity);
-        actorStateComponent.velocity.x = actorStateComponent.acceleration.x / 10.0f * MOVE_VELOCITY;
-        actorStateComponent.velocity.y = actorStateComponent.acceleration.y / 10.0f * MOVE_VELOCITY;
-        tmp.set(actorStateComponent.velocity).scl(deltaTime);
+        //加速度驱使速度
+        actorStateComponent.velocity.x += actorStateComponent.acceleration.x;
+        actorStateComponent.velocity.y += actorStateComponent.acceleration.y;
 
+        //摩擦力减少速度
+        actorStateComponent.velocity.x *= friction;
+        actorStateComponent.velocity.y *= friction;
+        if(Math.abs(actorStateComponent.velocity.x) < 0.0001){
+            actorStateComponent.velocity.x = 0;
+        }
+        if(Math.abs(actorStateComponent.velocity.y) < 0.0001){
+            actorStateComponent.velocity.y = 0;
+        }
+
+        //速度改变位置
+        tmp.set(actorStateComponent.velocity).scl(deltaTime);
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         positionComponent.position.add(tmp);
 
+        //更新方向信息
         actorStateComponent.isMoving = tmp.x != 0 || tmp.y!=0;
         if (actorStateComponent.isMoving){
             positionComponent.degrees = tmp.angle();
-            actorStateComponent.direction = convertDegreesToDirection(positionComponent.degrees);
+            actorStateComponent.direction = convertDegreesToDirection(tmp.angle());
         }
+
     }
 
 

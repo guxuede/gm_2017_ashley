@@ -36,34 +36,12 @@ public class ActorShadowRenderingSystem extends IteratingSystem {
         spriteBatch.end();
     }
 
-    static final float h = 32;
-
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
-        float scaleY = positionComponent.height /100;
-        float scaleX = positionComponent.height /100;
-//        spriteBatch.draw(ResourceManager.shadow, positionComponent.position.drawOffSetX-w/2, positionComponent.position.drawOffSetY-16-h, w/2, h/2, 64, 32, 1-scale, 1-scale, 0);
-        drawTextureAtCenterPosWithOwnWH(spriteBatch,ResourceManager.shadow,positionComponent.position.x,positionComponent.position.y, presentableComponent.region.getRegionWidth(),h, 1-scaleY, 1-scaleX);
-        //spriteBatch.draw(ResourceManager.shadow,positionComponent.position.drawOffSetX - w,positionComponent.position.drawOffSetY-h-16,64,32);
-//        drawTextureAtCenterPos(spriteBatch,ResourceManager.shadow,positionComponent.position.drawOffSetX,positionComponent.position.drawOffSetY-16,3,2);
-    }
-
-    public static void drawTextureAtCenterPosWithOwnWH(SpriteBatch spriteBatch, TextureRegion textureRegion,float x,float y, float w,float h,  float scalex, float scaley){
-        float regionWidth = w;
-        float regionHeight = h;
-        float halfWidth = regionWidth / 2;
-        float halfHeight = regionHeight / 2;
-        spriteBatch.draw(textureRegion, x- halfWidth, y- halfHeight, halfWidth, halfHeight, regionWidth, regionHeight, scalex,scaley, 0);
-    }
-
-    public static void drawTextureAtCenterPos(SpriteBatch spriteBatch, TextureRegion textureRegion,float x,float y, float scalex, float scaley){
-        int regionWidth = textureRegion.getRegionWidth();
-        int regionHeight = textureRegion.getRegionHeight();
-        int halfWidth = regionWidth / 2;
-        int halfHeight = regionHeight / 2;
-        spriteBatch.draw(textureRegion, x- halfWidth, y- halfHeight, halfWidth, halfHeight, regionWidth, regionHeight, scalex,scaley, 0);
+        shadow.setCenter(positionComponent.position.x,positionComponent.position.y);
+        shadow.setScale((presentableComponent.region.getRegionWidth()/shadow.getRegionWidth()),1);
+        shadow.draw(spriteBatch,0.7f);
     }
 }

@@ -34,7 +34,7 @@ public class ActorMoveAsSnackToPointAction extends ActorMoveToAction {
         super.begin();
         Vector2 startPoint = Mappers.positionCM.get(actor).position.cpy();
         Vector2 endPoint = targetPoint;
-        Vector2 v = TempObjects.temp0Vector2.set(startPoint).sub(endPoint);
+//        Vector2 v = TempObjects.temp0Vector2.set(startPoint).sub(endPoint);
         Vector2 p1 = new Vector2(startPoint.x+(endPoint.x-startPoint.x)*0.95f, startPoint.y+(endPoint.y-startPoint.y)*-0.31f);
         Vector2 p2 =  new Vector2(startPoint.x+(endPoint.x-startPoint.x)*0.00f, startPoint.y+(endPoint.y-startPoint.y)*1.14f);
         bezier = new Bezier<Vector2>(startPoint, p2, p1,endPoint);

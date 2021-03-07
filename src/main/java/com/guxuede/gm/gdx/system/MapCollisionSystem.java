@@ -11,8 +11,6 @@ import com.guxuede.gm.gdx.Mappers;
 import com.guxuede.gm.gdx.TempObjects;
 import com.guxuede.gm.gdx.component.*;
 
-import static com.guxuede.gm.gdx.system.MovementSystem.MOVE_VELOCITY;
-
 /**
  * Created by guxuede on 2017/6/10 .
  */
@@ -44,7 +42,7 @@ public class MapCollisionSystem extends IteratingSystem {
         //  no math required here.
         if (physics.acceleration.x != 0 || physics.acceleration.y != 0) {
             //calculate predicts position
-            TempObjects.temp0Vector2.set(physics.acceleration.x / 10.0f * MOVE_VELOCITY, physics.acceleration.y / 10.0f * MOVE_VELOCITY).scl(delta).add(pos.position);
+            TempObjects.temp0Vector2.set(physics.velocity).scl(delta).add(pos.position);
             float px = TempObjects.temp0Vector2.x;
             float py = TempObjects.temp0Vector2.y;
             //check position is collided

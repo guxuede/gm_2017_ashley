@@ -50,7 +50,7 @@ public class ResourceManager {
             if(name.contains(".")){
                 throw new RuntimeException("resource name not support contain dot or suffix");
             }
-            FileHandle fileHandle = Gdx.files.internal(name+".PNG");
+            FileHandle fileHandle = Gdx.files.internal(name+".png");
             if(fileHandle.exists()){
                 texture = new Texture(fileHandle);
                 TEXTURE_MAP.put(name, texture);

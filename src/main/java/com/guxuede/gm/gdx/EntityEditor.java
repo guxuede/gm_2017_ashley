@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -48,6 +49,14 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
+    public EntityEditor blood(int hitPoint, int currentHitPoint) {
+        BloodComponent bloodComponent = edit.create(BloodComponent.class);
+        bloodComponent.hitPoint = hitPoint;
+        bloodComponent.currentHitPoint = currentHitPoint;
+        entity.add(bloodComponent);
+        return this;
+    }
+
     public EntityEditor actorAnimation(String animationName) {
         return actorAnimation(animationName, ActorAnimationComponent.DOWN ,false,0);
     }
@@ -81,6 +90,15 @@ public abstract class EntityEditor<T extends EntityEditor>{
         presentableComponent.zIndex = zIndex;
         entity.add(animationComponent);
         entity.add(presentableComponent);
+        return this;
+    }
+
+    public EntityEditor animation(String animationName,Animation animation) {
+        AnimationComponent animationComponent = edit.create(AnimationComponent.class);
+        animationComponent.animation = animation;
+        animationComponent.animationName = animationName;
+        animationComponent.stateTime = 0;
+        entity.add(animationComponent);
         return this;
     }
 

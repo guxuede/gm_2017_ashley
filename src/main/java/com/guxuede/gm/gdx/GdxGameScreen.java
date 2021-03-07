@@ -4,10 +4,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.guxuede.gm.gdx.actions.DelayAction;
@@ -18,6 +22,8 @@ import com.guxuede.gm.gdx.actions.movement.BlinkAction;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.system.*;
+
+import java.util.Arrays;
 
 /**
  * Created by guxuede on 2017/5/30 .
@@ -60,6 +66,7 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new MapRenderingSystem(101,mapSystem,new int[]{0,1}){});//优先级越低，先画到最底部
 //        engine.addSystem(new MapRenderingSystem(600,mapSystem,new int[]{2}){});//优先级越低，先画到最底部
         addLayerAsPresntable(mapSystem.getTiledMapLayer(2));
+        engine.addSystem(new AmbianceLightSystem(999));
         /*SOUND*/
         engine.addSystem(new SoundSystem());
         engine.addSystem(new Sound3DSystem(camera));
@@ -100,7 +107,7 @@ public class GdxGameScreen extends ScreenAdapter {
     }
 
     private void createActor(String name, float x,float y) {
-        Entity entity = E.create().actorState().actorAnimation(name).asActor().pos(x,y).actions().bounds(32,32).sensor().buildToWorld();
+        Entity entity = E.create().actorState().actorAnimation(name).asActor().pos(x,y).actions().bounds(32,32).blood(100,65).sensor().buildToWorld();
         SkillComponent skillComponent = engine.createComponent(SkillComponent.class);
         skillComponent.skills.add(ResourceManager.getSkillById("burstFire"));
         skillComponent.skills.add(ResourceManager.getSkillById("burstFire1"));
@@ -152,7 +159,20 @@ public class GdxGameScreen extends ScreenAdapter {
                     float y1 = y * layerTileHeight;
                     int zOffSet = tile.getProperties().get("zOffSet",0,Integer.class);
                     float z = (int) -(y1+ layerTileHeight) + (layerTileHeight*zOffSet);
-                    E.create().textureRegionPresentable(tile.getTextureRegion(), z).pos(x1,y1).buildToWorld();
+
+                    EntityEditor editor = E.create().textureRegionPresentable(tile.getTextureRegion(), z).pos(x1, y1);
+                    if(tile instanceof AnimatedTiledMapTile){
+                        AnimatedTiledMapTile animatedTiledMapTile = (AnimatedTiledMapTile) tile;
+                        StaticTiledMapTile[] frameTiles = animatedTiledMapTile.getFrameTiles();
+                        Array<TextureRegion> textureRegions = new Array<TextureRegion>(frameTiles.length);
+                        for(int i=0;i<frameTiles.length;i++){
+                            StaticTiledMapTile frameTile = frameTiles[i];
+                            textureRegions.add(frameTile.getTextureRegion());
+                        }
+                        Animation animation = new Animation(animatedTiledMapTile.getAnimationIntervals()[0]/1000f, textureRegions, Animation.PlayMode.LOOP);
+                        editor.animation("tile-"+animatedTiledMapTile.getId(),animation);
+                    }
+                    editor.buildToWorld();
                 }
             }
         }

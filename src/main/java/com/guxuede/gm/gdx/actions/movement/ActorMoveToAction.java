@@ -27,7 +27,7 @@ public abstract class ActorMoveToAction extends Acting {
         if(!isArrive()){
             final Vector2 target = getTargetPoint();
             final Vector2 entryPos = positionComponent.position;
-            Vector2 vector2 = TempObjects.temp0Vector2.set(entryPos).sub(target).nor().scl(50f);
+            Vector2 vector2 = TempObjects.temp0Vector2.set(target).sub(entryPos).nor().scl(5f);
             Mappers.actorStateCM.get(actor).acceleration.set(vector2);
             return false;
         }
