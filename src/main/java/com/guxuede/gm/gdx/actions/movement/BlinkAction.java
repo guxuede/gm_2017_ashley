@@ -12,8 +12,9 @@ public class BlinkAction extends Action {
 
     private Vector2 targetPosition = new Vector2();
 
-    public BlinkAction(){
-
+    public BlinkAction(int x, int y){
+        targetPosition.x = x;
+        targetPosition.y = y;
     }
 
     public BlinkAction(Vector2 targetPositon){
