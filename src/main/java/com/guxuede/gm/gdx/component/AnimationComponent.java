@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.IntMap;
-import com.guxuede.gm.gdx.AnimationHolder;
 import com.guxuede.gm.gdx.GdxSprite;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.SoundUtils;
@@ -16,7 +14,7 @@ import com.guxuede.gm.gdx.SoundUtils;
 public class AnimationComponent implements Component {
     public static final int STOP=0, DOWN=1,LEFT=2,RIGHT=3,UP=4;
     //TODO support AnimatedTiledMapTile.
-    public Animation animation;
+    public Animation<TextureRegion> animation;
     public float stateTime;
     public float maxStateTime = Float.MAX_VALUE;
     public String animationName;
@@ -28,6 +26,9 @@ public class AnimationComponent implements Component {
     public TextureRegion getNextKeyFrame (float deltaTime, boolean looping) {
         stateTime += deltaTime;
         if(stateTime >= maxStateTime){
+            return null;
+        }
+        if(animation == null){
             return null;
         }
         TextureRegion textureRegion = this.animation.getKeyFrame(stateTime,looping);

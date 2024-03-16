@@ -40,6 +40,9 @@ public class ActorShadowRenderingSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
+        if(presentableComponent.region == null){
+            return;
+        }
         shadow.setCenter(positionComponent.position.x,positionComponent.position.y);
         shadow.setScale((presentableComponent.region.getRegionWidth()/shadow.getRegionWidth()),1);
         shadow.draw(spriteBatch,0.7f);

@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.guxuede.gm.gdx.MapMask;
 import com.guxuede.gm.gdx.Mappers;
@@ -42,18 +43,22 @@ public class MapCollisionSystem extends IteratingSystem {
         //  no math required here.
         if (physics.acceleration.x != 0 || physics.acceleration.y != 0) {
             //calculate predicts position
-            TempObjects.temp0Vector2.set(physics.velocity).scl(delta).add(pos.position);
-            float px = TempObjects.temp0Vector2.x;
-            float py = TempObjects.temp0Vector2.y;
+            Vector2 temp0Vector2 = TempObjects.temp0Vector2;
+            MovementSystem.getNextPositionDelta(delta, physics, temp0Vector2);//get next Position Delta
+            temp0Vector2.add(pos.position);//get next position
+            float px = temp0Vector2.x;
+            float py = temp0Vector2.y;
             //check position is collided
-            if ((physics.acceleration.x > 0 && collides(px + bounds.maxx/2 , py)) ||  (physics.acceleration.x < 0 && collides(px- bounds.maxx/2 , py))) {
-                physics.acceleration.x = physics.bounce > 0 ? -physics.velocity.x * physics.bounce : 0;
+            if ((physics.acceleration.x > 0 && collides(px + bounds.maxx / 2, py)) || (physics.acceleration.x < 0 && collides(px - bounds.maxx / 2, py))) {
+                physics.acceleration.x = physics.acceleration.x > 0?-1:1;
+                physics.velocity.x = 0;
             }
-            if ((physics.acceleration.y > 0 && collides(px, py + bounds.maxy/2)) || (physics.acceleration.y < 0 && collides(px, py - bounds.maxy/2))) {
-                physics.acceleration.y = physics.bounce > 0 ? -physics.velocity.y * physics.bounce : 0;
+            if ((physics.acceleration.y > 0 && collides(px, py + bounds.maxy / 2)) || (physics.acceleration.y < 0 && collides(px, py - bounds.maxy / 2))) {
+                physics.acceleration.y = physics.acceleration.y > 0?-1:1;
+                physics.velocity.y = 0;
             }
-        }
 
+        }
     }
 
     private boolean collides(final float x, final float y) {

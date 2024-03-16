@@ -583,5 +583,34 @@
         "loop":"true"
       }
     ]
+  },
+  {
+    "name" : "RPGMarkMen",
+    "width":48,
+    "height":48,
+    "texture":"data/Monster2_mvt",
+    "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
+    "frameDuration":0.2,
+    "actorNum":4
+  },
+  {
+    "name" : "RPGMarkPig",
+    "width":48,
+    "height":48,
+    "texture":"data/Nature",
+    "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
+    "frameDuration":0.2,
+    "actorNum":7
+  },
+
+  {
+    "name" : "RPGMarkGreg",
+    "width":48,
+    "height":48,
+    "texture":"data/rpgm_Actor1_1_run",
+    "texture_rpgm_battle":"data/rpgm_Actor1_1_battle",
+    "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
+    "frameDuration":0.2,
+    "actorNum":0
   }
 ]

@@ -2,9 +2,7 @@ package com.guxuede.gm.gdx.actions.entity;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.AnimationHolder;
 import com.guxuede.gm.gdx.E;
-import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.Action;
 
 /**

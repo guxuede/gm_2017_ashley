@@ -1,10 +1,7 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.actor.parser;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.IntMap;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by guxuede on 2016/9/16 .

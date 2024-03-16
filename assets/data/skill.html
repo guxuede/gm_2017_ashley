@@ -7,7 +7,7 @@
         </description>
         <script>
             var af = Java.type('com.guxuede.gm.gdx.A');
-            af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"special10",0.5,100,5));
+            af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"special10",0.1,100,5));
         </script>
     </skill>
     <skill id="burstFire1" name="Burst Fire" hotKey="N" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="10">
@@ -45,7 +45,7 @@
         </description>
         <script>
             var af = Java.type('com.guxuede.gm.gdx.A');
-            af.gdxSequence(af.blink(owner,targetPos,"fire1"));
+            af.gdxSequence(af.animation(owner,"hitAnimation"));
         </script>
     </skill>
 </skills>

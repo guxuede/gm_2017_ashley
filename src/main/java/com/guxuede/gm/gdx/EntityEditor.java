@@ -1,16 +1,22 @@
 package com.guxuede.gm.gdx;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.guxuede.gm.gdx.actions.Action;
+import com.guxuede.gm.gdx.actions.DelayAction;
+import com.guxuede.gm.gdx.actions.SequenceAction;
+import com.guxuede.gm.gdx.actions.animation.AnimationAction;
+import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
+import com.guxuede.gm.gdx.actions.movement.BlinkAction;
+import com.guxuede.gm.gdx.actor.parser.ActorHolder;
+import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.*;
+
+import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Created by guxuede on 2017/6/10 .
@@ -62,7 +68,17 @@ public abstract class EntityEditor<T extends EntityEditor>{
     }
 
     public EntityEditor actorAnimation(String animationName,int direction,boolean isMoving, int zIndex) {
-        AnimationHolder animationHolder = ResourceManager.getAnimationHolder(animationName);
+        AnimationHolder animationHolder = ResourceManager.getActorAnimation(animationName);
+        actorAnimation(animationHolder,direction,isMoving,zIndex);
+        return this;
+    }
+
+    public EntityEditor actorAnimation(AnimationHolder animationHolder) {
+        return actorAnimation(animationHolder, ActorAnimationComponent.DOWN ,false,0);
+    }
+
+
+    public EntityEditor actorAnimation(AnimationHolder animationHolder,int direction,boolean isMoving, int zIndex) {
         ActorAnimationComponent actorAnimationComponent = edit.create(ActorAnimationComponent.class);
         actorAnimationComponent.animationHolder = animationHolder;
         actorAnimationComponent.direction = direction;
@@ -82,7 +98,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
 
     public EntityEditor animation(String animationName, int zIndex) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
-        animationComponent.animation = ResourceManager.getAnimationHolder(animationName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION);
+        animationComponent.animation = ResourceManager.getActorAnimation(animationName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION);
         animationComponent.maxStateTime = animationComponent.animation.getAnimationDuration();
         animationComponent.animationName = animationName;
         animationComponent.stateTime = 0;
@@ -146,6 +162,18 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
+    public EntityEditor asRpgMarkerActor(String name, float x, float y){
+        ActorHolder actor = ResourceManager.getActor(name);
+        this.actorState().actorAnimation(actor.animationHolder).asActor().pos(x,y).actions().bounds((int) actor.bounds.getWidth(), (int) actor.bounds.getHeight())
+                .blood(actor.blood,actor.blood)
+                .sensor().actions(new SequenceAction(
+                        new AnimationAction("damage", 3f)
+                        ,new AnimationAction("victory", 3f)
+                        ,new AnimationAction("escape", 3f)
+                        ,new ScaleByAction(1,1,10f)));
+        return this;
+    }
+
     public EntityEditor bounds(){
         entity.add(edit.create(BoundsComponent.class));
         return this;
@@ -160,6 +188,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
         entity.add(component);
         return this;
     }
+
 
     public EntityEditor sound(String sound,boolean loop){
         return sound(ResourceManager.getSoundOrLoad(sound),loop);

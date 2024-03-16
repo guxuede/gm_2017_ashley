@@ -9,8 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.LongMap;
+import com.guxuede.gm.gdx.actor.parser.ActorHolder;
+import com.guxuede.gm.gdx.actor.parser.ActorJsonParse;
+import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
 
@@ -28,7 +30,7 @@ public class ResourceManager {
     private static final Map<String,Texture> TEXTURE_MAP = new HashMap<String, Texture>();
     private static final Map<String,TextureRegion> TEXTURE_REGION_MAP =  new HashMap<String, TextureRegion>();
     private static final TextureAtlas TEXTURE_ATLAS_PACK =new TextureAtlas(Gdx.files.internal("data/pack"));
-    private static final List<AnimationHolder> ANIMATION_HOLDER_LIST = ActorJsonParse.parse(Gdx.files.internal("data/actors.json"));
+    private static final List<ActorHolder> ANIMATION_HOLDER_LIST = new ActorJsonParse().parse(Gdx.files.internal("data/actors.json"));
     public static final Map<String, Skill> SKILLS =ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
 
     public static Sprite shadow = new Sprite(getTextureRegion("data/180-Switch03",96,96,32,32));
@@ -63,18 +65,14 @@ public class ResourceManager {
     }
 
     public static TextureRegion getTextureRegion(String name, int x, int y, int w, int h){
-        TextureRegion textureRegion = null;
-        String key = name+"_"+x+"drawOffSetX"+y+"drawOffSetX"+"drawOffSetX"+w+"drawOffSetX"+h;
-        textureRegion = getTextureRegion(key);
-        if(textureRegion==null){
-            TextureRegion fullTextureRegion = getTextureRegion(name);
-            if(fullTextureRegion!=null){
-                textureRegion = new TextureRegion(fullTextureRegion,x,y,w,h);
-                TEXTURE_REGION_MAP.put(key, textureRegion);
-            }
-        }
-        return textureRegion;
+        return new TextureRegion(getTextureRegion(name),x,y,w,h);
     }
+
+    public static TextureRegion getTextureRegion(String name, int xoffset, int yoffset){
+        TextureRegion fullTextureRegion = getTextureRegion(name);
+        return new TextureRegion(fullTextureRegion,xoffset,yoffset,fullTextureRegion.getRegionWidth(),fullTextureRegion.getRegionHeight());
+    }
+
     public static TextureRegion getTextureRegion(String name){
         TextureRegion textureRegion = null;
         textureRegion = TEXTURE_REGION_MAP.get(name);
@@ -90,15 +88,24 @@ public class ResourceManager {
         return textureRegion;
     }
 
-    public static AnimationHolder getAnimationHolder(String name){
-        for(AnimationHolder animationHolder : ANIMATION_HOLDER_LIST){
+    public static AnimationHolder getActorAnimation(String name){
+        for(ActorHolder animationHolder : ANIMATION_HOLDER_LIST){
             if(name.equals(animationHolder.name)){
-                return animationHolder;//.getCopy();
+                return animationHolder.animationHolder;//.getCopy();
             }
         }
         if("spine".equalsIgnoreCase(name)){
 
             new AnimationHolder();
+        }
+        return null;
+    }
+
+    public static ActorHolder getActor(String name){
+        for(ActorHolder animationHolder : ANIMATION_HOLDER_LIST){
+            if(name.equals(animationHolder.name)){
+                return animationHolder;//.getCopy();
+            }
         }
         return null;
     }

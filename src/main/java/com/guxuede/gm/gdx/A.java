@@ -5,13 +5,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.guxuede.gm.gdx.actions.*;
-import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
-import com.guxuede.gm.gdx.actions.movement.ActorMoveAsSnackToPointAction;
-import com.guxuede.gm.gdx.actions.movement.BezierMoveAction;
+import com.guxuede.gm.gdx.actions.movement.ActorMoveToPointAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
+import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
+import com.guxuede.gm.gdx.component.AnimationComponent;
 
 /**
  * Created by guxuede on 2017/6/8 .
@@ -302,7 +302,7 @@ public final class A {
      * @return
      */
     public  static EffectsActorAction effectsActorAction(String effectName, Vector2 pos){
-        float duration = ResourceManager.getAnimationHolder(effectName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION).getAnimationDuration();
+        float duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION).getAnimationDuration();
         EffectsActorAction action = action(EffectsActorAction.class);
         action.setPos(pos);
         action.setActorName(effectName);
@@ -405,12 +405,21 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
+//        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
+        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
                 .actorState()
                 .dynamicDirection()
                 .actorAnimation("fireBall")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
+        SequenceAction sequenceAction = sequence();
+        return sequenceAction;
+    }
+
+    public static Action animation(Entity owner, String effectName){
+        AnimationComponent animationComponent = Mappers.animationCM.get(owner);
+        ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(owner);
+        animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(effectName.hashCode());
         SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }

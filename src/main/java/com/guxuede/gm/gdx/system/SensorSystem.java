@@ -15,7 +15,7 @@ import com.guxuede.gm.gdx.component.SensorComponent;
 public class SensorSystem extends IteratingSystem {
 
     private static final Family family = Family.all(SensorComponent.class, ActorStateComponent.class).get();
-    public static final int ACC = 10;
+    public static final int ACC = 60;
 
     public SensorSystem() {
         super(family);
