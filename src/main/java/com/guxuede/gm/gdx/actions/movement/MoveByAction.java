@@ -17,7 +17,7 @@
 package com.guxuede.gm.gdx.actions.movement;
 
 
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.RelativeTemporalAction;
 
 /** Moves an actor to a relative position.

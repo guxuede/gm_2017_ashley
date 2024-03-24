@@ -20,18 +20,12 @@ package com.guxuede.gm.gdx.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import com.guxuede.gm.gdx.MapMask;
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
-import com.guxuede.gm.gdx.component.BoundsComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
 
-import static com.guxuede.gm.gdx.Mappers.actorStateCM;
+import static com.guxuede.gm.gdx.entityEdit.Mappers.actorStateCM;
 
 public class MovementSystem extends IteratingSystem {
 

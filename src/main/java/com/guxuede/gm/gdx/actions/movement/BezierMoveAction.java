@@ -2,10 +2,9 @@ package com.guxuede.gm.gdx.actions.movement;
 
 import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.actions.Action;
-import com.guxuede.gm.gdx.actions.TemporalAction;
 
 
 public class BezierMoveAction extends Action{

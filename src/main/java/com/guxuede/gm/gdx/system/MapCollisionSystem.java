@@ -7,9 +7,9 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.guxuede.gm.gdx.MapMask;
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.basic.libgdx.MapMask;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.*;
 
 /**

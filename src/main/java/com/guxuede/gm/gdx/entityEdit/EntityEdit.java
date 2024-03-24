@@ -1,11 +1,10 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.entityEdit;
 
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.guxuede.gm.gdx.actions.Action;
-import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.gdx.basic.libgdx.SingletonPooledEngine;
 
 public final class EntityEdit {
 

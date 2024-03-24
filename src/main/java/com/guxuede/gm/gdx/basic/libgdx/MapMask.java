@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.basic.libgdx;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
@@ -24,7 +24,7 @@ public class MapMask {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         v = new boolean[height][width];
-        generate(layers,1);
+        generate(layers,1);//第二层所有物品都是无法通过的
     }
 
     /**

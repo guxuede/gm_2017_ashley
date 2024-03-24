@@ -1,6 +1,6 @@
 package com.guxuede.gm.gdx.actions.movement;
 
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.RelativeTemporalAction;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 

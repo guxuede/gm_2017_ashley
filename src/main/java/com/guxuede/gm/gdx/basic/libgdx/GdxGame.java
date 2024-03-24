@@ -14,12 +14,10 @@
  * limitations under the License.
  ******************************************************************************/
 
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.basic.libgdx;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
+import com.guxuede.samplegame.GdxGameScreen;
 
 public class GdxGame extends Game {
 

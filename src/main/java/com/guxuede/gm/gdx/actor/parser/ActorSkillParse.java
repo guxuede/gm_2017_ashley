@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.actor.parser;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;

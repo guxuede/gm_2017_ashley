@@ -4,12 +4,13 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
 import com.guxuede.gm.gdx.actions.Action;
 
 /**
  * Created by guxuede on 2017/6/3 .
  */
-public class ActionsComponent implements Component {
+public class ActionsComponent implements Component, Pool.Poolable {
 
     public Engine engine;
     public final Array<Action> actions = new Array(0);
@@ -35,4 +36,9 @@ public class ActionsComponent implements Component {
         actions.clear();
     }
 
+    @Override
+    public void reset() {
+        engine = null;
+        actions.clear();
+    }
 }

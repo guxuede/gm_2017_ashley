@@ -1,10 +1,8 @@
 package com.guxuede.gm.gdx.actions.animation;
 
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.actions.Action;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.TemporalAction;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
-import com.guxuede.gm.gdx.component.PositionComponent;
 
 /**
  * Created by guxuede on 2017/6/3 .

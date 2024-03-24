@@ -12,7 +12,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.LongMap;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.ActorJsonParse;
+import com.guxuede.gm.gdx.actor.parser.ActorSkillParse;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
 
@@ -31,7 +33,7 @@ public class ResourceManager {
     private static final Map<String,TextureRegion> TEXTURE_REGION_MAP =  new HashMap<String, TextureRegion>();
     private static final TextureAtlas TEXTURE_ATLAS_PACK =new TextureAtlas(Gdx.files.internal("data/pack"));
     private static final List<ActorHolder> ANIMATION_HOLDER_LIST = new ActorJsonParse().parse(Gdx.files.internal("data/actors.json"));
-    public static final Map<String, Skill> SKILLS =ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
+    public static final Map<String, Skill> SKILLS = ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
 
     public static Sprite shadow = new Sprite(getTextureRegion("data/180-Switch03",96,96,32,32));
 

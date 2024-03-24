@@ -18,7 +18,7 @@ package com.guxuede.gm.gdx.actions;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 /** Executes an action only after all other actions on the actor at the time this action's target was set have finished.
  * @author Nathan Sweet */

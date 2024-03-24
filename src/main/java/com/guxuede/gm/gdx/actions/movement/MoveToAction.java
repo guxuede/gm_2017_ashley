@@ -18,7 +18,7 @@ package com.guxuede.gm.gdx.actions.movement;
 
 
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.TemporalAction;
 
 /** Moves an actor from its current position to a specific position.

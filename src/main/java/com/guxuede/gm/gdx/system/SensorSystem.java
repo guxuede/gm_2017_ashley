@@ -7,8 +7,8 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.SensorComponent;
 

@@ -6,13 +6,11 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.guxuede.gm.gdx.GdxSprite;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.ResourceManager;
-import com.guxuede.gm.gdx.SoundUtils;
 import com.guxuede.gm.gdx.component.AnimationComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
-import com.guxuede.gm.gdx.component.SoundComponent;
 
 /**
  * Created by guxuede on 2017/9/7 .

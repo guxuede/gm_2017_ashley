@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.samplegame;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
@@ -14,16 +14,17 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.DelayAction;
 import com.guxuede.gm.gdx.actions.SequenceAction;
 import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
-import com.guxuede.gm.gdx.actions.movement.ActorMoveToPointAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
+import com.guxuede.gm.gdx.basic.libgdx.SingletonPooledEngine;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.component.SkillComponent;
+import com.guxuede.gm.gdx.entityEdit.E;
+import com.guxuede.gm.gdx.entityEdit.EntityEditor;
 import com.guxuede.gm.gdx.system.*;
-
-import java.util.Arrays;
 
 /**
  * Created by guxuede on 2017/5/30 .

@@ -26,35 +26,12 @@ public class SequenceAction extends ParallelAction {
 	public SequenceAction () {
 	}
 
-	public SequenceAction (Action action1) {
-		addAction(action1);
+	public SequenceAction (Action... action1) {
+		for(Action a:action1){
+			addAction(a);
+		}
 	}
 
-	public SequenceAction (Action action1, Action action2) {
-		addAction(action1);
-		addAction(action2);
-	}
-
-	public SequenceAction (Action action1, Action action2, Action action3) {
-		addAction(action1);
-		addAction(action2);
-		addAction(action3);
-	}
-
-	public SequenceAction (Action action1, Action action2, Action action3, Action action4) {
-		addAction(action1);
-		addAction(action2);
-		addAction(action3);
-		addAction(action4);
-	}
-
-	public SequenceAction (Action action1, Action action2, Action action3, Action action4, Action action5) {
-		addAction(action1);
-		addAction(action2);
-		addAction(action3);
-		addAction(action4);
-		addAction(action5);
-	}
 
 	public boolean act (float delta) {
 		if (index >= actions.size) return true;

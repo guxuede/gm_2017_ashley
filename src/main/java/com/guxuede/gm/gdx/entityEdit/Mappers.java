@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.entityEdit;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;

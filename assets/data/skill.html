@@ -6,7 +6,7 @@
             在你前面产生一拍爆裂雷
         </description>
         <script>
-            var af = Java.type('com.guxuede.gm.gdx.A');
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
             af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"special10",0.1,100,5));
         </script>
     </skill>
@@ -15,7 +15,7 @@
             在你前面产生一拍爆裂雷
         </description>
         <script>
-            var af = Java.type('com.guxuede.gm.gdx.A');
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
             af.gdxSequence(af.createEffectAction(owner,targetPos,"special10",0.05));
         </script>
     </skill>
@@ -24,7 +24,7 @@
             从天而降的陨石，造成大量伤害，并且击晕
         </description>
         <script>
-            var af = Java.type('com.guxuede.gm.gdx.A');
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
             af.gdxSequence(af.createEffectAction(owner,targetPos,"fire1",0.05));
         </script>
     </skill>
@@ -34,7 +34,7 @@
             扔出个火球
         </description>
         <script>
-            var af = Java.type('com.guxuede.gm.gdx.A');
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
             af.gdxSequence(af.createFireBall(owner,targetPos,"fire1"));
         </script>
     </skill>
@@ -44,8 +44,8 @@
             blink
         </description>
         <script>
-            var af = Java.type('com.guxuede.gm.gdx.A');
-            af.gdxSequence(af.animation(owner,"hitAnimation"));
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
+            af.gdxSequence(af.blink1(owner,targetPos,"fire1"));
         </script>
     </skill>
 </skills>

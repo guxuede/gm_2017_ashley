@@ -16,7 +16,7 @@
 
 package com.guxuede.gm.gdx.actions;
 
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 /** Removes an actor from the stage.
  * @author Nathan Sweet */

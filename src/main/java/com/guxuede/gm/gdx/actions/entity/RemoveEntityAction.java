@@ -1,6 +1,6 @@
 package com.guxuede.gm.gdx.actions.entity;
 
-import com.guxuede.gm.gdx.E;
+import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.actions.Action;
 
 /**

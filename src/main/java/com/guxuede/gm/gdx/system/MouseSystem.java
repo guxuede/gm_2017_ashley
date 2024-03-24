@@ -8,10 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.guxuede.gm.gdx.ResourceManager;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 
 /**
  * Created by guxuede on 2017/6/11 .

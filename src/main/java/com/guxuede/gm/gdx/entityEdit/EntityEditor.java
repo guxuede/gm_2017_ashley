@@ -1,22 +1,18 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.entityEdit;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.Action;
-import com.guxuede.gm.gdx.actions.DelayAction;
 import com.guxuede.gm.gdx.actions.SequenceAction;
 import com.guxuede.gm.gdx.actions.animation.AnimationAction;
 import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
-import com.guxuede.gm.gdx.actions.movement.BlinkAction;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.*;
-
-import java.awt.*;
-import java.util.Arrays;
 
 /**
  * Created by guxuede on 2017/6/10 .
@@ -166,11 +162,23 @@ public abstract class EntityEditor<T extends EntityEditor>{
         ActorHolder actor = ResourceManager.getActor(name);
         this.actorState().actorAnimation(actor.animationHolder).asActor().pos(x,y).actions().bounds((int) actor.bounds.getWidth(), (int) actor.bounds.getHeight())
                 .blood(actor.blood,actor.blood)
-                .sensor().actions(new SequenceAction(
+                .sensor()
+                .actions(new SequenceAction(
                         new AnimationAction("damage", 3f)
                         ,new AnimationAction("victory", 3f)
                         ,new AnimationAction("escape", 3f)
+                        ,new AnimationAction("chant", 3f)
+                        ,new AnimationAction("missile", 3f)
+                        ,new AnimationAction("dying", 3f)
+                        ,new AnimationAction("dead", 10f)
                         ,new ScaleByAction(1,1,10f)));
+        SkillComponent skillComponent = edit.create(SkillComponent.class);
+        skillComponent.skills.add(ResourceManager.getSkillById("burstFire"));
+        skillComponent.skills.add(ResourceManager.getSkillById("burstFire1"));
+        skillComponent.skills.add(ResourceManager.getSkillById("meteorite"));
+        skillComponent.skills.add(ResourceManager.getSkillById("fireBall"));
+        skillComponent.skills.add(ResourceManager.getSkillById("blink"));
+        entity.add(skillComponent);
         return this;
     }
 

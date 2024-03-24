@@ -607,7 +607,7 @@
     "name" : "RPGMarkGreg",
     "width":48,
     "height":48,
-    "texture":"data/rpgm_Actor1_1_run",
+    "texture":"data/rpgm_Actor1_1_walk",
     "texture_rpgm_battle":"data/rpgm_Actor1_1_battle",
     "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
     "frameDuration":0.2,

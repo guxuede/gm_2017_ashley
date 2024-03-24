@@ -1,17 +1,22 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.actions;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.*;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
+import com.guxuede.gm.gdx.actions.movement.ActorMoveAsSnackToPointAction;
 import com.guxuede.gm.gdx.actions.movement.ActorMoveToPointAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.component.AnimationComponent;
+import com.guxuede.gm.gdx.entityEdit.E;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 /**
  * Created by guxuede on 2017/6/8 .
@@ -22,7 +27,7 @@ public final class A {
     }
     /** Returns a new or pooled action of the specified type. */
     static public <T extends Action> T action (Class<T> type) {
-        Pool<T> pool = Pools.get(type);
+        Pool<T> pool = Pools.get(type,0);//prformence
         T action = pool.obtain();
         action.setPool(pool);
         return action;
@@ -278,7 +283,7 @@ public final class A {
     }
     //////////////////////////////////////////////////////////////工具类 END///////////////////////////////////////////////////////////////////////
 
-    public static  BlinkAction blink(Entity owner, Vector2 pos, String effectName){
+    public static  BlinkAction blink1(Entity owner, Vector2 pos, String effectName){
         BlinkAction blinkAction = action(BlinkAction.class);
         blinkAction.setTargetPosition(pos);
         return blinkAction;
@@ -405,8 +410,8 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-//        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
-        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
+        E.create().actions(sequence(new ActorMoveAsSnackToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),new RemoveEntityAction()))
+//        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
                 .actorState()
                 .dynamicDirection()
                 .actorAnimation("fireBall")

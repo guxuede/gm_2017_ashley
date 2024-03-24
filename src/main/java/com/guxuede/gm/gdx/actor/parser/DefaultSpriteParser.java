@@ -4,8 +4,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.JsonValue;
-import com.guxuede.gm.gdx.GdxSprite;
-import com.guxuede.gm.gdx.MultiInOneSprite;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
+import com.guxuede.gm.gdx.basic.libgdx.MultiInOneSprite;
 import com.guxuede.gm.gdx.ResourceManager;
 
 public class DefaultSpriteParser extends AbstractSpriteParser {

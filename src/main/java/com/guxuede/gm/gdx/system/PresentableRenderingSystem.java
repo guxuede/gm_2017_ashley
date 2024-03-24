@@ -6,8 +6,8 @@ import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.guxuede.gm.gdx.GdxSprite;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.component.PresentableComponent;
 

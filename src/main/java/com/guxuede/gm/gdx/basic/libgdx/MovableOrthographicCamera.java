@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.basic.libgdx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

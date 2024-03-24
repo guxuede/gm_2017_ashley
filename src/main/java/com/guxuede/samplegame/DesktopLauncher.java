@@ -1,14 +1,15 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.samplegame;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.guxuede.gm.gdx.basic.libgdx.GdxGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Gdx Game";
-		config.width = 700;
-		config.height = 500;
+		config.title = "Demo Game";
+		config.width = 1024;
+		config.height = 800;
 		new LwjglApplication(new GdxGame(), config);
 	}
 }

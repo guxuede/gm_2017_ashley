@@ -1,6 +1,7 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.basic.libgdx;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 
 /**
  * Created by guxuede on 2016/5/31 .

@@ -2,12 +2,13 @@ package com.guxuede.gm.gdx.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Pool;
 
 
 /**
  * Entity has physical bounds.
  */
-public class BoundsComponent implements Component {
+public class BoundsComponent implements Component , Pool.Poolable{
 
     public int minx;
     public int miny;
@@ -40,4 +41,12 @@ public class BoundsComponent implements Component {
     public int cx() { return minx + (maxx - minx)/2; }
     /** Center Y */
     public int cy() { return miny + (maxy - miny)/2; }
+
+    @Override
+    public void reset() {
+        this.minx = 0;
+        this.miny = 0;
+        this.maxx = 0;
+        this.maxy = 0;
+    }
 }

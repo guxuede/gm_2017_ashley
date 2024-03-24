@@ -1,7 +1,7 @@
 package com.guxuede.gm.gdx.component.skill;
 
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.GdxSequenceAction;
 

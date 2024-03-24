@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.basic.libgdx;
 
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;

@@ -2,7 +2,7 @@
 package com.guxuede.gm.gdx.actions.appearance;
 
 import com.badlogic.gdx.graphics.Color;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.TemporalAction;
 import com.guxuede.gm.gdx.component.PresentableComponent;
 

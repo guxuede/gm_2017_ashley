@@ -1,9 +1,8 @@
 package com.guxuede.gm.gdx.actions.animation;
 
 import com.badlogic.ashley.core.Entity;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.RelativeTemporalAction;
-import com.guxuede.gm.gdx.component.AnimationComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
 
 /**

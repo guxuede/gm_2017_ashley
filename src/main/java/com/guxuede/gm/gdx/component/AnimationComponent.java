@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.GdxSprite;
+import com.badlogic.gdx.utils.Pool;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.ResourceManager;
-import com.guxuede.gm.gdx.SoundUtils;
+import com.guxuede.gm.gdx.basic.libgdx.SoundUtils;
 
-public class AnimationComponent implements Component {
+public class AnimationComponent implements Component , Pool.Poolable{
     public static final int STOP=0, DOWN=1,LEFT=2,RIGHT=3,UP=4;
     //TODO support AnimatedTiledMapTile.
     public Animation<TextureRegion> animation;
@@ -58,5 +59,17 @@ public class AnimationComponent implements Component {
         if (sound != null && soundId != -1) {
             SoundUtils.set3dPan(sound, soundId, soundPos.x,soundPos.y,camera);
         }
+    }
+
+    @Override
+    public void reset() {
+         animation = null;
+         stateTime = 0;
+         maxStateTime = Float.MAX_VALUE;
+         animationName = null;
+
+        currentFrameIndex = null;
+        soundId = -1;
+        sound = null;
     }
 }

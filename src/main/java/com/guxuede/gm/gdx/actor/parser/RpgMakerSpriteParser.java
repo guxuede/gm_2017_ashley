@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.JsonValue;
-import com.guxuede.gm.gdx.GdxSprite;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.ResourceManager;
 
 import static com.guxuede.gm.gdx.actor.parser.ActorJsonParse.*;
@@ -31,82 +31,23 @@ public class RpgMakerSpriteParser extends DefaultSpriteParser {
     @Override
     protected void parseAnimations(JsonValue jsonValue, ParseContext parseContext, AnimationHolder animationHolder) {
         ParseContext localParseContext = extendParentParseContext(parseContext, jsonValue);
-        TextureRegion aSpriteTextureRegion = getSpriteTextureRegion(jsonValue, parseContext);
+        TextureRegion aSpriteTextureRegion = getSpriteTextureRegion(jsonValue, localParseContext);
         //walk
         {
-            final GdxSprite[] frames = new GdxSprite[3];
-            for (int i = 0 ; i < 3 ; i++) {
-                frames[i]=parseNumbersSprite(parseContext,aSpriteTextureRegion, i);
-            }
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(WALK_DOWN_ANIMATION.hashCode(),animation);
-        }
+            parseBattleAnimation(animationHolder,WALK_DOWN_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{0,1,2});
+            parseBattleAnimation(animationHolder,WALK_LEFT_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{3,4,5});
+            parseBattleAnimation(animationHolder,WALK_RIGHT_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{6,7,8});
+            parseBattleAnimation(animationHolder,WALK_UP_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{9,10,11});
 
-        {
-            final GdxSprite[] frames = new GdxSprite[3];
-            for (int i = 0 ; i < 3 ; i++) {
-                frames[i]=parseNumbersSprite(parseContext,aSpriteTextureRegion, 3 + i);
-            }
+            parseBattleAnimation(animationHolder,STOP_DOWN_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{1});
+            parseBattleAnimation(animationHolder,STOP_LEFT_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{4});
+            parseBattleAnimation(animationHolder,STOP_RIGHT_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{7});
+            parseBattleAnimation(animationHolder,STOP_UP_ANIMATION,localParseContext, aSpriteTextureRegion,  new int[]{10});
 
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(WALK_LEFT_ANIMATION.hashCode(),animation);
-        }
-
-        {
-            final GdxSprite[] frames = new GdxSprite[3];
-            for (int i = 0 ; i < 3 ; i++) {
-                frames[i]=parseNumbersSprite(parseContext,aSpriteTextureRegion, 6 + i);
-            }
-
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(WALK_RIGHT_ANIMATION.hashCode(),animation);
-        }
-
-        {
-            final GdxSprite[] frames = new GdxSprite[3];
-            for (int i = 0 ; i < 3 ; i++) {
-                frames[i]=parseNumbersSprite(parseContext,aSpriteTextureRegion, 9 + i);
-            }
-
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(WALK_UP_ANIMATION.hashCode(),animation);
         }
 
 
-        //idel
-        {
-            final GdxSprite[] frames = new GdxSprite[1];
-            frames[0]=parseNumbersSprite(parseContext,aSpriteTextureRegion, 1);
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(STOP_DOWN_ANIMATION.hashCode(),animation);
-        }
-
-        {
-            final GdxSprite[] frames = new GdxSprite[1];
-            frames[0]=parseNumbersSprite(parseContext,aSpriteTextureRegion, 4);
-
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(STOP_LEFT_ANIMATION.hashCode(),animation);
-        }
-
-        {
-            final GdxSprite[] frames = new GdxSprite[1];
-            frames[0]=parseNumbersSprite(parseContext,aSpriteTextureRegion, 7);
-
-
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(STOP_RIGHT_ANIMATION.hashCode(),animation);
-        }
-
-        {
-            final GdxSprite[] frames = new GdxSprite[1];
-            frames[0]=parseNumbersSprite(parseContext,aSpriteTextureRegion, 10);
-
-            final Animation animation = new Animation(localParseContext.frameDuration,frames);
-            animationHolder.addAnimation(STOP_UP_ANIMATION.hashCode(),animation);
-        }
-
-        parseBattleAnimation(animationHolder, jsonValue, parseContext);
+        parseBattleAnimation(animationHolder, jsonValue, localParseContext);
     }
 
 
@@ -123,7 +64,7 @@ public class RpgMakerSpriteParser extends DefaultSpriteParser {
             parseBattleAnimation(animationHolder, "wait",parseContext,textureRegion,new int[]{9,10,11});
             parseBattleAnimation(animationHolder, "swing",parseContext,textureRegion,new int[]{12,13,14});
             parseBattleAnimation(animationHolder, "victory",parseContext,textureRegion,new int[]{15,16,17});
-            parseBattleAnimation(animationHolder, "chant",parseContext,textureRegion,new int[]{18,19,20});
+            parseBattleAnimation(animationHolder, "chant",parseContext,textureRegion,new int[]{18,19,20});//念诵
             parseBattleAnimation(animationHolder, "missile",parseContext,textureRegion,new int[]{21,22,23});
             parseBattleAnimation(animationHolder, "dying",parseContext,textureRegion,new int[]{24,25,26});
             parseBattleAnimation(animationHolder, "guard",parseContext,textureRegion,new int[]{27,28,29});
@@ -140,12 +81,14 @@ public class RpgMakerSpriteParser extends DefaultSpriteParser {
 
     }
 
-    private void parseBattleAnimation(AnimationHolder animationHolder, String animationName, ParseContext parseContext,TextureRegion textureRegion,int[] frameNumer){
-        final GdxSprite[] frames = new GdxSprite[3];
-        frames[0]=parseNumbersSprite(parseContext, textureRegion,frameNumer[0]);
-        frames[1]=parseNumbersSprite(parseContext, textureRegion,frameNumer[1]);
-        frames[2]=parseNumbersSprite(parseContext, textureRegion,frameNumer[2]);
-        final Animation animation = new Animation(parseContext.frameDuration,frames);
+
+    private void parseBattleAnimation(AnimationHolder animationHolder, String animationName, ParseContext parseContext,TextureRegion textureRegion,int[] frameNumber){
+        final GdxSprite[] frames = new GdxSprite[frameNumber.length];
+        for(int i = 0; i< frameNumber.length; i++){
+            frames[i]=parseNumbersSprite(parseContext, textureRegion,frameNumber[i]);
+
+        }
+        final Animation<TextureRegion> animation = new Animation<TextureRegion>(parseContext.frameDuration,frames);
         animationHolder.addAnimation(animationName.hashCode(),animation);
     }
 

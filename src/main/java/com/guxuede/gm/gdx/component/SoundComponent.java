@@ -4,14 +4,13 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.guxuede.gm.gdx.SoundUtils;
-import com.guxuede.gm.gdx.system.CameraSystem;
+import com.badlogic.gdx.utils.Pool;
+import com.guxuede.gm.gdx.basic.libgdx.SoundUtils;
 
 /**
  * Created by guxuede on 2017/9/3 .
  */
-public class SoundComponent implements Component {
+public class SoundComponent implements Component  , Pool.Poolable {
     public Sound sound;
     public boolean isLoop;
     public long soundId = -1;
@@ -58,5 +57,12 @@ public class SoundComponent implements Component {
         if (sound != null && soundId != -1) {
             SoundUtils.set3dPan(sound, soundId, soundPos.x,soundPos.y,camera);
         }
+    }
+
+    @Override
+    public void reset() {
+        sound = null;
+        isLoop = false;
+        soundId = -1;
     }
 }

@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.AnimationComponent;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 

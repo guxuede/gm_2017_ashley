@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.guxuede.gm.gdx.ResourceManager;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.*;
 
 public class AmbianceLightSystem extends EntitySystem {

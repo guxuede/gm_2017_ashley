@@ -1,7 +1,7 @@
 
 package com.guxuede.gm.gdx.actions;
 
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 /** Adds an action to an actor.
  * @author Nathan Sweet */

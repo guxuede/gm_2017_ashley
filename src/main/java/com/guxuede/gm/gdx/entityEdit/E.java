@@ -1,9 +1,7 @@
-package com.guxuede.gm.gdx;
+package com.guxuede.gm.gdx.entityEdit;
 
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
 
 /**
  * Local entity editor. Does not support multiple worlds.

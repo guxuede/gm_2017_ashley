@@ -1,7 +1,7 @@
 package com.guxuede.gm.gdx.actions.movement;
 
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.Action;
 import com.guxuede.gm.gdx.component.PositionComponent;
 
@@ -11,6 +11,9 @@ import com.guxuede.gm.gdx.component.PositionComponent;
 public class BlinkAction extends Action {
 
     private Vector2 targetPosition = new Vector2();
+
+    public BlinkAction(){
+    }
 
     public BlinkAction(int x, int y){
         targetPosition.x = x;

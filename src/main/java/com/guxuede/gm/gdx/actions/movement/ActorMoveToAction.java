@@ -2,8 +2,8 @@ package com.guxuede.gm.gdx.actions.movement;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.actions.Acting;
 import com.guxuede.gm.gdx.component.PositionComponent;
 
@@ -27,7 +27,7 @@ public abstract class ActorMoveToAction extends Acting {
         if(!isArrive()){
             final Vector2 target = getTargetPoint();
             final Vector2 entryPos = positionComponent.position;
-            Vector2 vector2 = TempObjects.temp0Vector2.set(target).sub(entryPos).nor().scl(10f);
+            Vector2 vector2 = TempObjects.temp0Vector2.set(target).sub(entryPos).nor().scl(100f);//speed
             Mappers.actorStateCM.get(actor).acceleration.set(vector2);
             return false;
         }

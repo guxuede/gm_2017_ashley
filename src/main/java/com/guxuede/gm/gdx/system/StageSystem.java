@@ -9,17 +9,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.guxuede.gm.gdx.InputListenerMultiplexer;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.basic.libgdx.InputListenerMultiplexer;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.ActorComponent;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 
-import static com.guxuede.gm.gdx.Mappers.actorCM;
+import static com.guxuede.gm.gdx.entityEdit.Mappers.actorCM;
 
 /**
  * Created by guxuede on 2017/5/29 .

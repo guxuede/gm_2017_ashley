@@ -4,8 +4,9 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Pool;
 
-public class PresentableComponent implements Component {
+public class PresentableComponent implements Component, Pool.Poolable {
     public boolean visible = true;
     public float scaleX = 1, scaleY = 1;
     public float rotation;
@@ -18,4 +19,11 @@ public class PresentableComponent implements Component {
     //偏移值
     public float drawOffSetX;
     public float drawOffSetY;
+
+    @Override
+    public void reset() {
+        rotation = 0;
+        visible = true;
+        color.set(1,1,1,1);
+    }
 }

@@ -2,7 +2,7 @@ package com.guxuede.gm.gdx.actions.movement;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
-import com.guxuede.gm.gdx.TempObjects;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 
 /**
  * Created by guxuede on 2016/7/16 .

@@ -2,7 +2,7 @@ package com.guxuede.gm.gdx.actions.movement;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 import java.util.Iterator;
 import java.util.List;

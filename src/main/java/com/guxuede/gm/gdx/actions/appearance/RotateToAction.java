@@ -1,7 +1,7 @@
 
 package com.guxuede.gm.gdx.actions.appearance;
 
-import com.guxuede.gm.gdx.Mappers;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.TemporalAction;
 
 public class RotateToAction extends TemporalAction {

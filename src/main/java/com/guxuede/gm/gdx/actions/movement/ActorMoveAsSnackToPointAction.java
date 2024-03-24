@@ -1,13 +1,8 @@
 package com.guxuede.gm.gdx.actions.movement;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.A;
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.TempObjects;
-import com.guxuede.gm.gdx.actions.Acting;
-import com.guxuede.gm.gdx.component.PositionComponent;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 /**
  * Created by guxuede on 2016/7/14 .

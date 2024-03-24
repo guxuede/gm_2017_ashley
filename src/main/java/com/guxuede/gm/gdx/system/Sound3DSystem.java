@@ -4,8 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.guxuede.gm.gdx.Mappers;
-import com.guxuede.gm.gdx.SoundUtils;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.component.SoundComponent;
 
