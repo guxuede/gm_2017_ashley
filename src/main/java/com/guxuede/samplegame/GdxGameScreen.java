@@ -20,6 +20,7 @@ import com.guxuede.gm.gdx.actions.SequenceAction;
 import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actions.movement.BlinkAction;
 import com.guxuede.gm.gdx.basic.libgdx.SingletonPooledEngine;
+import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
@@ -59,6 +60,7 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new MovementSystem());
         engine.addSystem(new DynamicDirectionSystem());
         engine.addSystem(new SensorSystem());
+        engine.addSystem(new EntityNetClientPackSystem());
         /*MAP*/
         MapSystem mapSystem = new MapSystem("data/desert1.tmx",spriteBatch,camera);//24,14  27,5
         engine.addSystem(new MapCollisionSystem(mapSystem));
@@ -72,15 +74,16 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new SoundSystem());
         engine.addSystem(new Sound3DSystem(camera));
         engine.addSystem(new SoundOnAnimationSystem(camera));
+        engine.addSystem(new GlobalNetPackSystem(engine));
 //        E.create().presentable("Aquatic",-1).pos(100,100).buildToWorld();
 //        createPresentableComponentEntity();
 //        createPresentableComponentAnimationComponentEntity();
 //        createPresentableComponentAnimationComponentActorAnimationComponentEntity();
-        createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
-        createActor("Aquatic",100,100);
-        createActor("Undead",200,200);
-        createActor("RPGMarkPig",300,350);
-        rpgMarkerActor("RPGMarkGreg",360,350);
+//        createPresentableComponentAnimationComponentActorAnimationComponentActorStateComponentEntity();
+//        createActor("Aquatic",100,100);
+//        createActor("Undead",200,200);
+//        createActor("RPGMarkPig",300,350);
+//        rpgMarkerActor("RPGMarkGreg",360,350);
     }
 
     @Override
@@ -125,17 +128,17 @@ public class GdxGameScreen extends ScreenAdapter {
     }
 
 
-//    @Override
-//    public void resize(int width, int height) {
-//        TempObjects.temp0Vector3.set(camera.position);
-//        viewport.setScreenSize(width,height);
-//        viewport.setWorldSize(width,height);
-//        viewport.update(width,height);
-//        camera.setToOrtho(false, width, height);
-//        camera.position.set(TempObjects.temp0Vector3);
-//        camera.update();
-//        spriteBatch.setProjectionMatrix(camera.combined);
-//    }
+    @Override
+    public void resize(int width, int height) {
+        TempObjects.temp0Vector3.set(camera.position);
+        viewport.setScreenSize(width,height);
+        viewport.setWorldSize(width,height);
+        viewport.update(width,height);
+        camera.setToOrtho(false, width, height);
+        camera.position.set(TempObjects.temp0Vector3);
+        camera.update();
+        spriteBatch.setProjectionMatrix(camera.combined);
+    }
 
 
 

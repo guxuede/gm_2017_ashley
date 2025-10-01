@@ -2,6 +2,7 @@ package com.guxuede.gm.gdx.entityEdit;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,10 +15,13 @@ import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.*;
 
+import java.util.function.Consumer;
+
 /**
  * Created by guxuede on 2017/6/10 .
  */
 public abstract class EntityEditor<T extends EntityEditor>{
+    private static final Family netIdfamily = Family.all(NetClientComponent.class).get();
 
     private EntityEdit edit = new EntityEdit();
     private Entity entity;
@@ -26,6 +30,8 @@ public abstract class EntityEditor<T extends EntityEditor>{
         this.entity = entity;
         return (T) this;
     }
+
+
 
     public final T createEntity() {
         editEntity(edit.createEntity());
@@ -233,61 +239,12 @@ public abstract class EntityEditor<T extends EntityEditor>{
     /**
      * Add artemis managed components to entity.
      */
-    public final T with(Class<? extends Component> component) {
-        edit.create(component);
+    public final <V  extends Component> T with(Class<V> component, Consumer<V> consumer) {
+        V c = edit.create(component);
+        consumer.accept(c);
+        entity.add(c);
         return (T) this;
     }
 
-    /**
-     * Add artemis managed components to entity.
-     */
-    public final T with(Class<? extends Component> component1, Class<? extends Component> component2) {
-        edit.create(component1);
-        edit.create(component2);
-        return (T) this;
-    }
-
-    /**
-     * Add artemis managed components to entity.
-     */
-    public final T with(Class<? extends Component> component1, Class<? extends Component> component2, Class<? extends Component> component3) {
-        edit.create(component1);
-        edit.create(component2);
-        edit.create(component3);
-        return (T) this;
-    }
-
-    /**
-     * Add artemis managed components to entity.
-     */
-    public final T with(Class<? extends Component> component1, Class<? extends Component> component2, Class<? extends Component> component3, Class<? extends Component> component4) {
-        edit.create(component1);
-        edit.create(component2);
-        edit.create(component3);
-        edit.create(component4);
-        return (T) this;
-    }
-
-    /**
-     * Add artemis managed components to entity.
-     */
-    public final T with(Class<? extends Component> component1, Class<? extends Component> component2, Class<? extends Component> component3, Class<? extends Component> component4, Class<? extends Component> component5) {
-        edit.create(component1);
-        edit.create(component2);
-        edit.create(component3);
-        edit.create(component4);
-        edit.create(component5);
-        return (T) this;
-    }
-
-    /**
-     * Add artemis managed components to entity.
-     */
-    public final T with(Class<? extends Component>... components) {
-        for (int i = 0, n = components.length; i < n; i++) {
-            edit.create(components[i]);
-        }
-        return (T) this;
-    }
 
 }

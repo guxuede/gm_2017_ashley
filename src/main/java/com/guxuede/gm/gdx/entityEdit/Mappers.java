@@ -1,6 +1,5 @@
 package com.guxuede.gm.gdx.entityEdit;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.guxuede.gm.gdx.component.*;
 
@@ -21,5 +20,6 @@ public class Mappers {
     public static final ComponentMapper<BloodComponent> bloodCM = ComponentMapper.getFor(BloodComponent.class);
     public static final ComponentMapper<SensorComponent> sensorCM = ComponentMapper.getFor(SensorComponent.class);
 
+    public static final ComponentMapper<NetClientComponent> netPackCM = ComponentMapper.getFor(NetClientComponent.class);
 
 }
