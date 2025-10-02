@@ -15,7 +15,7 @@
  */
 package com.guxuede.gm.net.client;
 
-import com.guxuede.gm.gdx.system.GlobalNetPackSystem;
+import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.net.client.registry.codec.NetPackageDelimiterBasedFrameDecoder;
 import com.guxuede.gm.net.client.registry.codec.NetPackageDelimiterBasedFrameEncoder;
 import io.netty.channel.ChannelInitializer;

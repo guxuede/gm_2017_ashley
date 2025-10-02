@@ -2,6 +2,7 @@ package com.guxuede.gm.gdx.entityEdit;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 
 /**
  * Created by guxuede on 2017/5/31 .
@@ -20,6 +21,6 @@ public class Mappers {
     public static final ComponentMapper<BloodComponent> bloodCM = ComponentMapper.getFor(BloodComponent.class);
     public static final ComponentMapper<SensorComponent> sensorCM = ComponentMapper.getFor(SensorComponent.class);
 
-    public static final ComponentMapper<NetClientComponent> netPackCM = ComponentMapper.getFor(NetClientComponent.class);
+    public static final ComponentMapper<PlayerDataComponent> netPackCM = ComponentMapper.getFor(PlayerDataComponent.class);
 
 }

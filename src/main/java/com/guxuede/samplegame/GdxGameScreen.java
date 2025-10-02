@@ -25,6 +25,8 @@ import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.entityEdit.EntityEditor;
+import com.guxuede.gm.net.system.EntityNetClientPackSystem;
+import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.gdx.system.*;
 
 /**

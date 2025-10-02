@@ -1,11 +1,10 @@
-package com.guxuede.gm.gdx.system;
+package com.guxuede.gm.net.system;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.utils.Array;
-import com.guxuede.gm.gdx.component.NetClientComponent;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.net.client.PackageChannelInitializer;
 import com.guxuede.gm.net.client.pack.utils.PackQueue;
@@ -20,7 +19,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 
 public class GlobalNetPackSystem extends IteratingSystem {
-    private static final Family netIdfamily = Family.all(NetClientComponent.class).get();
+    private static final Family netIdfamily = Family.all(PlayerDataComponent.class).get();
 
     public static final String HOST = System.getProperty("host", "127.0.0.1");
     public static final int PORT = Integer.parseInt(System.getProperty("port", "8992"));
@@ -64,17 +63,17 @@ public class GlobalNetPackSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float v) {
-        NetClientComponent netClientComponent = Mappers.netPackCM.get(entity);
-        netClientComponent.outboundNetPacks.consumerAll(p-> channel.write(p));
+        PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(entity);
+        playerDataComponent.outboundNetPacks.consumerAll(p-> channel.write(p));
     }
 
 
     private void processMessage(NetPack msg){
         if(msg instanceof PlayerPack){
             PlayerPack playerPack = (PlayerPack) msg;
-            NetClientComponent netClientComponent = getNetClientComponent(playerPack.getPlayerId());
-            if(netClientComponent!=null){
-                netClientComponent.inBoundPack(msg);
+            PlayerDataComponent playerDataComponent = getNetClientComponent(playerPack.getPlayerId());
+            if(playerDataComponent !=null){
+                playerDataComponent.inBoundPack(msg);
             }
         }else {
             try {
@@ -85,11 +84,11 @@ public class GlobalNetPackSystem extends IteratingSystem {
         }
     }
 
-    public NetClientComponent getNetClientComponent(long id) {
+    public PlayerDataComponent getNetClientComponent(long id) {
         for (Entity e : engine.getEntitiesFor(netIdfamily)) {
-            NetClientComponent netClientComponent = Mappers.netPackCM.get(e);
-            if(id == netClientComponent.getId()){
-                return netClientComponent;
+            PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(e);
+            if(id == playerDataComponent.getId()){
+                return playerDataComponent;
             }
         }
         return null;

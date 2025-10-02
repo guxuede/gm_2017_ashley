@@ -48,7 +48,7 @@ public class StageSystem extends EntitySystem {
         chatBox = new Table();
         chatBox.setWidth(400);
         chatBox.setHeight(30);
-        chatText = new TextField(null, ResourceManager.skin);
+        chatText = new TextField("login password=123 username=guxuede", ResourceManager.skin);
         chatText.setFillParent(true);
         chatBox.add(chatText);
         chatBox.setVisible(false);
@@ -64,7 +64,6 @@ public class StageSystem extends EntitySystem {
                     if(chatBox.isVisible()) {
                         String text = chatText.getText();
                         if(StringUtils.isNoneBlank(text)){
-                            chatText.setText(null);
                             System.out.println("input box:" + text);;
                             getEngine().getSystem(CommandSystem.class).executeCommand(text);
                         }

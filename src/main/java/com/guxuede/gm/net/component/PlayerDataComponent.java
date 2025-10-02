@@ -1,8 +1,7 @@
-package com.guxuede.gm.gdx.component;
+package com.guxuede.gm.net.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.guxuede.gm.net.client.pack.utils.PackQueue;
 import com.guxuede.gm.net.client.registry.NetPack;
@@ -10,7 +9,7 @@ import com.guxuede.gm.net.client.registry.NetPack;
 import static com.guxuede.gm.gdx.component.ActorStateComponent.DOWN;
 
 
-public class NetClientComponent implements Component, Pool.Poolable{
+public class PlayerDataComponent implements Component, Pool.Poolable{
     public String userName;
     public int id;
     public String character;

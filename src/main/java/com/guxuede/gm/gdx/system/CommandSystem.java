@@ -2,6 +2,7 @@ package com.guxuede.gm.gdx.system;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
+import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.net.client.registry.pack.PlayerLoginPack;
 import com.guxuede.samplegame.DesktopLauncher;
 import picocli.CommandLine;

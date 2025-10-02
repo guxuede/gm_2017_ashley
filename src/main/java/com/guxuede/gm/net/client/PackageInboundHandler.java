@@ -15,7 +15,7 @@
  */
 package com.guxuede.gm.net.client;
 
-import com.guxuede.gm.gdx.system.GlobalNetPackSystem;
+import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.net.client.registry.NetPack;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

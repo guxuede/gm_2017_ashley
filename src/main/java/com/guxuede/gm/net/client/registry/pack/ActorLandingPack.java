@@ -2,7 +2,7 @@ package com.guxuede.gm.net.client.registry.pack;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.guxuede.gm.gdx.component.NetClientComponent;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.entityEdit.EntityEditor;
 import com.guxuede.gm.gdx.system.StageSystem;
@@ -13,19 +13,20 @@ import io.netty.buffer.ByteBuf;
 import org.apache.commons.lang3.StringUtils;
 
 
-public class PlayerLandingPack extends NetPack {
+public class ActorLandingPack extends NetPack {
     private String userName;
-    private int id, x, y;
+    private int id;
+    private float x, y;
     private String character;
     private int direction;
 
-    public PlayerLandingPack(ByteBuf data) {
+    public ActorLandingPack(ByteBuf data) {
         super(data);
         this.id = data.readInt();
         this.userName = PackageUtils.readString(data);
         this.character = PackageUtils.readString(data);
-        this.x = data.readInt();
-        this.y = data.readInt();
+        this.x = data.readFloat();
+        this.y = data.readFloat();
         this.direction = data.readInt();
     }
 
@@ -34,8 +35,8 @@ public class PlayerLandingPack extends NetPack {
         data.writeInt(this.id);
         PackageUtils.writeString(userName, data);
         PackageUtils.writeString(character, data);
-        data.writeInt(this.x);
-        data.writeInt(this.y);
+        data.writeFloat(this.x);
+        data.writeFloat(this.y);
         data.writeInt(this.direction);
     }
 
@@ -50,7 +51,7 @@ public class PlayerLandingPack extends NetPack {
     }
 
     private EntityEditor buildActor(E target){
-        return target.with(NetClientComponent.class, e -> {
+        return target.with(PlayerDataComponent.class, e -> {
             e.userName = userName;
             e.setCharacter(character);
             e.setId(id);

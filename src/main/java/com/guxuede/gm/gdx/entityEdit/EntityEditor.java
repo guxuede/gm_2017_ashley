@@ -14,6 +14,7 @@ import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 
 import java.util.function.Consumer;
 
@@ -21,7 +22,7 @@ import java.util.function.Consumer;
  * Created by guxuede on 2017/6/10 .
  */
 public abstract class EntityEditor<T extends EntityEditor>{
-    private static final Family netIdfamily = Family.all(NetClientComponent.class).get();
+    private static final Family netIdfamily = Family.all(PlayerDataComponent.class).get();
 
     private EntityEdit edit = new EntityEdit();
     private Entity entity;
