@@ -1,5 +1,6 @@
 package com.guxuede.gm.net.client.registry;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import io.netty.buffer.ByteBuf;
 
@@ -16,7 +17,7 @@ public abstract class NetPack {
 
     }
 
-    public void action(Entity entity){
+    public void action(Engine engine, Entity entity){
 
     }
 

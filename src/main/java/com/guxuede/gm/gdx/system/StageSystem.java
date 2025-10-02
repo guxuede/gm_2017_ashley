@@ -108,6 +108,10 @@ public class StageSystem extends EntitySystem {
         return viewActor;
     }
 
+    public void setViewActor(Entity viewActor) {
+        this.viewActor = viewActor;
+    }
+
     @Override
     public void addedToEngine(final Engine engine) {
         super.addedToEngine(engine);

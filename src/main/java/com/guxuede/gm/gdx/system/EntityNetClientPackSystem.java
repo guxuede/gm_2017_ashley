@@ -1,5 +1,6 @@
 package com.guxuede.gm.gdx.system;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -27,6 +28,7 @@ public class EntityNetClientPackSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        Engine engine = this.getEngine();
         //process inbound entity message
         NetClientComponent netClientComponent = Mappers.netPackCM.get(entity);
 
@@ -34,14 +36,14 @@ public class EntityNetClientPackSystem extends IteratingSystem {
         processSensorAndMove(entity, netClientComponent);
 
         //process package
-        netClientComponent.inboundNetPacks.consumerAll(e-> processNetPack(entity, e));
+        netClientComponent.inboundNetPacks.consumerAll(e-> processNetPack(engine, entity, e));
 //
 //        GlobalNetPackSystem netPackSystem = getEngine().getSystem(GlobalNetPackSystem.class);
 //        netClientComponent.outboundNetPacks.consumerAll(netPackSystem::outboundNetPack);
     }
 
-    private void processNetPack(Entity entity, NetPack pack){
-        pack.action(entity);
+    private void processNetPack(Engine engine, Entity entity, NetPack pack){
+        pack.action(engine , entity);
     }
 
 

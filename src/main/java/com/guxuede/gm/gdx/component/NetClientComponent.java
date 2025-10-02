@@ -11,9 +11,9 @@ import static com.guxuede.gm.gdx.component.ActorStateComponent.DOWN;
 
 
 public class NetClientComponent implements Component, Pool.Poolable{
-
-    private int id;
-    private String character;
+    public String userName;
+    public int id;
+    public String character;
     public Vector2 acceleration = new Vector2();
     public Vector2 position = new Vector2();
     public int direction= DOWN;

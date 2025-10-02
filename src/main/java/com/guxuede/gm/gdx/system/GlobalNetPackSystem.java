@@ -78,7 +78,7 @@ public class GlobalNetPackSystem extends IteratingSystem {
             }
         }else {
             try {
-                msg.action(null);
+                msg.action(engine, null);
             }catch (RuntimeException e){
                 e.printStackTrace();
             }

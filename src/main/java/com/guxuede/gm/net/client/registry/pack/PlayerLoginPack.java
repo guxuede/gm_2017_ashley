@@ -1,5 +1,6 @@
 package com.guxuede.gm.net.client.registry.pack;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.guxuede.gm.net.client.pack.utils.PackageUtils;
 import com.guxuede.gm.net.client.registry.NetPack;
@@ -31,7 +32,7 @@ public class PlayerLoginPack extends NetPack {
     }
 
     @Override
-    public void action(Entity entity) {
+    public void action(Engine engine, Entity entity) {
 
     }
 

@@ -6,6 +6,9 @@ import com.guxuede.gm.gdx.basic.libgdx.GdxGame;
 import io.netty.util.ResourceLeakDetector;
 
 public class DesktopLauncher {
+
+	public static String currentUserName;
+
 	public static void main (String[] arg) {
 		ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.ADVANCED);
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();

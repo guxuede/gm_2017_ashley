@@ -1,5 +1,6 @@
 package com.guxuede.gm.net.client.registry.pack;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.component.NetClientComponent;
@@ -41,7 +42,7 @@ public class PlayerPositionPack extends NetPack implements PlayerPack {
     }
 
     @Override
-    public void action(Entity entity) {
+    public void action(Engine engine, Entity entity) {
         NetClientComponent netClientComponent = Mappers.netPackCM.get(entity);
         netClientComponent.position.set(position);
         netClientComponent.direction = direction;
