@@ -30,7 +30,14 @@ public class PlayerLandingPack extends NetPack  {
 
     @Override
     public void action(Entity entity) {
-        E.create().with(NetClientComponent.class,e->{e.setCharacter(character);e.setId(id);}).asRpgMarkerActor(character,x,y).buildToWorld();
+        E.create().with(NetClientComponent.class, e -> {
+                    e.setCharacter(character);
+                    e.setId(id);
+                    e.position.set(x, y);
+                })
+                .actorState()
+                .actorAnimation(character).asActor().pos(x, y)
+                .actions().bounds(48, 48).blood(100, 65).sensor().buildToWorld();
     }
 
 

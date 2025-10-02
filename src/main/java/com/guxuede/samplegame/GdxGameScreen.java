@@ -52,7 +52,7 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new ActorStateActorAnimationSystem());
         engine.addSystem(new ActorAnimationSystem());
         engine.addSystem(new ActionsSystem());
-        engine.addSystem(new StageSystem(spriteBatch,viewport,inputMultiplexer));
+        engine.addSystem(new StageSystem(2000, spriteBatch,viewport,inputMultiplexer));
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PresentableRenderingSystem(300,spriteBatch));
         engine.addSystem(new ActorShadowRenderingSystem(200,spriteBatch));
@@ -75,6 +75,7 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new Sound3DSystem(camera));
         engine.addSystem(new SoundOnAnimationSystem(camera));
         engine.addSystem(new GlobalNetPackSystem(engine));
+        engine.addSystem(new CommandSystem(engine));
 //        E.create().presentable("Aquatic",-1).pos(100,100).buildToWorld();
 //        createPresentableComponentEntity();
 //        createPresentableComponentAnimationComponentEntity();

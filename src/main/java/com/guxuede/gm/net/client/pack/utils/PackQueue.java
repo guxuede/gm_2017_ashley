@@ -1,11 +1,10 @@
 package com.guxuede.gm.net.client.pack.utils;
 
-import com.guxuede.gm.net.client.registry.NetPack;
 
-import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
 
-public class PackQueue<T> extends LinkedList<T> {
+public class PackQueue<T> extends ConcurrentLinkedQueue<T> {
 
     public void consumerAll(Consumer<T> consumer){
         T p;

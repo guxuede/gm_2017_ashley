@@ -11,29 +11,29 @@ import io.netty.buffer.ByteBuf;
 public class PlayerPositionPack extends NetPack implements PlayerPack {
 
     private int id;
-    private Vector2 acceleration = new Vector2();
-    private Vector2 position = new Vector2();
+    private final int direction;
+    private final Vector2 position = new Vector2();
 
-    public PlayerPositionPack(int id, Vector2 acceleration, Vector2 position) {
+    public PlayerPositionPack(int id, int direction, Vector2 position) {
         this.id = id;
-        this.acceleration.set(acceleration);
+        this.direction = direction;
         this.position.set(position);
     }
 
     public PlayerPositionPack(ByteBuf data) {
         id = data.readInt();
-        acceleration.set(data.readFloat(), data.readFloat());
+        direction = data.readInt();
         position.set(data.readFloat(), data.readFloat());
     }
 
     @Override
     public void write(ByteBuf data) {
         data.writeInt(id);
-        data.writeFloat(acceleration.x);
-        data.writeFloat(acceleration.y);
+        data.writeInt(direction);
         data.writeFloat(position.x);
         data.writeFloat(position.y);
     }
+
 
     @Override
     public int getPlayerId() {
@@ -44,6 +44,15 @@ public class PlayerPositionPack extends NetPack implements PlayerPack {
     public void action(Entity entity) {
         NetClientComponent netClientComponent = Mappers.netPackCM.get(entity);
         netClientComponent.position.set(position);
-        netClientComponent.acceleration.set(acceleration);
+        netClientComponent.direction = direction;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerPositionPack{" +
+                "id=" + id +
+                ", direction=" + direction +
+                ", position=" + position +
+                '}';
     }
 }

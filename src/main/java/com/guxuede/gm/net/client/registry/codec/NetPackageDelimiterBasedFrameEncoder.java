@@ -15,5 +15,6 @@ public class NetPackageDelimiterBasedFrameEncoder extends MessageToByteEncoder<N
         out.writeInt(PacketRegistry.getPacketID(msg.getClass()));
         msg.write(out);
         out.writeBytes(PACKAGE_DELIMITER, 0 , PACKAGE_DELIMITER.capacity());
+        System.out.println(msg);
     }
 }

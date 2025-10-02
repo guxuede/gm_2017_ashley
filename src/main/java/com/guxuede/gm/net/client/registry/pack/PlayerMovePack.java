@@ -10,8 +10,8 @@ import io.netty.buffer.ByteBuf;
 
 public class PlayerMovePack extends NetPack implements PlayerPack {
 
-    private int id;
-    private Vector2 acceleration = new Vector2();
+    private final int id;
+    private final Vector2 acceleration = new Vector2();
 
     public PlayerMovePack(int id, Vector2 acceleration, Vector2 position) {
         this.id = id;

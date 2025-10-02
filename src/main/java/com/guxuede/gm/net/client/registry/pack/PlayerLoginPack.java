@@ -9,6 +9,11 @@ public class PlayerLoginPack extends NetPack {
     private String userName;
     private String password;
 
+    public PlayerLoginPack(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
     public PlayerLoginPack() {
 
     }

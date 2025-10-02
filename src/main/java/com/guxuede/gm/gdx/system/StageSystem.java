@@ -1,9 +1,6 @@
 package com.guxuede.gm.gdx.system;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntityListener;
-import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -12,18 +9,23 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.basic.libgdx.InputListenerMultiplexer;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.ActorComponent;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
+import org.apache.commons.lang3.StringUtils;
 
 import static com.guxuede.gm.gdx.entityEdit.Mappers.actorCM;
 
 /**
  * Created by guxuede on 2017/5/29 .
  */
-public class StageSystem extends IteratingSystem {
+public class StageSystem extends EntitySystem {
+
     private float speed = 5.0f;
     private static final Family family = Family.all(ActorComponent.class).get();
 
@@ -31,16 +33,48 @@ public class StageSystem extends IteratingSystem {
     private OrthographicCamera camera;
     private Stage stage;
     private Entity viewActor;
+    private Table chatBox;
+    private TextField chatText;
 
-    public StageSystem(SpriteBatch batch, Viewport viewport, InputMultiplexer inputMultiplexer) {
-        super(family);
+
+
+    public StageSystem(int priority, SpriteBatch batch, Viewport viewport, InputMultiplexer inputMultiplexer) {
+        this.priority = priority;
         this.camera = (OrthographicCamera) viewport.getCamera();
         this.stage = new Stage(viewport,batch);
         this.stage.setDebugAll(true);
         this.spriteBatch = batch;
+
+        chatBox = new Table();
+        chatBox.setWidth(400);
+        chatBox.setHeight(30);
+        chatText = new TextField(null, ResourceManager.skin);
+        chatText.setFillParent(true);
+        chatBox.add(chatText);
+        chatBox.setVisible(false);
+        stage.addActor(chatBox);
+
         inputMultiplexer.addProcessor(this.stage);
         InputListenerMultiplexer inputListenerMultiplexer = new InputListenerMultiplexer();
         inputListenerMultiplexer.addListener(new InputListener() {
+
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+                if(keycode == Input.Keys.ENTER){
+                    if(chatBox.isVisible()) {
+                        String text = chatText.getText();
+                        if(StringUtils.isNoneBlank(text)){
+                            chatText.setText(null);
+                            System.out.println("input box:" + text);;
+                            getEngine().getSystem(CommandSystem.class).executeCommand(text);
+                        }
+                    }
+                    chatBox.setVisible(!chatBox.isVisible());
+                    return true;
+                }
+                return false;
+            }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Actor actor = event.getTarget();
@@ -101,10 +135,6 @@ public class StageSystem extends IteratingSystem {
         super.update(deltaTime);
     }
 
-    @Override
-    protected void processEntity(Entity entity, float deltaTime) {
-
-    }
 
     private void updateCamera(){
         Vector2 position = null;

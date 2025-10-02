@@ -1,9 +1,7 @@
 package com.guxuede.gm.net.client.registry;
 
 
-import com.guxuede.gm.net.client.registry.pack.PlayerLandingPack;
-import com.guxuede.gm.net.client.registry.pack.PlayerLoginPack;
-import com.guxuede.gm.net.client.registry.pack.PlayerMovePack;
+import com.guxuede.gm.net.client.registry.pack.*;
 import io.netty.buffer.ByteBuf;
 
 import java.lang.reflect.InvocationTargetException;
@@ -21,6 +19,8 @@ public class PacketRegistry extends ClassedGameRegistry<NetPack, PacketRegistry.
       registerPacket(PlayerLoginPack.class);
       registerPacket(PlayerLandingPack.class);
       registerPacket(PlayerMovePack.class);
+      registerPacket(PlayerPositionPack.class);
+      registerPacket(PlayerDisconnectedPack.class);
    }
 
    protected void onRegistryClose() {

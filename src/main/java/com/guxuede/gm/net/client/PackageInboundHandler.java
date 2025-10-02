@@ -38,8 +38,10 @@ public class PackageInboundHandler extends SimpleChannelInboundHandler<NetPack> 
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, NetPack msg) throws Exception {
+        System.out.println("received message:"  + msg);
         clientManager.inboundNetPack(msg);
     }
+
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
