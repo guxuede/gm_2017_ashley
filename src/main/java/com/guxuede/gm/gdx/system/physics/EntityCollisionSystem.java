@@ -1,11 +1,9 @@
-package com.guxuede.gm.gdx.system;
+package com.guxuede.gm.gdx.system.physics;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
-import com.guxuede.gm.gdx.component.BoundsComponent;
-import com.guxuede.gm.gdx.component.PositionComponent;
 
 public class EntityCollisionSystem extends IteratingSystem {
 

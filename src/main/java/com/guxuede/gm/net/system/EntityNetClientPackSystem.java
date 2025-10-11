@@ -9,7 +9,7 @@ import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.component.SensorComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
-import com.guxuede.gm.gdx.system.StageSystem;
+import com.guxuede.gm.gdx.system.render.StageSystem;
 import com.guxuede.gm.net.client.registry.NetPack;
 import com.guxuede.gm.net.client.registry.pack.ActorMovePack;
 import com.guxuede.gm.net.client.registry.pack.ActorPositionPack;

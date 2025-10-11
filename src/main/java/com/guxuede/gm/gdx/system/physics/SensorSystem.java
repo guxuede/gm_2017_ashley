@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx.system;
+package com.guxuede.gm.gdx.system.physics;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.SensorComponent;
+import com.guxuede.gm.gdx.system.render.StageSystem;
 
 public class SensorSystem extends EntitySystem {
 

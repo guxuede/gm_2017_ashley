@@ -17,10 +17,12 @@
 package com.guxuede.gm.gdx.basic.libgdx;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.guxuede.samplegame.GdxGameScreen;
 
 public class GdxGame extends Game {
 
+	private FPSLogger fpsLogger = new FPSLogger();
 	@Override
 	public void create () {
 		setScreen(new GdxGameScreen());
@@ -29,5 +31,7 @@ public class GdxGame extends Game {
 	@Override
 	public void render() {
 		super.render();
+		fpsLogger.log();
 	}
+
 }

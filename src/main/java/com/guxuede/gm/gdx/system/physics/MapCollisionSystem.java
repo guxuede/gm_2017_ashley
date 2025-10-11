@@ -1,5 +1,6 @@
-package com.guxuede.gm.gdx.system;
+package com.guxuede.gm.gdx.system.physics;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -11,6 +12,7 @@ import com.guxuede.gm.gdx.basic.libgdx.MapMask;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.gdx.system.render.MapSystem;
 
 /**
  * Created by guxuede on 2017/6/10 .
@@ -19,19 +21,23 @@ public class MapCollisionSystem extends IteratingSystem {
 
     private static final Family family = Family.all(ActorStateComponent.class, PositionComponent.class, BoundsComponent.class).get();
 
-
     private MapMask mapMask;
 
-    public MapCollisionSystem(MapSystem mapSystem) {
+    public MapCollisionSystem() {
         super(family);
-        TiledMap map = mapSystem.tiledMap;
+        this.priority = 0;
+    }
+
+    @Override
+    public void addedToEngine(Engine engine) {
+        super.addedToEngine(engine);
+        TiledMap map = engine.getSystem(MapSystem.class).tiledMap;
         Array<TiledMapTileLayer> layers = map.getLayers().getByType(TiledMapTileLayer.class);
         Integer width = map.getProperties().get("width", Integer.class);
         Integer height = map.getProperties().get("height", Integer.class);
         Integer tileWidth = map.getProperties().get("tilewidth", Integer.class);
         Integer tileHeight = map.getProperties().get("tileheight", Integer.class);
         mapMask = new MapMask(height, width, tileWidth, tileHeight, layers, "block");
-        this.priority = 0;
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.basic.libgdx.SingletonPooledEngine;
 import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.component.skill.Skill;
-import com.guxuede.gm.gdx.system.MouseSystem;
+import com.guxuede.gm.gdx.system.physics.MouseSystem;
 
 import static com.guxuede.gm.gdx.component.ActorStateComponent.*;
 import static com.guxuede.gm.gdx.component.skill.SkillTargetTypeEnum.TARGET_TYPE_AREA;

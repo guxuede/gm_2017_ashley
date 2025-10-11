@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx.system;
+package com.guxuede.gm.gdx.system.render;
 
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,10 +13,10 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
  */
 public class MapSystem extends EntitySystem {
 
-    TiledMap tiledMap;
-    OrthogonalTiledMapRenderer renderer;
-    OrthographicCamera camera;
-    SpriteBatch spriteBatch;
+    public TiledMap tiledMap;
+    public OrthogonalTiledMapRenderer renderer;
+    public OrthographicCamera camera;
+    public SpriteBatch spriteBatch;
 
     public MapSystem(String mapFileName,SpriteBatch spriteBatch,OrthographicCamera camera){
         this.camera = camera;

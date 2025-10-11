@@ -1,11 +1,7 @@
-package com.guxuede.gm.gdx.system;
+package com.guxuede.gm.gdx.system.render;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 /**
  * 使用它画第一层地板第二层人物的效果
@@ -21,10 +17,15 @@ public class MapRenderingSystem extends EntitySystem {
     private int[] layers = new int[]{0,1};
     MapSystem mapSystem;
 
-    public MapRenderingSystem(int priority , MapSystem mapSystem, int[] layers){
-        this.mapSystem = mapSystem;
+    public MapRenderingSystem(int priority, int[] layers){
         this.priority = priority;
         this.layers = layers;
+    }
+
+    @Override
+    public void addedToEngine(Engine engine) {
+        super.addedToEngine(engine);
+        mapSystem = getEngine().getSystem(MapSystem.class);
     }
 
     @Override

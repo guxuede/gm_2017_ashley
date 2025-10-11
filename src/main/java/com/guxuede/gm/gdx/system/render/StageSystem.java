@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx.system;
+package com.guxuede.gm.gdx.system.render;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.gdx.Gdx;

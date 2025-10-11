@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.entityEdit.EntityEditor;
-import com.guxuede.gm.gdx.system.StageSystem;
+import com.guxuede.gm.gdx.system.render.StageSystem;
 import com.guxuede.gm.net.client.pack.utils.PackageUtils;
 import com.guxuede.gm.net.client.registry.NetPack;
 import com.guxuede.samplegame.DesktopLauncher;
