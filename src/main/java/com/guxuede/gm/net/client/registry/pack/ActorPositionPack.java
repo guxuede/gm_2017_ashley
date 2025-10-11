@@ -50,7 +50,7 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
 
     @Override
     public String toString() {
-        return "PlayerPositionPack{" +
+        return "ActorPositionPack{" +
                 "id=" + id +
                 ", direction=" + direction +
                 ", position=" + position +

@@ -21,6 +21,8 @@ public class PacketRegistry extends ClassedGameRegistry<NetPack, PacketRegistry.
       registerPacket(ActorMovePack.class);
       registerPacket(ActorPositionPack.class);
       registerPacket(PlayerDisconnectedPack.class);
+      registerPacket(PlayerChatPack.class);
+      registerPacket(PlayerCommandPack.class);
    }
 
    protected void onRegistryClose() {

@@ -1,10 +1,16 @@
 package com.guxuede.gm.gdx.system;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
+import com.guxuede.gm.net.client.registry.pack.PlayerChatPack;
+import com.guxuede.gm.net.client.registry.pack.PlayerCommandPack;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.net.client.registry.pack.PlayerLoginPack;
 import com.guxuede.samplegame.DesktopLauncher;
+import org.apache.commons.lang3.StringUtils;
 import picocli.CommandLine;
 
 public class CommandSystem extends EntitySystem {
@@ -15,11 +21,33 @@ public class CommandSystem extends EntitySystem {
         this.engine = engine;
     }
 
-    public void executeCommand(String line){
-        CommandLine commandLine = new CommandLine(new GameCommand());
-        commandLine.execute(line.split(" "));
-    }
+    public void executeCommand(Entity entity,String lineChat){
+        if(lineChat.startsWith("/")){
+            CommandLine commandLine = new CommandLine(new GameCommand());
+            String command = StringUtils.substringAfter(lineChat, "/");
+            int execute = commandLine.execute(command.split(" "));
+            //if == 0, then local command
+            //elase remove command
+            if(execute != 0){
+                if(entity!=null){
+                    PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(entity);
+                    PlayerCommandPack playerCommandPack = new PlayerCommandPack(playerDataComponent.id, command);
+                    playerDataComponent.outBoundPack(playerCommandPack);
+                }else{
+                    System.out.println("还没有选择角色,无法执行远程命令");
+                }
+            }
+        }else{
+            if(entity!=null){
+                PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(entity);
+                PlayerChatPack playerChatPack = new PlayerChatPack(playerDataComponent.id, playerDataComponent.userName, lineChat);
+                playerDataComponent.outBoundPack(playerChatPack);
+            }else{
+                System.out.println("还没有选择角色,无法聊天");
+            }
+        }
 
+    }
 
     @CommandLine.Command(
             subcommands = {

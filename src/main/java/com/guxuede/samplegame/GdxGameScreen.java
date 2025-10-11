@@ -141,6 +141,8 @@ public class GdxGameScreen extends ScreenAdapter {
         camera.position.set(TempObjects.temp0Vector3);
         camera.update();
         spriteBatch.setProjectionMatrix(camera.combined);
+
+        engine.getSystem(StageSystem.class).onScreenResize(width, height);
     }
 
 

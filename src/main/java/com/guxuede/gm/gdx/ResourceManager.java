@@ -37,7 +37,7 @@ public class ResourceManager {
     private static final List<ActorHolder> ANIMATION_HOLDER_LIST = new ActorJsonParse().parse(Gdx.files.internal("data/actors.json"));
     public static final Map<String, Skill> SKILLS = ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
 
-    public static Skin skin=new Skin(Gdx.files.internal("skin/skin.json"));
+    public static Skin skin=new Skin(Gdx.files.internal("skin/kenney-pixel/skin.json"));
     public static BitmapFont font = skin.getFont("default-font");
 
     public static Sprite shadow = new Sprite(getTextureRegion("data/180-Switch03",96,96,32,32));

@@ -1,16 +1,19 @@
 package com.guxuede.gm.gdx.system;
 
 import com.badlogic.ashley.core.*;
-import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.actions.*;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.basic.libgdx.InputListenerMultiplexer;
@@ -33,8 +36,13 @@ public class StageSystem extends EntitySystem {
     private OrthographicCamera camera;
     private Stage stage;
     private Entity viewActor;
-    private Table chatBox;
-    private TextField chatText;
+
+    //~~~~~~~~~~~~~~~~~~UI
+    private OrthographicCamera uiCamera;
+    private FitViewport uiVviewport;
+    private Stage uiStage;
+    private Table chatHistoryBox;
+    private TextField chatText;//pixthulhu kenney-pixel
 
 
 
@@ -42,38 +50,16 @@ public class StageSystem extends EntitySystem {
         this.priority = priority;
         this.camera = (OrthographicCamera) viewport.getCamera();
         this.stage = new Stage(viewport,batch);
-        this.stage.setDebugAll(true);
+        this.stage.setDebugAll(false);
+
         this.spriteBatch = batch;
-
-        chatBox = new Table();
-        chatBox.setWidth(400);
-        chatBox.setHeight(30);
-        chatText = new TextField("login password=123 username=guxuede", ResourceManager.skin);
-        chatText.setFillParent(true);
-        chatBox.add(chatText);
-        chatBox.setVisible(false);
-        stage.addActor(chatBox);
-
+        initUI();
         inputMultiplexer.addProcessor(this.stage);
+        inputMultiplexer.addProcessor(this.uiStage);
+
+
         InputListenerMultiplexer inputListenerMultiplexer = new InputListenerMultiplexer();
         inputListenerMultiplexer.addListener(new InputListener() {
-
-            @Override
-            public boolean keyUp(InputEvent event, int keycode) {
-                if(keycode == Input.Keys.ENTER){
-                    if(chatBox.isVisible()) {
-                        String text = chatText.getText();
-                        if(StringUtils.isNoneBlank(text)){
-                            System.out.println("input box:" + text);;
-                            getEngine().getSystem(CommandSystem.class).executeCommand(text);
-                        }
-                    }
-                    chatBox.setVisible(!chatBox.isVisible());
-                    return true;
-                }
-                return false;
-            }
-
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Actor actor = event.getTarget();
@@ -136,6 +122,8 @@ public class StageSystem extends EntitySystem {
         stage.act(deltaTime);
         stage.draw();
         super.update(deltaTime);
+        uiStage.act();
+        uiStage.draw();
     }
 
 
@@ -161,5 +149,70 @@ public class StageSystem extends EntitySystem {
                 camera.translate(-speed, 0);camera.update();
             }
         }
+    }
+
+
+    public void onScreenResize(int width, int height){
+        uiVviewport.setScreenSize(width,height);
+        uiVviewport.setWorldSize(width,height);
+        uiVviewport.update(width,height);
+        uiCamera.setToOrtho(false, width, height);
+        uiCamera.update();
+    }
+
+    private void initUI(){
+        uiCamera = new OrthographicCamera();
+        uiVviewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),uiCamera);
+        uiVviewport.apply();
+        this.uiStage = new Stage(uiVviewport);
+        this.uiStage.setDebugAll(false);
+        chatHistoryBox = new Table(ResourceManager.skin);
+        chatHistoryBox.padLeft(15);
+        chatHistoryBox.setWidth(400);
+        chatHistoryBox.setHeight(600);
+        chatHistoryBox.setBackground((Drawable) null);
+        chatHistoryBox.setPosition(0,130);
+        chatHistoryBox.align(Align.bottomLeft);
+
+        chatText = new TextField("/login password=123 username=guxuede", ResourceManager.skin);
+        chatText.setWidth(400);
+        chatText.setHeight(30);
+        chatText.setFillParent(true);
+        chatText.setVisible(false);
+        chatText.setPosition(15,100);
+
+        chatHistoryBox.setVisible(true);
+        uiStage.addActor(chatHistoryBox);
+        uiStage.addActor(chatText);
+
+        InputListenerMultiplexer inputListenerMultiplexer = new InputListenerMultiplexer();
+        inputListenerMultiplexer.addListener(new InputListener() {
+
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+                if(keycode == Input.Keys.ENTER){
+                    if(chatText.isVisible()) {
+                        String text = chatText.getText();
+                        if(StringUtils.isNoneBlank(text)){
+                            System.out.println("input box:" + text);
+                            getEngine().getSystem(CommandSystem.class).executeCommand(viewActor, text);
+                        }
+                    }
+                    chatText.setVisible(!chatText.isVisible());
+                    return true;
+                }
+                return false;
+            }
+        });
+        uiStage.addListener(inputListenerMultiplexer);
+    }
+
+    public void addUserMessageToUI(String text) {
+        chatHistoryBox.row().left();
+        Label label = new Label(text,ResourceManager.skin);
+        Color color = label.getColor();
+        color.a = 0;
+        label.addAction(new SequenceAction(Actions.fadeIn(0.5f), new DelayAction(4), Actions.fadeOut(4),new RemoveActorAction()));
+        chatHistoryBox.add(label).left();
     }
 }
