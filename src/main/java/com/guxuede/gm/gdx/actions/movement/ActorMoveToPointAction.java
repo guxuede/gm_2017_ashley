@@ -7,14 +7,14 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class ActorMoveToPointAction extends ActorMoveToAction {
 
-    protected Vector2 targetPoint;
+    protected Vector2 targetPoint = new Vector2();
 
     public ActorMoveToPointAction(Vector2 targetPoint) {
-        this.targetPoint = targetPoint;
+        this.targetPoint.set(targetPoint);
     }
 
     public ActorMoveToPointAction(float targetX, float targetY) {
-        this.targetPoint = new Vector2(targetX, targetY);
+        this.targetPoint.set(targetX, targetY);
     }
 
     @Override

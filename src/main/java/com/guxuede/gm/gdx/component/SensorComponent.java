@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class SensorComponent implements Component {
 
-    public final Vector2 lastAcceleration = new Vector2();//加速度，要有加速度才能有速度
     public final Vector2 acceleration = new Vector2();//加速度，要有加速度才能有速度
 
 }

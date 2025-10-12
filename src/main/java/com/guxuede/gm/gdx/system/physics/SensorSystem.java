@@ -15,7 +15,7 @@ import com.guxuede.gm.gdx.system.render.StageSystem;
 public class SensorSystem extends EntitySystem {
 
     private static final Family family = Family.all(SensorComponent.class).get();
-    public static final int ACC = 60;
+    public static final int ACC = 1;
 
     public SensorSystem() {
 
@@ -27,7 +27,6 @@ public class SensorSystem extends EntitySystem {
         if(viewActor!=null){
             Vector2 acc = processKeyEvent();
             SensorComponent sensorComponent = Mappers.sensorCM.get(viewActor);
-            sensorComponent.lastAcceleration.set(sensorComponent.acceleration);
             sensorComponent.acceleration.set(acc);
         }
     }

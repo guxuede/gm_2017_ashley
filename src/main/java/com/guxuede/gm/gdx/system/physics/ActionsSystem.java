@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.Action;
 import com.guxuede.gm.gdx.component.ActionsComponent;
@@ -25,6 +26,15 @@ public class ActionsSystem extends IteratingSystem {
         ActionsComponent actionsComponent = Mappers.actionCM.get(entity);
         actionsComponent.engine = getEngine();
         act(actionsComponent.actions,deltaTime);
+
+        Action currectAction = actionsComponent.currectAction;
+        if(currectAction !=null){
+            boolean act = currectAction.act(deltaTime);
+            if(act){
+                actionsComponent.currectAction.reset();
+                actionsComponent.currectAction = null;
+            }
+        }
     }
 
     public void act (Array<Action> actions,float delta) {
@@ -43,4 +53,6 @@ public class ActionsSystem extends IteratingSystem {
             }
         }
     }
+
+
 }

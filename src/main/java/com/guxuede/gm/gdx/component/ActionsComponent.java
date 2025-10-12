@@ -15,9 +15,16 @@ public class ActionsComponent implements Component, Pool.Poolable {
     public Engine engine;
     public final Array<Action> actions = new Array(0);
 
-    public void addAction (Entity entity,Action action) {
+    public Action currectAction;
+
+    public void addAction(Entity entity, Action action) {
         action.setActor(entity);
         actions.add(action);
+    }
+
+    public void setCurrectAction (Entity entity,Action action) {
+        action.setActor(entity);
+        currectAction = action;
     }
 
     public void removeAction (Action action) {
@@ -41,4 +48,10 @@ public class ActionsComponent implements Component, Pool.Poolable {
         engine = null;
         actions.clear();
     }
+
+//    public void addOrReplace(Action action){
+//        Iterable<Action> select = actions.select(e -> e.getClass().equals(action.getClass()));
+//        select.iterator()
+//        actions.removeValue()
+//    }
 }

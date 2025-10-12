@@ -1,4 +1,4 @@
-package com.guxuede.gm.gdx.system.physics;
+package com.guxuede.gm.gdx.system.render;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;

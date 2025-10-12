@@ -52,18 +52,17 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new PresentableRenderingSystem(300,spriteBatch));
         engine.addSystem(new ActorShadowRenderingSystem(200,spriteBatch));
         engine.addSystem(new ActorLifeBarRenderingSystem(500,spriteBatch));
-        engine.addSystem(new MovementSystem());
+        engine.addSystem(new SensorMovementSystem());
         engine.addSystem(new DynamicDirectionSystem());
         engine.addSystem(new SensorSystem());
         engine.addSystem(new EntityNetClientPackSystem());
         /*MAP*/
-        MapSystem mapSystem = new MapSystem("data/desert1.tmx",spriteBatch,camera);//24,14  27,5
-        engine.addSystem(mapSystem);
+        engine.addSystem(new TiledMapManagerSystem(spriteBatch,camera));
+        engine.addSystem(new TiledMapRenderingSystem(101,new int[]{0,1}){});//优先级越低，先画到最底部         //不能同時增加2個相同類型的system
+        engine.addSystem(new TiledMapRenderingSystem(600,new int[]{2}){});//优先级越低，先画到最底部
         engine.addSystem(new MapCollisionSystem());
 
-        engine.addSystem(new MapRenderingSystem(101,new int[]{0,1}){});//优先级越低，先画到最底部         //不能同時增加2個相同類型的system
-//        engine.addSystem(new MapRenderingSystem(600,mapSystem,new int[]{2}){});//优先级越低，先画到最底部
-        addLayerAsPresntable(mapSystem.getTiledMapLayer(2));
+//        addLayerAsPresntable(mapDataSystem.getTiledMapLayer(2));
 //        engine.addSystem(new AmbianceLightSystem(999));
         /*SOUND*/
         engine.addSystem(new SoundSystem());

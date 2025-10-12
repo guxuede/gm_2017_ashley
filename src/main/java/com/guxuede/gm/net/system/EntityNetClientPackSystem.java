@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.guxuede.gm.gdx.actions.movement.MoveToAction;
+import com.guxuede.gm.gdx.component.ActionsComponent;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
@@ -11,7 +13,6 @@ import com.guxuede.gm.gdx.component.SensorComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.system.render.StageSystem;
 import com.guxuede.gm.net.client.registry.NetPack;
-import com.guxuede.gm.net.client.registry.pack.ActorMovePack;
 import com.guxuede.gm.net.client.registry.pack.ActorPositionPack;
 
 
@@ -38,9 +39,6 @@ public class EntityNetClientPackSystem extends IteratingSystem {
 
         //process package
         playerDataComponent.inboundNetPacks.consumerAll(e-> processNetPack(engine, entity, e));
-//
-//        GlobalNetPackSystem netPackSystem = getEngine().getSystem(GlobalNetPackSystem.class);
-//        netClientComponent.outboundNetPacks.consumerAll(netPackSystem::outboundNetPack);
     }
 
     private void processNetPack(Engine engine, Entity entity, NetPack pack){
@@ -57,17 +55,12 @@ public class EntityNetClientPackSystem extends IteratingSystem {
             ActorStateComponent stateComponent = Mappers.actorStateCM.get(entity);
             stateComponent.acceleration.set(sensorComponent.acceleration);
 
-            if(!sensorComponent.acceleration.epsilonEquals(sensorComponent.lastAcceleration)){
-                ActorMovePack actorMovePack = new ActorMovePack(playerDataComponent.getId(),sensorComponent.acceleration);
-                playerDataComponent.outBoundPack(actorMovePack);
-            }
-
             playerDataComponent.acceleration.set(stateComponent.acceleration);
             playerDataComponent.direction = stateComponent.direction;
 
             PositionComponent positionComponent = Mappers.positionCM.get(entity);
             if (positionComponent != null && !positionComponent.position.epsilonEquals(playerDataComponent.position)
-                    && (System.currentTimeMillis() - playerDataComponent.lastTimePositionReported) > 1000) {
+                    && (System.currentTimeMillis() - playerDataComponent.lastTimePositionReported) > 100) {
                 playerDataComponent.position.set(positionComponent.position);
                 playerDataComponent.lastTimePositionReported = System.currentTimeMillis();
                 ActorPositionPack actorPositionPack = new ActorPositionPack(playerDataComponent.getId(), playerDataComponent.direction , playerDataComponent.position);
@@ -75,13 +68,15 @@ public class EntityNetClientPackSystem extends IteratingSystem {
             }
         }else{
             //不是本地角色, 接收服务器数据
+            //todo add network delay
             ActorStateComponent stateComponent = Mappers.actorStateCM.get(entity);
-            stateComponent.acceleration.set(playerDataComponent.acceleration);
 
             PositionComponent positionComponent = Mappers.positionCM.get(entity);
-            if (positionComponent != null && !positionComponent.position.epsilonEquals(playerDataComponent.position)
-                    && (System.currentTimeMillis() - playerDataComponent.lastTimePositionReported) > 1000) {
-                positionComponent.position.set(playerDataComponent.position);
+            if (positionComponent != null && !positionComponent.position.epsilonEquals(playerDataComponent.position)) {
+                float expectTime = playerDataComponent.position.dst(positionComponent.position) / stateComponent.speed;
+                MoveToAction action = new MoveToAction(expectTime, playerDataComponent.position.x, playerDataComponent.position.y);
+                ActionsComponent actionsComponent = Mappers.actionCM.get(entity);
+                actionsComponent.setCurrectAction(entity, action);
                 playerDataComponent.lastTimePositionReported = System.currentTimeMillis();
             }
         }

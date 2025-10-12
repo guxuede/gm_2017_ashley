@@ -11,7 +11,7 @@ import com.guxuede.gm.gdx.component.PositionComponent;
  * Created by guxuede on 2016/7/14 .
  */
 public abstract class ActorMoveToAction extends Acting {
-    public static final int IS_ARRIVE_RADIO = 10;
+    public static final float IS_ARRIVE_RADIO = 0.1f;
     public ActorMoveListener actorMoveListener;
     private Vector2 oldPoint = new Vector2();
 
@@ -27,7 +27,11 @@ public abstract class ActorMoveToAction extends Acting {
         if(!isArrive()){
             final Vector2 target = getTargetPoint();
             final Vector2 entryPos = positionComponent.position;
-            Vector2 vector2 = TempObjects.temp0Vector2.set(target).sub(entryPos).nor().scl(100f);//speed
+//            final float dst = entryPos.dst(entryPos);
+//            if(dst < speed){
+//                speed = 5;
+//            }
+            Vector2 vector2 = TempObjects.temp0Vector2.set(target).sub(entryPos).nor();//speed
             Mappers.actorStateCM.get(actor).acceleration.set(vector2);
             return false;
         }

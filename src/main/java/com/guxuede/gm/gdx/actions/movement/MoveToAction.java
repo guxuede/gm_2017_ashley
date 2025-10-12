@@ -1,64 +1,86 @@
-/*******************************************************************************
- * Copyright 2011 See AUTHORS file.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
 package com.guxuede.gm.gdx.actions.movement;
 
-
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.TemporalAction;
+import com.guxuede.gm.gdx.component.ActorStateComponent;
+import com.guxuede.gm.gdx.component.PositionComponent;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
+import com.guxuede.gm.gdx.system.physics.SensorMovementSystem;
 
-/** Moves an actor from its current position to a specific position.
- * @author Nathan Sweet */
 public class MoveToAction extends TemporalAction {
-	private float startX, startY;
-	private float endX, endY;
+    private float startX;
+    private float startY;
+    private float endX;
+    private float endY;
 
-	protected void begin () {
-        Vector2 position = Mappers.positionCM.get(actor).position;
-		startX = position.x;
-		startY = position.y;
-	}
+    public MoveToAction(float duration, float endX, float endY) {
+        super(duration);
+        this.endX = endX;
+        this.endY = endY;
+    }
 
-	protected void update (float percent) {
-        Mappers.positionCM.get(actor).position.set(startX + (endX - startX) * percent, startY + (endY - startY) * percent);
-	}
+    protected void begin() {
+        Vector2 position = Mappers.positionCM.get(this.target).position;
+        this.startX = position.x;
+        this.startY = position.y;
+    }
 
-	public void reset () {
-		super.reset();
-	}
+    protected void update(float percent) {
+        ActorStateComponent stateComponent = Mappers.actorStateCM.get(this.target);
+        float x;
+        float y;
+        if (percent == 0.0F) {
+            x = this.startX;
+            y = this.startY;
+        } else if (percent == 1.0F) {
+            x = this.endX;
+            y = this.endY;
+        } else {
+            x = this.startX + (this.endX - this.startX) * percent;
+            y = this.startY + (this.endY - this.startY) * percent;
+        }
+        PositionComponent positionComponent = Mappers.positionCM.get(this.target);
+        SensorMovementSystem.updateMovement(stateComponent, positionComponent, x, y);
+    }
 
-	public void setPosition (float x, float y) {
-		endX = x;
-		endY = y;
-	}
+    @Override
+    protected void end() {
+        ActorStateComponent stateComponent = Mappers.actorStateCM.get(this.target);
+        stateComponent.isMoving = false;
+    }
 
-	public float getX () {
-		return endX;
-	}
+    public void reset() {
+        super.reset();
+    }
 
-	public void setX (float x) {
-		endX = x;
-	}
 
-	public float getY () {
-		return endY;
-	}
+    public float getX() {
+        return this.endX;
+    }
 
-	public void setY (float y) {
-		endY = y;
-	}
+    public void setX(float x) {
+        this.endX = x;
+    }
+
+    public float getY() {
+        return this.endY;
+    }
+
+    public void setY(float y) {
+        this.endY = y;
+    }
+
+    public float getStartX() {
+        return this.startX;
+    }
+
+    public float getStartY() {
+        return this.startY;
+    }
+
 }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
  */
 public class ScreenClearSystem extends EntitySystem {
 
-    Color CLEAR_COLOR = Color.valueOf("969291");
+    Color CLEAR_COLOR = Color.valueOf("000000");
 
     public ScreenClearSystem(int priority){
         this.priority = priority;

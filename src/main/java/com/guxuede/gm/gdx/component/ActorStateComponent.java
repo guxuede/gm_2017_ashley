@@ -25,7 +25,7 @@ public class ActorStateComponent implements Component, Pool.Poolable{
 
     public long id;
     public int direction=DOWN;
-    public float speed=1200000;
+    public float speed=100;
     public boolean isMoving;
     public float visualRadius=100;
     public Color primaryColor;
@@ -66,7 +66,7 @@ public class ActorStateComponent implements Component, Pool.Poolable{
 
          id = 0;
         direction=DOWN;
-        speed=1200000;
+        speed=100;
         isMoving = false;
         visualRadius=100;
         lifeStatus = LIFE_STATUS_CREATE;

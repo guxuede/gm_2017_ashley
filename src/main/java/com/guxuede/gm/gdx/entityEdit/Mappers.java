@@ -8,6 +8,8 @@ import com.guxuede.gm.net.component.PlayerDataComponent;
  * Created by guxuede on 2017/5/31 .
  */
 public class Mappers {
+    public static final ComponentMapper<TiledMapDataComponent> tiledMapDataCM = ComponentMapper.getFor(TiledMapDataComponent.class);
+
     public static final ComponentMapper<PositionComponent> positionCM = ComponentMapper.getFor(PositionComponent.class);
     public static final ComponentMapper<ActorStateComponent> actorStateCM = ComponentMapper.getFor(ActorStateComponent.class);
     public static final ComponentMapper<AnimationComponent> animationCM = ComponentMapper.getFor(AnimationComponent.class);

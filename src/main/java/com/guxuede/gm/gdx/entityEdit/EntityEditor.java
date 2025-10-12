@@ -247,5 +247,13 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return (T) this;
     }
 
+    /**
+     * Add artemis managed components to entity.
+     */
+    public  <V  extends Component> T with(V component) {
+        entity.add(component);
+        return (T) this;
+    }
+
 
 }
