@@ -9,7 +9,7 @@ import com.guxuede.gm.gdx.component.ActorAnimationComponent;
  */
 public class AnimationAction extends TemporalAction {
 
-    private String animationName;
+    private final String animationName;
 
     public AnimationAction(String animationName,float duration){
         this.animationName = animationName;
@@ -20,13 +20,13 @@ public class AnimationAction extends TemporalAction {
     @Override
     protected void begin() {
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(actor);
-        actorAnimationComponent.hotAnimation = animationName;
+        actorAnimationComponent.setCurrentAnimation(animationName, getDuration());
     }
 
     @Override
     protected void end() {
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(actor);
-        actorAnimationComponent.hotAnimation = null;
+        actorAnimationComponent.adhotAnimation = null;
     }
 
     @Override

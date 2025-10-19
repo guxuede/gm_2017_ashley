@@ -19,6 +19,7 @@ import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -28,7 +29,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ResourceManager {
-    private static ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("nashorn");
+
+    private static ScriptEngine scriptEngine;
+    static {
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        scriptEngineManager.registerEngineName("nashorn",new NashornScriptEngineFactory());
+        scriptEngine = new ScriptEngineManager().getEngineByName("nashorn");
+    }
     private static final Map<String,Sound> soundMap = new HashMap<String, Sound>();
     private static final LongMap<Sound> spriteSoundMap = new LongMap<Sound>();
     private static final Map<String,Texture> TEXTURE_MAP = new HashMap<String, Texture>();

@@ -11,7 +11,8 @@ import static com.guxuede.gm.gdx.component.skill.SkillTargetTypeEnum.*;
  * Created by guxuede on 2016/9/27 .
  */
 public abstract class Skill implements Pool.Poolable,Cloneable {
-
+    public String id;
+    public String name;
     public Entity targetEntry;
     public Vector2 targetPos;
     public boolean isAvailable = true;
@@ -58,5 +59,22 @@ public abstract class Skill implements Pool.Poolable,Cloneable {
         targetEntry = null;
         targetPos = null;
         stateTime = 0;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

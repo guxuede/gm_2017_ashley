@@ -39,6 +39,7 @@ public class ActorSkillParse {
                 String script = node.getElementsByTag("script").html();
                 String description = node.getElementsByTag("description").html();
                 ScriptSkill skill = new ScriptSkill();
+                skill.setId(skillId);
                 skill.setName(name);
                 skill.setDescription(description);
                 skill.setHotKey(hotKey);

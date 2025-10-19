@@ -12,14 +12,25 @@ public class ActorAnimationComponent implements Component , Pool.Poolable{
     public int direction;
     public boolean isMoving;
 
-    public String hotAnimation;// if not null, play this animation
+    public String adhotAnimation;// if not null, play this animation
+    public float adhotAnimationDuration;// if not null, play this animation
+    public float adhotAnimationTime;// if not null, play this animation
 
+    public void setCurrentAnimation(String name, float adhotAnimationDuration){
+        this.adhotAnimation = name;
+        this.adhotAnimationDuration = adhotAnimationDuration;
+        this.adhotAnimationTime = 0;
+    }
 
     @Override
     public void reset() {
         animationHolder = null;
         direction = 0;
         isMoving = false;
-        hotAnimation = null;
+
+
+        adhotAnimation = null;
+        adhotAnimationDuration = 0;
+        adhotAnimationTime = 0;
     }
 }

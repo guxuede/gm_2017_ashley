@@ -3,6 +3,8 @@ package com.guxuede.gm.net.client.registry.pack;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.guxuede.gm.gdx.ResourceManager;
+import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.component.TiledMapDataComponent;
 import com.guxuede.gm.gdx.system.render.TiledMapManagerSystem;
 import com.guxuede.gm.net.component.PlayerDataComponent;
@@ -14,6 +16,8 @@ import com.guxuede.gm.net.client.registry.NetPack;
 import com.guxuede.samplegame.DesktopLauncher;
 import io.netty.buffer.ByteBuf;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.function.Consumer;
 
 
 public class ActorLandingPack extends NetPack {
@@ -51,8 +55,13 @@ public class ActorLandingPack extends NetPack {
         if(StringUtils.equals(DesktopLauncher.currentUserName, userName)){
             //clear map
             engine.getEntitiesFor(Family.all(PlayerDataComponent.class).get()).iterator().forEachRemaining(engine::removeEntity);
-
-            Entity userEntity = buildActor(E.create()).sensor().buildToWorld();
+            Entity userEntity = buildActor(E.create()).sensor().with(SkillComponent.class, (Consumer<SkillComponent>) o -> {
+                o.skills.add(ResourceManager.getSkillById("burstFire"));
+                o.skills.add(ResourceManager.getSkillById("burstFire1"));
+                o.skills.add(ResourceManager.getSkillById("meteorite"));
+                o.skills.add(ResourceManager.getSkillById("fireBall"));
+                o.skills.add(ResourceManager.getSkillById("blink"));
+            }).buildToWorld();
             engine.getSystem(StageSystem.class).setViewActor(userEntity);
             processMap(engine);
         }else{

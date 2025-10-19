@@ -22,9 +22,24 @@ public class ActorAnimationSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         ActorAnimationComponent stateComponent = Mappers.animationHolderCM.get(entity);
+
+        //adhot Animation have high priority
+        if(stateComponent.adhotAnimation !=null){
+            if(stateComponent.adhotAnimationTime <= stateComponent.adhotAnimationDuration){
+                AnimationComponent animationComponent = Mappers.animationCM.get(entity);
+                animationComponent.animation = stateComponent.animationHolder.getAnimation(stateComponent.adhotAnimation.hashCode());
+                stateComponent.adhotAnimationTime += deltaTime;
+                return;
+            }else{
+                stateComponent.adhotAnimation = null;
+                stateComponent.adhotAnimationTime = 0;
+                stateComponent.adhotAnimationDuration = 0;
+            }
+        }
+
+
         //moving
         if(stateComponent.isMoving){
-            stateComponent.hotAnimation = null;
             switch (stateComponent.direction) {
                 case AnimationComponent.UP:
                     doAnimation(entity,deltaTime,AnimationHolder.WALK_UP_ANIMATION);
@@ -43,28 +58,23 @@ public class ActorAnimationSystem extends IteratingSystem {
                     break;
             }
         }else{
-            if(stateComponent.hotAnimation!=null){
-                AnimationComponent animationComponent = Mappers.animationCM.get(entity);
-                animationComponent.animation = stateComponent.animationHolder.getAnimation(stateComponent.hotAnimation.hashCode());
-            }else{
-                //idel
-                switch (stateComponent.direction) {
-                    case AnimationComponent.UP:
-                        doAnimation(entity,deltaTime,AnimationHolder.STOP_UP_ANIMATION);
-                        break;
-                    case AnimationComponent.DOWN:
-                        doAnimation(entity,deltaTime,AnimationHolder.STOP_DOWN_ANIMATION);
-                        break;
-                    case AnimationComponent.RIGHT:
-                        doAnimation(entity,deltaTime,AnimationHolder.STOP_RIGHT_ANIMATION);
-                        break;
-                    case AnimationComponent.LEFT:
-                        doAnimation(entity,deltaTime,AnimationHolder.STOP_LEFT_ANIMATION);
-                        break;
-                    default:
-                        doAnimation(entity,deltaTime,AnimationHolder.STOP_DOWN_ANIMATION);
-                        break;
-                }
+            //idel
+            switch (stateComponent.direction) {
+                case AnimationComponent.UP:
+                    doAnimation(entity,deltaTime,AnimationHolder.STOP_UP_ANIMATION);
+                    break;
+                case AnimationComponent.DOWN:
+                    doAnimation(entity,deltaTime,AnimationHolder.STOP_DOWN_ANIMATION);
+                    break;
+                case AnimationComponent.RIGHT:
+                    doAnimation(entity,deltaTime,AnimationHolder.STOP_RIGHT_ANIMATION);
+                    break;
+                case AnimationComponent.LEFT:
+                    doAnimation(entity,deltaTime,AnimationHolder.STOP_LEFT_ANIMATION);
+                    break;
+                default:
+                    doAnimation(entity,deltaTime,AnimationHolder.STOP_DOWN_ANIMATION);
+                    break;
             }
         }
     }

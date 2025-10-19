@@ -4,6 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.GdxSequenceAction;
+import com.guxuede.gm.net.client.registry.pack.ActorPlayAnimationPack;
+import com.guxuede.gm.net.client.registry.pack.ActorPlaySkillPack;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
@@ -16,7 +19,6 @@ public class ScriptSkill extends Skill {
 
     private String script;
     private GdxSequenceAction action;
-    private String name;
     private String description;
     private SkillTargetTypeEnum targetType;
     private int hotKey;
@@ -34,17 +36,13 @@ public class ScriptSkill extends Skill {
 
     @Override
     public void enter() {
-        ScriptEngine scriptEngine = ResourceManager.getScriptEngine();
-        SimpleBindings simpleBindings = new SimpleBindings();
-        simpleBindings.put("targetEntry",targetEntry);
-        simpleBindings.put("targetPos",targetPos);
-        simpleBindings.put("owner",owner);
-        try {
-            action = (GdxSequenceAction) scriptEngine.eval(script,simpleBindings);
-        } catch (ScriptException e) {
-            throw new RuntimeException("Skill error",e);
+        PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(owner);
+        if(playerDataComponent!=null){
+            ActorPlayAnimationPack playAnimationPack = new ActorPlayAnimationPack(playerDataComponent.id,"skill",1);
+            playerDataComponent.outBoundPack(playAnimationPack);
+            ActorPlaySkillPack playSkillPack = new ActorPlaySkillPack(playerDataComponent.id, this.getId() ,targetPos.x, targetPos.y);
+            playerDataComponent.outBoundPack(playSkillPack);
         }
-        Mappers.actionCM.get(owner).addAction(owner,action);
     }
 
     @Override
@@ -72,12 +70,12 @@ public class ScriptSkill extends Skill {
         this.hotKey = hotKey;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setScript(String script) {
         this.script = script;
+    }
+
+    public String getScript() {
+        return script;
     }
 
     public void setTargetType(SkillTargetTypeEnum targetType) {
@@ -114,7 +112,6 @@ public class ScriptSkill extends Skill {
         scriptSkill.setSkillCooldownCounter(0);
         scriptSkill.setIcon(icon);
         scriptSkill.setHotKey(hotKey);
-        scriptSkill.setName(name);
         scriptSkill.setTargetType(targetType);
         scriptSkill.setScript(script);
         scriptSkill.isAvailable = true;

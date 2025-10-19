@@ -22,7 +22,7 @@ public class ActionsComponent implements Component, Pool.Poolable {
         actions.add(action);
     }
 
-    public void setCurrectAction (Entity entity,Action action) {
+    public void setCurrentAction(Entity entity, Action action) {
         action.setActor(entity);
         currectAction = action;
     }

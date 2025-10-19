@@ -76,7 +76,7 @@ public class EntityNetClientPackSystem extends IteratingSystem {
                 float expectTime = playerDataComponent.position.dst(positionComponent.position) / stateComponent.speed;
                 MoveToAction action = new MoveToAction(expectTime, playerDataComponent.position.x, playerDataComponent.position.y);
                 ActionsComponent actionsComponent = Mappers.actionCM.get(entity);
-                actionsComponent.setCurrectAction(entity, action);
+                actionsComponent.setCurrentAction(entity, action);
                 playerDataComponent.lastTimePositionReported = System.currentTimeMillis();
             }
         }
