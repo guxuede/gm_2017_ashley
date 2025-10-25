@@ -2,15 +2,10 @@ package com.guxuede.gm.gdx.component.skill;
 
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
-import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.GdxSequenceAction;
 import com.guxuede.gm.net.client.registry.pack.ActorPlayAnimationPack;
 import com.guxuede.gm.net.client.registry.pack.ActorPlaySkillPack;
 import com.guxuede.gm.net.component.PlayerDataComponent;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-import javax.script.SimpleBindings;
 
 /**
  * Created by guxuede on 2016/9/27 .

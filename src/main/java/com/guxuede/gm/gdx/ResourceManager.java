@@ -19,6 +19,7 @@ import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
+import org.apache.commons.lang3.StringUtils;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 import javax.script.ScriptEngine;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class ResourceManager {
 
@@ -40,8 +42,8 @@ public class ResourceManager {
     private static final LongMap<Sound> spriteSoundMap = new LongMap<Sound>();
     private static final Map<String,Texture> TEXTURE_MAP = new HashMap<String, Texture>();
     private static final Map<String,TextureRegion> TEXTURE_REGION_MAP =  new HashMap<String, TextureRegion>();
-    private static final TextureAtlas TEXTURE_ATLAS_PACK =new TextureAtlas(Gdx.files.internal("data/pack"));
-    private static final List<ActorHolder> ANIMATION_HOLDER_LIST = new ActorJsonParse().parse(Gdx.files.internal("data/actors.json"));
+    private static final Map<String,TextureAtlas> TEXTURE_ATLAS_PACK =new HashMap<>();//new TextureAtlas(Gdx.files.internal("data/texture/actor/pack.atlas"));
+    private static final List<ActorHolder> ANIMATION_HOLDER_LIST = new ActorJsonParse().parse(Gdx.files.internal("data/texture/actors.json"));
     public static final Map<String, Skill> SKILLS = ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
 
     public static Skin skin=new Skin(Gdx.files.internal("skin/kenney-pixel/skin.json"));
@@ -59,44 +61,49 @@ public class ResourceManager {
     public static Cursor customCursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("data/cursor_1.gif")), 0, 0);
 
 
-    public static Texture getTexture(String name){
+    public static Texture getTexture(String path){
         Texture texture = null;
-        texture = TEXTURE_MAP.get(name);
+        texture = TEXTURE_MAP.get(path);
         if(texture==null){
-            if(name.contains(".")){
+            if(path.contains(".")){
                 throw new RuntimeException("resource name not support contain dot or suffix");
             }
-            FileHandle fileHandle = Gdx.files.internal(name+".png");
+            FileHandle fileHandle = Gdx.files.internal(path+".png");
             if(fileHandle.exists()){
                 texture = new Texture(fileHandle);
-                TEXTURE_MAP.put(name, texture);
-                TEXTURE_REGION_MAP.put(name, new TextureRegion(texture));
+                TEXTURE_MAP.put(path, texture);
+                TEXTURE_REGION_MAP.put(path, new TextureRegion(texture));
             }else{
-                System.err.println(name + " resource not found.");
+                throw new RuntimeException(path + " resource not found.");
             }
         }
         return texture;
     }
 
-    public static TextureRegion getTextureRegion(String name, int x, int y, int w, int h){
-        return new TextureRegion(getTextureRegion(name),x,y,w,h);
+    public static TextureRegion getTextureRegion(String path, int x, int y, int w, int h){
+        return new TextureRegion(getTextureRegion(path),x,y,w,h);
     }
 
-    public static TextureRegion getTextureRegion(String name, int xoffset, int yoffset){
-        TextureRegion fullTextureRegion = getTextureRegion(name);
+    public static TextureRegion getTextureRegion(String path, int xoffset, int yoffset){
+        TextureRegion fullTextureRegion = getTextureRegion(path);
         return new TextureRegion(fullTextureRegion,xoffset,yoffset,fullTextureRegion.getRegionWidth(),fullTextureRegion.getRegionHeight());
     }
 
-    public static TextureRegion getTextureRegion(String name){
+    public static TextureRegion getTextureRegion(String path){
         TextureRegion textureRegion = null;
-        textureRegion = TEXTURE_REGION_MAP.get(name);
+        textureRegion = TEXTURE_REGION_MAP.get(path);
         if(textureRegion==null){
-            textureRegion = TEXTURE_ATLAS_PACK.findRegion(name);
-        }
-        if(textureRegion==null){
-            Texture texture = getTexture(name);
-            if(texture !=null){
-                textureRegion = TEXTURE_REGION_MAP.get(name);
+            if(path.contains(".atlas")){
+                String regionName = StringUtils.substringAfter(path, ".atlas/");
+                String atlas = StringUtils.substringBefore(path, regionName);
+                TextureAtlas textureAtlas = getTextureAtlas(atlas);
+                textureRegion = textureAtlas.findRegion(regionName);
+                TEXTURE_REGION_MAP.put(path, textureRegion);
+            }else{
+                Texture texture = getTexture(path);
+                if(texture !=null){
+                    textureRegion = TEXTURE_REGION_MAP.get(path);
+                }
             }
         }
         return textureRegion;
@@ -157,5 +164,14 @@ public class ResourceManager {
 
     public static ScriptEngine getScriptEngine() {
         return scriptEngine;
+    }
+
+    public static TextureAtlas getTextureAtlas(String path){
+        return TEXTURE_ATLAS_PACK.computeIfAbsent(path, new Function<String, TextureAtlas>() {
+            @Override
+            public TextureAtlas apply(String s) {
+                return new TextureAtlas(Gdx.files.internal(path));
+            }
+        });
     }
 }

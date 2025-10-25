@@ -3,7 +3,7 @@
     "name": "Undead",
     "width": 80,
     "height": 96,
-    "texture": "Undead",
+    "texture": "data/texture/actor/pack.atlas/Undead",
     "alpha": 0.5,
     "drawOffSetX": 0,
     "drawOffSetY": 40,
@@ -469,7 +469,7 @@
     "name": "fireBall",
     "width": 16,
     "height": 16,
-    "texture": "data/fireBall",
+    "texture": "data/texture/skill/fireBall",
     "animations": [
       {
         "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
@@ -485,10 +485,17 @@
     }]
   },
   {
+    "name": "redFireBall",
+    "width": 32,
+    "height": 32,
+    "texture": "data/texture/skill/redFireBall.gif",
+    "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
+  },
+  {
     "name" : "Aquatic",
     "width":96,
     "height":96,
-    "texture":"Aquatic",
+    "texture":"data/texture/actor/pack.atlas/Aquatic",
     "drawOffSetY": 40,
     "frameDuration":0.1,
     "animations":[
@@ -540,7 +547,7 @@
     "width":32,
     "height":48,
     "drawOffSetY": 20,
-    "texture":"Farmer",
+    "texture":"data/texture/actor/pack.atlas/Farmer",
     "frameDuration":0.1,
     "animations":[
       {
@@ -588,7 +595,7 @@
     "name" : "RPGMarkMen",
     "width":48,
     "height":48,
-    "texture":"data/Monster2_mvt",
+    "texture":"data/texture/actor/Monster2_mvt",
     "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
     "frameDuration":0.2,
     "actorNum":4
@@ -597,7 +604,7 @@
     "name" : "RPGMarkPig",
     "width":48,
     "height":48,
-    "texture":"data/Nature",
+    "texture":"data/texture/actor/Nature",
     "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
     "frameDuration":0.2,
     "actorNum":7
@@ -607,8 +614,8 @@
     "name" : "RPGMarkGreg",
     "width":48,
     "height":48,
-    "texture":"data/rpgm_Actor1_1_walk",
-    "texture_rpgm_battle":"data/rpgm_Actor1_1_battle",
+    "texture":"data/texture/actor/rpgm_Actor1_1_walk",
+    "texture_rpgm_battle":"data/texture/actor/rpgm_Actor1_1_battle",
     "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
     "frameDuration":0.2,
     "actorNum":0

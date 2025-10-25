@@ -8,10 +8,7 @@ import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.*;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
-import com.guxuede.gm.gdx.actions.movement.ActorMoveAsSnackToPointAction;
-import com.guxuede.gm.gdx.actions.movement.ActorMoveToPointAction;
-import com.guxuede.gm.gdx.actions.movement.BlinkAction;
-import com.guxuede.gm.gdx.actions.movement.MoveAsSnackToAction;
+import com.guxuede.gm.gdx.actions.movement.*;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
@@ -411,11 +408,13 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        E.create().actions(sequence(new MoveAsSnackToAction(5, pos.x,pos.y),effectsActorOnActorPosAction("special10"),new RemoveEntityAction()))
+        //MoveToAction
+        //new MoveAsSnackToAction(5, pos.x,pos.y)
+        E.create().actions(sequence(new MoveToAction(5, pos.x,pos.y),effectsActorOnActorPosAction("special10"),new RemoveEntityAction()))
 //        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
                 .actorState()
                 .dynamicDirection()
-                .actorAnimation("fireBall")
+                .actorAnimation("redFireBall")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();
