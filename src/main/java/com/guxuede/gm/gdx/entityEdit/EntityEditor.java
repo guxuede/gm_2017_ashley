@@ -48,13 +48,25 @@ public abstract class EntityEditor<T extends EntityEditor>{
         actorState(ActorAnimationComponent.DOWN,false,0,0,0,0);
         return this;
     }
-    public EntityEditor actorState(int direction,boolean isMoving, float vx, float vy, float acx ,float acy) {
+
+    public EntityEditor actorState(float speed) {
+        actorState(ActorAnimationComponent.DOWN,false,0,0,0,0);
+        return this;
+    }
+
+    public EntityEditor actorState(int direction,boolean isMoving, float vx, float vy, float acx ,float acy, float speed) {
         ActorStateComponent actorStateComponent = edit.create(ActorStateComponent.class);
         actorStateComponent.isMoving = isMoving;
         actorStateComponent.direction = direction;
         actorStateComponent.velocity.set(vx,vy);
         actorStateComponent.acceleration.set(acx,acy);
+        actorStateComponent.speed = speed;
         entity.add(actorStateComponent);
+        return this;
+    }
+
+    public EntityEditor actorState(int direction,boolean isMoving, float vx, float vy, float acx ,float acy) {
+        actorState(direction, isMoving, vx, vy, acx, acy, 100);
         return this;
     }
 

@@ -2,10 +2,13 @@ package com.guxuede.gm.gdx.actions.movement;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
-import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.actions.Acting;
 import com.guxuede.gm.gdx.component.PositionComponent;
+
+import static com.guxuede.gm.gdx.system.physics.SensorMovementSystem.getNextPositionDelta;
+import static com.guxuede.gm.gdx.system.physics.SensorMovementSystem.updateMovement;
 
 /**
  * Created by guxuede on 2016/7/14 .
@@ -14,6 +17,9 @@ public abstract class ActorMoveToAction extends Acting {
     public static final float IS_ARRIVE_RADIO = 0.1f;
     public ActorMoveListener actorMoveListener;
     private Vector2 oldPoint = new Vector2();
+
+
+    private static final Vector2 temp0Vector2 = new Vector2();
 
     @Override
     protected void begin() {
@@ -24,19 +30,28 @@ public abstract class ActorMoveToAction extends Acting {
     @Override
     protected boolean update(float delta) {
         PositionComponent positionComponent = Mappers.positionCM.get(actor);
-        if(!isArrive()){
-            final Vector2 target = getTargetPoint();
-            final Vector2 entryPos = positionComponent.position;
-//            final float dst = entryPos.dst(entryPos);
-//            if(dst < speed){
-//                speed = 5;
-//            }
-            Vector2 vector2 = TempObjects.temp0Vector2.set(target).sub(entryPos).nor();//speed
-            Mappers.actorStateCM.get(actor).acceleration.set(vector2);
+        ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(actor);
+
+        final Vector2 position = positionComponent.position;
+        final Vector2 target = getTargetPoint();
+
+        Vector2 vector2 = temp0Vector2.set(target).sub(position).nor();//acceleration
+        actorStateComponent.acceleration.set(vector2);
+        getNextPositionDelta(delta,actorStateComponent,temp0Vector2);
+
+        Vector2 nextPosition = temp0Vector2.add(position);
+        updateMovement(actorStateComponent, positionComponent, nextPosition.x ,nextPosition.y);
+
+
+        temp0Vector2.set(target).sub(position).nor();//recalculate next time's acceleration
+
+        //if current new position's acceleration is same with previous, ok, we are not arrival
+        if(temp0Vector2.hasSameDirection(actorStateComponent.acceleration)){
             return false;
+        }else{
+            actorStateComponent.acceleration.set(0,0);
+            return true;
         }
-        Mappers.actorStateCM.get(actor).acceleration.set(0,0);
-        return true;
     }
 
     @Override
@@ -44,16 +59,6 @@ public abstract class ActorMoveToAction extends Acting {
         super.end();
     }
 
-    protected boolean isArrive() {
-        final Vector2 target = getTargetPoint();
-        if(target == null){
-            return true;
-        }else{
-            PositionComponent positionComponent = Mappers.positionCM.get(actor);
-            float dist = target.dst(positionComponent.position);
-            return dist < IS_ARRIVE_RADIO;
-        }
-    }
 
     public void onArrived(){
 

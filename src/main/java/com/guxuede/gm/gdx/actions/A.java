@@ -410,7 +410,8 @@ public final class A {
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
         //MoveToAction
         //new MoveAsSnackToAction(5, pos.x,pos.y)
-        E.create().actions(sequence(new MoveToAction(5, pos.x,pos.y),effectsActorOnActorPosAction("special10"),new RemoveEntityAction()))
+        //new MoveToAction(5, pos.x,pos.y)
+        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),new RemoveEntityAction()))
 //        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
                 .actorState()
                 .dynamicDirection()

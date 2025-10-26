@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
+import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 
 public class GifDecoder {
     /**
@@ -719,7 +720,7 @@ public class GifDecoder {
             for(v = 0; v < vzones; v++) {
                 int frameID = v + h * vzones;
                 if(frameID < nrFrames) {
-                    TextureRegion tr = new TextureRegion(texture, h * width, v * height, width, height);
+                    TextureRegion tr = getTr(texture, h, width, v, height);
                     texReg.add(tr);
                 }
             }
@@ -728,6 +729,17 @@ public class GifDecoder {
         Animation<TextureRegion> result = new Animation<TextureRegion>(frameDuration, texReg, playMode);
 
         return result;
+    }
+
+    //convert to sprite
+    private static TextureRegion getTr(Texture texture, int h, int width, int v, int height) {
+        GdxSprite sprite = new GdxSprite( new TextureRegion(texture, h * width, v * height, width, height));
+//        sprite.setSize(parentParseContext.width, parentParseContext.height);
+//        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
+//        sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
+//        sprite.setRotation(parentParseContext.rotation);
+//        sprite.setAlpha(parentParseContext.alpha);
+        return sprite;
     }
 
     public static Animation<TextureRegion> loadGIFAnimation(Animation.PlayMode playMode, Float fd, InputStream is) {

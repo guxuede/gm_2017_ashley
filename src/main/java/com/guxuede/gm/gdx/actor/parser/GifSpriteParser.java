@@ -10,6 +10,8 @@ public class GifSpriteParser extends DefaultSpriteParser {
     @Override
     protected void parseAnimations(JsonValue jsonValue, ParseContext parseContext, AnimationHolder animationHolder) {
         Animation<TextureRegion> textureRegionAnimation = GifDecoder.loadGIFAnimation(Animation.PlayMode.NORMAL,null,Gdx.files.internal(parseContext.textureName).read());
+
+
         animationHolder.addAnimation(AnimationHolder.WALK_DOWN_ANIMATION,textureRegionAnimation);
         animationHolder.addAnimation(AnimationHolder.WALK_LEFT_ANIMATION,textureRegionAnimation);
         animationHolder.addAnimation(AnimationHolder.WALK_RIGHT_ANIMATION,textureRegionAnimation);

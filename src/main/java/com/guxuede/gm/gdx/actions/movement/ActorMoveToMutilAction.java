@@ -11,19 +11,19 @@ public abstract class ActorMoveToMutilAction  extends ActorMoveToAction{
     public abstract boolean haveNextTarget();
     public abstract void moveToNextTarget();
     public abstract Vector2 getCurrentTarget();
-
-    @Override
-    protected boolean isArrive() {
-        boolean isArrive = super.isArrive();
-        if(isArrive){
-            onArrived();
-        }
-        if(isArrive && haveNextTarget()){
-            moveToNextTarget();
-            isArrive = false;
-        }
-        return isArrive;
-    }
+//
+//    @Override
+//    protected boolean isArrive() {
+//        boolean isArrive = super.isArrive();
+//        if(isArrive){
+//            onArrived();
+//        }
+//        if(isArrive && haveNextTarget()){
+//            moveToNextTarget();
+//            isArrive = false;
+//        }
+//        return isArrive;
+//    }
 
     @Override
     public void onArrived() {

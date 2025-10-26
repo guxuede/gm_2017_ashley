@@ -7,6 +7,11 @@ import com.guxuede.gm.gdx.actions.TemporalAction;
 public class RotateToAction extends TemporalAction {
 	private float start, end;
 
+	public RotateToAction(float duration, float end) {
+		super(duration);
+		this.end = end;
+	}
+
 	protected void begin () {
 		start = Mappers.presentableCM.get(actor).rotation;
 	}

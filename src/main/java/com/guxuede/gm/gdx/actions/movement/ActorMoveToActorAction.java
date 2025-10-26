@@ -19,14 +19,6 @@ public class ActorMoveToActorAction extends ActorMoveToAction {
         this.targetActor = targetActor;
     }
 
-    @Override
-    protected boolean isArrive() {
-        boolean is= super.isArrive();
-        if(is){
-            onArrived();
-        }
-        return is;
-    }
 
     @Override
     public void onArrived() {

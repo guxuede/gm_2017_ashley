@@ -22,14 +22,14 @@ public class ActorMoveToPointAction extends ActorMoveToAction {
         return targetPoint;
     }
 
-    @Override
-    protected boolean isArrive() {
-        boolean is= super.isArrive();
-        if(is){
-            onArrived();
-        }
-        return is;
-    }
+//    @Override
+//    protected boolean isArrive() {
+//        boolean is= super.isArrive();
+//        if(is){
+//            onArrived();
+//        }
+//        return is;
+//    }
 
     @Override
     public void onArrived() {
