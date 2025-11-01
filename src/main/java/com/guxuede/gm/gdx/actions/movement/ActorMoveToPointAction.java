@@ -13,8 +13,9 @@ public class ActorMoveToPointAction extends ActorMoveToAction {
         this.targetPoint.set(targetPoint);
     }
 
-    public ActorMoveToPointAction(float targetX, float targetY) {
+    public ActorMoveToPointAction(float targetX, float targetY, float speed) {
         this.targetPoint.set(targetX, targetY);
+        this.speed = speed;
     }
 
     @Override

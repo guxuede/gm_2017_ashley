@@ -9,17 +9,12 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class PositionComponent implements Component , Pool.Poolable {
     public final Vector2 position = new Vector2();
-    public float height;
     public float degrees;
-
-    public final Vector2 lastPositionReported = new Vector2();
-    public long lastTimePositionReported =0;
 
 
     @Override
     public void reset() {
         position.set(0,0);
-        height = 0;
         degrees = 0;
     }
 }

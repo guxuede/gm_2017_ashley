@@ -492,10 +492,51 @@
     "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
   },
   {
+    "name": "arrow",
+    "width": 26,
+    "height": 14,
+    "texture": "data/texture/skill/arrow",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "rotation": 630,
+        "frames": [0],
+        "drawOffSetY": 20
+      }
+    ]
+  },
+  {
+    "name": "redFireBallExplosion",
+    "width": 32,
+    "height": 32,
+    "texture": "data/texture/skill/fire_ball_explosion.gif",
+    "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
+  },
+  {
+    "name": "sword",
+    "width": 48,
+    "height": 48,
+    "texture": "data/texture/skill/Icon sheet (48x48)",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation",
+        "frameDuration": 0.05,
+        "frames": [
+          {
+            "x": 288,
+            "y": 96,
+            "frame": [288,96]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name" : "Aquatic",
     "width":96,
     "height":96,
-    "texture":"data/texture/actor/pack.atlas/Aquatic",
+    "texture": "data/texture/actor/pack.atlas/Aquatic",
     "drawOffSetY": 40,
     "frameDuration":0.1,
     "animations":[
@@ -588,6 +629,49 @@
         "name":"walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation",
         "sound":"step1.ogg",
         "loop":"true"
+      }
+    ]
+  },
+  {
+    "name" : "BatFly",
+    "width":16,
+    "height":16,
+    "texture": "data/texture/actor/Bat 01_fly (16x16)",
+    "frameDuration":0.1,
+    "animations":[
+      {
+        "name":"walkDownAnimation",
+        "frames":[0,1,2,3]
+      },
+      {
+        "name":"walkLeftAnimation",
+        "frames":[4,5,6,7]
+      },
+      {
+        "name":"walkRightAnimation",
+        "frames":[8,9,10,11]
+      },
+      {
+        "name":"walkUpAnimation",
+        "drawOffSetY": 10,
+        "frames":[12,13,14,15]
+      },
+      {
+        "name":"stopDownAnimation",
+        "frames":[1,2]
+      },
+      {
+        "name":"stopLeftAnimation",
+        "frames":[5,6]
+      },
+      {
+        "name":"stopRightAnimation",
+        "frames":[9,10]
+      },
+      {
+        "name":"stopUpAnimation",
+        "drawOffSetY": 10,
+        "frames":[13,14]
       }
     ]
   },

@@ -14,10 +14,10 @@ import static com.guxuede.gm.gdx.system.physics.SensorMovementSystem.updateMovem
  * Created by guxuede on 2016/7/14 .
  */
 public abstract class ActorMoveToAction extends Acting {
-    public static final float IS_ARRIVE_RADIO = 0.1f;
     public ActorMoveListener actorMoveListener;
     private Vector2 oldPoint = new Vector2();
-
+    public Float speed;
+    public float originalSpeed;
 
     private static final Vector2 temp0Vector2 = new Vector2();
 
@@ -25,6 +25,11 @@ public abstract class ActorMoveToAction extends Acting {
     protected void begin() {
         PositionComponent positionComponent = Mappers.positionCM.get(actor);
         oldPoint.set(positionComponent.position);
+        ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(actor);
+        if(speed!=null){
+            originalSpeed = actorStateComponent.speed;
+            actorStateComponent.speed = speed;
+        }
     }
 
     @Override
@@ -56,6 +61,8 @@ public abstract class ActorMoveToAction extends Acting {
 
     @Override
     protected void end() {
+        ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(actor);
+        actorStateComponent.speed = originalSpeed;
         super.end();
     }
 

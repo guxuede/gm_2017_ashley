@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.*;
+import com.guxuede.gm.gdx.actions.appearance.RotateByAction;
+import com.guxuede.gm.gdx.actions.appearance.RotateToAction;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
 import com.guxuede.gm.gdx.actions.movement.*;
@@ -411,11 +413,11 @@ public final class A {
         //MoveToAction
         //new MoveAsSnackToAction(5, pos.x,pos.y)
         //new MoveToAction(5, pos.x,pos.y)
-        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),new RemoveEntityAction()))
+        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion"),new RemoveEntityAction()))
 //        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
                 .actorState()
                 .dynamicDirection()
-                .actorAnimation("redFireBall")
+                .actorAnimation("arrow")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();
@@ -426,6 +428,18 @@ public final class A {
         AnimationComponent animationComponent = Mappers.animationCM.get(owner);
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(owner);
         animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(effectName.hashCode());
+        SequenceAction sequenceAction = sequence();
+        return sequenceAction;
+    }
+
+    public static Action brandish(Entity owner, Vector2 pos, String effectName, float intervalTime){
+        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        E.create().actions(sequence(new ActorBrandishedByAction(owner),new RemoveEntityAction()))
+//        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
+                .actorState()
+                .actorAnimation("sword")
+                .pos(ownerPos.x,ownerPos.y)
+                .buildToWorld();
         SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }

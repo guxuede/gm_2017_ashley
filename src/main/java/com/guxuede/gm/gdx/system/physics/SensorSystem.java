@@ -39,9 +39,9 @@ public class SensorSystem extends EntitySystem {
         if (appType == Application.ApplicationType.Android || appType == Application.ApplicationType.iOS) {
             accelX = Gdx.input.getAccelerometerX();
         } else {
-            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
+            if (Gdx.input.isKeyPressed(Input.Keys.A)){
                 accelX = -1f;
-            }else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
+            }else if (Gdx.input.isKeyPressed(Input.Keys.D)){
                 accelX = 1f;
             }else{
                 accelX = 0;
@@ -51,9 +51,9 @@ public class SensorSystem extends EntitySystem {
         if (appType == Application.ApplicationType.Android || appType == Application.ApplicationType.iOS) {
             accelY = Gdx.input.getAccelerometerY();
         } else {
-            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
+            if (Gdx.input.isKeyPressed(Input.Keys.S)){
                 accelY = -1f;
-            }else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
+            }else if (Gdx.input.isKeyPressed(Input.Keys.W)){
                 accelY = 1f;
             }else{
                 accelY = 0;

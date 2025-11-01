@@ -8,6 +8,12 @@ import com.guxuede.gm.gdx.actions.RelativeTemporalAction;
 public class RotateByAction extends RelativeTemporalAction {
 	private float amount;
 
+
+	public RotateByAction(float amount, float duration) {
+		this.setDuration(duration);
+		this.amount = amount;
+	}
+
 	protected void updateRelative (float percentDelta) {
         float amountInDegrees = amount * percentDelta;
         if (amountInDegrees != 0) {
