@@ -434,7 +434,7 @@ public final class A {
 
     public static Action brandish(Entity owner, Vector2 pos, String effectName, float intervalTime){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        E.create().actions(sequence(new ActorBrandishedByAction(owner),new RemoveEntityAction()))
+        E.create().actions(sequence(new ActorBrandishedByAction(0.5f, (float) Math.PI, owner, pos),new RemoveEntityAction()))
 //        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
                 .actorState()
                 .actorAnimation("sword")
