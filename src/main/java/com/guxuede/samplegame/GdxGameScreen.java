@@ -52,6 +52,7 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new PresentableRenderingSystem(300,spriteBatch));
         engine.addSystem(new ActorShadowRenderingSystem(200,spriteBatch));
         engine.addSystem(new ActorLifeBarRenderingSystem(500,spriteBatch));
+        engine.addSystem(new HurtSystem());
         engine.addSystem(new SensorMovementSystem());
         engine.addSystem(new DynamicDirectionSystem());
         engine.addSystem(new SensorSystem());

@@ -8,15 +8,18 @@ import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 public class ActorRepelAction extends TemporalAction {
 
-    private Vector2 targetPostion = new Vector2();
+    private float intensity;
+
+    private final Vector2 facePosition = new Vector2();
     private float startX;
     private float startY;
     private float endX;
     private float endY;
 
-    public ActorRepelAction(Vector2 targetPosition, float duration) {
+    public ActorRepelAction(Vector2 facePosition, float intensity, float duration) {
         super(duration, Interpolation.bounceOut);
-        this.targetPostion.set(targetPosition);
+        this.facePosition.set(facePosition);
+        this.intensity = intensity;
     }
 
     float x = 0;
@@ -28,16 +31,16 @@ public class ActorRepelAction extends TemporalAction {
         this.startX = position.x;
         this.startY = position.y;
 
-        targetPostion.sub(position).nor().scl(-10,-10);
+        facePosition.sub(position).nor().scl(- intensity,-intensity);
 
-        this.endX = position.x + targetPostion.x;
-        this.endY = position.y + targetPostion.y;
+        this.endX = position.x + facePosition.x;
+        this.endY = position.y + facePosition.y;
     }
 
     @Override
     protected void update(float percent) {
         PositionComponent positionComponent = Mappers.positionCM.get(getActor());
-        positionComponent.high  =  10* percent;
+        positionComponent.high  =  intensity* percent;
 
 
         float x;
@@ -61,5 +64,13 @@ public class ActorRepelAction extends TemporalAction {
         super.end();
         PositionComponent sourceOwnerPositionComponent = Mappers.positionCM.get(getActor());
         sourceOwnerPositionComponent.high  = 0;
+    }
+
+    public float getIntensity() {
+        return intensity;
+    }
+
+    public void setIntensity(float intensity) {
+        this.intensity = intensity;
     }
 }

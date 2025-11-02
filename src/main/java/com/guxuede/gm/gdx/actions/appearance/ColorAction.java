@@ -11,6 +11,14 @@ public class ColorAction extends TemporalAction {
 	private Color color;
 	private final Color end = new Color();
 
+	public ColorAction(float duration, float endR, float endG, float endB, float endA) {
+		super(duration);
+		end.set(endR,
+				endG,
+				endB,
+				endA);
+	}
+
 	protected void begin () {
 		if (color == null) color = Mappers.presentableCM.get(actor).color;
 		startR = color.r;

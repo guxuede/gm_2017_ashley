@@ -24,5 +24,6 @@ public class Mappers {
     public static final ComponentMapper<SensorComponent> sensorCM = ComponentMapper.getFor(SensorComponent.class);
 
     public static final ComponentMapper<PlayerDataComponent> netPackCM = ComponentMapper.getFor(PlayerDataComponent.class);
+    public static final ComponentMapper<HurtComponent> hurtCM = ComponentMapper.getFor(HurtComponent.class);
 
 }

@@ -410,7 +410,7 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        Mappers.actionCM.get(owner).addAction(owner, new ActorRepelAction(pos,0.5f));
+        Mappers.actionCM.get(owner).addAction(owner, new ActorRepelAction(pos,10, 0.5f));
         //MoveToAction
         //new MoveAsSnackToAction(5, pos.x,pos.y)
         //new MoveToAction(5, pos.x,pos.y)
@@ -423,6 +423,7 @@ public final class A {
                         E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion1"),new RemoveEntityAction()))
                                 .actorState()
                                 .dynamicDirection()
+                                .canHurt(10, 20)
                                 .actorAnimation("redFireBall")
                                 .pos(ownerPos.x,ownerPos.y)
                                 .buildToWorld();
@@ -451,6 +452,7 @@ public final class A {
         E.create().actions(sequence(new ActorBrandishedByAction(0.25f, 60F, (float) Math.PI, owner, pos),new RemoveEntityAction()))
                 .actorState()
                 .actorAnimation("sword")
+                .canHurt(10, 20)
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();
@@ -473,4 +475,5 @@ public final class A {
         SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }
+
 }

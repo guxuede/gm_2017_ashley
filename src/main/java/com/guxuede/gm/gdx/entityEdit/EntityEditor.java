@@ -238,6 +238,14 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
+    public EntityEditor canHurt(float hurtDamage,float hurtRadius){
+        HurtComponent component = edit.create(HurtComponent.class);
+        component.hurtDamage = hurtDamage;
+        component.hurtRadius = hurtRadius;
+        entity.add(component);
+        return this;
+    }
+
     public Entity build() {
         final Entity tmp = this.entity;
         entity = null;
