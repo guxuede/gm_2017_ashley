@@ -54,12 +54,12 @@ public class PresentableRenderingSystem extends SortedIteratingSystem {
         if (textureRegion != null) {
             if (textureRegion instanceof GdxSprite) {
                 GdxSprite sprite = (GdxSprite) textureRegion;
-                sprite.setPosition(positionComponent.position.x + presentableComponent.drawOffSetX, positionComponent.position.y + presentableComponent.drawOffSetY);
+                sprite.setPosition(positionComponent.position.x + presentableComponent.drawOffSetX, positionComponent.position.y + presentableComponent.drawOffSetY +  positionComponent.high);
                 sprite.draw(batch, alphaModulation, presentableComponent.rotation, presentableComponent.scaleX, presentableComponent.scaleY, presentableComponent.color);
             } else {
                 tmpColor.set(presentableComponent.color).a*=alphaModulation;
                 batch.setColor(tmpColor);
-                batch.draw(textureRegion, positionComponent.position.x + presentableComponent.drawOffSetX, positionComponent.position.y +  + presentableComponent.drawOffSetY, presentableComponent.originX, presentableComponent.originY, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), presentableComponent.scaleX, presentableComponent.scaleY, presentableComponent.rotation);
+                batch.draw(textureRegion, positionComponent.position.x + presentableComponent.drawOffSetX, positionComponent.position.y +  + presentableComponent.drawOffSetY +  positionComponent.high, presentableComponent.originX, presentableComponent.originY, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), presentableComponent.scaleX, presentableComponent.scaleY, presentableComponent.rotation);
             }
         }
     }

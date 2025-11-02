@@ -7,7 +7,9 @@ package com.guxuede.gm.gdx.actor.parser;
 
 
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.Vector;
+import java.util.function.Supplier;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -689,7 +691,7 @@ public class GifDecoder {
         } while ((blockSize > 0) && !err());
     }
 
-    public Animation<TextureRegion> getAnimation(PlayMode playMode, Float fd) {//frameDuration
+    public Animation<TextureRegion> getAnimation(ParseContext parentParseContext, PlayMode playMode, Float fd) {//frameDuration
         int nrFrames = getFrameCount();
         Pixmap frame = getFrame(0);
         int width = frame.getWidth();
@@ -720,7 +722,7 @@ public class GifDecoder {
             for(v = 0; v < vzones; v++) {
                 int frameID = v + h * vzones;
                 if(frameID < nrFrames) {
-                    TextureRegion tr = getTr(texture, h, width, v, height);
+                    TextureRegion tr = getTr(parentParseContext , texture, h, width, v, height);
                     texReg.add(tr);
                 }
             }
@@ -732,19 +734,19 @@ public class GifDecoder {
     }
 
     //convert to sprite
-    private static TextureRegion getTr(Texture texture, int h, int width, int v, int height) {
+    private static TextureRegion getTr(ParseContext parentParseContext , Texture texture, int h, int width, int v, int height) {
         GdxSprite sprite = new GdxSprite( new TextureRegion(texture, h * width, v * height, width, height));
-//        sprite.setSize(parentParseContext.width, parentParseContext.height);
-//        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
-//        sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
-//        sprite.setRotation(parentParseContext.rotation);
-//        sprite.setAlpha(parentParseContext.alpha);
+        sprite.setSize(parentParseContext.width, parentParseContext.height);
+        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
+        sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
+        sprite.setRotation(parentParseContext.rotation);
+        sprite.setAlpha(parentParseContext.alpha);
         return sprite;
     }
 
-    public static Animation<TextureRegion> loadGIFAnimation(Animation.PlayMode playMode, Float fd, InputStream is) {
+    public static Animation<TextureRegion> loadGIFAnimation(ParseContext parentParseContext, Animation.PlayMode playMode, Float fd,  InputStream is) {
         GifDecoder gdec = new GifDecoder();
         gdec.read(is);
-        return gdec.getAnimation(playMode, fd);
+        return gdec.getAnimation(parentParseContext, playMode, fd);
     }
 }

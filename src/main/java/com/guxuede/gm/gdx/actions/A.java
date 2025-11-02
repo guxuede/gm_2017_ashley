@@ -410,14 +410,28 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        Mappers.actionCM.get(owner).addAction(owner, new ActorRepelAction(pos,0.5f));
         //MoveToAction
         //new MoveAsSnackToAction(5, pos.x,pos.y)
         //new MoveToAction(5, pos.x,pos.y)
-        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion"),new RemoveEntityAction()))
-//        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
+
+        E.create().actions(parallel(
+                (sequence(delay(0.25f),new Action() {
+                    @Override
+                    public boolean act(float delta) {
+                        System.out.println("fireball");
+                        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion1"),new RemoveEntityAction()))
+                                .actorState()
+                                .dynamicDirection()
+                                .actorAnimation("redFireBall")
+                                .pos(ownerPos.x,ownerPos.y)
+                                .buildToWorld();
+                        return true;
+                    }
+                })),
+                        sequence(new ActorBrandishedByAction(0.5f, 30, (float) Math.PI/3, owner, pos),new RemoveEntityAction())))
                 .actorState()
-                .dynamicDirection()
-                .actorAnimation("arrow")
+                .actorAnimation("wand")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();
@@ -432,12 +446,28 @@ public final class A {
         return sequenceAction;
     }
 
-    public static Action brandish(Entity owner, Vector2 pos, String effectName, float intervalTime){
+    public static Action swordBrandish(Entity owner, Vector2 pos, String effectName, float intervalTime){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        E.create().actions(sequence(new ActorBrandishedByAction(0.5f, (float) Math.PI, owner, pos),new RemoveEntityAction()))
-//        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y),effectsActorOnActorPosAction("special10"),deleteSelf()))
+        E.create().actions(sequence(new ActorBrandishedByAction(0.25f, 60F, (float) Math.PI, owner, pos),new RemoveEntityAction()))
                 .actorState()
                 .actorAnimation("sword")
+                .pos(ownerPos.x,ownerPos.y)
+                .buildToWorld();
+        SequenceAction sequenceAction = sequence();
+        return sequenceAction;
+    }
+
+    public static Action bow(Entity owner, Vector2 pos, String effectName, float intervalTime){
+        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        E.create().actions(sequence(new ActorBrandishedByAction(0.5f, 15, 0.001f, owner, pos),new RemoveEntityAction()))
+                .actorState()
+                .actorAnimation("bow")
+                .pos(ownerPos.x,ownerPos.y)
+                .buildToWorld();
+        E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion"),new RemoveEntityAction()))
+                .actorState()
+                .dynamicDirection()
+                .actorAnimation("arrow")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();

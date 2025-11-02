@@ -57,7 +57,8 @@ public class ActorLandingPack extends NetPack {
             engine.getEntitiesFor(Family.all(PlayerDataComponent.class).get()).iterator().forEachRemaining(engine::removeEntity);
             Entity userEntity = buildActor(E.create()).sensor().with(SkillComponent.class, (Consumer<SkillComponent>) o -> {
                 o.skills.add(ResourceManager.getSkillById("burstFire"));
-                o.skills.add(ResourceManager.getSkillById("burstFire1"));
+                o.skills.add(ResourceManager.getSkillById("huijian"));
+                o.skills.add(ResourceManager.getSkillById("bow"));
                 o.skills.add(ResourceManager.getSkillById("meteorite"));
                 o.skills.add(ResourceManager.getSkillById("fireBall"));
                 o.skills.add(ResourceManager.getSkillById("blink"));

@@ -488,6 +488,7 @@
     "name": "redFireBall",
     "width": 32,
     "height": 32,
+    "drawOffSetY": 20,
     "texture": "data/texture/skill/redFireBall.gif",
     "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
   },
@@ -514,6 +515,21 @@
     "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
   },
   {
+    "name": "redFireBallExplosion1",
+    "width": 48,
+    "height": 48,
+    "texture": "data/texture/skill/Firebolt SpriteSheet",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [5,6,7,8,9,10],
+        "drawOffSetY": 20,
+        "rotation": 270
+      }
+    ]
+  },
+  {
     "name": "sword",
     "width": 48,
     "height": 48,
@@ -522,11 +538,49 @@
       {
         "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation",
         "frameDuration": 0.05,
+        "drawOffSetY": 20,
+        "rotation": -45,
         "frames": [
           {
-            "x": 288,
-            "y": 96,
-            "frame": [288,96]
+            "frame": [48,48]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "bow",
+    "width": 48,
+    "height": 48,
+    "texture": "data/texture/skill/Icon sheet (48x48)",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation",
+        "frameDuration": 0.05,
+        "drawOffSetY": 20,
+        "rotation": -135,
+        "frames": [
+          {
+            "frame": [96,48]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "wand",
+    "width": 48,
+    "height": 48,
+    "texture": "data/texture/skill/Icon sheet (48x48)",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation",
+        "frameDuration": 0.05,
+        "drawOffSetY": 20,
+        "rotation": -45,
+        "frames": [
+          {
+            "frame": [48,288]
           }
         ]
       }

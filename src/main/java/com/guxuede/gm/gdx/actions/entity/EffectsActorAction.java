@@ -2,6 +2,8 @@ package com.guxuede.gm.gdx.actions.entity;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.guxuede.gm.gdx.component.PositionComponent;
+import com.guxuede.gm.gdx.component.PresentableComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.actions.Action;
 
@@ -17,7 +19,9 @@ public class EffectsActorAction extends Action {
 
     @Override
     public boolean act(float delta) {
-        effectsEntity = E.create().animation(actorName).pos(pos.x,pos.y).actions(actions).buildToWorld();
+        PresentableComponent component = getActor().getComponent(PresentableComponent.class);
+        float roration = component == null? 0 : component.rotation;
+        effectsEntity = E.create().animation(actorName, roration).pos(pos.x,pos.y).actions(actions).buildToWorld();
         return true;
     }
 

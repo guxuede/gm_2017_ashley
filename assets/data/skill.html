@@ -10,13 +10,22 @@
             af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"special10",0.1,100,5));
         </script>
     </skill>
-    <skill id="burstFire1" name="Burst Fire" hotKey="N" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="10">
+    <skill id="huijian" name="Burst Fire" hotKey="N" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="10">
         <description>
-            在你前面产生一个爆裂雷
+            挥剑
         </description>
         <script>
             var af = Java.type('com.guxuede.gm.gdx.actions.A');
-            af.gdxSequence(af.brandish(owner,targetPos,"sword",0.05));
+            af.gdxSequence(af.swordBrandish(owner,targetPos,"sword",0.05));
+        </script>
+    </skill>
+    <skill id="bow" name="Burst Fire" hotKey="R" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="10">
+        <description>
+            弓箭
+        </description>
+        <script>
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
+            af.gdxSequence(af.bow(owner,targetPos,"bow",0.05));
         </script>
     </skill>
     <skill id="meteorite" name="Meteorite" hotKey="M" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">

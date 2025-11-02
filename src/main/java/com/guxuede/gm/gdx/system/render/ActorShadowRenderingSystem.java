@@ -43,7 +43,7 @@ public class ActorShadowRenderingSystem extends IteratingSystem {
             return;
         }
         shadow.setCenter(positionComponent.position.x,positionComponent.position.y);
-        shadow.setScale(((float)presentableComponent.region.getRegionWidth()/shadow.getRegionWidth()),1);
+        shadow.setScale((presentableComponent.region.getRegionWidth() - positionComponent.high)/shadow.getRegionWidth());// * (positionComponent.high)
         shadow.draw(spriteBatch,0.7f);
     }
 }

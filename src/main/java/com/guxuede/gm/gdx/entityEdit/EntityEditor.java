@@ -107,11 +107,11 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
-    public EntityEditor animation(String animationName) {
-        return animation(animationName, 0);
+    public EntityEditor animation(String animationName, float rotation) {
+        return animation(animationName, 0, rotation);
     }
 
-    public EntityEditor animation(String animationName, int zIndex) {
+    public EntityEditor animation(String animationName, int zIndex, float rotation) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         animationComponent.animation = ResourceManager.getActorAnimation(animationName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION);
         animationComponent.maxStateTime = animationComponent.animation.getAnimationDuration();
@@ -119,6 +119,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
         animationComponent.stateTime = 0;
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
         presentableComponent.zIndex = zIndex;
+        presentableComponent.rotation = rotation;
         entity.add(animationComponent);
         entity.add(presentableComponent);
         return this;
@@ -193,7 +194,8 @@ public abstract class EntityEditor<T extends EntityEditor>{
                         ,new ScaleByAction(1,1,10f)));
         SkillComponent skillComponent = edit.create(SkillComponent.class);
         skillComponent.skills.add(ResourceManager.getSkillById("burstFire"));
-        skillComponent.skills.add(ResourceManager.getSkillById("burstFire1"));
+        skillComponent.skills.add(ResourceManager.getSkillById("huijian"));
+        skillComponent.skills.add(ResourceManager.getSkillById("bow"));
         skillComponent.skills.add(ResourceManager.getSkillById("meteorite"));
         skillComponent.skills.add(ResourceManager.getSkillById("fireBall"));
         skillComponent.skills.add(ResourceManager.getSkillById("blink"));

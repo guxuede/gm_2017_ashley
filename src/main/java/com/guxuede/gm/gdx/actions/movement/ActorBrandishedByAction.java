@@ -3,7 +3,6 @@ package com.guxuede.gm.gdx.actions.movement;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.actions.TemporalAction;
-import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.component.PresentableComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
@@ -16,19 +15,20 @@ public class ActorBrandishedByAction extends TemporalAction {
     protected Vector2 targetPoint = new Vector2();
     public float fromBrandishedAngleInRadians;
     public float brandishedAngleInRadians;
+    public float radius;
 
     public Entity sourceOwner;
     private static final Vector2 temp0Vector2 = new Vector2();
 
 
-    public ActorBrandishedByAction(float duration, float brandishedAngleInRadians, Entity sourceOwner, Vector2 targetPoint) {
+    public ActorBrandishedByAction(float duration,float radius, float brandishedAngleInRadians, Entity sourceOwner, Vector2 targetPoint) {
         super(duration);
+        this.radius = radius;
         this.sourceOwner = sourceOwner;
         this.targetPoint.set(targetPoint);
         this.brandishedAngleInRadians = brandishedAngleInRadians;
     }
 
-    float r = 50;
 
     @Override
     protected void begin() {
@@ -53,8 +53,8 @@ public class ActorBrandishedByAction extends TemporalAction {
         float angleInRadians =fromBrandishedAngleInRadians - brandishedAngleInRadians* percent;
 
 
-        float x = (float) (sourceOwnerPosition.x + r*Math.cos(angleInRadians));
-        float y = (float) (sourceOwnerPosition.y + r*Math.sin(angleInRadians));
+        float x = (float) (sourceOwnerPosition.x + radius *Math.cos(angleInRadians));
+        float y = (float) (sourceOwnerPosition.y + radius *Math.sin(angleInRadians));
 
 
         positionComponent.position.set(x, y);
@@ -62,18 +62,12 @@ public class ActorBrandishedByAction extends TemporalAction {
         PresentableComponent presentableComponent = Mappers.presentableCM.get(actor);
 
         temp0Vector2.set(x,y).sub(sourceOwnerPosition).nor();
-        presentableComponent.rotation = temp0Vector2.angle() - 45;//45 is the texture angle
+        presentableComponent.rotation = temp0Vector2.angle();
     }
 
     @Override
     protected void end() {
-        ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(actor);
         super.end();
-    }
-
-
-    public void onArrived(){
-
     }
 
     @Override
