@@ -29,7 +29,7 @@ public class HurtSystem extends IteratingSystem {
         getEngine().getEntitiesFor(blood).forEach(e->{
             if(Mappers.positionCM.get(e).position.dst(positionComponent.position) < hurtComponent.hurtRadius){
                 BloodComponent bloodComponent = Mappers.bloodCM.get(e);
-                bloodComponent.currentHitPoint = bloodComponent.currentHitPoint - hurtComponent.hurtDamage;
+                bloodComponent.modify(-hurtComponent.hurtDamage);
 
                 ActionsComponent actionsComponent = Mappers.actionCM.get(e);
                 actionsComponent.addAction(e,new ActorRepelAction(positionComponent.position,30, 0.5f));

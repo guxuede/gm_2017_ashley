@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.guxuede.gm.gdx.component.ShadowComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
@@ -16,7 +17,7 @@ import com.guxuede.gm.gdx.component.PresentableComponent;
  */
 public class ActorShadowRenderingSystem extends IteratingSystem {
 
-    private static final Family family = Family.all(ActorStateComponent.class, PositionComponent.class, PresentableComponent.class).get();
+    private static final Family family = Family.all(ShadowComponent.class, PositionComponent.class).get();
 
     SpriteBatch spriteBatch;
     Sprite shadow;
@@ -38,12 +39,9 @@ public class ActorShadowRenderingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
-        PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
-        if(presentableComponent.region == null){
-            return;
-        }
+        ShadowComponent shadowComponent = Mappers.shadowCM.get(entity);
         shadow.setCenter(positionComponent.position.x,positionComponent.position.y);
-        shadow.setScale((presentableComponent.region.getRegionWidth() - positionComponent.high)/shadow.getRegionWidth());// * (positionComponent.high)
+        shadow.setScale((shadowComponent.width - positionComponent.high)/shadow.getRegionWidth());
         shadow.draw(spriteBatch,0.7f);
     }
 }

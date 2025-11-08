@@ -7,9 +7,7 @@ package com.guxuede.gm.gdx.actor.parser;
 
 
 import java.io.InputStream;
-import java.util.Optional;
 import java.util.Vector;
-import java.util.function.Supplier;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -737,7 +735,7 @@ public class GifDecoder {
     private static TextureRegion getTr(ParseContext parentParseContext , Texture texture, int h, int width, int v, int height) {
         GdxSprite sprite = new GdxSprite( new TextureRegion(texture, h * width, v * height, width, height));
         sprite.setSize(parentParseContext.width, parentParseContext.height);
-        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
+        sprite.setDrawOffSet(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
         sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
         sprite.setRotation(parentParseContext.rotation);
         sprite.setAlpha(parentParseContext.alpha);

@@ -8,7 +8,7 @@ public class DamageAreAction extends Action {
 	public boolean damage;
 
 	public boolean act (float delta) {
-		Mappers.bloodCM.get(actor).currentHitPoint = Mappers.bloodCM.get(actor).currentHitPoint - 10;
+		Mappers.bloodCM.get(actor).modify(-10);
 		return true;
 	}
 

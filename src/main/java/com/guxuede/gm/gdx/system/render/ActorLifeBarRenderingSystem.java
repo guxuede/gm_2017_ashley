@@ -45,18 +45,23 @@ public class ActorLifeBarRenderingSystem extends IteratingSystem {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         BloodComponent bloodComponent = Mappers.bloodCM.get(entity);
 
+        //todo
+
         //if(!animationActor.isInScreen)continue;
-        Vector2 p = positionComponent.position.cpy();
+        Vector2 p = positionComponent.position;
+        float px = p.x - BLOOD_WIDTH/2;
+        float py = p.y + 5;
+
         shapes.set(ShapeRenderer.ShapeType.Filled);
         shapes.setColor(Color.GRAY);
-        shapes.rect(p.x, p.y, BLOOD_WIDTH, BLOOD_HEIGHT);
+        shapes.rect(px, py, BLOOD_WIDTH, BLOOD_HEIGHT);
         shapes.set(ShapeRenderer.ShapeType.Line);
         shapes.setColor(Color.BLACK);
-        shapes.rect(p.x, p.y, BLOOD_WIDTH, BLOOD_HEIGHT);
+        shapes.rect(px, py, BLOOD_WIDTH, BLOOD_HEIGHT);
 
         shapes.set(ShapeRenderer.ShapeType.Filled);
         shapes.setColor(Color.GREEN);
-        shapes.rect(p.x + 1, p.y + 1, BLOOD_WIDTH * (bloodComponent.currentHitPoint / bloodComponent.hitPoint) - 1, 4f);
+        shapes.rect(px+ 1, py + 1, BLOOD_WIDTH * (bloodComponent.currentHitPoint / bloodComponent.hitPoint) - 1, 4f);
     }
 
 }

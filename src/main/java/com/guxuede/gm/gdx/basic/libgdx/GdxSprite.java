@@ -44,7 +44,7 @@ public class GdxSprite extends Sprite {
         super(sprite);
     }
 
-    public void setDrawOffSetX(float offSetX, float offSetY) {
+    public void setDrawOffSet(float offSetX, float offSetY) {
         this.drawOffSetX = offSetX;
         this.drawOffSetY = offSetY;
     }

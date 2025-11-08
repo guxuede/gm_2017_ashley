@@ -30,7 +30,7 @@ public class ActorJsonParse {
         List<ActorHolder> animationHolders= new ArrayList<ActorHolder>();
         for(JsonValue.JsonIterator it = jsonValue.iterator(); it.hasNext();){
             JsonValue jsonValue1 = it.next();
-            ActorHolder animationHolder=getParser(jsonValue1).parseAnimationHolder(jsonValue1);
+            ActorHolder animationHolder=getParser(jsonValue1).parseActor(jsonValue1);
             animationHolders.add(animationHolder);
         }
         return animationHolders;

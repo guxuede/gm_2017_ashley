@@ -5,9 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.guxuede.gm.gdx.ResourceManager;
-import com.guxuede.gm.gdx.actions.*;
-import com.guxuede.gm.gdx.actions.appearance.RotateByAction;
-import com.guxuede.gm.gdx.actions.appearance.RotateToAction;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
 import com.guxuede.gm.gdx.actions.movement.*;
@@ -424,7 +421,7 @@ public final class A {
                                 .actorState()
                                 .dynamicDirection()
                                 .canHurt(10, 20)
-                                .actorAnimation("redFireBall")
+                                .actor("redFireBall")
                                 .pos(ownerPos.x,ownerPos.y)
                                 .buildToWorld();
                         return true;
@@ -432,7 +429,7 @@ public final class A {
                 })),
                         sequence(new ActorBrandishedByAction(0.5f, 30, (float) Math.PI/3, owner, pos),new RemoveEntityAction())))
                 .actorState()
-                .actorAnimation("wand")
+                .actor("wand")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();
@@ -451,7 +448,7 @@ public final class A {
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
         E.create().actions(sequence(new ActorBrandishedByAction(0.25f, 60F, (float) Math.PI, owner, pos),new RemoveEntityAction()))
                 .actorState()
-                .actorAnimation("sword")
+                .actor("sword")
                 .canHurt(10, 20)
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
@@ -463,13 +460,13 @@ public final class A {
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
         E.create().actions(sequence(new ActorBrandishedByAction(0.5f, 15, 0.001f, owner, pos),new RemoveEntityAction()))
                 .actorState()
-                .actorAnimation("bow")
+                .actor("bow")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion"),new RemoveEntityAction()))
                 .actorState()
                 .dynamicDirection()
-                .actorAnimation("arrow")
+                .actor("arrow")
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();

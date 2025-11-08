@@ -3,6 +3,7 @@
     "name": "Undead",
     "width": 80,
     "height": 96,
+    "shadowWidth": 80,
     "texture": "data/texture/actor/pack.atlas/Undead",
     "alpha": 0.5,
     "drawOffSetX": 0,
@@ -333,6 +334,7 @@
     "name": "fire1",
     "width": 192,
     "height": 192,
+    "shadowWidth": 192,
     "texture": "data/Fire4",
     "animations": [
       {
@@ -469,6 +471,7 @@
     "name": "fireBall",
     "width": 16,
     "height": 16,
+    "shadowWidth": 16,
     "texture": "data/texture/skill/fireBall",
     "animations": [
       {
@@ -488,6 +491,7 @@
     "name": "redFireBall",
     "width": 32,
     "height": 32,
+    "shadowWidth": 32,
     "drawOffSetY": 20,
     "texture": "data/texture/skill/redFireBall.gif",
     "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
@@ -496,6 +500,7 @@
     "name": "arrow",
     "width": 26,
     "height": 14,
+    "shadowWidth": 26,
     "texture": "data/texture/skill/arrow",
     "animations": [
       {
@@ -533,6 +538,7 @@
     "name": "sword",
     "width": 48,
     "height": 48,
+    "shadowWidth": 48,
     "texture": "data/texture/skill/Icon sheet (48x48)",
     "animations": [
       {
@@ -552,6 +558,7 @@
     "name": "bow",
     "width": 48,
     "height": 48,
+    "shadowWidth": 48,
     "texture": "data/texture/skill/Icon sheet (48x48)",
     "animations": [
       {
@@ -571,6 +578,7 @@
     "name": "wand",
     "width": 48,
     "height": 48,
+    "shadowWidth": 48,
     "texture": "data/texture/skill/Icon sheet (48x48)",
     "animations": [
       {
@@ -590,6 +598,7 @@
     "name" : "Aquatic",
     "width":96,
     "height":96,
+    "shadowWidth": 90,
     "texture": "data/texture/actor/pack.atlas/Aquatic",
     "drawOffSetY": 40,
     "frameDuration":0.1,
@@ -641,6 +650,7 @@
     "name" : "Farmer",
     "width":32,
     "height":48,
+    "shadowWidth": 32,
     "drawOffSetY": 20,
     "texture":"data/texture/actor/pack.atlas/Farmer",
     "frameDuration":0.1,
@@ -690,6 +700,7 @@
     "name" : "BatFly",
     "width":16,
     "height":16,
+    "shadowWidth": 16,
     "texture": "data/texture/actor/Bat 01_fly (16x16)",
     "frameDuration":0.1,
     "animations":[
@@ -757,5 +768,10 @@
     "parser":"com.guxuede.gm.gdx.actor.parser.RpgMakerSpriteParser",
     "frameDuration":0.2,
     "actorNum":0
+  },
+  {
+    "name" : "LpcActor1",
+    "texture":"data/texture/actor/lpcc3universal",
+    "parser":"com.guxuede.gm.gdx.actor.parser.LpcWithJumpParser"
   }
 ]

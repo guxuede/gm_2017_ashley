@@ -9,6 +9,7 @@ public class ActorHolder {
     public String name;
     public int blood;
     public int age;
+    public float shadowWidth;
 
     public AnimationHolder animationHolder;
 

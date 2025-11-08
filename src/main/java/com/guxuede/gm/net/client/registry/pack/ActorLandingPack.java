@@ -78,7 +78,7 @@ public class ActorLandingPack extends NetPack {
             e.position.set(x, y);
         })
                 .actorState(direction, false, 0,0,0,0)
-                .actorAnimation(character).pos(x, y)
+                .actor(character).pos(x, y)
                 .actions().bounds(48, 48).blood(100, 65);
     }
 

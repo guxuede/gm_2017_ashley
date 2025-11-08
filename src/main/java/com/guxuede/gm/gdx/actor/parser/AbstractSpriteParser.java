@@ -4,5 +4,5 @@ import com.badlogic.gdx.utils.JsonValue;
 
 public abstract class AbstractSpriteParser {
 
-    public abstract ActorHolder parseAnimationHolder(JsonValue jsonValue);
+    public abstract ActorHolder parseActor(JsonValue jsonValue);
 }

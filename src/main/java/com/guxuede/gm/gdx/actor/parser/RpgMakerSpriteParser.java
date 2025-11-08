@@ -12,6 +12,13 @@ import static com.guxuede.gm.gdx.actor.parser.ActorJsonParse.*;
 public class RpgMakerSpriteParser extends DefaultSpriteParser {
 
     @Override
+    public ActorHolder parseActor(JsonValue jsonValue) {
+        ActorHolder actorHolder = super.parseActor(jsonValue);
+        actorHolder.shadowWidth = actorHolder.animationHolder.width*0.7f;
+        return actorHolder;
+    }
+
+    @Override
     protected ParseContext buildDefaultParserContext() {
         ParseContext parseContext =super.buildDefaultParserContext();
         parseContext.width = 48;

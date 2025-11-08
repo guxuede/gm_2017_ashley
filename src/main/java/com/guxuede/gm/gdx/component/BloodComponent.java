@@ -10,6 +10,17 @@ public class BloodComponent implements Component  , Pool.Poolable{
     public float hitPoint = 100;
     public float currentHitPoint = 100;
 
+
+    //draw
+    public float lastModifyTime;
+
+
+    public void modify(float delta){
+        hitPoint = hitPoint + delta;
+        lastModifyTime = System.nanoTime();
+    }
+
+
     @Override
     public void reset() {
         hitPoint = 0;

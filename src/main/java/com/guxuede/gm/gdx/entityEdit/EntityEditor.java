@@ -78,35 +78,43 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
-    public EntityEditor actorAnimation(String animationName) {
-        return actorAnimation(animationName, ActorAnimationComponent.DOWN ,false,0);
+    //----------------------------------as actor---------------------------------------------------------------------------
+    public EntityEditor actor(String actorName) {
+        return actor(actorName, ActorAnimationComponent.DOWN ,false,0);
     }
 
-    public EntityEditor actorAnimation(String animationName,int direction,boolean isMoving, int zIndex) {
-        AnimationHolder animationHolder = ResourceManager.getActorAnimation(animationName);
-        actorAnimation(animationHolder,direction,isMoving,zIndex);
+    public EntityEditor actor(String actorName, int direction, boolean isMoving, int zIndex) {
+        ActorHolder actorHolder = ResourceManager.getActor(actorName);
+        actor(actorHolder,direction,isMoving,zIndex);
         return this;
     }
 
-    public EntityEditor actorAnimation(AnimationHolder animationHolder) {
-        return actorAnimation(animationHolder, ActorAnimationComponent.DOWN ,false,0);
+    public EntityEditor actor(ActorHolder actorHolder) {
+        return actor(actorHolder, ActorAnimationComponent.DOWN ,false,0);
     }
 
-
-    public EntityEditor actorAnimation(AnimationHolder animationHolder,int direction,boolean isMoving, int zIndex) {
+    public EntityEditor actor(ActorHolder actorHolder, int direction, boolean isMoving, int zIndex) {
         ActorAnimationComponent actorAnimationComponent = edit.create(ActorAnimationComponent.class);
-        actorAnimationComponent.animationHolder = animationHolder;
+        actorAnimationComponent.animationHolder = actorHolder.animationHolder;
         actorAnimationComponent.direction = direction;
         actorAnimationComponent.isMoving = isMoving;
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
         presentableComponent.zIndex = zIndex;
+
+        if(actorHolder.shadowWidth!= 0){
+            ShadowComponent shadowComponent = edit.create(ShadowComponent.class);
+            shadowComponent.width = actorHolder.shadowWidth;
+            entity.add(shadowComponent);
+        }
+
         entity.add(actorAnimationComponent);
         entity.add(animationComponent);
         entity.add(presentableComponent);
         return this;
     }
 
+    //-------------------------------play actor animation(stop down)------------------------------------------------------
     public EntityEditor animation(String animationName, float rotation) {
         return animation(animationName, 0, rotation);
     }
@@ -133,6 +141,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
         entity.add(animationComponent);
         return this;
     }
+    //-------------------------------------------------------------------------------------------
 
     public EntityEditor presentable(String presentableName) {
         return presentable(presentableName, 0);
@@ -180,7 +189,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
 
     public EntityEditor asRpgMarkerActor(String name, float x, float y){
         ActorHolder actor = ResourceManager.getActor(name);
-        this.actorState().actorAnimation(actor.animationHolder).asActor().pos(x,y).actions().bounds((int) actor.bounds.getWidth(), (int) actor.bounds.getHeight())
+        this.actorState().actor(actor).asActor().pos(x,y).actions().bounds((int) actor.bounds.getWidth(), (int) actor.bounds.getHeight())
                 .blood(actor.blood,actor.blood)
                 .sensor()
                 .actions(new SequenceAction(

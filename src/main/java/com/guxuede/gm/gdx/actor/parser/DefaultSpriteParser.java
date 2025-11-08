@@ -23,10 +23,11 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
      * @param jsonValue
      * @return
      */
-    public ActorHolder parseAnimationHolder(JsonValue jsonValue){
+    public ActorHolder parseActor(JsonValue jsonValue){
         ActorHolder actorHolder = new ActorHolder();
         ParseContext parseContext = extendParentParseContext(null, jsonValue);
         String name = jsonValue.getString("name");
+        float shadowWidth = jsonValue.getFloat("shadowWidth", 0);
         ///////////////////////////actor attributes///////////////////////////////////
         parseActorAttributes(jsonValue, parseContext, actorHolder);
         /////////////////////////animations/////////////////////////////
@@ -39,6 +40,7 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
         parseSounds(jsonValue, animationHolder);
         actorHolder.animationHolder = animationHolder;
         actorHolder.name = name;
+        actorHolder.shadowWidth = shadowWidth;
         return actorHolder;
     }
 
@@ -157,7 +159,7 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
         TextureRegion frame = getTextureRegionByNumber(parentParseContext, number);
         GdxSprite sprite = new GdxSprite(frame);
         sprite.setSize(parentParseContext.width, parentParseContext.height);
-        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
+        sprite.setDrawOffSet(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
         sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
         sprite.setRotation(parentParseContext.rotation);
         sprite.setAlpha(parentParseContext.alpha);
@@ -168,7 +170,7 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
         TextureRegion frame = getTextureRegionByNumber(parentParseContext,textureRegion, number);
         GdxSprite sprite = new GdxSprite(frame);
         sprite.setSize(parentParseContext.width, parentParseContext.height);
-        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
+        sprite.setDrawOffSet(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
         sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
         sprite.setRotation(parentParseContext.rotation);
         sprite.setAlpha(parentParseContext.alpha);
@@ -192,7 +194,7 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
         TextureRegion frame = getTextureRegion(parentParseContext, posIntArrayJ);
         GdxSprite sprite = new GdxSprite(frame);
         sprite.setSize(parentParseContext.width, parentParseContext.height);
-        sprite.setDrawOffSetX(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
+        sprite.setDrawOffSet(parentParseContext.drawOffSetX, parentParseContext.drawOffSetY);
         sprite.setScale(parentParseContext.scaleX, parentParseContext.scaleY);
         sprite.setRotation(parentParseContext.rotation);
         sprite.setAlpha(parentParseContext.alpha);
@@ -392,7 +394,7 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
 
     protected void applyDefaultValueToSprite(ParseContext parseContext, GdxSprite sprite){
         sprite.setSize(parseContext.width, parseContext.height);
-        sprite.setDrawOffSetX(parseContext.drawOffSetX, parseContext.drawOffSetY);
+        sprite.setDrawOffSet(parseContext.drawOffSetX, parseContext.drawOffSetY);
         sprite.setScale(parseContext.scaleX,parseContext.scaleY);
         sprite.setRotation(parseContext.rotation);
         sprite.setAlpha(parseContext.alpha);
