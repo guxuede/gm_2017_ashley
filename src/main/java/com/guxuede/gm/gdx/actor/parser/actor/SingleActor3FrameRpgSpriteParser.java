@@ -11,7 +11,7 @@ public class SingleActor3FrameRpgSpriteParser extends SingleActor4FrameRpgSprite
     }
 
     protected int[] getIdleFrameCycle() {
-        return new int[]{1, 2};
+        return new int[]{1};
     }
 
     protected int[] getWalkFrameCycle() {

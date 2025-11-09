@@ -8,41 +8,56 @@ import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 public class ActorRepelAction extends TemporalAction {
 
-    private float intensity;
 
     private final Vector2 facePosition = new Vector2();
+
+    private float far;
+
     private float startX;
     private float startY;
     private float endX;
     private float endY;
 
-    public ActorRepelAction(Vector2 facePosition, float intensity, float duration) {
-        super(duration, Interpolation.bounceOut);
+    private float startHigh;
+    private final float endHigh;
+
+
+    public ActorRepelAction(Vector2 facePosition, float far, float high, float duration, Interpolation interpolation) {
+        super(duration, interpolation);
         this.facePosition.set(facePosition);
-        this.intensity = intensity;
+        this.far = far;
+        this.endHigh = high;
     }
 
-    float x = 0;
 
     @Override
     protected void begin() {
         super.begin();
-        Vector2 position = Mappers.positionCM.get(this.target).position;
+        PositionComponent positionComponent = Mappers.positionCM.get(this.target);
+        Vector2 position = positionComponent.position;
         this.startX = position.x;
         this.startY = position.y;
 
-        facePosition.sub(position).nor().scl(- intensity,-intensity);
+        facePosition.sub(position).nor().scl(-far,-far);
 
         this.endX = position.x + facePosition.x;
         this.endY = position.y + facePosition.y;
+
+        this.startHigh = positionComponent.high;
     }
 
     @Override
     protected void update(float percent) {
         PositionComponent positionComponent = Mappers.positionCM.get(getActor());
-        positionComponent.high  =  intensity* percent;
+        updateHigh(percent, positionComponent);
+        updatePosition(percent, positionComponent);
+    }
 
+    private void updateHigh(float percent, PositionComponent positionComponent) {
+        positionComponent.high  =  this.startHigh + (this.endHigh - this.startHigh) * percent;
+    }
 
+    private void updatePosition(float percent, PositionComponent positionComponent) {
         float x;
         float y;
         if (percent == 0.0F) {
@@ -56,21 +71,18 @@ public class ActorRepelAction extends TemporalAction {
             y = this.startY + (this.endY - this.startY) * percent;
         }
         positionComponent.position.set(x, y);
-
     }
 
     @Override
     protected void end() {
         super.end();
-        PositionComponent sourceOwnerPositionComponent = Mappers.positionCM.get(getActor());
-        sourceOwnerPositionComponent.high  = 0;
     }
 
-    public float getIntensity() {
-        return intensity;
+    public float getFar() {
+        return far;
     }
 
-    public void setIntensity(float intensity) {
-        this.intensity = intensity;
+    public void setFar(float far) {
+        this.far = far;
     }
 }

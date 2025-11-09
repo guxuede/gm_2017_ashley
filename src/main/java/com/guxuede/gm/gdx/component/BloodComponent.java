@@ -6,18 +6,18 @@ import com.badlogic.gdx.utils.Pool;
 /**
  * Created by guxuede on 2017/9/10 .
  */
-public class BloodComponent implements Component  , Pool.Poolable{
+public class BloodComponent implements Component , Pool.Poolable{
     public float hitPoint = 100;
     public float currentHitPoint = 100;
 
 
     //draw
-    public float lastModifyTime;
+    public long lastModifyTime;
 
 
     public void modify(float delta){
-        hitPoint = hitPoint + delta;
-        lastModifyTime = System.nanoTime();
+        currentHitPoint = Math.max(0, Math.min(currentHitPoint + delta, hitPoint));
+        lastModifyTime = System.currentTimeMillis();
     }
 
 
