@@ -43,7 +43,14 @@ public class ResourceManager {
     private static final Map<String,Texture> TEXTURE_MAP = new HashMap<String, Texture>();
     private static final Map<String,TextureRegion> TEXTURE_REGION_MAP =  new HashMap<String, TextureRegion>();
     private static final Map<String,TextureAtlas> TEXTURE_ATLAS_PACK =new HashMap<>();//new TextureAtlas(Gdx.files.internal("data/texture/actor/pack.atlas"));
-    private static final List<ActorHolder> ANIMATION_HOLDER_LIST = new ActorJsonParse().parse(Gdx.files.internal("data/texture/actors.json"));
+    private static final List<ActorHolder> ANIMATION_HOLDER_LIST = new ArrayList<>();
+    static{
+        ActorJsonParse actorJsonParse = new ActorJsonParse();
+        ANIMATION_HOLDER_LIST.addAll(actorJsonParse.parse(Gdx.files.internal("data/texture/actors.json")));
+        ANIMATION_HOLDER_LIST.addAll(actorJsonParse.parse(Gdx.files.internal("data/texture/effects.json")));
+        ANIMATION_HOLDER_LIST.addAll(actorJsonParse.parse(Gdx.files.internal("data/texture/projectiles.json")));
+        ANIMATION_HOLDER_LIST.addAll(actorJsonParse.parse(Gdx.files.internal("data/texture/weapons.json")));
+    }
     public static final Map<String, Skill> SKILLS = ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
 
     public static Skin skin=new Skin(Gdx.files.internal("skin/kenney-pixel/skin.json"));

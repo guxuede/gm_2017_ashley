@@ -1,10 +1,8 @@
 package com.guxuede.gm.gdx.actor.parser;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.JsonValue;
-import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 
-public class LpcWithJumpParser extends DefaultSpriteParser{
+public class LpcWithJumpParser extends AbstractRpgActorSpriteParser{
 
     private static final int NUMBER_OF_FRAME_OF_ONE_LINE = 13;
 
@@ -21,19 +19,11 @@ public class LpcWithJumpParser extends DefaultSpriteParser{
 
 
     @Override
-    public ActorHolder parseActor(JsonValue jsonValue) {
-        ActorHolder actorHolder = super.parseActor(jsonValue);
-        actorHolder.shadowWidth = actorHolder.animationHolder.width*0.6f;
-        return actorHolder;
-    }
-
-    @Override
     protected ParseContext buildDefaultParserContext() {
         ParseContext parseContext =super.buildDefaultParserContext();
         parseContext.width = 64;
         parseContext.height = 64;
         parseContext.frameDuration= 0.2f;
-        parseContext.drawOffSetY = parseContext.height/2; // by default. LPC actor
         return parseContext;
     }
 
@@ -54,21 +44,4 @@ public class LpcWithJumpParser extends DefaultSpriteParser{
         animationHolder.addAnimation(AnimationHolder.STOP_RIGHT_ANIMATION,parseAnimation(parseContext, IDLE_RIGHT_ANIMATION_START_NUMBER, idleFrameCycle));
     }
 
-    public Animation parseAnimation(ParseContext parseContext, int animationStartNumber, int animationFrameCount){
-        final GdxSprite[] frames = new GdxSprite[animationFrameCount];
-        for (int i = 0; i< animationFrameCount ; i++) {
-            frames[i] = parseNumbersSprite(parseContext, animationStartNumber + i);
-        }
-        final Animation animation = new Animation(parseContext.frameDuration,frames);
-        return animation;
-    }
-
-    public Animation parseAnimation(ParseContext parseContext, int animationStartNumber, int[] animationFrameNumber){
-        final GdxSprite[] frames = new GdxSprite[animationFrameNumber.length];
-        for (int i = 0; i< animationFrameNumber.length ; i++) {
-            frames[i] = parseNumbersSprite(parseContext, animationStartNumber + animationFrameNumber[i]);
-        }
-        final Animation animation = new Animation(parseContext.frameDuration,frames);
-        return animation;
-    }
 }

@@ -1,0 +1,47 @@
+[
+  {
+    "name": "fireBall",
+    "width": 16,
+    "height": 16,
+    "shadowWidth": 16,
+    "texture": "data/texture/skill/fireBall",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [0,1,2,1]
+      }
+    ],
+    "sounds": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation",
+        "sound": "fire_flying.wav",
+        "loop": "true"
+      }]
+  },
+  {
+    "name": "redFireBall",
+    "width": 32,
+    "height": 32,
+    "shadowWidth": 32,
+    "drawOffSetY": 20,
+    "texture": "data/texture/skill/redFireBall.gif",
+    "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
+  },
+  {
+    "name": "arrow",
+    "width": 26,
+    "height": 14,
+    "shadowWidth": 26,
+    "texture": "data/texture/skill/arrow",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "rotation": 630,
+        "frames": [0],
+        "drawOffSetY": 20
+      }
+    ]
+  }
+]

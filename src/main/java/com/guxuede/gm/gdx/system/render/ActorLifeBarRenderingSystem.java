@@ -44,13 +44,15 @@ public class ActorLifeBarRenderingSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         BloodComponent bloodComponent = Mappers.bloodCM.get(entity);
+        float hitPoint = bloodComponent.hitPoint;
+        float currentHitPoint = Math.min(0, Math.max(bloodComponent.currentHitPoint, hitPoint));
 
         //todo
 
         //if(!animationActor.isInScreen)continue;
         Vector2 p = positionComponent.position;
         float px = p.x - BLOOD_WIDTH/2;
-        float py = p.y + 5;
+        float py = p.y - 5;
 
         shapes.set(ShapeRenderer.ShapeType.Filled);
         shapes.setColor(Color.GRAY);
@@ -61,7 +63,7 @@ public class ActorLifeBarRenderingSystem extends IteratingSystem {
 
         shapes.set(ShapeRenderer.ShapeType.Filled);
         shapes.setColor(Color.GREEN);
-        shapes.rect(px+ 1, py + 1, BLOOD_WIDTH * (bloodComponent.currentHitPoint / bloodComponent.hitPoint) - 1, 4f);
+        shapes.rect(px+ 1, py + 1, BLOOD_WIDTH * (currentHitPoint / hitPoint) - 1, 4f);
     }
 
 }

@@ -340,6 +340,7 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
     protected ParseContext extendParentParseContext(ParseContext parseContext, JsonValue animJ){
         if(parseContext == null){
             parseContext = buildDefaultParserContext();
+            afterBuildDefaultParserContext(parseContext);
         }
         float frameDuration = animJ.getFloat("frameDuration", parseContext.frameDuration);
         String textureName = animJ.getString("texture", parseContext.textureName);
@@ -392,6 +393,10 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
         return parseContext;
     }
 
+    protected void afterBuildDefaultParserContext(ParseContext parseContext) {
+
+    }
+
     protected void applyDefaultValueToSprite(ParseContext parseContext, GdxSprite sprite){
         sprite.setSize(parseContext.width, parseContext.height);
         sprite.setDrawOffSet(parseContext.drawOffSetX, parseContext.drawOffSetY);
@@ -401,4 +406,22 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
     }
 
 
+    //utils
+    public Animation parseAnimation(ParseContext parseContext, int animationStartNumber, int animationFrameCount){
+        final GdxSprite[] frames = new GdxSprite[animationFrameCount];
+        for (int i = 0; i< animationFrameCount ; i++) {
+            frames[i] = parseNumbersSprite(parseContext, animationStartNumber + i);
+        }
+        final Animation animation = new Animation(parseContext.frameDuration,frames);
+        return animation;
+    }
+
+    public Animation parseAnimation(ParseContext parseContext, int animationStartNumber, int[] animationFrameNumber){
+        final GdxSprite[] frames = new GdxSprite[animationFrameNumber.length];
+        for (int i = 0; i< animationFrameNumber.length ; i++) {
+            frames[i] = parseNumbersSprite(parseContext, animationStartNumber + animationFrameNumber[i]);
+        }
+        final Animation animation = new Animation(parseContext.frameDuration,frames);
+        return animation;
+    }
 }

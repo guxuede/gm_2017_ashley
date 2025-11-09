@@ -1,0 +1,238 @@
+[
+  {
+    "name": "yuanQuan",
+    "width": 192,
+    "height": 192,
+    "texture": "data/State6",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "name": "lightningLine1",
+    "width": 128,
+    "height": 128,
+    "texture": "data/llllight",
+    "scaleX": 0.2,
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "name": "special10",
+    "width": 192,
+    "height": 192,
+    "texture": "data/Special10",
+    "scale": 1,
+    "y": 40,
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "name": "meteorite",
+    "width": 192,
+    "height": 192,
+    "shadowWidth": 192,
+    "texture": "data/Fire4",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.05,
+        "frames": [
+          {
+            "y": 200,
+            "x": 100,
+            "rotation": -30,
+            "frame": 14,
+            "sound":"fire_spell.ogg"
+          },
+          {
+            "y": 190,
+            "x": 90,
+            "rotation": -24,
+            "frame": 15
+          },
+          {
+            "y": 180,
+            "x": 80,
+            "rotation": -22,
+            "frame": 14
+          },
+          {
+            "y": 170,
+            "x": 70,
+            "rotation": -20,
+            "frame": 15
+          },
+          {
+            "y": 160,
+            "x": 60,
+            "rotation": -18,
+            "frame": 14
+          },
+          {
+            "y": 150,
+            "x": 50,
+            "rotation": -15,
+            "frame": 15
+          },
+          {
+            "y": 140,
+            "x": 40,
+            "rotation": -13,
+            "frame": 14
+          },
+          {
+            "y": 130,
+            "x": 30,
+            "rotation": -10,
+            "frame": 15
+          },
+          {
+            "y": 100,
+            "x": 20,
+            "rotation": -7,
+            "frame": 14
+          },
+          {
+            "y": 80,
+            "x": 15,
+            "rotation": -6,
+            "frame": 14
+          } ,
+          {
+            "y": 60,
+            "x": 13,
+            "rotation": -4,
+            "frame": 14
+          },
+          {
+            "y": 50,
+            "x": 10,
+            "rotation": -0,
+            "frame": 14
+          },
+          {
+            "y": 50,
+            "x": 10,
+            "frameDuration": 0.1,
+            "rotation": -0,
+            "frame": 4
+          },
+          {
+            "y": 50,
+            "x": 10,
+            "frameDuration": 0.1,
+            "rotation": -0,
+            "frame": 3
+          }
+        ,
+          {
+            "y": 50,
+            "x": 10,
+            "frameDuration": 0.1,
+            "rotation": -0,
+            "frame": 1
+          }
+        ,
+          {
+            "y": 50,
+            "x": 10,
+            "frameDuration": 0.1,
+            "rotation": -0,
+            "frame": 1,
+            "sound":"fire_hited.wav"
+          }
+        ]
+      },
+      {
+        "name": "deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [
+          {
+            "y": 25,
+            "x": 20,
+            "rotation": -6,
+            "frame": 15
+          },
+          {
+            "y": 0,
+            "x": 0,
+            "rotation": -0,
+            "frame": 14
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "redFireBallExplosion",
+    "width": 32,
+    "height": 32,
+    "texture": "data/texture/skill/fire_ball_explosion.gif",
+    "parser":"com.guxuede.gm.gdx.actor.parser.GifSpriteParser"
+  },
+  {
+    "name": "redFireBallExplosion1",
+    "width": 48,
+    "height": 48,
+    "texture": "data/texture/skill/Firebolt SpriteSheet",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [5,6,7,8,9,10],
+        "drawOffSetY": 20,
+        "rotation": 270
+      }
+    ]
+  }
+]

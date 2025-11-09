@@ -1,0 +1,62 @@
+[
+  {
+    "name": "sword",
+    "width": 48,
+    "height": 48,
+    "shadowWidth": 48,
+    "texture": "data/texture/skill/Icon sheet (48x48)",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.05,
+        "drawOffSetY": 20,
+        "rotation": -45,
+        "frames": [
+          {
+            "frame": [48,48]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "bow",
+    "width": 48,
+    "height": 48,
+    "shadowWidth": 48,
+    "texture": "data/texture/skill/Icon sheet (48x48)",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.05,
+        "drawOffSetY": 20,
+        "rotation": -135,
+        "frames": [
+          {
+            "frame": [96,48]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "wand",
+    "width": 48,
+    "height": 48,
+    "shadowWidth": 48,
+    "texture": "data/texture/skill/Icon sheet (48x48)",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.05,
+        "drawOffSetY": 20,
+        "rotation": -45,
+        "frames": [
+          {
+            "frame": [48,288]
+          }
+        ]
+      }
+    ]
+  }
+]
