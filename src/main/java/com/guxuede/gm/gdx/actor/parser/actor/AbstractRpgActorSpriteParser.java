@@ -1,9 +1,12 @@
-package com.guxuede.gm.gdx.actor.parser;
+package com.guxuede.gm.gdx.actor.parser.actor;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.JsonValue;
+import com.guxuede.gm.gdx.actor.parser.ActorHolder;
+import com.guxuede.gm.gdx.actor.parser.DefaultSpriteParser;
+import com.guxuede.gm.gdx.actor.parser.ParseContext;
 
-public class AbstractRpgActorSpriteParser extends DefaultSpriteParser{
+public class AbstractRpgActorSpriteParser extends DefaultSpriteParser {
 
     @Override
     public ActorHolder parseActor(JsonValue jsonValue) {

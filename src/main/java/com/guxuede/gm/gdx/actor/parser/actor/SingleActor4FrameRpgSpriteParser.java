@@ -1,7 +1,8 @@
-package com.guxuede.gm.gdx.actor.parser;
+package com.guxuede.gm.gdx.actor.parser.actor;
 
 import com.badlogic.gdx.utils.JsonValue;
-import com.guxuede.gm.gdx.ResourceManager;
+import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.actor.parser.ParseContext;
 
 //
 public class SingleActor4FrameRpgSpriteParser extends AbstractRpgActorSpriteParser {

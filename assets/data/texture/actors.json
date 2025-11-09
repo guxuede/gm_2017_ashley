@@ -8,7 +8,7 @@
     "alpha": 0.5,
     "drawOffSetX": 0,
     "drawOffSetY": 40,
-    "parser":"com.guxuede.gm.gdx.actor.parser.SingleActor4FrameRpgSpriteParser",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor4FrameRpgSpriteParser",
     "sounds": [
       {
         "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation",
@@ -25,7 +25,7 @@
     "texture": "data/texture/actor/pack.atlas/Aquatic",
     "drawOffSetY": 40,
     "frameDuration":0.1,
-    "parser":"com.guxuede.gm.gdx.actor.parser.SingleActor4FrameRpgSpriteParser"
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor4FrameRpgSpriteParser"
   },
   {
     "name" : "Farmer",
@@ -34,7 +34,7 @@
     "shadowWidth": 32,
     "drawOffSetY": 20,
     "texture":"data/texture/actor/pack.atlas/Farmer",
-    "parser":"com.guxuede.gm.gdx.actor.parser.SingleActor4FrameRpgSpriteParser"
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor4FrameRpgSpriteParser"
   },
   {
     "name" : "BatFly",
@@ -42,14 +42,14 @@
     "height":16,
     "shadowWidth": 16,
     "texture": "data/texture/actor/Bat 01_fly (16x16)",
-    "parser":"com.guxuede.gm.gdx.actor.parser.SingleActor4FrameRpgSpriteParser"
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor4FrameRpgSpriteParser"
   },
   {
     "name" : "RPGMarkMen",
     "width":48,
     "height":48,
     "texture":"data/texture/actor/Monster2_mvt",
-    "parser":"com.guxuede.gm.gdx.actor.parser.MultipleActor3FrameRpgSpriteParser",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.MultipleActor3FrameRpgSpriteParser",
     "frameDuration":0.2,
     "actorNumber":4
   },
@@ -58,7 +58,7 @@
     "width":48,
     "height":48,
     "texture":"data/texture/actor/Nature",
-    "parser":"com.guxuede.gm.gdx.actor.parser.MultipleActor3FrameRpgSpriteParser",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.MultipleActor3FrameRpgSpriteParser",
     "frameDuration":0.2,
     "actorNumber":7
   },
@@ -68,12 +68,12 @@
     "height":48,
     "texture":"data/texture/actor/rpgm_Actor1_1_walk",
     "texture_rpgm_battle":"data/texture/actor/rpgm_Actor1_1_battle",
-    "parser":"com.guxuede.gm.gdx.actor.parser.SingleActor3FrameRpgSpriteParser",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor3FrameRpgSpriteParser",
     "frameDuration":0.2
   },
   {
     "name" : "LpcActor1",
     "texture":"data/texture/actor/lpcc3universal",
-    "parser":"com.guxuede.gm.gdx.actor.parser.LpcWithJumpParser"
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcWithJumpParser"
   }
 ]

@@ -4,24 +4,25 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.guxuede.gm.gdx.ResourceManager;
 
 public class ParseContext {
-    protected String textureName;
-    protected TextureRegion texture;
+    public String textureName;
+    public TextureRegion texture;
 
-    protected float frameDuration;
-    protected float width;
-    protected float height;
-    protected float alpha;
-    protected float rotation;
+    public float frameDuration;
+    public float width;
+    public float height;
+    public float alpha;
+    public float rotation;
 
-    protected float scaleX;
-    protected float scaleY;
+    public float scaleX;
+    public float scaleY;
     //精灵展示位置偏移
-    protected float drawOffSetX, drawOffSetY;
+    public float drawOffSetX, drawOffSetY;
 
-    protected float textureOffSetX = 0;
-    protected float textureOffSetY = 0;
+    public float textureOffSetX = 0;
+    public float textureOffSetY = 0;
 
-    protected String sound;
+    public String sound;
 
+    
 
 }

@@ -1,4 +1,6 @@
-package com.guxuede.gm.gdx.actor.parser;
+package com.guxuede.gm.gdx.actor.parser.actor;
+
+import com.guxuede.gm.gdx.actor.parser.ParseContext;
 
 //
 public class SingleActor3FrameRpgSpriteParser extends SingleActor4FrameRpgSpriteParser {

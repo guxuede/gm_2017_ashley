@@ -1,8 +1,10 @@
-package com.guxuede.gm.gdx.actor.parser;
+package com.guxuede.gm.gdx.actor.parser.actor;
 
 import com.badlogic.gdx.utils.JsonValue;
+import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.actor.parser.ParseContext;
 
-public class LpcWithJumpParser extends AbstractRpgActorSpriteParser{
+public class LpcWithJumpParser extends AbstractRpgActorSpriteParser {
 
     private static final int NUMBER_OF_FRAME_OF_ONE_LINE = 13;
 

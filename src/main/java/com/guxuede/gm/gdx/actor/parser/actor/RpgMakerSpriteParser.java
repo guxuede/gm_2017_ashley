@@ -1,8 +1,10 @@
-package com.guxuede.gm.gdx.actor.parser;
+package com.guxuede.gm.gdx.actor.parser.actor;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.JsonValue;
+import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.actor.parser.ParseContext;
 import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.ResourceManager;
 
