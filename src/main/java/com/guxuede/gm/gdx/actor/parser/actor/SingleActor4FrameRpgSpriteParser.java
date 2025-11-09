@@ -18,7 +18,7 @@ public class SingleActor4FrameRpgSpriteParser extends AbstractRpgActorSpritePars
         animationHolder.addAnimation(AnimationHolder.WALK_UP_ANIMATION,parseAnimation(parseContext, (3 + numberOfActor) * numberOfFrameOfOneLine, walkFrameCycle));
 
         int[] idleFrameCycle = getIdleFrameCycle();
-        parseContext.frameDuration = parseContext.frameDuration * 0.5f;
+        parseContext.frameDuration = 0.5f;
         animationHolder.addAnimation(AnimationHolder.STOP_DOWN_ANIMATION,parseAnimation(parseContext, (0 + numberOfActor) * numberOfFrameOfOneLine, idleFrameCycle));
         animationHolder.addAnimation(AnimationHolder.STOP_LEFT_ANIMATION,parseAnimation(parseContext, (1 + numberOfActor) * numberOfFrameOfOneLine, idleFrameCycle));
         animationHolder.addAnimation(AnimationHolder.STOP_RIGHT_ANIMATION,parseAnimation(parseContext, (2 + numberOfActor) * numberOfFrameOfOneLine, idleFrameCycle));
@@ -34,7 +34,7 @@ public class SingleActor4FrameRpgSpriteParser extends AbstractRpgActorSpritePars
     }
 
     protected int[] getIdleFrameCycle() {
-        return new int[]{1};
+        return new int[]{1,2};
     }
 
     protected int[] getWalkFrameCycle() {

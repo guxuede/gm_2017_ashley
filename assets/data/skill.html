@@ -57,4 +57,14 @@
             af.gdxSequence(af.blink1(owner,targetPos,"meteorite"));
         </script>
     </skill>
+
+    <skill id="heal" name="heal" hotKey="H" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+        <description>
+            heal myself
+        </description>
+        <script>
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
+            af.gdxSequence(af.heal(owner,targetPos, 30, 10));
+        </script>
+    </skill>
 </skills>

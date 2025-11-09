@@ -3,6 +3,8 @@ package com.guxuede.gm.gdx.system.physics;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.math.Interpolation;
+import com.guxuede.gm.gdx.actions.SequenceAction;
 import com.guxuede.gm.gdx.actions.appearance.ColorAction;
 import com.guxuede.gm.gdx.actions.movement.ActorRepelAction;
 import com.guxuede.gm.gdx.component.ActionsComponent;
@@ -27,12 +29,12 @@ public class HurtSystem extends IteratingSystem {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         HurtComponent hurtComponent = Mappers.hurtCM.get(entity);
         getEngine().getEntitiesFor(blood).forEach(e->{
-            if(Mappers.positionCM.get(e).position.dst(positionComponent.position) < hurtComponent.hurtRadius){
+            if(!hurtComponent.hurtEntity.contains(e, true) && Mappers.positionCM.get(e).position.dst(positionComponent.position) < hurtComponent.hurtRadius){
                 BloodComponent bloodComponent = Mappers.bloodCM.get(e);
                 bloodComponent.modify(-hurtComponent.hurtDamage);
-
+                hurtComponent.hurtEntity.add(e);
                 ActionsComponent actionsComponent = Mappers.actionCM.get(e);
-                actionsComponent.addAction(e,new ActorRepelAction(positionComponent.position,30, 0.5f));
+                actionsComponent.addAction(e,new SequenceAction(new ActorRepelAction(positionComponent.position,20, 15f, 0.5f, Interpolation.circleOut),new ActorRepelAction(positionComponent.position,50, 0f, 0.5f, Interpolation.bounceOut)));
             }
         });
     }

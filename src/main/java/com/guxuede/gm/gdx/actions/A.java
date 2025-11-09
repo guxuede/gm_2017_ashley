@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.guxuede.gm.gdx.ResourceManager;
+import com.guxuede.gm.gdx.actions.damage.HealByAction;
 import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
 import com.guxuede.gm.gdx.actions.movement.*;
@@ -286,6 +287,13 @@ public final class A {
         return blinkAction;
     }
 
+    public static HealByAction heal(Entity owner, Vector2 pos, float heal, float time){
+        HealByAction blinkAction = new HealByAction(heal, time);
+        return blinkAction;
+    }
+
+
+
     public  static Action effectsActorOnActorPosAction(final String effectName){
         Action runnableAction = new Action() {
             @Override
@@ -407,7 +415,7 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        Mappers.actionCM.get(owner).addAction(owner, new ActorRepelAction(pos,10, 0.5f));
+//        Mappers.actionCM.get(owner).addAction(owner, new ActorRepelAction(pos,10, 0.5f));
         //MoveToAction
         //new MoveAsSnackToAction(5, pos.x,pos.y)
         //new MoveToAction(5, pos.x,pos.y)

@@ -45,25 +45,26 @@ public class ActorLifeBarRenderingSystem extends IteratingSystem {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         BloodComponent bloodComponent = Mappers.bloodCM.get(entity);
         float hitPoint = bloodComponent.hitPoint;
-        float currentHitPoint = Math.min(0, Math.max(bloodComponent.currentHitPoint, hitPoint));
+        float currentHitPoint = Math.max(0, Math.min(bloodComponent.currentHitPoint, hitPoint));
 
         //todo
+        if(System.currentTimeMillis() - bloodComponent.lastModifyTime < 5000){
+            //if(!animationActor.isInScreen)continue;
+            Vector2 p = positionComponent.position;
+            float px = p.x - BLOOD_WIDTH/2;
+            float py = p.y - 5;
 
-        //if(!animationActor.isInScreen)continue;
-        Vector2 p = positionComponent.position;
-        float px = p.x - BLOOD_WIDTH/2;
-        float py = p.y - 5;
+            shapes.set(ShapeRenderer.ShapeType.Filled);
+            shapes.setColor(Color.GRAY);
+            shapes.rect(px, py, BLOOD_WIDTH, BLOOD_HEIGHT);
+            shapes.set(ShapeRenderer.ShapeType.Line);
+            shapes.setColor(Color.BLACK);
+            shapes.rect(px, py, BLOOD_WIDTH, BLOOD_HEIGHT);
 
-        shapes.set(ShapeRenderer.ShapeType.Filled);
-        shapes.setColor(Color.GRAY);
-        shapes.rect(px, py, BLOOD_WIDTH, BLOOD_HEIGHT);
-        shapes.set(ShapeRenderer.ShapeType.Line);
-        shapes.setColor(Color.BLACK);
-        shapes.rect(px, py, BLOOD_WIDTH, BLOOD_HEIGHT);
-
-        shapes.set(ShapeRenderer.ShapeType.Filled);
-        shapes.setColor(Color.GREEN);
-        shapes.rect(px+ 1, py + 1, BLOOD_WIDTH * (currentHitPoint / hitPoint) - 1, 4f);
+            shapes.set(ShapeRenderer.ShapeType.Filled);
+            shapes.setColor(Color.GREEN);
+            shapes.rect(px+ 1, py + 1, BLOOD_WIDTH * (currentHitPoint / hitPoint) - 1, 4f);
+        }
     }
 
 }

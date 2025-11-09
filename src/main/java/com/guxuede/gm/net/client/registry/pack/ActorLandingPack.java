@@ -62,6 +62,7 @@ public class ActorLandingPack extends NetPack {
                 o.skills.add(ResourceManager.getSkillById("meteorite"));
                 o.skills.add(ResourceManager.getSkillById("fireBall"));
                 o.skills.add(ResourceManager.getSkillById("blink"));
+                o.skills.add(ResourceManager.getSkillById("heal"));
             }).buildToWorld();
             engine.getSystem(StageSystem.class).setViewActor(userEntity);
             processMap(engine);
