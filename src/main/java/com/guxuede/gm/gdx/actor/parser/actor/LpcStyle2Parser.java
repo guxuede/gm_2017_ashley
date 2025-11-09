@@ -4,7 +4,8 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.actor.parser.ParseContext;
 
-public class LpcWithJumpParser extends AbstractRpgActorSpriteParser {
+//由CharGen_v0.9.3 生成 无跳跃/跑动作,idel 和walk 在一行
+public class LpcStyle2Parser extends AbstractRpgActorSpriteParser {
 
     private static final int NUMBER_OF_FRAME_OF_ONE_LINE = 13;
 
@@ -14,10 +15,10 @@ public class LpcWithJumpParser extends AbstractRpgActorSpriteParser {
     private static final int WALK_RIGHT_ANIMATION_START_NUMBER = 11 * NUMBER_OF_FRAME_OF_ONE_LINE;;
 
 
-    private static final int IDLE_UP_ANIMATION_START_NUMBER = 22 * NUMBER_OF_FRAME_OF_ONE_LINE;
-    private static final int IDLE_LEFT_ANIMATION_START_NUMBER = 23 * NUMBER_OF_FRAME_OF_ONE_LINE;//
-    private static final int IDLE_DOWN_ANIMATION_START_NUMBER = 24 * NUMBER_OF_FRAME_OF_ONE_LINE;
-    private static final int IDLE_RIGHT_ANIMATION_START_NUMBER = 25 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int IDLE_UP_ANIMATION_START_NUMBER = 8 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int IDLE_LEFT_ANIMATION_START_NUMBER = 9 * NUMBER_OF_FRAME_OF_ONE_LINE;//
+    private static final int IDLE_DOWN_ANIMATION_START_NUMBER = 10 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int IDLE_RIGHT_ANIMATION_START_NUMBER = 11 * NUMBER_OF_FRAME_OF_ONE_LINE;
 
 
     @Override
@@ -39,9 +40,8 @@ public class LpcWithJumpParser extends AbstractRpgActorSpriteParser {
         animationHolder.addAnimation(AnimationHolder.WALK_DOWN_ANIMATION, parseAnimation(parseContext, WALK_DOWN_ANIMATION_START_NUMBER, walkFrameCycle));
         animationHolder.addAnimation(AnimationHolder.WALK_RIGHT_ANIMATION,parseAnimation(parseContext, WALK_RIGHT_ANIMATION_START_NUMBER, walkFrameCycle));
 
-
-        parseContext.frameDuration= 0.2f;
-        int[] idleFrameCycle = new int[]{0,0,1};
+        parseContext.frameDuration= 0.5f;
+        int[] idleFrameCycle = new int[]{9,9,10};
         animationHolder.addAnimation(AnimationHolder.STOP_UP_ANIMATION,parseAnimation(parseContext, IDLE_UP_ANIMATION_START_NUMBER, idleFrameCycle));
         animationHolder.addAnimation(AnimationHolder.STOP_LEFT_ANIMATION,parseAnimation(parseContext, IDLE_LEFT_ANIMATION_START_NUMBER, idleFrameCycle));
         animationHolder.addAnimation(AnimationHolder.STOP_DOWN_ANIMATION,parseAnimation(parseContext, IDLE_DOWN_ANIMATION_START_NUMBER, idleFrameCycle));

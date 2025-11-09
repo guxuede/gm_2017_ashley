@@ -73,7 +73,22 @@
   },
   {
     "name" : "LpcActor1",
+    "texture":"data/texture/actor/lpcc1universal",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor2",
+    "texture":"data/texture/actor/lpcc2universal",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor3",
     "texture":"data/texture/actor/lpcc3universal",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor4",
+    "texture":"data/texture/actor/lpcc4universal",
     "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcWithJumpParser"
   }
 ]
