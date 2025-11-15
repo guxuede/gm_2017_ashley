@@ -1,17 +1,13 @@
 package com.guxuede.gm.gdx.actor.parser.actor;
 
-import com.badlogic.gdx.utils.JsonValue;
-import com.guxuede.gm.gdx.ResourceManager;
-import com.guxuede.gm.gdx.actor.parser.ParseContext;
 
-//
-public class MultipleActor3FrameRpgSpriteParser extends SingleActor3FrameRpgSpriteParser {
+public class MultipleActor3FrameRpgSpriteParser extends MultipleActor4FrameRpgSpriteParser {
 
-    protected int getNumberOfFrameOfOneLine(ParseContext parseContext) {
-        return (int) (ResourceManager.getTextureRegion(parseContext.textureName).getRegionWidth()/parseContext.width);
+    protected int[] getIdleFrameCycle() {
+        return new int[]{1};
     }
 
-    protected int getNumberOfActor(JsonValue jsonValue, ParseContext parseContext) {
-        return jsonValue.getInt("actorNumber", 0);
+    protected int[] getWalkFrameCycle() {
+        return new int[]{0, 1, 2};
     }
 }

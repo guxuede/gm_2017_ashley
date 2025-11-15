@@ -416,6 +416,13 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
         return animation;
     }
 
+    /**
+     * 把图像按宽高分隔成小图块
+     * @param parseContext
+     * @param animationStartNumber 第几个图块开始
+     * @param animationFrameNumber 取图块
+     * @return
+     */
     public Animation parseAnimation(ParseContext parseContext, int animationStartNumber, int[] animationFrameNumber){
         final GdxSprite[] frames = new GdxSprite[animationFrameNumber.length];
         for (int i = 0; i< animationFrameNumber.length ; i++) {

@@ -108,6 +108,9 @@ public abstract class EntityEditor<T extends EntityEditor>{
             entity.add(shadowComponent);
         }
 
+        AttributeModifferComponent attributeModifferComponent = edit.create(AttributeModifferComponent.class);
+
+        entity.add(attributeModifferComponent);
         entity.add(actorAnimationComponent);
         entity.add(animationComponent);
         entity.add(presentableComponent);

@@ -8,7 +8,7 @@ import com.guxuede.gm.gdx.actor.parser.ParseContext;
 import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.ResourceManager;
 
-public class RpgMakerSpriteParser extends SingleActor4FrameRpgSpriteParser {
+public class RpgMakerSpriteParser extends MultipleActor4FrameRpgSpriteParser {
 
     @Override
     protected ParseContext buildDefaultParserContext() {

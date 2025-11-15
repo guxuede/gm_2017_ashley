@@ -42,6 +42,7 @@ public class GdxGameScreen extends ScreenAdapter {
         viewport.apply();
         engine = SingletonPooledEngine.instance;
         engine.addSystem(new ScreenClearSystem(1));
+        engine.addSystem(new AttributeModifierSystemBefore(0));
         engine.addSystem(new MouseSystem(1000,spriteBatch,viewport,inputMultiplexer));
         engine.addSystem(new ActorStateSystem());
         engine.addSystem(new ActorStateActorAnimationSystem());
@@ -71,6 +72,7 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new SoundOnAnimationSystem(camera));
         engine.addSystem(new GlobalNetPackSystem(engine));
         engine.addSystem(new CommandSystem(engine));
+        engine.addSystem(new AttributeModifierSystemAfter(10000));
     }
 
     @Override

@@ -45,13 +45,13 @@
     "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor4FrameRpgSpriteParser"
   },
   {
-    "name" : "RPGMarkMen",
+    "name" : "RPGMarkGreg",
     "width":48,
     "height":48,
     "texture":"data/texture/actor/Monster2_mvt",
     "parser":"com.guxuede.gm.gdx.actor.parser.actor.MultipleActor3FrameRpgSpriteParser",
     "frameDuration":0.2,
-    "actorNumber":4
+    "actorNumber":1
   },
   {
     "name" : "Pig1",
@@ -63,12 +63,29 @@
     "actorNumber":7
   },
   {
-    "name" : "RPGMarkGreg",
+    "name" : "Actor1",
     "width":48,
     "height":48,
-    "texture":"data/texture/actor/rpgm_Actor1_1_walk",
-    "texture_rpgm_battle":"data/texture/actor/rpgm_Actor1_1_battle",
-    "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor3FrameRpgSpriteParser",
+    "texture":"data/texture/actor/rpg1",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.MultipleActor3FrameRpgSpriteParser",
+    "frameDuration":0.2,
+    "actorNumber":2
+  },
+  {
+    "name" : "Actor2",
+    "width":48,
+    "height":48,
+    "texture":"data/texture/actor/rpg1",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.MultipleActor3FrameRpgSpriteParser",
+    "frameDuration":0.2,
+    "actorNumber":2
+  },
+  {
+    "name" : "OgreChristmas",
+    "width":32,
+    "height":32,
+    "texture":"data/texture/actor/Ogre Christmas",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor4FrameRpgSpriteParser",
     "frameDuration":0.2
   },
   {
