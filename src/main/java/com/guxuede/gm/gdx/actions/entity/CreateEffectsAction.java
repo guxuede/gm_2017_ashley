@@ -1,27 +1,27 @@
 package com.guxuede.gm.gdx.actions.entity;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.component.PositionComponent;
+import com.guxuede.gm.gdx.actions.Acting;
 import com.guxuede.gm.gdx.component.PresentableComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.actions.Action;
 
 /**
+ * 创建一个动画在指定地点
  * Created by guxuede on 2017/4/4 .
  */
-public class EffectsActorAction extends Action {
+public class CreateEffectsAction extends Acting {
 
     private String actorName;
+    private float duration;
     private final Vector2 pos = new Vector2();
     private Action[] actions;
-    private Entity effectsEntity;
 
     @Override
-    public boolean act(float delta) {
+    public boolean update(float delta) {
         PresentableComponent component = getActor().getComponent(PresentableComponent.class);
-        float roration = component == null? 0 : component.rotation;
-        effectsEntity = E.create().animation(actorName, roration).pos(pos.x,pos.y).actions(actions).buildToWorld();
+        float rotation = component == null? 0 : component.rotation;
+        E.create().animation(actorName, rotation, duration).pos(pos.x,pos.y).actions(actions).buildToWorld();
         return true;
     }
 
@@ -31,7 +31,6 @@ public class EffectsActorAction extends Action {
         actorName = null;
         pos.set(0,0);
         actions = null;
-        effectsEntity = null;
     }
 
 
@@ -45,5 +44,9 @@ public class EffectsActorAction extends Action {
 
     public void setActions(Action... actions) {
         this.actions = actions;
+    }
+
+    public void setDuration(float duration) {
+        this.duration = duration;
     }
 }

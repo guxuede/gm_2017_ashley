@@ -51,15 +51,15 @@ public class ResourceManager {
         ANIMATION_HOLDER_LIST.addAll(actorJsonParse.parse(Gdx.files.internal("data/texture/projectiles.json")));
         ANIMATION_HOLDER_LIST.addAll(actorJsonParse.parse(Gdx.files.internal("data/texture/weapons.json")));
     }
-    public static final Map<String, Skill> SKILLS = ActorSkillParse.parseSkill(Gdx.files.internal("data/skill.html"));
+    public static final Map<String, Skill> SKILLS = ActorSkillParse.parseSkill(Gdx.files.internal("data/skill/skill.html"));
 
     public static Skin skin=new Skin(Gdx.files.internal("skin/kenney-pixel/skin.json"));
     public static BitmapFont font = skin.getFont("default-font");
 
-    public static Sprite shadow = new Sprite(getTextureRegion("data/180-Switch03",96,96,32,32));
+    public static Sprite shadow = new Sprite(getTextureRegion("data/shadow",96,96,32,32));
 
-    public static Sprite mouseAreaIndicator=new GdxSprite(getTextureRegion("data/Gun2", 0, 0, 192, 192));
-    public static Sprite mouseTargetIndicator=new GdxSprite(getTextureRegion("data/Gun2", 84, 84, 24, 24));
+    public static Sprite mouseAreaIndicator=new GdxSprite(getTextureRegion("data/texture/effect/Gun2", 0, 0, 192, 192));
+    public static Sprite mouseTargetIndicator=new GdxSprite(getTextureRegion("data/texture/effect/Gun2", 84, 84, 24, 24));
     static {
         mouseAreaIndicator.setOriginCenter();
         mouseTargetIndicator.setOriginCenter();

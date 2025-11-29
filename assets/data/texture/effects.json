@@ -3,26 +3,28 @@
     "name": "yuanQuan",
     "width": 192,
     "height": 192,
-    "texture": "data/State6",
+    "texture": "data/texture/effect/State6",
     "animations": [
       {
         "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
         "frameDuration": 0.1,
         "frames": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
+          0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1
+        ]
+      }
+    ]
+  },
+  {
+    "name": "State1",
+    "width": 192,
+    "height": 192,
+    "texture": "data/texture/effect/State1",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [
+          0, 1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13
         ]
       }
     ]
@@ -31,15 +33,14 @@
     "name": "lightningLine1",
     "width": 128,
     "height": 128,
-    "texture": "data/llllight",
+    "texture": "data/texture/effect/llllight",
     "scaleX": 0.2,
     "animations": [
       {
         "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
         "frameDuration": 0.1,
         "frames": [
-          0,
-          1
+          0,1
         ]
       }
     ]
@@ -48,31 +49,29 @@
     "name": "special10",
     "width": 192,
     "height": 192,
-    "texture": "data/Special10",
+    "texture": "data/texture/effect/Special10",
     "scale": 1,
-    "y": 40,
+    "drawOffSetY": 50,
     "animations": [
       {
         "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
         "frameDuration": 0.1,
-        "frames": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
+        "frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
         ]
+      }
+    ]
+  },
+  {
+    "name": "dichi",
+    "width": 32,
+    "height": 32,
+    "texture": "data/texture/effect/grond_effect",
+    "scale": 1,
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [2, 6, 10, 14, 14, 14, 14, 14, 14]
       }
     ]
   },
@@ -81,7 +80,7 @@
     "width": 192,
     "height": 192,
     "shadowWidth": 192,
-    "texture": "data/Fire4",
+    "texture": "data/texture/effect/Fire4",
     "animations": [
       {
         "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
@@ -232,6 +231,34 @@
         "frames": [5,6,7,8,9,10],
         "drawOffSetY": 20,
         "rotation": 270
+      }
+    ]
+  },
+  {
+    "name": "hit",
+    "width": 32,
+    "height": 32,
+    "texture": "data/texture/effect/Hit",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [0,1,2,3],
+        "drawOffSetY": 20
+      }
+    ]
+  },
+  {
+    "name": "blood",
+    "width": 32,
+    "height": 32,
+    "texture": "data/texture/effect/Blood",
+    "animations": [
+      {
+        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "frameDuration": 0.1,
+        "frames": [0,1,2,3,4,5,6,7],
+        "drawOffSetY": 20
       }
     ]
   }

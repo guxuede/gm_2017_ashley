@@ -118,14 +118,27 @@ public abstract class EntityEditor<T extends EntityEditor>{
     }
 
     //-------------------------------play actor animation(stop down)------------------------------------------------------
-    public EntityEditor animation(String animationName, float rotation) {
-        return animation(animationName, 0, rotation);
+
+    /**
+     *
+     * @param animationName
+     * @param rotation
+     * @param duration 如果<=0, 默认只播放一次
+     * @return
+     */
+    public EntityEditor animation(String animationName, float rotation, float duration) {
+        return animation(animationName, 0, rotation, duration);
     }
 
-    public EntityEditor animation(String animationName, int zIndex, float rotation) {
+    public EntityEditor animation(String animationName, int zIndex, float rotation, float duration) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         animationComponent.animation = ResourceManager.getActorAnimation(animationName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION);
-        animationComponent.maxStateTime = animationComponent.animation.getAnimationDuration();
+        if(duration <= 0){
+            animationComponent.maxStateTime = animationComponent.animation.getAnimationDuration();
+        }else{
+            animationComponent.maxStateTime = duration;
+        }
+
         animationComponent.animationName = animationName;
         animationComponent.stateTime = 0;
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);

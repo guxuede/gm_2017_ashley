@@ -6,7 +6,8 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.damage.HealByAction;
-import com.guxuede.gm.gdx.actions.entity.EffectsActorAction;
+import com.guxuede.gm.gdx.actions.entity.CreateEffectsOnActorPositionAction;
+import com.guxuede.gm.gdx.actions.entity.CreateEffectsAction;
 import com.guxuede.gm.gdx.actions.entity.RemoveEntityAction;
 import com.guxuede.gm.gdx.actions.movement.*;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
@@ -281,28 +282,24 @@ public final class A {
     }
     //////////////////////////////////////////////////////////////工具类 END///////////////////////////////////////////////////////////////////////
 
-    public static  BlinkAction blink1(Entity owner, Vector2 pos, String effectName){
+    public static BlinkAction blink1(Entity owner, Vector2 pos, String effectName){
         BlinkAction blinkAction = action(BlinkAction.class);
         blinkAction.setTargetPosition(pos);
         return blinkAction;
     }
 
-    public static HealByAction heal(Entity owner, Vector2 pos, float heal, float time){
-        HealByAction blinkAction = new HealByAction(heal, time);
-        return blinkAction;
+    public static Action heal(Entity owner, Vector2 pos, float heal, float time){
+        return parallel(
+                new HealByAction(heal, time),
+                effectsActorActionAndAttach(owner, "State1", time)
+        );
     }
 
 
-
     public  static Action effectsActorOnActorPosAction(final String effectName){
-        Action runnableAction = new Action() {
-            @Override
-            public boolean act(float delta) {
-                Mappers.actionCM.get(actor).addAction(actor,effectsActorAction(effectName,Mappers.positionCM.get(actor).position));
-                return true;
-            }
-        };
-        return runnableAction;
+        CreateEffectsOnActorPositionAction createEffectsOnActorPositionAction = action(CreateEffectsOnActorPositionAction.class);
+        createEffectsOnActorPositionAction.setEffectName(effectName);
+        return createEffectsOnActorPositionAction;
     }
 
     /**
@@ -311,12 +308,28 @@ public final class A {
      * @param pos
      * @return
      */
-    public  static EffectsActorAction effectsActorAction(String effectName, Vector2 pos){
+    public  static CreateEffectsAction effectsActorAction(String effectName, Vector2 pos){
         float duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION).getAnimationDuration();
-        EffectsActorAction action = action(EffectsActorAction.class);
+        CreateEffectsAction action = action(CreateEffectsAction.class);
         action.setPos(pos);
         action.setActorName(effectName);
         action.setActions(sequence(delay(duration),removeEntityAction()));
+        return action;
+    }
+
+    public  static CreateEffectsAction effectsActorActionAndAttach(Entity owner, String effectName, float duration){
+        Vector2 position = Mappers.positionCM.get(owner).position;
+        if(duration<=0){
+            duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION).getAnimationDuration();
+        }
+        CreateEffectsAction action = action(CreateEffectsAction.class);
+        action.setPos(position);
+        action.setDuration(duration);
+        action.setActorName(effectName);
+        action.setActions(parallel(
+                new ActorAttachedToAction(duration,owner),
+                sequence(delay(duration),removeEntityAction()))
+        );
         return action;
     }
 
@@ -326,8 +339,8 @@ public final class A {
      * @param pos
      * @return
      */
-    public  static EffectsActorAction effectsActorActionWithDeathAction(String effectName, Vector2 pos, Action actions,Action deathAction){
-        EffectsActorAction action = action(EffectsActorAction.class);
+    public  static CreateEffectsAction effectsActorActionWithDeathAction(String effectName, Vector2 pos, Action actions, Action deathAction){
+        CreateEffectsAction action = action(CreateEffectsAction.class);
         action.setPos(pos);
         action.setActorName(effectName);
         action.setActions(actions);
