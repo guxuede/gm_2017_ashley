@@ -25,6 +25,15 @@ public class LpcWithJumpParser extends AbstractRpgActorSpriteParser {
     private static final int IDLE_DOWN_ANIMATION_START_NUMBER = 24 * NUMBER_OF_FRAME_OF_ONE_LINE;
     private static final int IDLE_RIGHT_ANIMATION_START_NUMBER = 25 * NUMBER_OF_FRAME_OF_ONE_LINE;
 
+    private static final int SLASH_UP_ANIMATION_START_NUMBER = 12 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int SLASH_LEFT_ANIMATION_START_NUMBER = 13 * NUMBER_OF_FRAME_OF_ONE_LINE;//
+    private static final int SLASH_DOWN_ANIMATION_START_NUMBER = 14 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int SLASH_RIGHT_ANIMATION_START_NUMBER = 15 * NUMBER_OF_FRAME_OF_ONE_LINE;
+
+    private static final int SIT_UP_ANIMATION_START_NUMBER = 30 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int SIT_LEFT_ANIMATION_START_NUMBER = 31 * NUMBER_OF_FRAME_OF_ONE_LINE;//
+    private static final int SIT_DOWN_ANIMATION_START_NUMBER = 32 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int SIT_RIGHT_ANIMATION_START_NUMBER = 33 * NUMBER_OF_FRAME_OF_ONE_LINE;
 
     @Override
     protected ParseContext buildDefaultParserContext() {
@@ -61,6 +70,22 @@ public class LpcWithJumpParser extends AbstractRpgActorSpriteParser {
         animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_LEFT, parseAnimation(parseContext, IDLE_LEFT_ANIMATION_START_NUMBER, idleFrameCycle));
         animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_DOWN, parseAnimation(parseContext, IDLE_DOWN_ANIMATION_START_NUMBER, idleFrameCycle));
         animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_RIGHT, parseAnimation(parseContext, IDLE_RIGHT_ANIMATION_START_NUMBER, idleFrameCycle));
+
+
+        parseContext.frameDuration= 0.1f;
+        int[] slashFrameCycle = new int[]{0,1,2,3,4,5};
+        animationHolder.addAnimation(AnimationHolder.SLASH, AnimationHolder.DIRECTION_UP,parseAnimation(parseContext, SLASH_UP_ANIMATION_START_NUMBER, slashFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.SLASH, AnimationHolder.DIRECTION_LEFT,parseAnimation(parseContext, SLASH_LEFT_ANIMATION_START_NUMBER, slashFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.SLASH, AnimationHolder.DIRECTION_DOWN,parseAnimation(parseContext, SLASH_DOWN_ANIMATION_START_NUMBER, slashFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.SLASH, AnimationHolder.DIRECTION_RIGHT,parseAnimation(parseContext, SLASH_RIGHT_ANIMATION_START_NUMBER, slashFrameCycle));
+
+        parseContext.frameDuration= 0.1f;
+        int[] sitFrameCycle = new int[]{0};
+        animationHolder.addAnimation(AnimationHolder.SIT, AnimationHolder.DIRECTION_UP,parseAnimation(parseContext, SIT_UP_ANIMATION_START_NUMBER, sitFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.SIT, AnimationHolder.DIRECTION_LEFT,parseAnimation(parseContext, SIT_LEFT_ANIMATION_START_NUMBER, sitFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.SIT, AnimationHolder.DIRECTION_DOWN,parseAnimation(parseContext, SIT_DOWN_ANIMATION_START_NUMBER, sitFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.SIT, AnimationHolder.DIRECTION_RIGHT,parseAnimation(parseContext, SIT_RIGHT_ANIMATION_START_NUMBER, sitFrameCycle));
+
     }
 
 }

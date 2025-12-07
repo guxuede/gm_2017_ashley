@@ -33,7 +33,7 @@ public class ScriptSkill extends Skill {
     public void enter() {
         PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(owner);
         if(playerDataComponent!=null){
-            ActorPlayAnimationPack playAnimationPack = new ActorPlayAnimationPack(playerDataComponent.id,"spellcast",5);
+            ActorPlayAnimationPack playAnimationPack = new ActorPlayAnimationPack(playerDataComponent.id,"slash",2);
             playerDataComponent.outBoundPack(playAnimationPack);
             ActorPlaySkillPack playSkillPack = new ActorPlaySkillPack(playerDataComponent.id, this.getId() ,targetPos.x, targetPos.y);
             playerDataComponent.outBoundPack(playSkillPack);

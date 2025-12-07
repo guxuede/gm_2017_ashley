@@ -16,8 +16,11 @@ public class BloodComponent implements Component , Pool.Poolable{
 
 
     public void modify(float delta){
-        currentHitPoint = Math.max(0, Math.min(currentHitPoint + delta, hitPoint));
-        lastModifyTime = System.currentTimeMillis();
+        float modified = Math.max(0, Math.min(currentHitPoint + delta, hitPoint));
+        if(modified!=currentHitPoint){
+            currentHitPoint = modified;
+            lastModifyTime = System.currentTimeMillis();
+        }
     }
 
 

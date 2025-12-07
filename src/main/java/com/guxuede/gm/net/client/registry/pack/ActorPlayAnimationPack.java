@@ -48,7 +48,7 @@ public class ActorPlayAnimationPack extends NetPack implements PlayerPack {
 //        animationComponent.setCurrentAnimation(animationName, duration);
 
         ActionsComponent actionsComponent = Mappers.actionCM.get(entity);
-        actionsComponent.addAction(entity, new AnimationAction(animationName, 1f));
+        actionsComponent.addAction(entity, new AnimationAction(animationName, duration));
     }
 
 }

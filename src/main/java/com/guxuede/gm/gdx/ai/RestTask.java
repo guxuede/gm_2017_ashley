@@ -19,6 +19,9 @@ package com.guxuede.gm.gdx.ai;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
+import com.guxuede.gm.net.client.registry.pack.ActorPlayAnimationPack;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 
 /** @author implicit-invocation
  * @author davebaol */
@@ -31,6 +34,10 @@ public class RestTask extends LeafTask<Entity> {
 		System.out.println("RestTask");
 //		getObject().brainLog("YAWN - So tired...");
 		startTime = System.currentTimeMillis();
+		Entity dog = getObject();
+		PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(dog);
+		ActorPlayAnimationPack playAnimationPack = new ActorPlayAnimationPack(playerDataComponent.id,"sit",4);
+		playerDataComponent.outBoundPack(playAnimationPack);
 	}
 
 	@Override

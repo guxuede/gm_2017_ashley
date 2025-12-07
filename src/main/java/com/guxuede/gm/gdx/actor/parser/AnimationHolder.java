@@ -13,8 +13,10 @@ public class AnimationHolder {
 
     public static final int WALK = "walk".hashCode();
     public static final int IDLE = "idle".hashCode();
+    public static final int SLASH = "slash".hashCode();
     public static final int DEATH = "death".hashCode();
     public static final int SPELLCAST = "spellcast".hashCode();
+    public static final int SIT = "sit".hashCode();
 
     public static final int[] allAnimations = new int[]{WALK,IDLE,DEATH,SPELLCAST};
 
