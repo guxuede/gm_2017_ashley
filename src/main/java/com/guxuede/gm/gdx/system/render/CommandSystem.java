@@ -127,4 +127,25 @@ public class CommandSystem extends EntitySystem {
             engine.getSystem(GlobalNetPackSystem.class).outboundNetPack(playerLandingPack);
         }
     }
+
+    @CommandLine.Command(
+            name = "transport"  //transport x=0 y=0
+    )
+    public static class TransportCommand implements Runnable{
+
+        @CommandLine.Option(names = {"x"})
+        private String x;
+
+        @CommandLine.Option(names = {"y"})
+        private String y;
+
+        public TransportCommand() {
+        }
+
+        @Override
+        public void run() {
+
+        }
+    }
+
 }

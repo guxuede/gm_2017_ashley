@@ -130,4 +130,8 @@ abstract public class TemporalAction extends Action {
 	public void setReverse (boolean reverse) {
 		this.reverse = reverse;
 	}
+
+	public boolean isComplete() {
+		return complete;
+	}
 }

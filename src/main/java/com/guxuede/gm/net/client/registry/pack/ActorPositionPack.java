@@ -13,17 +13,20 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
 
     private int id;
     private final int direction;
+    public Vector2 acceleration = new Vector2();
     private final Vector2 position = new Vector2();
 
-    public ActorPositionPack(int id, int direction, Vector2 position) {
+    public ActorPositionPack(int id, int direction, Vector2 acceleration, Vector2 position) {
         this.id = id;
         this.direction = direction;
+        this.acceleration.set(acceleration);
         this.position.set(position);
     }
 
     public ActorPositionPack(ByteBuf data) {
         id = data.readInt();
         direction = data.readInt();
+        acceleration.set(data.readFloat(), data.readFloat());
         position.set(data.readFloat(), data.readFloat());
     }
 
@@ -31,6 +34,10 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
     public void write(ByteBuf data) {
         data.writeInt(id);
         data.writeInt(direction);
+
+        data.writeFloat(acceleration.x);
+        data.writeFloat(acceleration.y);
+
         data.writeFloat(position.x);
         data.writeFloat(position.y);
     }
@@ -44,8 +51,9 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
     @Override
     public void action(Engine engine, Entity entity) {
         PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(entity);
-        playerDataComponent.position.set(position);
         playerDataComponent.direction = direction;
+        playerDataComponent.position.set(position);
+        playerDataComponent.acceleration.set(acceleration);
     }
 
     @Override
@@ -53,6 +61,7 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
         return "ActorPositionPack{" +
                 "id=" + id +
                 ", direction=" + direction +
+                ", acceleration=" + acceleration +
                 ", position=" + position +
                 '}';
     }

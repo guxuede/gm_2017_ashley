@@ -22,6 +22,8 @@ import com.guxuede.gm.gdx.system.render.*;
 import com.guxuede.gm.net.system.EntityNetClientPackSystem;
 import com.guxuede.gm.net.system.GlobalNetPackSystem;
 
+import static com.guxuede.samplegame.DesktopLauncher.currentUserName;
+
 /**
  * Created by guxuede on 2017/5/30 .
  */
@@ -73,6 +75,10 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new GlobalNetPackSystem(engine));
         engine.addSystem(new CommandSystem(engine));
         engine.addSystem(new AttributeModifierSystemAfter(10000));
+        engine.addSystem(new AiSystem(1));
+
+        //for testing
+        engine.getSystem(CommandSystem.class).executeCommand(null, "/login password=123 username="+currentUserName);
     }
 
     @Override

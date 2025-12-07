@@ -52,4 +52,9 @@ abstract public class Acting extends Action {
         complete = false;
         time = 0;
     }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
 }

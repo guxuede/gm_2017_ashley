@@ -67,4 +67,15 @@
             af.gdxSequence(af.heal(owner,targetPos, 30, 10));
         </script>
     </skill>
+
+    <skill id="flyFireWithMe" name="flyFireWithMe" hotKey="J" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+        <description>
+            fly Fire With Me
+        </description>
+        <script>
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
+            af.gdxSequence(af.flyFireWithMe(owner,targetPos, 30, 10));
+        </script>
+    </skill>
+
 </skills>

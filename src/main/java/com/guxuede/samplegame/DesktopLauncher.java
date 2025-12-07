@@ -12,7 +12,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.ADVANCED);
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Demo Game";
+		currentUserName = (arg.length>0?arg[0]:" Unknown_"+System.nanoTime());
+		config.title = "Demo Game - " + currentUserName;
 		config.width = 1024;
 		config.height = 800;
 		new LwjglApplication(new GdxGame(), config);

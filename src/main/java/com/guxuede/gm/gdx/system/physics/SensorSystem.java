@@ -8,11 +8,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
-import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.SensorComponent;
 import com.guxuede.gm.gdx.system.render.StageSystem;
 
+/**
+ * get system input
+ */
 public class SensorSystem extends EntitySystem {
+    public static final Vector2 temp0Vector2 = new Vector2();
 
     private static final Family family = Family.all(SensorComponent.class).get();
     public static final int ACC = 1;
@@ -27,7 +30,7 @@ public class SensorSystem extends EntitySystem {
         if(viewActor!=null){
             Vector2 acc = processKeyEvent();
             SensorComponent sensorComponent = Mappers.sensorCM.get(viewActor);
-            sensorComponent.acceleration.set(acc);
+            sensorComponent.apply(acc);
         }
     }
 
@@ -59,7 +62,7 @@ public class SensorSystem extends EntitySystem {
                 accelY = 0;
             }
         }
-        TempObjects.temp0Vector2.set(accelX* ACC,accelY*ACC);
-        return TempObjects.temp0Vector2;
+        temp0Vector2.set(accelX* ACC,accelY*ACC);
+        return temp0Vector2;
     }
 }

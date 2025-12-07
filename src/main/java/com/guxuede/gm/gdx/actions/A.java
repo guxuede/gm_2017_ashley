@@ -291,10 +291,16 @@ public final class A {
     public static Action heal(Entity owner, Vector2 pos, float heal, float time){
         return parallel(
                 new HealByAction(heal, time),
-                effectsActorActionAndAttach(owner, "State1", time)
+                effectsActorActionAndAttach(owner, "State1", time, new ActorAttachedToAction(time,owner))
         );
     }
 
+    public static Action flyFireWithMe(Entity owner, Vector2 pos, float heal, float time){
+        return parallel(
+                new HealByAction(heal, time),
+                effectsActorActionAndAttach(owner, "redFireBall", time, new ActorBrandishedByAction(time,35,60,owner,pos))
+        );
+    }
 
     public  static Action effectsActorOnActorPosAction(final String effectName){
         CreateEffectsOnActorPositionAction createEffectsOnActorPositionAction = action(CreateEffectsOnActorPositionAction.class);
@@ -317,7 +323,7 @@ public final class A {
         return action;
     }
 
-    public  static CreateEffectsAction effectsActorActionAndAttach(Entity owner, String effectName, float duration){
+    public  static CreateEffectsAction effectsActorActionAndAttach(Entity owner, String effectName, float duration, Action action1){
         Vector2 position = Mappers.positionCM.get(owner).position;
         if(duration<=0){
             duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION).getAnimationDuration();
@@ -326,8 +332,7 @@ public final class A {
         action.setPos(position);
         action.setDuration(duration);
         action.setActorName(effectName);
-        action.setActions(parallel(
-                new ActorAttachedToAction(duration,owner),
+        action.setActions(parallel(action1,
                 sequence(delay(duration),removeEntityAction()))
         );
         return action;

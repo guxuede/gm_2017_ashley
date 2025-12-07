@@ -2,6 +2,7 @@ package com.guxuede.gm.gdx.entityEdit;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.gdx.component.ai.AiComponent;
 import com.guxuede.gm.net.component.PlayerDataComponent;
 
 /**
@@ -27,5 +28,7 @@ public class Mappers {
 
     public static final ComponentMapper<PlayerDataComponent> netPackCM = ComponentMapper.getFor(PlayerDataComponent.class);
     public static final ComponentMapper<HurtComponent> hurtCM = ComponentMapper.getFor(HurtComponent.class);
+
+    public static final ComponentMapper<AiComponent> aiCM = ComponentMapper.getFor(AiComponent.class);
 
 }

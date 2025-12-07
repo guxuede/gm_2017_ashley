@@ -22,10 +22,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
-import com.guxuede.gm.gdx.component.SensorComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
+import com.guxuede.gm.net.component.PlayerDataComponent;
 
 import static com.guxuede.gm.gdx.entityEdit.Mappers.actorStateCM;
 
@@ -34,7 +34,7 @@ public class SensorMovementSystem extends IteratingSystem {
     private final Vector2 temp = new Vector2();
 
     public SensorMovementSystem() {
-        super(Family.all(ActorStateComponent.class, PositionComponent.class, SensorComponent.class).get());
+        super(Family.all(ActorStateComponent.class, PositionComponent.class, PlayerDataComponent.class).get());
         this.priority = 1;
     }
 

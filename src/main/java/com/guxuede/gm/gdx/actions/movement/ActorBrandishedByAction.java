@@ -46,6 +46,9 @@ public class ActorBrandishedByAction extends TemporalAction {
     @Override
     protected void update(float percent) {
         PositionComponent sourceOwnerPositionComponent = Mappers.positionCM.get(sourceOwner);
+        if(sourceOwnerPositionComponent==null){
+            return;
+        }
         Vector2 sourceOwnerPosition = sourceOwnerPositionComponent.position;
 
         PositionComponent positionComponent = Mappers.positionCM.get(actor);

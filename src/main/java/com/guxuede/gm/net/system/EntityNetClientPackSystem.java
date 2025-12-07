@@ -53,30 +53,27 @@ public class EntityNetClientPackSystem extends IteratingSystem {
         if(viewActor == entity){
             SensorComponent sensorComponent = Mappers.sensorCM.get(entity);
             ActorStateComponent stateComponent = Mappers.actorStateCM.get(entity);
-            stateComponent.acceleration.set(sensorComponent.acceleration);
+            sensorComponent.applyToIfChanged(stateComponent.acceleration);
 
-            playerDataComponent.acceleration.set(stateComponent.acceleration);
-            playerDataComponent.direction = stateComponent.direction;
 
             PositionComponent positionComponent = Mappers.positionCM.get(entity);
-            if (positionComponent != null && !positionComponent.position.epsilonEquals(playerDataComponent.position)
-                    && (System.currentTimeMillis() - playerDataComponent.lastTimePositionReported) > 100) {
+            if ((!positionComponent.position.epsilonEquals(playerDataComponent.position)  && (System.currentTimeMillis() - playerDataComponent.lastTimePositionReported) > 100)
+            || !playerDataComponent.acceleration.epsilonEquals(playerDataComponent.acceleration)) {
+                playerDataComponent.acceleration.set(stateComponent.acceleration);
                 playerDataComponent.position.set(positionComponent.position);
+                playerDataComponent.direction = stateComponent.direction;
                 playerDataComponent.lastTimePositionReported = System.currentTimeMillis();
-                ActorPositionPack actorPositionPack = new ActorPositionPack(playerDataComponent.getId(), playerDataComponent.direction , playerDataComponent.position);
+                ActorPositionPack actorPositionPack = new ActorPositionPack(playerDataComponent.getId(), playerDataComponent.direction , playerDataComponent.acceleration, playerDataComponent.position);
                 playerDataComponent.outBoundPack(actorPositionPack);
             }
         }else{
             //不是本地角色, 接收服务器数据
-            //todo add network delay
             ActorStateComponent stateComponent = Mappers.actorStateCM.get(entity);
+            stateComponent.acceleration.set(playerDataComponent.acceleration);
 
             PositionComponent positionComponent = Mappers.positionCM.get(entity);
-            if (positionComponent != null && !positionComponent.position.epsilonEquals(playerDataComponent.position)) {
-                float expectTime = playerDataComponent.position.dst(positionComponent.position) / stateComponent.speed;
-                MoveToAction action = new MoveToAction(expectTime, playerDataComponent.position.x, playerDataComponent.position.y);
-                ActionsComponent actionsComponent = Mappers.actionCM.get(entity);
-                actionsComponent.setCurrentAction(entity, action);
+            if (positionComponent.position.dst(playerDataComponent.position) > 10) {
+                positionComponent.position.set(playerDataComponent.position);
                 playerDataComponent.lastTimePositionReported = System.currentTimeMillis();
             }
         }

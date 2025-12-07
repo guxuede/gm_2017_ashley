@@ -41,12 +41,12 @@ public class MapCollisionSystem extends IteratingSystem {
             float px = temp0Vector2.x;
             float py = temp0Vector2.y;
             //check position is collided
-            if ((physics.acceleration.x > 0 && collides(mapMask,px + bounds.maxx / 2, py)) || (physics.acceleration.x < 0 && collides(mapMask,px - bounds.maxx / 2, py))) {
-                physics.acceleration.x = physics.acceleration.x > 0?-1:1;
+            if ((physics.acceleration.x > 0 && collides(mapMask,px, py)) || (physics.acceleration.x < 0 && collides(mapMask,px, py))) {
+                physics.acceleration.x = 0;
                 physics.velocity.x = 0;
             }
-            if ((physics.acceleration.y > 0 && collides(mapMask,px, py + bounds.maxy / 2)) || (physics.acceleration.y < 0 && collides(mapMask,px, py - bounds.maxy / 2))) {
-                physics.acceleration.y = physics.acceleration.y > 0?-1:1;
+            if ((physics.acceleration.y > 0 && collides(mapMask,px, py)) || (physics.acceleration.y < 0 && collides(mapMask,px, py))) {
+                physics.acceleration.y = 0;
                 physics.velocity.y = 0;
             }
 

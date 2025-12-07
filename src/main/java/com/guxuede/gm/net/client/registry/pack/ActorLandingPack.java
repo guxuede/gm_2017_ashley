@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.component.TiledMapDataComponent;
+import com.guxuede.gm.gdx.component.ai.AiComponent;
 import com.guxuede.gm.gdx.system.render.TiledMapManagerSystem;
 import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
@@ -63,7 +64,11 @@ public class ActorLandingPack extends NetPack {
                 o.skills.add(ResourceManager.getSkillById("fireBall"));
                 o.skills.add(ResourceManager.getSkillById("blink"));
                 o.skills.add(ResourceManager.getSkillById("heal"));
+                o.skills.add(ResourceManager.getSkillById("flyFireWithMe"));
             }).buildToWorld();
+            AiComponent aiComponent = new AiComponent();
+            aiComponent.behaviorTree =  ResourceManager.behaviorTreeLibraryManager.createBehaviorTree("dog", userEntity);
+            userEntity.add(aiComponent);
             engine.getSystem(StageSystem.class).setViewActor(userEntity);
             processMap(engine);
         }else{

@@ -1,6 +1,17 @@
 package com.guxuede.gm.gdx;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.btree.BehaviorTree;
+import com.badlogic.gdx.ai.btree.Task;
+import com.badlogic.gdx.ai.btree.branch.Parallel;
+import com.badlogic.gdx.ai.btree.branch.Selector;
+import com.badlogic.gdx.ai.btree.branch.Sequence;
+import com.badlogic.gdx.ai.btree.decorator.AlwaysFail;
+import com.badlogic.gdx.ai.btree.decorator.Include;
+import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibrary;
+import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibraryManager;
+import com.badlogic.gdx.ai.btree.utils.BehaviorTreeParser;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Cursor;
@@ -16,6 +27,9 @@ import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.ActorJsonParse;
 import com.guxuede.gm.gdx.actor.parser.ActorSkillParse;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.ai.PlayTask;
+import com.guxuede.gm.gdx.ai.RestTask;
+import com.guxuede.gm.gdx.ai.WalkTask;
 import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
@@ -180,5 +194,55 @@ public class ResourceManager {
                 return new TextureAtlas(Gdx.files.internal(path));
             }
         });
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /// ////////////////AI
+    public static BehaviorTreeLibraryManager behaviorTreeLibraryManager = createActor();
+    public static BehaviorTreeLibraryManager createActor () {
+        BehaviorTreeLibraryManager libraryManager = BehaviorTreeLibraryManager.getInstance();
+        BehaviorTreeLibrary library = new BehaviorTreeLibrary(BehaviorTreeParser.DEBUG_HIGH);
+        registerDogBehavior(library);
+        libraryManager.setLibrary(library);
+        return libraryManager;
+    }
+
+    private static void registerDogBehavior (BehaviorTreeLibrary library) {
+        Include<Entity> include = new Include<Entity>();
+        include.subtree = "dog.actual";
+        BehaviorTree<Entity> includeBehavior = new BehaviorTree<Entity>(include);
+        library.registerArchetypeTree("dog", includeBehavior);
+
+        BehaviorTree<Entity> actualBehavior = new BehaviorTree<Entity>(createDogBehavior());
+        library.registerArchetypeTree("dog.actual", actualBehavior);
+    }
+
+    private static Task<Entity> createDogBehavior () {
+        Selector<Entity> selector = new Selector<Entity>();
+
+        {
+            Parallel<Entity> parallel = new Parallel<Entity>();
+            selector.addChild(parallel);
+            parallel.addChild(new AlwaysFail<Entity>(new RestTask()));
+        }
+
+        {
+            Sequence<Entity> sequence = new Sequence<Entity>();
+            selector.addChild(sequence);
+
+            sequence.addChild(new WalkTask());
+            sequence.addChild(new PlayTask());
+        }
+
+        return selector;
     }
 }
