@@ -12,13 +12,13 @@ public class GifSpriteParser extends DefaultSpriteParser {
         Animation<TextureRegion> textureRegionAnimation = GifDecoder.loadGIFAnimation(parseContext, Animation.PlayMode.NORMAL,null,Gdx.files.internal(parseContext.textureName).read());
 
 
-        animationHolder.addAnimation(AnimationHolder.WALK_DOWN_ANIMATION,textureRegionAnimation);
-        animationHolder.addAnimation(AnimationHolder.WALK_LEFT_ANIMATION,textureRegionAnimation);
-        animationHolder.addAnimation(AnimationHolder.WALK_RIGHT_ANIMATION,textureRegionAnimation);
-        animationHolder.addAnimation(AnimationHolder.WALK_UP_ANIMATION,textureRegionAnimation);
-        animationHolder.addAnimation(AnimationHolder.STOP_DOWN_ANIMATION,textureRegionAnimation);
-        animationHolder.addAnimation(AnimationHolder.STOP_LEFT_ANIMATION,textureRegionAnimation);
-        animationHolder.addAnimation(AnimationHolder.STOP_RIGHT_ANIMATION,textureRegionAnimation);
-        animationHolder.addAnimation(AnimationHolder.STOP_UP_ANIMATION,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.WALK, AnimationHolder.DIRECTION_DOWN,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.WALK,AnimationHolder.DIRECTION_LEFT,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.WALK,AnimationHolder.DIRECTION_RIGHT,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.WALK,AnimationHolder.DIRECTION_UP,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_DOWN,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_LEFT,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_RIGHT,textureRegionAnimation);
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_UP,textureRegionAnimation);
     }
 }

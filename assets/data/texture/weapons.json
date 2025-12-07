@@ -7,7 +7,7 @@
     "texture": "data/texture/skill/Icon sheet (48x48)",
     "animations": [
       {
-        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "name": "idle",
         "frameDuration": 0.05,
         "drawOffSetY": 20,
         "rotation": -45,
@@ -27,7 +27,7 @@
     "texture": "data/texture/skill/Icon sheet (48x48)",
     "animations": [
       {
-        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "name": "idle",
         "frameDuration": 0.05,
         "drawOffSetY": 20,
         "rotation": -135,
@@ -47,7 +47,7 @@
     "texture": "data/texture/skill/Icon sheet (48x48)",
     "animations": [
       {
-        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "name": "idle",
         "frameDuration": 0.05,
         "drawOffSetY": 20,
         "rotation": -45,

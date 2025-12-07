@@ -11,7 +11,7 @@
     "parser":"com.guxuede.gm.gdx.actor.parser.actor.SingleActor4FrameRpgSpriteParser",
     "sounds": [
       {
-        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation",
+        "name": "idle",
         "sound": "step1.ogg",
         "loop": "true"
       }

@@ -23,17 +23,17 @@ public class MultipleActor4FrameRpgSpriteParser extends AbstractRpgActorSpritePa
         int columNumberOfActor = numberOfActor%numberOfActorOfOneLine;
 
         int frameOffSet = rowNumberOfActor * numberOfActorOfOneLine * (numberOfFrameOfActorOneAction * numberOfActionOfActor) + columNumberOfActor * numberOfFrameOfActorOneAction;
-        animationHolder.addAnimation(AnimationHolder.WALK_DOWN_ANIMATION, parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine * 0), walkFrameCycle));
-        animationHolder.addAnimation(AnimationHolder.WALK_LEFT_ANIMATION,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*1), walkFrameCycle));
-        animationHolder.addAnimation(AnimationHolder.WALK_RIGHT_ANIMATION,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*2), walkFrameCycle));
-        animationHolder.addAnimation(AnimationHolder.WALK_UP_ANIMATION,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*3), walkFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.WALK,AnimationHolder.DIRECTION_DOWN, parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine * 0), walkFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.WALK,AnimationHolder.DIRECTION_LEFT,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*1), walkFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.WALK,AnimationHolder.DIRECTION_RIGHT,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*2), walkFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.WALK,AnimationHolder.DIRECTION_UP,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*3), walkFrameCycle));
 
         int[] idleFrameCycle = getIdleFrameCycle();
         parseContext.frameDuration = 0.5f;
-        animationHolder.addAnimation(AnimationHolder.STOP_DOWN_ANIMATION,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*0), idleFrameCycle));
-        animationHolder.addAnimation(AnimationHolder.STOP_LEFT_ANIMATION,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*1), idleFrameCycle));
-        animationHolder.addAnimation(AnimationHolder.STOP_RIGHT_ANIMATION,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*2), idleFrameCycle));
-        animationHolder.addAnimation(AnimationHolder.STOP_UP_ANIMATION,parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*3), idleFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_DOWN, parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*0), idleFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_LEFT, parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*1), idleFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_RIGHT, parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*2), idleFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_UP, parseAnimation(parseContext, frameOffSet + (numberOfFrameOfOneLine*3), idleFrameCycle));
     }
 
     protected int getNumberOfFrameOfOneLine(ParseContext parseContext) {

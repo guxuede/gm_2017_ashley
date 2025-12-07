@@ -7,14 +7,14 @@
     "texture": "data/texture/skill/fireBall",
     "animations": [
       {
-        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "name": "idle",
         "frameDuration": 0.1,
         "frames": [0,1,2,1]
       }
     ],
     "sounds": [
       {
-        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation",
+        "name": "idle",
         "sound": "fire_flying.wav",
         "loop": "true"
       }]
@@ -36,7 +36,7 @@
     "texture": "data/texture/skill/arrow",
     "animations": [
       {
-        "name": "walkDownAnimation,walkLeftAnimation,walkRightAnimation,walkUpAnimation,stopDownAnimation,stopLeftAnimation,stopRightAnimation,stopUpAnimation,deathAnimation",
+        "name": "idle",
         "frameDuration": 0.1,
         "rotation": 630,
         "frames": [0],

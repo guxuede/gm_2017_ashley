@@ -45,12 +45,12 @@ public abstract class EntityEditor<T extends EntityEditor>{
     }
 
     public EntityEditor actorState() {
-        actorState(ActorAnimationComponent.DOWN,false,0,0,0,0);
+        actorState(AnimationHolder.DIRECTION_DOWN,false,0,0,0,0);
         return this;
     }
 
     public EntityEditor actorState(float speed) {
-        actorState(ActorAnimationComponent.DOWN,false,0,0,0,0);
+        actorState(AnimationHolder.DIRECTION_DOWN,false,0,0,0,0);
         return this;
     }
 
@@ -80,7 +80,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
 
     //----------------------------------as actor---------------------------------------------------------------------------
     public EntityEditor actor(String actorName) {
-        return actor(actorName, ActorAnimationComponent.DOWN ,false,0);
+        return actor(actorName, AnimationHolder.DIRECTION_DOWN ,false,0);
     }
 
     public EntityEditor actor(String actorName, int direction, boolean isMoving, int zIndex) {
@@ -90,7 +90,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
     }
 
     public EntityEditor actor(ActorHolder actorHolder) {
-        return actor(actorHolder, ActorAnimationComponent.DOWN ,false,0);
+        return actor(actorHolder, AnimationHolder.DIRECTION_DOWN ,false,0);
     }
 
     public EntityEditor actor(ActorHolder actorHolder, int direction, boolean isMoving, int zIndex) {
@@ -132,7 +132,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
 
     public EntityEditor animation(String animationName, int zIndex, float rotation, float duration) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
-        animationComponent.animation = ResourceManager.getActorAnimation(animationName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION);
+        animationComponent.animation = ResourceManager.getActorAnimation(animationName).getAnimation(AnimationHolder.IDLE, AnimationHolder.DIRECTION_DOWN);
         if(duration <= 0){
             animationComponent.maxStateTime = animationComponent.animation.getAnimationDuration();
         }else{

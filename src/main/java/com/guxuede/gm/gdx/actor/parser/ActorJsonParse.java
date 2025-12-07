@@ -13,15 +13,6 @@ import java.util.List;
  */
 public class ActorJsonParse {
 
-    public static final String WALK_DOWN_ANIMATION = "walkDownAnimation";
-    public static final String WALK_LEFT_ANIMATION = "walkLeftAnimation";
-    public static final String WALK_RIGHT_ANIMATION = "walkRightAnimation";
-    public static final String WALK_UP_ANIMATION = "walkUpAnimation";
-    public static final String STOP_DOWN_ANIMATION = "stopDownAnimation";
-    public static final String STOP_LEFT_ANIMATION = "stopLeftAnimation";
-    public static final String STOP_RIGHT_ANIMATION = "stopRightAnimation";
-    public static final String STOP_UP_ANIMATION = "stopUpAnimation";
-    public static final String DEATH_ANIMATION = "deathAnimation";
 
     public List<ActorHolder> parse(FileHandle fileHandle){
         JsonReader jsonReader = new JsonReader();

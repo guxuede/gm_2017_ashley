@@ -315,7 +315,7 @@ public final class A {
      * @return
      */
     public  static CreateEffectsAction effectsActorAction(String effectName, Vector2 pos){
-        float duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION).getAnimationDuration();
+        float duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_DOWN).getAnimationDuration();
         CreateEffectsAction action = action(CreateEffectsAction.class);
         action.setPos(pos);
         action.setActorName(effectName);
@@ -326,7 +326,7 @@ public final class A {
     public  static CreateEffectsAction effectsActorActionAndAttach(Entity owner, String effectName, float duration, Action action1){
         Vector2 position = Mappers.positionCM.get(owner).position;
         if(duration<=0){
-            duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.STOP_DOWN_ANIMATION).getAnimationDuration();
+            duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_DOWN).getAnimationDuration();
         }
         CreateEffectsAction action = action(CreateEffectsAction.class);
         action.setPos(position);
@@ -465,7 +465,7 @@ public final class A {
     public static Action animation(Entity owner, String effectName){
         AnimationComponent animationComponent = Mappers.animationCM.get(owner);
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(owner);
-        animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(effectName.hashCode());
+        animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(effectName.hashCode(),AnimationHolder.DIRECTION_DOWN);
         SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }

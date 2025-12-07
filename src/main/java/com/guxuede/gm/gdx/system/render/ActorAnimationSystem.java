@@ -27,7 +27,7 @@ public class ActorAnimationSystem extends IteratingSystem {
         if(stateComponent.adhotAnimation !=null){
             if(stateComponent.adhotAnimationTime <= stateComponent.adhotAnimationDuration){
                 AnimationComponent animationComponent = Mappers.animationCM.get(entity);
-                animationComponent.animation = stateComponent.animationHolder.getAnimation(stateComponent.adhotAnimation.hashCode());
+                animationComponent.animation = stateComponent.animationHolder.getAnimation(stateComponent.adhotAnimation.hashCode(), stateComponent.direction);
                 stateComponent.adhotAnimationTime += deltaTime;
                 return;
             }else{
@@ -40,48 +40,15 @@ public class ActorAnimationSystem extends IteratingSystem {
 
         //moving
         if(stateComponent.isMoving){
-            switch (stateComponent.direction) {
-                case AnimationComponent.UP:
-                    doAnimation(entity,deltaTime,AnimationHolder.WALK_UP_ANIMATION);
-                    break;
-                case AnimationComponent.DOWN:
-                    doAnimation(entity,deltaTime,AnimationHolder.WALK_DOWN_ANIMATION);
-                    break;
-                case AnimationComponent.RIGHT:
-                    doAnimation(entity,deltaTime,AnimationHolder.WALK_RIGHT_ANIMATION);
-                    break;
-                case AnimationComponent.LEFT:
-                    doAnimation(entity,deltaTime,AnimationHolder.WALK_LEFT_ANIMATION);
-                    break;
-                default:
-                    doAnimation(entity,deltaTime,AnimationHolder.WALK_DOWN_ANIMATION);
-                    break;
-            }
+            doAnimation(entity,deltaTime,AnimationHolder.WALK, stateComponent.direction);
         }else{
-            //idel
-            switch (stateComponent.direction) {
-                case AnimationComponent.UP:
-                    doAnimation(entity,deltaTime,AnimationHolder.STOP_UP_ANIMATION);
-                    break;
-                case AnimationComponent.DOWN:
-                    doAnimation(entity,deltaTime,AnimationHolder.STOP_DOWN_ANIMATION);
-                    break;
-                case AnimationComponent.RIGHT:
-                    doAnimation(entity,deltaTime,AnimationHolder.STOP_RIGHT_ANIMATION);
-                    break;
-                case AnimationComponent.LEFT:
-                    doAnimation(entity,deltaTime,AnimationHolder.STOP_LEFT_ANIMATION);
-                    break;
-                default:
-                    doAnimation(entity,deltaTime,AnimationHolder.STOP_DOWN_ANIMATION);
-                    break;
-            }
+            doAnimation(entity,deltaTime,AnimationHolder.IDLE, stateComponent.direction);
         }
     }
 
-    public void doAnimation(Entity entity, float deltaTime,int animationName){
+    public void doAnimation(Entity entity, float deltaTime,int animationName, int direction){
         AnimationComponent animationComponent = Mappers.animationCM.get(entity);
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(entity);
-        animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(animationName);
+        animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(animationName, direction);
     }
 }
