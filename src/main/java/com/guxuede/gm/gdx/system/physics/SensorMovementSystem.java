@@ -74,7 +74,6 @@ public class SensorMovementSystem extends IteratingSystem {
         if(stateComponent.isMoving) {
             positionComponent.degrees = angle;
             stateComponent.direction = convertDegreesToDirection(angle);
-            System.out.println(stateComponent.direction);
         }
     }
 
@@ -86,7 +85,7 @@ public class SensorMovementSystem extends IteratingSystem {
             direction = ActorStateComponent.LEFT;
         }else if(degrees >= 200 && degrees < 350){
             direction = ActorStateComponent.DOWN;
-        }else if(degrees >= 350 || degrees < 45){
+        }else if(degrees >= 350 || degrees < 30){
             direction = ActorStateComponent.RIGHT;
         }
         return direction;
