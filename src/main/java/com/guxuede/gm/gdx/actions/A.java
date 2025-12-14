@@ -14,6 +14,7 @@ import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 import com.guxuede.gm.gdx.component.AnimationComponent;
+import com.guxuede.gm.gdx.component.TeamComponent;
 import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 
@@ -429,6 +430,8 @@ public final class A {
 
     public static Action createFireBall(Entity owner, Vector2 pos, String effectName){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        TeamComponent teamComponent = Mappers.teamCM.get(owner);
+
 //        Mappers.actionCM.get(owner).addAction(owner, new ActorRepelAction(pos,10, 0.5f));
         //MoveToAction
         //new MoveAsSnackToAction(5, pos.x,pos.y)
@@ -442,6 +445,7 @@ public final class A {
                                 .actorState()
                                 .dynamicDirection()
                                 .canHurt(10, 20)
+                                .team(teamComponent.id)
                                 .actor("fireBall1")
                                 .pos(ownerPos.x,ownerPos.y)
                                 .buildToWorld();
@@ -466,13 +470,14 @@ public final class A {
     }
 
     public static Action swordBrandish(Entity owner, Vector2 pos, String effectName, float intervalTime){
-//        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        TeamComponent teamComponent = Mappers.teamCM.get(owner);
 
         Entity sword = E.create().actions(sequence(
                 new ActorBrandishedByAction(0.5f, 60F, (float) Math.PI, owner, pos), new RemoveEntityAction()))
                 .actorState()
                 .actor("sword")
                 .canHurt(10, 20)
+                .team(teamComponent.id)
                 .pos(0, 0)//可能会露馅,位置0的人能看到
                 .buildToWorld();
 
@@ -483,6 +488,7 @@ public final class A {
 
     public static Action bow(Entity owner, Vector2 pos, String effectName, float intervalTime){
         Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        TeamComponent teamComponent = Mappers.teamCM.get(owner);
         E.create().actions(sequence(new ActorBrandishedByAction(0.5f, 15, 0.001f, owner, pos),new RemoveEntityAction()))
                 .actorState()
                 .actor("bow")
@@ -490,6 +496,7 @@ public final class A {
                 .buildToWorld();
         E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion"),new RemoveEntityAction()))
                 .actorState()
+                .team(teamComponent.id)
                 .dynamicDirection()
                 .actor("arrow")
                 .pos(ownerPos.x,ownerPos.y)

@@ -80,7 +80,7 @@ public class ActorLandingPack extends NetPack {
         })
                 .actorState(directionInDegrees, false, 0,0,0,0)
                 .actor(character).pos(x, y)
-                .actions().bounds(48, 48).blood(100, 65);
+                .actions().bounds(48, 48).blood(100, 65).team(id);
     }
 
     private void processMap(Engine engine){

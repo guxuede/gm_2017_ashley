@@ -231,6 +231,13 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
+    public EntityEditor team(int teamId){
+        TeamComponent component = edit.create(TeamComponent.class);
+        component.id = teamId;
+        entity.add(component);
+        return this;
+    }
+
 
     public EntityEditor sound(String sound,boolean loop){
         return sound(ResourceManager.getSoundOrLoad(sound),loop);

@@ -28,6 +28,7 @@ public class Mappers {
 
     public static final ComponentMapper<PlayerDataComponent> netPackCM = ComponentMapper.getFor(PlayerDataComponent.class);
     public static final ComponentMapper<HurtComponent> hurtCM = ComponentMapper.getFor(HurtComponent.class);
+    public static final ComponentMapper<TeamComponent> teamCM = ComponentMapper.getFor(TeamComponent.class);
 
     public static final ComponentMapper<AiComponent> aiCM = ComponentMapper.getFor(AiComponent.class);
 
