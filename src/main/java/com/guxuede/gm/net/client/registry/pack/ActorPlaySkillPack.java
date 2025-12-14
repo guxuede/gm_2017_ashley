@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.actions.GdxSequenceAction;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
-import com.guxuede.gm.gdx.component.skill.Skill;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.net.client.pack.utils.PackageUtils;
 import com.guxuede.gm.net.client.registry.NetPack;

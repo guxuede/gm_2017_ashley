@@ -2,7 +2,6 @@ package com.guxuede.gm.gdx.actions.buff;
 
 import com.badlogic.gdx.math.Interpolation;
 import com.guxuede.gm.gdx.actions.RelativeTemporalAction;
-import com.guxuede.gm.gdx.actions.TemporalAction;
 import com.guxuede.gm.gdx.modifier.AnyAttributeModifier;
 import com.guxuede.gm.gdx.modifier.AttributeModifier;
 

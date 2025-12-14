@@ -8,9 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.guxuede.gm.gdx.component.ShadowComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.ResourceManager;
-import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
-import com.guxuede.gm.gdx.component.PresentableComponent;
 
 /**
  * Created by guxuede on 2017/5/31 .

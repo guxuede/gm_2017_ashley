@@ -1,7 +1,6 @@
 package com.guxuede.gm.gdx.actor.parser;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.guxuede.gm.gdx.ResourceManager;
 
 public class ParseContext {
     public String textureName;

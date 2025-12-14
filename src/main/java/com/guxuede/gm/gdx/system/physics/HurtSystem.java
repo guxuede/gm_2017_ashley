@@ -16,7 +16,6 @@ import com.guxuede.gm.gdx.component.ActionsComponent;
 import com.guxuede.gm.gdx.component.BloodComponent;
 import com.guxuede.gm.gdx.component.HurtComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
-import com.guxuede.gm.gdx.entityEdit.E;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.modifier.AnyAttributeModifier;
 import com.guxuede.gm.gdx.modifier.HighAttribute;

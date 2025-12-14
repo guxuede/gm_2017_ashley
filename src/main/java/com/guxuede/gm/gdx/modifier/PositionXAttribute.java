@@ -1,7 +1,6 @@
 package com.guxuede.gm.gdx.modifier;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 

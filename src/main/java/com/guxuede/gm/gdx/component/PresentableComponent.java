@@ -3,7 +3,6 @@ package com.guxuede.gm.gdx.component;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 
 public class PresentableComponent implements Component, Pool.Poolable {

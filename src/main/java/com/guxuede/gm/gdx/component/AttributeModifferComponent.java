@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
 import com.guxuede.gm.gdx.modifier.Attribute;
 import com.guxuede.gm.gdx.modifier.AttributeModifier;
-import com.guxuede.gm.gdx.modifier.HighAttribute;
 
 import java.util.HashMap;
 import java.util.Map;

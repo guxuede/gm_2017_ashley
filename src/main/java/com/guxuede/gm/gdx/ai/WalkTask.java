@@ -21,11 +21,8 @@ import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.guxuede.gm.gdx.actions.movement.MoveToAction;
 import com.guxuede.gm.gdx.actions.movement.bysensor.ActorMoveToAction;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
-
-import java.util.Random;
 
 /** @author implicit-invocation
  * @author davebaol */
