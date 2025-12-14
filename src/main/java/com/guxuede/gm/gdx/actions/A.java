@@ -442,12 +442,11 @@ public final class A {
                 (sequence(delay(0.25f),new Action() {
                     @Override
                     public boolean act(float delta) {
-                        System.out.println("fireball");
                         E.create().actions(sequence(new ActorMoveToPointAction(pos.x,pos.y, 400),effectsActorOnActorPosAction("redFireBallExplosion1"),new RemoveEntityAction()))
                                 .actorState()
                                 .dynamicDirection()
                                 .canHurt(10, 20)
-                                .actor("redFireBall")
+                                .actor("fireBall1")
                                 .pos(ownerPos.x,ownerPos.y)
                                 .buildToWorld();
                         return true;
@@ -478,7 +477,8 @@ public final class A {
                 .canHurt(10, 20)
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
-        SequenceAction sequenceAction = sequence();
+        SequenceAction sequenceAction = sequence(effectsActorAction("slash_light",pos));
+//        SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }
 

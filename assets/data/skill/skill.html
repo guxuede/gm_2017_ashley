@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--suppress ALL -->
 <skills>
-    <skill id="burstFire" name="Burst Fire" hotKey="B" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="10">
+    <skill id="burstFire" name="Burst Fire" hotKey="B" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="10"
+           spellcastAnimation = "spellcast"
+           spellcastAnimationDuration="0"
+           actionDelay="1">
         <description>
             在你前面产生一拍爆裂雷
         </description>
@@ -10,7 +14,11 @@
             af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"dichi",0.1,35,5));
         </script>
     </skill>
-    <skill id="huijian" name="Burst Fire" hotKey="N" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="10">
+    <skill id="huijian" name="Burst Fire" hotKey="N" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+        skillCooldownTime="10"
+        spellcastAnimation = "slash"
+        spellcastAnimationDuration="0"
+        actionDelay="0">
         <description>
             挥剑
         </description>
@@ -19,7 +27,11 @@
             af.gdxSequence(af.swordBrandish(owner,targetPos,"sword",0.05));
         </script>
     </skill>
-    <skill id="bow" name="Burst Fire" hotKey="R" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="10">
+    <skill id="bow" name="Burst Fire" hotKey="R" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="10"
+           spellcastAnimation = "slash"
+           spellcastAnimationDuration="0"
+           actionDelay="0">
         <description>
             弓箭
         </description>
@@ -28,7 +40,11 @@
             af.gdxSequence(af.bow(owner,targetPos,"bow",0.05));
         </script>
     </skill>
-    <skill id="meteorite" name="Meteorite" hotKey="M" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+    <skill id="meteorite" name="Meteorite" hotKey="M" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="6"
+           spellcastAnimation = "spellcast"
+           spellcastAnimationDuration="0"
+           actionDelay="1">
         <description>
             从天而降的陨石，造成大量伤害，并且击晕
         </description>
@@ -38,7 +54,11 @@
         </script>
     </skill>
 
-    <skill id="fireBall" name="FireBall" hotKey="F" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+    <skill id="fireBall" name="FireBall" hotKey="F" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="6"
+           spellcastAnimation = "spellcast"
+           spellcastAnimationDuration="0"
+           actionDelay="1">
         <description>
             扔出个火球
         </description>
@@ -48,7 +68,11 @@
         </script>
     </skill>
 
-    <skill id="blink" name="blink" hotKey="V" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+    <skill id="blink" name="blink" hotKey="V" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="6"
+           spellcastAnimation = "slash"
+           spellcastAnimationDuration="0"
+           actionDelay="1">
         <description>
             blink
         </description>
@@ -58,7 +82,11 @@
         </script>
     </skill>
 
-    <skill id="heal" name="heal" hotKey="H" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+    <skill id="heal" name="heal" hotKey="H" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+            skillCooldownTime="6"
+            spellcastAnimation = "spellcast"
+            spellcastAnimationDuration="0"
+            actionDelay="1">
         <description>
             heal myself
         </description>
@@ -68,7 +96,11 @@
         </script>
     </skill>
 
-    <skill id="flyFireWithMe" name="flyFireWithMe" hotKey="J" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn" skillCooldownTime="6">
+    <skill id="flyFireWithMe" name="flyFireWithMe" hotKey="J" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="6"
+           spellcastAnimation = "spellcast"
+           spellcastAnimationDuration="0"
+           actionDelay="1">
         <description>
             fly Fire With Me
         </description>

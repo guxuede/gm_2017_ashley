@@ -3,7 +3,9 @@ package com.guxuede.gm.gdx.system.render;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.basic.libgdx.MathUtils;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.AnimationComponent;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
@@ -23,26 +25,33 @@ public class ActorAnimationSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         ActorAnimationComponent stateComponent = Mappers.animationHolderCM.get(entity);
 
-        //adhot Animation have high priority
-        if(stateComponent.adhotAnimation !=null){
-            if(stateComponent.adhotAnimationTime <= stateComponent.adhotAnimationDuration){
+        //actor animation have high priority
+        if(stateComponent.currentAnimation !=null){
+            if(stateComponent.currentAnimationTime ==0) {//初始化
                 AnimationComponent animationComponent = Mappers.animationCM.get(entity);
-                animationComponent.animation = stateComponent.animationHolder.getAnimation(stateComponent.adhotAnimation.hashCode(), stateComponent.direction);
-                stateComponent.adhotAnimationTime += deltaTime;
+                Animation animation = stateComponent.animationHolder.getAnimation(stateComponent.currentAnimation.hashCode(), MathUtils.convertDegreesToDirection(stateComponent.directionInDegrees));
+                animationComponent.animation = animation;
+                animationComponent.stateTime = 0;
+                if(stateComponent.currentAnimationDuration <=0) {
+                    stateComponent.currentAnimationDuration = animation.getAnimationDuration();//纠正
+                }
+            }
+
+            if(stateComponent.currentAnimationTime <= stateComponent.currentAnimationDuration){
+                stateComponent.currentAnimationTime += deltaTime;
                 return;
             }else{
-                stateComponent.adhotAnimation = null;
-                stateComponent.adhotAnimationTime = 0;
-                stateComponent.adhotAnimationDuration = 0;
+                stateComponent.currentAnimation = null;
+                stateComponent.currentAnimationTime = 0;
+                stateComponent.currentAnimationDuration = 0;
             }
         }
 
-
-        //moving
+        //then process moving and idle animation
         if(stateComponent.isMoving){
-            doAnimation(entity,deltaTime,AnimationHolder.WALK, stateComponent.direction);
+            doAnimation(entity,deltaTime,AnimationHolder.WALK, MathUtils.convertDegreesToDirection(stateComponent.directionInDegrees));
         }else{
-            doAnimation(entity,deltaTime,AnimationHolder.IDLE, stateComponent.direction);
+            doAnimation(entity,deltaTime,AnimationHolder.IDLE, MathUtils.convertDegreesToDirection(stateComponent.directionInDegrees));
         }
     }
 

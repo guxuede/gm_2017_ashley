@@ -54,10 +54,10 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
-    public EntityEditor actorState(int direction,boolean isMoving, float vx, float vy, float acx ,float acy, float speed) {
+    public EntityEditor actorState(float directionInDegrees,boolean isMoving, float vx, float vy, float acx ,float acy, float speed) {
         ActorStateComponent actorStateComponent = edit.create(ActorStateComponent.class);
         actorStateComponent.isMoving = isMoving;
-        actorStateComponent.direction = direction;
+        actorStateComponent.directionInDegrees = directionInDegrees;
         actorStateComponent.velocity.set(vx,vy);
         actorStateComponent.acceleration.set(acx,acy);
         actorStateComponent.speed = speed;
@@ -65,8 +65,8 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
-    public EntityEditor actorState(int direction,boolean isMoving, float vx, float vy, float acx ,float acy) {
-        actorState(direction, isMoving, vx, vy, acx, acy, 100);
+    public EntityEditor actorState(float directionInDegrees,boolean isMoving, float vx, float vy, float acx ,float acy) {
+        actorState(directionInDegrees, isMoving, vx, vy, acx, acy, 100);
         return this;
     }
 
@@ -96,7 +96,7 @@ public abstract class EntityEditor<T extends EntityEditor>{
     public EntityEditor actor(ActorHolder actorHolder, int direction, boolean isMoving, int zIndex) {
         ActorAnimationComponent actorAnimationComponent = edit.create(ActorAnimationComponent.class);
         actorAnimationComponent.animationHolder = actorHolder.animationHolder;
-        actorAnimationComponent.direction = direction;
+        actorAnimationComponent.directionInDegrees = direction;
         actorAnimationComponent.isMoving = isMoving;
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
@@ -139,7 +139,6 @@ public abstract class EntityEditor<T extends EntityEditor>{
             animationComponent.maxStateTime = duration;
         }
 
-        animationComponent.animationName = animationName;
         animationComponent.stateTime = 0;
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
         presentableComponent.zIndex = zIndex;
@@ -152,7 +151,6 @@ public abstract class EntityEditor<T extends EntityEditor>{
     public EntityEditor animation(String animationName,Animation animation) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         animationComponent.animation = animation;
-        animationComponent.animationName = animationName;
         animationComponent.stateTime = 0;
         entity.add(animationComponent);
         return this;

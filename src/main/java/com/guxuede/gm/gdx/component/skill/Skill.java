@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
+import com.guxuede.gm.gdx.actions.Action;
 
 import static com.guxuede.gm.gdx.component.skill.SkillTargetTypeEnum.*;
 
@@ -34,9 +35,7 @@ public abstract class Skill implements Pool.Poolable,Cloneable {
         return false;
     }
 
-    public void enter(){
-
-    }
+    public abstract Action play();
 
     public void exit() {
         reset();

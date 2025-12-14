@@ -2,7 +2,6 @@ package com.guxuede.gm.gdx.actor.parser;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
 import com.guxuede.gm.gdx.component.skill.SkillTargetTypeEnum;
@@ -11,7 +10,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.ListIterator;
@@ -46,6 +44,10 @@ public class ActorSkillParse {
                 skill.setScript(script);
                 skill.setTargetType(targetType);
                 skill.setSkillCooldownTime(skillCooldownTime);
+
+                skill.setSpellcastAnimation(node.attr("spellcastAnimation"));
+                skill.setSpellcastAnimationDuration(Float.parseFloat(node.attr("spellcastAnimationDuration")));
+                skill.setActionDelay(Float.parseFloat(node.attr("actionDelay")));
                 //skill.setIcon(new TextureRegionDrawable(ResourceManager.getTextureRegion(icon)));
                 skills.put(skillId,skill);
             }

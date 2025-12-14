@@ -27,7 +27,7 @@ public class ActorLandingPack extends NetPack {
     private int id;
     private float x, y;
     private String character;
-    private int direction;
+    private float directionInDegrees;
 
     public ActorLandingPack(ByteBuf data) {
         super(data);
@@ -37,7 +37,7 @@ public class ActorLandingPack extends NetPack {
         this.character = PackageUtils.readString(data);
         this.x = data.readFloat();
         this.y = data.readFloat();
-        this.direction = data.readInt();
+        this.directionInDegrees = data.readFloat();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ActorLandingPack extends NetPack {
         PackageUtils.writeString(character, data);
         data.writeFloat(this.x);
         data.writeFloat(this.y);
-        data.writeInt(this.direction);
+        data.writeFloat(this.directionInDegrees);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class ActorLandingPack extends NetPack {
             e.setId(id);
             e.position.set(x, y);
         })
-                .actorState(direction, false, 0,0,0,0)
+                .actorState(directionInDegrees, false, 0,0,0,0)
                 .actor(character).pos(x, y)
                 .actions().bounds(48, 48).blood(100, 65);
     }

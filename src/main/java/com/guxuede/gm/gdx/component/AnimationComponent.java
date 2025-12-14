@@ -13,12 +13,10 @@ import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.basic.libgdx.SoundUtils;
 
 public class AnimationComponent implements Component , Pool.Poolable{
-    public static final int STOP=0, DOWN=1,LEFT=2,RIGHT=3,UP=4;
     //TODO support AnimatedTiledMapTile.
     public Animation<TextureRegion> animation;
     public float stateTime;
     public float maxStateTime = Float.MAX_VALUE;
-    public String animationName;
 
     public TextureRegion currentFrameIndex;
     public long soundId = -1;
@@ -66,7 +64,6 @@ public class AnimationComponent implements Component , Pool.Poolable{
          animation = null;
          stateTime = 0;
          maxStateTime = Float.MAX_VALUE;
-         animationName = null;
 
         currentFrameIndex = null;
         soundId = -1;

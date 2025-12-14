@@ -1,6 +1,7 @@
 package com.guxuede.gm.gdx.basic.libgdx;
 
 import com.badlogic.gdx.math.Vector2;
+import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 
 public class MathUtils {
 
@@ -35,7 +36,23 @@ public class MathUtils {
     public static float getAngle(Vector2 p1, Vector2 p2){
         return getAngle(p1.x,p1.y,p2.x,p2.y);
     }
-	
+
+
+    public static int convertDegreesToDirection(float degrees){
+        int direction = 0;
+        if(degrees >= 30 && degrees < 165){
+            direction = AnimationHolder.DIRECTION_UP;
+        }else if(degrees >= 165 && degrees < 200){
+            direction = AnimationHolder.DIRECTION_LEFT;
+        }else if(degrees >= 200 && degrees < 350){
+            direction = AnimationHolder.DIRECTION_DOWN;
+        }else if(degrees >= 350 || degrees < 30){
+            direction = AnimationHolder.DIRECTION_RIGHT;
+        }
+        return direction;
+    }
+
+
     /**
      * 返回从此 Point2D 到指定点的距离的平方
      * Returns the square of the distance between two points.

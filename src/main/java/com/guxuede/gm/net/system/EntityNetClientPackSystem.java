@@ -4,8 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.guxuede.gm.gdx.actions.movement.MoveToAction;
-import com.guxuede.gm.gdx.component.ActionsComponent;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
@@ -61,9 +59,9 @@ public class EntityNetClientPackSystem extends IteratingSystem {
             || !playerDataComponent.acceleration.epsilonEquals(playerDataComponent.acceleration)) {
                 playerDataComponent.acceleration.set(stateComponent.acceleration);
                 playerDataComponent.position.set(positionComponent.position);
-                playerDataComponent.direction = stateComponent.direction;
+                playerDataComponent.directionInDegrees = stateComponent.directionInDegrees;
                 playerDataComponent.lastTimePositionReported = System.currentTimeMillis();
-                ActorPositionPack actorPositionPack = new ActorPositionPack(playerDataComponent.getId(), playerDataComponent.direction , playerDataComponent.acceleration, playerDataComponent.position);
+                ActorPositionPack actorPositionPack = new ActorPositionPack(playerDataComponent.getId(), playerDataComponent.directionInDegrees, playerDataComponent.acceleration, playerDataComponent.position);
                 playerDataComponent.outBoundPack(actorPositionPack);
             }
         }else{

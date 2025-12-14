@@ -21,10 +21,11 @@ public class ActorStateComponent implements Component, Pool.Poolable{
             LIFE_STATUS_DEAD=0x08,//实体处于死亡状态，无敌不可攻击不可控制，并有死亡动画，且有尸体消亡动画,死亡完成后进入LIFE_STATUS_DESTORY
             LIFE_STATUS_DESTROY =0x10;//实体处于摧毁状态，退出世界之外，系统将不久销毁它，内存空间将清理
 
-    public static final int STOP=0, DOWN=1,LEFT=2,RIGHT=3,UP=4;
+    public static final int DIRECTION_IN_DEGREES_DOWN = 270;
+
 
     public long id;
-    public int direction=DOWN;
+    public float directionInDegrees = DIRECTION_IN_DEGREES_DOWN;
     public float speed=100;
     public boolean isMoving;
     public float visualRadius=100;
@@ -61,11 +62,15 @@ public class ActorStateComponent implements Component, Pool.Poolable{
         return false;
     }
 
+    public void setDirectionInDegrees(float directionInDegrees) {
+        this.directionInDegrees = directionInDegrees;
+    }
+
     @Override
     public void reset() {
 
          id = 0;
-        direction=DOWN;
+        directionInDegrees =0;
         speed=100;
         isMoving = false;
         visualRadius=100;

@@ -1,5 +1,6 @@
 package com.guxuede.gm.gdx.actions.animation;
 
+import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.actions.TemporalAction;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
@@ -10,23 +11,33 @@ import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 public class AnimationAction extends TemporalAction {
 
     private final String animationName;
+    private final float directionInDegrees;
 
+    public AnimationAction(String animationName, float directionInDegrees, float duration){
+        this.animationName = animationName;
+        this.directionInDegrees = directionInDegrees;
+        setDuration(duration);
+    }
     public AnimationAction(String animationName,float duration){
         this.animationName = animationName;
+        this.directionInDegrees = -1;
         setDuration(duration);
     }
 
-
     @Override
     protected void begin() {
+        if(directionInDegrees >0){
+            ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(actor);
+            actorStateComponent.setDirectionInDegrees(directionInDegrees);
+        }
+
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(actor);
-        actorAnimationComponent.setCurrentAnimation(animationName, getDuration());
+        actorAnimationComponent.playAnimation(animationName, getDuration());
+
     }
 
     @Override
     protected void end() {
-        ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(actor);
-        actorAnimationComponent.adhotAnimation = null;
     }
 
     @Override

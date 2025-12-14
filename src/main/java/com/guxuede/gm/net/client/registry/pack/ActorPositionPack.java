@@ -12,20 +12,20 @@ import io.netty.buffer.ByteBuf;
 public class ActorPositionPack extends NetPack implements PlayerPack {
 
     private int id;
-    private final int direction;
+    private final float directionInDegrees;
     public Vector2 acceleration = new Vector2();
     private final Vector2 position = new Vector2();
 
-    public ActorPositionPack(int id, int direction, Vector2 acceleration, Vector2 position) {
+    public ActorPositionPack(int id, float directionInDegrees, Vector2 acceleration, Vector2 position) {
         this.id = id;
-        this.direction = direction;
+        this.directionInDegrees = directionInDegrees;
         this.acceleration.set(acceleration);
         this.position.set(position);
     }
 
     public ActorPositionPack(ByteBuf data) {
         id = data.readInt();
-        direction = data.readInt();
+        directionInDegrees = data.readFloat();
         acceleration.set(data.readFloat(), data.readFloat());
         position.set(data.readFloat(), data.readFloat());
     }
@@ -33,7 +33,7 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
     @Override
     public void write(ByteBuf data) {
         data.writeInt(id);
-        data.writeInt(direction);
+        data.writeFloat(directionInDegrees);
 
         data.writeFloat(acceleration.x);
         data.writeFloat(acceleration.y);
@@ -51,7 +51,7 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
     @Override
     public void action(Engine engine, Entity entity) {
         PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(entity);
-        playerDataComponent.direction = direction;
+        playerDataComponent.directionInDegrees = directionInDegrees;
         playerDataComponent.position.set(position);
         playerDataComponent.acceleration.set(acceleration);
     }
@@ -60,7 +60,7 @@ public class ActorPositionPack extends NetPack implements PlayerPack {
     public String toString() {
         return "ActorPositionPack{" +
                 "id=" + id +
-                ", direction=" + direction +
+                ", directionInDegrees=" + directionInDegrees +
                 ", acceleration=" + acceleration +
                 ", position=" + position +
                 '}';

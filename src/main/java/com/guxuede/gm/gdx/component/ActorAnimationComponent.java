@@ -8,28 +8,28 @@ import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 public class ActorAnimationComponent implements Component , Pool.Poolable{
 
 	public AnimationHolder animationHolder;
-    public int direction;
+    public float directionInDegrees;
     public boolean isMoving;
 
-    public String adhotAnimation;// if not null, play this animation
-    public float adhotAnimationDuration;// if not null, play this animation
-    public float adhotAnimationTime;// if not null, play this animation
+    public String currentAnimation;// if not null, play this animation
+    public float currentAnimationDuration;// 动画时长
+    public float currentAnimationTime;// 当前动画已经播放了多长
 
-    public void setCurrentAnimation(String name, float adhotAnimationDuration){
-        this.adhotAnimation = name;
-        this.adhotAnimationDuration = adhotAnimationDuration;
-        this.adhotAnimationTime = 0;
+    public void playAnimation(String name, float duration){
+        this.currentAnimation = name;
+        this.currentAnimationDuration = duration;
+        this.currentAnimationTime = 0;
     }
 
     @Override
     public void reset() {
         animationHolder = null;
-        direction = 0;
+        directionInDegrees = 0;
         isMoving = false;
 
 
-        adhotAnimation = null;
-        adhotAnimationDuration = 0;
-        adhotAnimationTime = 0;
+        currentAnimation = null;
+        currentAnimationDuration = 0;
+        currentAnimationTime = 0;
     }
 }

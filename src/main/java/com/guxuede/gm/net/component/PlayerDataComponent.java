@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Pool;
 import com.guxuede.gm.net.client.pack.utils.PackQueue;
 import com.guxuede.gm.net.client.registry.NetPack;
 
-import static com.guxuede.gm.gdx.component.ActorStateComponent.DOWN;
+import static com.guxuede.gm.gdx.component.ActorStateComponent.DIRECTION_IN_DEGREES_DOWN;
 
 
 public class PlayerDataComponent implements Component, Pool.Poolable{
@@ -15,7 +15,7 @@ public class PlayerDataComponent implements Component, Pool.Poolable{
     public String character;
     public Vector2 acceleration = new Vector2();
     public Vector2 position = new Vector2();
-    public int direction= DOWN;
+    public float directionInDegrees = DIRECTION_IN_DEGREES_DOWN;
 
     public PackQueue<NetPack> inboundNetPacks = new PackQueue<>();
     public PackQueue<NetPack> outboundNetPacks = new PackQueue<>();

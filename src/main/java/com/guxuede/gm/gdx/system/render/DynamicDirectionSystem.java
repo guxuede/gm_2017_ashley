@@ -3,9 +3,9 @@ package com.guxuede.gm.gdx.system.render;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.DynamicDirectionComponent;
-import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.component.PresentableComponent;
 
 /**
@@ -13,7 +13,7 @@ import com.guxuede.gm.gdx.component.PresentableComponent;
  */
 public class DynamicDirectionSystem extends IteratingSystem {
 
-    private static final Family family = Family.all(DynamicDirectionComponent.class,PositionComponent.class, PresentableComponent.class).get();
+    private static final Family family = Family.all(DynamicDirectionComponent.class, ActorStateComponent.class, PresentableComponent.class).get();
 
     public DynamicDirectionSystem() {
         super(family);
@@ -21,8 +21,8 @@ public class DynamicDirectionSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        PositionComponent positionComponent = Mappers.positionCM.get(entity);
+        ActorStateComponent actorStateComponent = Mappers.actorStateCM.get(entity);
         PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
-        presentableComponent.rotation = positionComponent.degrees + 90;
+        presentableComponent.rotation = actorStateComponent.directionInDegrees + 90;
     }
 }

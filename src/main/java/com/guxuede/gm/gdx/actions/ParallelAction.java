@@ -117,4 +117,8 @@ public class ParallelAction extends Action {
 		buffer.append(')');
 		return buffer.toString();
 	}
+
+	public boolean isComplete() {
+		return complete;
+	}
 }

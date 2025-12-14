@@ -18,6 +18,7 @@ public class AnimationHolder {
     public static final int SPELLCAST = "spellcast".hashCode();
     public static final int SIT = "sit".hashCode();
 
+
     public static final int[] allAnimations = new int[]{WALK,IDLE,DEATH,SPELLCAST};
 
     /*********************************************/

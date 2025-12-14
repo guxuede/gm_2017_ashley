@@ -43,5 +43,22 @@
         "drawOffSetY": 20
       }
     ]
+  },
+  {
+    "name": "fireBall1",
+    "width": 64,
+    "height": 64,
+    "shadowWidth": 32,
+    "scaleY": 2,
+    "rotation": 630,
+    "texture": "data/texture/effect/Retro Impact Effect Pack 5 A",
+    "animations": [
+      {
+        "name": "idle",
+        "frameDuration": 0.1,
+        "frames": [72,73,74,75,76,77],
+        "drawOffSetY": 20
+      }
+    ]
   }
 ]

@@ -72,23 +72,8 @@ public class SensorMovementSystem extends IteratingSystem {
         float angle = TempObjects.temp0Vector2.angle();
         stateComponent.isMoving = !TempObjects.temp0Vector2.isZero();
         if(stateComponent.isMoving) {
-            positionComponent.degrees = angle;
-            stateComponent.direction = convertDegreesToDirection(angle);
+            stateComponent.directionInDegrees = angle;
         }
-    }
-
-    public static int convertDegreesToDirection(float degrees){
-        int direction = 0;
-        if(degrees >= 30 && degrees < 165){
-            direction = ActorStateComponent.UP;
-        }else if(degrees >= 165 && degrees < 200){
-            direction = ActorStateComponent.LEFT;
-        }else if(degrees >= 200 && degrees < 350){
-            direction = ActorStateComponent.DOWN;
-        }else if(degrees >= 350 || degrees < 30){
-            direction = ActorStateComponent.RIGHT;
-        }
-        return direction;
     }
 
 }

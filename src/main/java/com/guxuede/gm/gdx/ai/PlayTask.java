@@ -19,23 +19,34 @@ package com.guxuede.gm.gdx.ai;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+import com.guxuede.gm.gdx.actions.SequenceAction;
+import com.guxuede.gm.gdx.component.SkillComponent;
+import com.guxuede.gm.gdx.component.skill.Skill;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
-import com.guxuede.gm.net.client.registry.pack.ActorPlaySkillPack;
-import com.guxuede.gm.net.component.PlayerDataComponent;
 
 public class PlayTask extends LeafTask<Entity> {
 
 	long startTime;
+
+	SequenceAction sequenceAction;
 
 	public void start () {
 		System.out.println("PlayTask");
 		startTime = System.currentTimeMillis();
 		Entity dog = getObject();
 //		dog.brainLog("WOW - Lets play!");
-		PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(dog);
+		SkillComponent playerDataComponent = Mappers.skillCM.get(dog);
 		if(playerDataComponent!=null){
-			ActorPlaySkillPack playSkillPack = new ActorPlaySkillPack(playerDataComponent.id, "flyFireWithMe" ,0,0);
-			playerDataComponent.outBoundPack(playSkillPack);
+			Vector2 position = Mappers.positionCM.get(dog).position;
+
+//			Skill skill = playerDataComponent.getSkill("flyFireWithMe");
+			Skill skill = playerDataComponent.getRandomSkill();
+			skill.targetEntry = dog;
+			skill.owner = dog;
+			skill.targetPos = new Vector2((position.x+ MathUtils.random(-200f,200f)), (position.y+ MathUtils.random(-200f,200f)));
+			sequenceAction = (SequenceAction) skill.play();
 		}
 	}
 
@@ -51,6 +62,7 @@ public class PlayTask extends LeafTask<Entity> {
 	@Override
 	public void end () {
 		Entity dog = getObject();
+		sequenceAction =null;
 //		dog.brainLog("SIC - No time to play :(");
 	}
 
