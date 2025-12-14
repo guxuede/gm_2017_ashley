@@ -11,6 +11,8 @@ import com.guxuede.gm.gdx.component.AnimationComponent;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 
 /**
+ * 根据actor animation 和状态来播放动画
+ *
  * Created by guxuede on 2017/5/29 .
  */
 public class ActorAnimationSystem extends IteratingSystem {
@@ -49,15 +51,16 @@ public class ActorAnimationSystem extends IteratingSystem {
 
         //then process moving and idle animation
         if(stateComponent.isMoving){
-            doAnimation(entity,deltaTime,AnimationHolder.WALK, MathUtils.convertDegreesToDirection(stateComponent.directionInDegrees));
+            doAnimation(entity,AnimationHolder.WALK, MathUtils.convertDegreesToDirection(stateComponent.directionInDegrees));
         }else{
-            doAnimation(entity,deltaTime,AnimationHolder.IDLE, MathUtils.convertDegreesToDirection(stateComponent.directionInDegrees));
+            doAnimation(entity,AnimationHolder.IDLE, MathUtils.convertDegreesToDirection(stateComponent.directionInDegrees));
         }
     }
 
-    public void doAnimation(Entity entity, float deltaTime,int animationName, int direction){
+    public void doAnimation(Entity entity,int animationName, int direction){
         AnimationComponent animationComponent = Mappers.animationCM.get(entity);
         ActorAnimationComponent actorAnimationComponent = Mappers.animationHolderCM.get(entity);
         animationComponent.animation = actorAnimationComponent.animationHolder.getAnimation(animationName, direction);
+        animationComponent.loop = true;
     }
 }

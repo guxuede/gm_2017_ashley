@@ -17,10 +17,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.LongMap;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
@@ -80,6 +77,18 @@ public class ResourceManager {
     }
 
     public static Cursor customCursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("data/cursor_1.gif")), 0, 0);
+
+
+    public static ParticleEffectPool bombEffectPool;
+    static {
+        ParticleEffect bombEffect = new ParticleEffect();
+        bombEffect.load(Gdx.files.internal("data/particles/slash.p"), new TextureAtlas(Gdx.files.internal("data/particles/slash.atlas")));
+//        bombEffect.setEmittersCleanUpBlendFunction(false);
+
+        bombEffectPool = new ParticleEffectPool(bombEffect, 1, 2);
+
+    }
+
 
 
     public static Texture getTexture(String path){

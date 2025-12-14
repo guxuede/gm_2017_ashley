@@ -53,11 +53,11 @@ public class ActorBrandishedByAction extends TemporalAction {
 
         PositionComponent positionComponent = Mappers.positionCM.get(actor);
 
-        float angleInRadians =fromBrandishedAngleInRadians + brandishedAngleInRadians* percent;
+        float angleInRadians =fromBrandishedAngleInRadians - brandishedAngleInRadians * percent;
 
 
-        float x = (float) (sourceOwnerPosition.x - radius *Math.cos(angleInRadians));
-        float y = (float) (sourceOwnerPosition.y - radius *Math.sin(angleInRadians));
+        float x = (float) (sourceOwnerPosition.x + radius *Math.cos(angleInRadians));
+        float y = (float) (sourceOwnerPosition.y + radius *Math.sin(angleInRadians));
 
 
         positionComponent.position.set(x, y);

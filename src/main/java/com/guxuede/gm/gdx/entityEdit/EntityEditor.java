@@ -2,7 +2,6 @@ package com.guxuede.gm.gdx.entityEdit;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,15 +13,15 @@ import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.*;
-import com.guxuede.gm.net.component.PlayerDataComponent;
 
 import java.util.function.Consumer;
+
+import static com.guxuede.gm.gdx.component.ActorStateComponent.DIRECTION_IN_DEGREES_DOWN;
 
 /**
  * Created by guxuede on 2017/6/10 .
  */
 public abstract class EntityEditor<T extends EntityEditor>{
-    private static final Family netIdfamily = Family.all(PlayerDataComponent.class).get();
 
     private EntityEdit edit = new EntityEdit();
     private Entity entity;
@@ -80,23 +79,23 @@ public abstract class EntityEditor<T extends EntityEditor>{
 
     //----------------------------------as actor---------------------------------------------------------------------------
     public EntityEditor actor(String actorName) {
-        return actor(actorName, AnimationHolder.DIRECTION_DOWN ,false,0);
+        return actor(actorName, DIRECTION_IN_DEGREES_DOWN ,false,0);
     }
 
-    public EntityEditor actor(String actorName, int direction, boolean isMoving, int zIndex) {
+    public EntityEditor actor(String actorName, float directionInDegrees, boolean isMoving, int zIndex) {
         ActorHolder actorHolder = ResourceManager.getActor(actorName);
-        actor(actorHolder,direction,isMoving,zIndex);
+        actor(actorHolder,directionInDegrees,isMoving,zIndex);
         return this;
     }
 
     public EntityEditor actor(ActorHolder actorHolder) {
-        return actor(actorHolder, AnimationHolder.DIRECTION_DOWN ,false,0);
+        return actor(actorHolder, DIRECTION_IN_DEGREES_DOWN,false,0);
     }
 
-    public EntityEditor actor(ActorHolder actorHolder, int direction, boolean isMoving, int zIndex) {
+    public EntityEditor actor(ActorHolder actorHolder, Float directionInDegrees, boolean isMoving, int zIndex) {
         ActorAnimationComponent actorAnimationComponent = edit.create(ActorAnimationComponent.class);
         actorAnimationComponent.animationHolder = actorHolder.animationHolder;
-        actorAnimationComponent.directionInDegrees = direction;
+        actorAnimationComponent.directionInDegrees = directionInDegrees;
         actorAnimationComponent.isMoving = isMoving;
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
@@ -123,23 +122,15 @@ public abstract class EntityEditor<T extends EntityEditor>{
      *
      * @param animationName
      * @param rotation
-     * @param duration 如果<=0, 默认只播放一次
      * @return
      */
-    public EntityEditor animation(String animationName, float rotation, float duration) {
-        return animation(animationName, 0, rotation, duration);
+    public EntityEditor animation(String animationName, float rotation) {
+        return animation(animationName, 0, rotation);
     }
 
-    public EntityEditor animation(String animationName, int zIndex, float rotation, float duration) {
+    public EntityEditor animation(String animationName, int zIndex, float rotation) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         animationComponent.animation = ResourceManager.getActorAnimation(animationName).getAnimation(AnimationHolder.IDLE, AnimationHolder.DIRECTION_DOWN);
-        if(duration <= 0){
-            animationComponent.maxStateTime = animationComponent.animation.getAnimationDuration();
-        }else{
-            animationComponent.maxStateTime = duration;
-        }
-
-        animationComponent.stateTime = 0;
         PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
         presentableComponent.zIndex = zIndex;
         presentableComponent.rotation = rotation;
@@ -151,7 +142,6 @@ public abstract class EntityEditor<T extends EntityEditor>{
     public EntityEditor animation(String animationName,Animation animation) {
         AnimationComponent animationComponent = edit.create(AnimationComponent.class);
         animationComponent.animation = animation;
-        animationComponent.stateTime = 0;
         entity.add(animationComponent);
         return this;
     }

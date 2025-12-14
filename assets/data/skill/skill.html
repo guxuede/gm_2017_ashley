@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--suppress ALL -->
 <skills>
+    <skill id="createEffect" name="create Effect" hotKey="C" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="10"
+           spellcastAnimation = "spellcast"
+           spellcastAnimationDuration="0"
+           actionDelay="1">
+        <description>
+            create Effect
+        </description>
+        <script>
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
+            af.gdxSequence(af.createEffectAction(owner,targetPos,"special10",0.05));
+        </script>
+    </skill>
     <skill id="burstFire" name="Burst Fire" hotKey="B" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
            skillCooldownTime="10"
            spellcastAnimation = "spellcast"

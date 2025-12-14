@@ -20,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.function.Consumer;
 
+import static com.guxuede.gm.gdx.ResourceManager.*;
+
 
 public class ActorLandingPack extends NetPack {
     private String mapName;
@@ -57,17 +59,10 @@ public class ActorLandingPack extends NetPack {
             //clear map
             engine.getEntitiesFor(Family.all(PlayerDataComponent.class).get()).iterator().forEachRemaining(engine::removeEntity);
             Entity userEntity = buildActor(E.create()).sensor().with(SkillComponent.class, (Consumer<SkillComponent>) o -> {
-                o.skills.add(ResourceManager.getSkillById("burstFire"));
-                o.skills.add(ResourceManager.getSkillById("huijian"));
-                o.skills.add(ResourceManager.getSkillById("bow"));
-                o.skills.add(ResourceManager.getSkillById("meteorite"));
-                o.skills.add(ResourceManager.getSkillById("fireBall"));
-                o.skills.add(ResourceManager.getSkillById("blink"));
-                o.skills.add(ResourceManager.getSkillById("heal"));
-                o.skills.add(ResourceManager.getSkillById("flyFireWithMe"));
+                SKILLS.values().forEach(o.skills::add);
             }).buildToWorld();
             AiComponent aiComponent = new AiComponent();
-            aiComponent.behaviorTree =  ResourceManager.behaviorTreeLibraryManager.createBehaviorTree("dog", userEntity);
+            aiComponent.behaviorTree =  behaviorTreeLibraryManager.createBehaviorTree("dog", userEntity);
             userEntity.add(aiComponent);
             engine.getSystem(StageSystem.class).setViewActor(userEntity);
             processMap(engine);

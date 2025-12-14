@@ -8,6 +8,9 @@ import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.ActorAnimationComponent;
 
 /**
+ * 链接ActorState 和 ActorAnimationComponent 组件
+ * ActorAnimationComponent 可以让角色播放动画
+ *
  * Created by guxuede on 2017/5/29 .
  */
 public class ActorStateActorAnimationSystem extends IteratingSystem {

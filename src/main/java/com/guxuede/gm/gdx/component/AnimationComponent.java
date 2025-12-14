@@ -13,24 +13,20 @@ import com.guxuede.gm.gdx.ResourceManager;
 import com.guxuede.gm.gdx.basic.libgdx.SoundUtils;
 
 public class AnimationComponent implements Component , Pool.Poolable{
-    //TODO support AnimatedTiledMapTile.
     public Animation<TextureRegion> animation;
+    public boolean loop;
     public float stateTime;
-    public float maxStateTime = Float.MAX_VALUE;
 
     public TextureRegion currentFrameIndex;
     public long soundId = -1;
     public Sound sound = null;
 
-    public TextureRegion getNextKeyFrame (float deltaTime, boolean looping) {
+    public TextureRegion getNextKeyFrame (float deltaTime) {
         stateTime += deltaTime;
-        if(stateTime >= maxStateTime){
-            return null;
-        }
         if(animation == null){
             return null;
         }
-        TextureRegion textureRegion = this.animation.getKeyFrame(stateTime,looping);
+        TextureRegion textureRegion = this.animation.getKeyFrame(stateTime, loop);
         TextureRegion currentFrameIndex = textureRegion;
         if(currentFrameIndex!=this.currentFrameIndex){
             this.currentFrameIndex = currentFrameIndex;
@@ -52,7 +48,6 @@ public class AnimationComponent implements Component , Pool.Poolable{
         }
     }
 
-    //解决位置为负时声音反而变大的问题
     public void threeDSound(Vector2 soundPos, Camera camera){
         if (sound != null && soundId != -1) {
             SoundUtils.set3dPan(sound, soundId, soundPos.x,soundPos.y,camera);
@@ -61,10 +56,9 @@ public class AnimationComponent implements Component , Pool.Poolable{
 
     @Override
     public void reset() {
-         animation = null;
-         stateTime = 0;
-         maxStateTime = Float.MAX_VALUE;
-
+        animation = null;
+        stateTime = 0;
+        loop = false;
         currentFrameIndex = null;
         soundId = -1;
         sound = null;

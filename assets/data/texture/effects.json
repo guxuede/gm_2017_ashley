@@ -309,5 +309,14 @@
         "drawOffSetY": 20
       }
     ]
+  },
+  {
+    "name": "slashParticles",
+    "width": 64,
+    "height": 64,
+    "scaleX": 1,
+    "scaleY": 1,
+    "texture": "data/particles/slash",
+    "parser":"com.guxuede.gm.gdx.actor.parser.ParticleSpriteParser"
   }
 ]

@@ -13,7 +13,6 @@ import com.guxuede.gm.gdx.actions.Action;
 public class CreateEffectsAction extends Acting {
 
     private String actorName;
-    private float duration;
     private final Vector2 pos = new Vector2();
     private Action[] actions;
 
@@ -21,7 +20,7 @@ public class CreateEffectsAction extends Acting {
     public boolean update(float delta) {
         PresentableComponent component = getActor().getComponent(PresentableComponent.class);
         float rotation = component == null? 0 : component.rotation;
-        E.create().animation(actorName, rotation, duration).pos(pos.x,pos.y).actions(actions).buildToWorld();
+        E.create().animation(actorName, rotation).pos(pos.x,pos.y).actions(actions).buildToWorld();
         return true;
     }
 
@@ -46,7 +45,4 @@ public class CreateEffectsAction extends Acting {
         this.actions = actions;
     }
 
-    public void setDuration(float duration) {
-        this.duration = duration;
-    }
 }

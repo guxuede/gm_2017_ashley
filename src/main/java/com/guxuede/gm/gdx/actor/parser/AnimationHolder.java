@@ -65,7 +65,7 @@ public class AnimationHolder {
 
     @Deprecated
     public Animation getAnimation(int name){
-        return Optional.ofNullable(animationMap.get(name)).orElse(animationMap.get(IDLE)).get(DIRECTION_DOWN);
+        return getAnimation(name, DIRECTION_DOWN);
     }
 
     public Animation getAnimation(int name, int direction){

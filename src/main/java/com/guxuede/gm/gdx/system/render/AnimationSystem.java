@@ -25,7 +25,7 @@ public class AnimationSystem extends IteratingSystem {
         PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
         AnimationComponent animationComponent = Mappers.animationCM.get(entity);
 
-        presentableComponent.region = animationComponent.getNextKeyFrame(deltaTime,true);
+        presentableComponent.region = animationComponent.getNextKeyFrame(deltaTime);
         presentableComponent.zIndex = -positionComponent.position.y;
     }
 

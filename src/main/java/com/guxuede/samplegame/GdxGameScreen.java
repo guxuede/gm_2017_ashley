@@ -77,6 +77,8 @@ public class GdxGameScreen extends ScreenAdapter {
         engine.addSystem(new AttributeModifierSystemAfter(10000));
         engine.addSystem(new AiSystem(1));
 
+        engine.addSystem(new ParticleEffectManagerSystem());
+
         //for testing
         engine.getSystem(CommandSystem.class).executeCommand(null, "/login password=123 username="+currentUserName);
     }

@@ -325,12 +325,8 @@ public final class A {
 
     public  static CreateEffectsAction effectsActorActionAndAttach(Entity owner, String effectName, float duration, Action action1){
         Vector2 position = Mappers.positionCM.get(owner).position;
-        if(duration<=0){
-            duration = ResourceManager.getActorAnimation(effectName).getAnimation(AnimationHolder.IDLE,AnimationHolder.DIRECTION_DOWN).getAnimationDuration();
-        }
         CreateEffectsAction action = action(CreateEffectsAction.class);
         action.setPos(position);
-        action.setDuration(duration);
         action.setActorName(effectName);
         action.setActions(parallel(action1,
                 sequence(delay(duration),removeEntityAction()))
@@ -470,14 +466,17 @@ public final class A {
     }
 
     public static Action swordBrandish(Entity owner, Vector2 pos, String effectName, float intervalTime){
-        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
-        E.create().actions(sequence(new ActorBrandishedByAction(0.25f, 60F, (float) Math.PI, owner, pos),new RemoveEntityAction()))
+//        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+
+        Entity sword = E.create().actions(sequence(
+                new ActorBrandishedByAction(0.5f, 60F, (float) Math.PI, owner, pos), new RemoveEntityAction()))
                 .actorState()
                 .actor("sword")
                 .canHurt(10, 20)
-                .pos(ownerPos.x,ownerPos.y)
+                .pos(0, 0)//可能会露馅,位置0的人能看到
                 .buildToWorld();
-        SequenceAction sequenceAction = sequence(effectsActorAction("slash_light",pos));
+
+        SequenceAction sequenceAction = sequence(effectsActorActionAndAttach(sword, "slashParticles", 0.5f, new ActorAttachedToAction(0.5f,sword)));
 //        SequenceAction sequenceAction = sequence();
         return sequenceAction;
     }
