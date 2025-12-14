@@ -20,11 +20,11 @@
            spellcastAnimationDuration="0"
            actionDelay="1">
         <description>
-            在你前面产生一拍爆裂雷
+            在你前面产生一拍地刺
         </description>
         <script>
             var af = Java.type('com.guxuede.gm.gdx.actions.A');
-            af.gdxSequence(af.createLineEffectEntriesAction(owner,targetPos,"dichi",0.1,35,5));
+            af.gdxSequence(af.dichi(owner,targetPos,"dichi",0.1,35,5));
         </script>
     </skill>
     <skill id="huijian" name="Burst Fire" hotKey="N" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
@@ -69,9 +69,9 @@
 
     <skill id="fireBall" name="FireBall" hotKey="F" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
            skillCooldownTime="6"
-           spellcastAnimation = "spellcast"
+           spellcastAnimation = "water"
            spellcastAnimationDuration="0"
-           actionDelay="1">
+           actionDelay="0">
         <description>
             扔出个火球
         </description>

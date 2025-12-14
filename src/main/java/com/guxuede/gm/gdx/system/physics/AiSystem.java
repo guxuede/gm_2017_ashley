@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.guxuede.gm.gdx.component.ai.AiComponent;
+import com.guxuede.gm.gdx.entityEdit.Mappers;
 
 public class AiSystem extends IntervalIteratingSystem {
     private static final Family family = Family.all(AiComponent.class).get();

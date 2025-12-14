@@ -35,6 +35,11 @@ public class LpcStyle2Parser extends AbstractRpgActorSpriteParser {
     private static final int SIT_DOWN_ANIMATION_START_NUMBER = 20 * NUMBER_OF_FRAME_OF_ONE_LINE;
     private static final int SIT_RIGHT_ANIMATION_START_NUMBER = 20 * NUMBER_OF_FRAME_OF_ONE_LINE;
 
+    private static final int WALTER_UP_ANIMATION_START_NUMBER = 4 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int WALTER_LEFT_ANIMATION_START_NUMBER = 5 * NUMBER_OF_FRAME_OF_ONE_LINE;//
+    private static final int WALTER_DOWN_ANIMATION_START_NUMBER = 6 * NUMBER_OF_FRAME_OF_ONE_LINE;
+    private static final int WALTER_RIGHT_ANIMATION_START_NUMBER = 7 * NUMBER_OF_FRAME_OF_ONE_LINE;
+
     @Override
     protected ParseContext buildDefaultParserContext() {
         ParseContext parseContext =super.buildDefaultParserContext();
@@ -84,6 +89,13 @@ public class LpcStyle2Parser extends AbstractRpgActorSpriteParser {
         animationHolder.addAnimation(AnimationHolder.SIT, AnimationHolder.DIRECTION_LEFT,parseAnimation(parseContext, SIT_LEFT_ANIMATION_START_NUMBER, sitFrameCycle));
         animationHolder.addAnimation(AnimationHolder.SIT, AnimationHolder.DIRECTION_DOWN,parseAnimation(parseContext, SIT_DOWN_ANIMATION_START_NUMBER, sitFrameCycle));
         animationHolder.addAnimation(AnimationHolder.SIT, AnimationHolder.DIRECTION_RIGHT,parseAnimation(parseContext, SIT_RIGHT_ANIMATION_START_NUMBER, sitFrameCycle));
+
+        parseContext.frameDuration= 0.1f;
+        int[] walterFrameCycle = new int[]{0,1,2,3,4,5,6,7};
+        animationHolder.addAnimation(AnimationHolder.WATER, AnimationHolder.DIRECTION_UP,parseAnimation(parseContext, WALTER_UP_ANIMATION_START_NUMBER, walterFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.WATER, AnimationHolder.DIRECTION_LEFT,parseAnimation(parseContext, WALTER_LEFT_ANIMATION_START_NUMBER, walterFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.WATER, AnimationHolder.DIRECTION_DOWN,parseAnimation(parseContext, WALTER_DOWN_ANIMATION_START_NUMBER, walterFrameCycle));
+        animationHolder.addAnimation(AnimationHolder.WATER, AnimationHolder.DIRECTION_RIGHT,parseAnimation(parseContext, WALTER_RIGHT_ANIMATION_START_NUMBER, walterFrameCycle));
 
     }
 

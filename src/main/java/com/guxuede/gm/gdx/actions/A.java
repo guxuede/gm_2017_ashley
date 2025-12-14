@@ -452,7 +452,7 @@ public final class A {
                         return true;
                     }
                 })),
-                        sequence(new ActorBrandishedByAction(0.5f, 30, (float) Math.PI/3, owner, pos),new RemoveEntityAction())))
+                        sequence(new ActorBrandishedByAction(0.5f, 15, 0.001f, owner, pos),new RemoveEntityAction())))
                 .actorState()
                 .actor("wand")
                 .pos(ownerPos.x,ownerPos.y)
@@ -502,6 +502,31 @@ public final class A {
                 .pos(ownerPos.x,ownerPos.y)
                 .buildToWorld();
         SequenceAction sequenceAction = sequence();
+        return sequenceAction;
+    }
+
+    public static Action dichi(Entity owner, Vector2 pos, String effectName, float intervalTime, float intervalDistance, int unit){
+        SequenceAction sequenceAction = sequence();
+        TeamComponent teamComponent = Mappers.teamCM.get(owner);
+        Vector2 ownerPos = Mappers.positionCM.get(owner).position;
+        Vector2 directionNor = TempObjects.temp1Vector2.set(pos).sub(Mappers.positionCM.get(owner).position).nor();
+        for (int i = 0; i < unit; i++) {
+            sequenceAction.addAction(delay(intervalTime));
+            Vector2 effectPoint = TempObjects.temp2Vector2.set(directionNor).scl(i*intervalDistance).add(ownerPos);
+            float x = effectPoint.x;
+            float y = effectPoint.y;
+            sequenceAction.addAction(parallel(effectsActorAction(effectName, effectPoint), new Action() {
+                @Override
+                public boolean act(float delta) {
+                    E.create().actions(sequence(delay(1),new RemoveEntityAction()))
+                            .canHurt(10, 30)
+                            .team(teamComponent.id)
+                            .pos(x,y)
+                            .buildToWorld();
+                    return true;
+                }
+            }));
+        }
         return sequenceAction;
     }
 
