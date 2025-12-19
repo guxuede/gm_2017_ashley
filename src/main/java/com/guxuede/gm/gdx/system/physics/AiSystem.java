@@ -15,6 +15,6 @@ public class AiSystem extends IntervalIteratingSystem {
 
     @Override
     protected void processEntity(Entity entity) {
-//        Mappers.aiCM.get(entity).behaviorTree.step();
+        Mappers.aiCM.get(entity).behaviorTree.step();
     }
 }

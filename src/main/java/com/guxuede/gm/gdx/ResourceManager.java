@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.ai.btree.Task;
+import com.badlogic.gdx.ai.btree.TaskCloner;
 import com.badlogic.gdx.ai.btree.branch.Parallel;
 import com.badlogic.gdx.ai.btree.branch.Selector;
 import com.badlogic.gdx.ai.btree.branch.Sequence;
@@ -20,6 +21,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.LongMap;
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.util.DefaultInstantiatorStrategy;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.ActorJsonParse;
 import com.guxuede.gm.gdx.actor.parser.ActorSkillParse;
@@ -31,6 +34,7 @@ import com.guxuede.gm.gdx.basic.libgdx.GdxSprite;
 import com.guxuede.gm.gdx.component.skill.ScriptSkill;
 import com.guxuede.gm.gdx.component.skill.Skill;
 import org.apache.commons.lang3.StringUtils;
+import org.objenesis.strategy.StdInstantiatorStrategy;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 import javax.script.ScriptEngine;
@@ -222,6 +226,24 @@ public class ResourceManager {
         BehaviorTreeLibrary library = new BehaviorTreeLibrary(BehaviorTreeParser.DEBUG_HIGH);
         registerDogBehavior(library);
         libraryManager.setLibrary(library);
+//        Task.TASK_CLONER = new TaskCloner() {
+//            Kryo kryo;
+//            @Override
+//            public  <T> Task<T> cloneTask (Task<T> task) {
+//                if (kryo == null) {
+//                    System.out.println("cloneTask");
+//                    kryo = new Kryo();
+//                    kryo.setRegistrationRequired(false);
+//                    kryo.setInstantiatorStrategy(new DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
+//                }
+//                return kryo.copy(task);
+//            }
+//
+//            @Override
+//            public <T> void freeTask(Task<T> task) {
+//
+//            }
+//        };
         return libraryManager;
     }
 

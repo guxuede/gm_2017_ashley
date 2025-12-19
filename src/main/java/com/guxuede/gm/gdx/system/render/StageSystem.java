@@ -174,7 +174,7 @@ public class StageSystem extends EntitySystem {
         chatHistoryBox.setPosition(0,130);
         chatHistoryBox.align(Align.bottomLeft);
 
-        chatText = new TextField("/login password=123 username=guxuede", ResourceManager.skin);
+        chatText = new TextField("Hello", ResourceManager.skin);
         chatText.setWidth(400);
         chatText.setHeight(30);
         chatText.setFillParent(true);
@@ -199,6 +199,7 @@ public class StageSystem extends EntitySystem {
                         }
                     }
                     chatText.setVisible(!chatText.isVisible());
+                    chatText.setDisabled(!chatText.isVisible());
                     return true;
                 }
                 return false;

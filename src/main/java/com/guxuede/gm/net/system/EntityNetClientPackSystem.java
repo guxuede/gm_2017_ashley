@@ -12,6 +12,7 @@ import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.system.render.StageSystem;
 import com.guxuede.gm.net.client.registry.NetPack;
 import com.guxuede.gm.net.client.registry.pack.ActorPositionPack;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -48,10 +49,12 @@ public class EntityNetClientPackSystem extends IteratingSystem {
         Entity viewActor = getEngine().getSystem(StageSystem.class).getViewActor();
 
         //如果是本地操作角色,那就本地移动.定时汇报给服务器速度和位置
-        if(viewActor == entity){
+        if(viewActor == entity || isControl(playerDataComponent, viewActor)){
             SensorComponent sensorComponent = Mappers.sensorCM.get(entity);
             ActorStateComponent stateComponent = Mappers.actorStateCM.get(entity);
-            sensorComponent.applyToIfChanged(stateComponent.acceleration);
+            if(sensorComponent!=null){
+                sensorComponent.applyToIfChanged(stateComponent.acceleration);
+            }
 
 
             PositionComponent positionComponent = Mappers.positionCM.get(entity);
@@ -75,5 +78,10 @@ public class EntityNetClientPackSystem extends IteratingSystem {
                 playerDataComponent.lastTimePositionReported = System.currentTimeMillis();
             }
         }
+    }
+
+    private boolean isControl(PlayerDataComponent playerDataComponent, Entity viewActor){
+        PlayerDataComponent currectPlayer = Mappers.netPackCM.get(viewActor);
+        return StringUtils.equals(playerDataComponent.controlByUserName, currectPlayer.controlByUserName);
     }
 }

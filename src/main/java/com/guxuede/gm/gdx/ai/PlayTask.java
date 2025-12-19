@@ -33,9 +33,9 @@ public class PlayTask extends LeafTask<Entity> {
 	SequenceAction sequenceAction;
 
 	public void start () {
-		System.out.println("PlayTask");
 		startTime = System.currentTimeMillis();
 		Entity dog = getObject();
+		System.out.println("PlayTask:" + dog);
 //		dog.brainLog("WOW - Lets play!");
 		SkillComponent playerDataComponent = Mappers.skillCM.get(dog);
 		if(playerDataComponent!=null){

@@ -13,9 +13,12 @@ import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
 import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.gdx.component.ai.AiComponent;
 
 import java.util.function.Consumer;
 
+import static com.guxuede.gm.gdx.ResourceManager.SKILLS;
+import static com.guxuede.gm.gdx.ResourceManager.behaviorTreeLibraryManager;
 import static com.guxuede.gm.gdx.component.ActorStateComponent.DIRECTION_IN_DEGREES_DOWN;
 
 /**
@@ -167,6 +170,19 @@ public abstract class EntityEditor<T extends EntityEditor>{
     public EntityEditor sensor() {
         SensorComponent sensorComponent = edit.create(SensorComponent.class);
         entity.add(sensorComponent);
+        return this;
+    }
+    public EntityEditor ai() {
+        AiComponent component = edit.create(AiComponent.class);
+        component.behaviorTree =  behaviorTreeLibraryManager.createBehaviorTree("dog", entity);
+        entity.add(component);
+        return this;
+    }
+
+    public EntityEditor skill() {
+        SkillComponent component = edit.create(SkillComponent.class);
+        SKILLS.values().forEach(component.skills::add);
+        entity.add(component);
         return this;
     }
 

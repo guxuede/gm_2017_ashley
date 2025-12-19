@@ -11,6 +11,7 @@ import static com.guxuede.gm.gdx.component.ActorStateComponent.DIRECTION_IN_DEGR
 
 public class PlayerDataComponent implements Component, Pool.Poolable{
     public String userName;
+    public String controlByUserName;
     public int id;
     public String character;
     public Vector2 acceleration = new Vector2();

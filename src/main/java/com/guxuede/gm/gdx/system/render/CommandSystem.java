@@ -122,9 +122,8 @@ public class CommandSystem extends EntitySystem {
 
         @Override
         public void run() {
-            DesktopLauncher.currentUserName = username;
-            PlayerLoginPack playerLandingPack = new PlayerLoginPack(username, password);
-            engine.getSystem(GlobalNetPackSystem.class).outboundNetPack(playerLandingPack);
+            PlayerLoginPack playerLoginPack = new PlayerLoginPack(username, password, DesktopLauncher.currentUserName);
+            engine.getSystem(GlobalNetPackSystem.class).outboundNetPack(playerLoginPack);
         }
     }
 

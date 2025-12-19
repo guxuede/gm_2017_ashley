@@ -25,7 +25,6 @@ import com.guxuede.gm.gdx.basic.libgdx.TempObjects;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
 import com.guxuede.gm.gdx.component.PositionComponent;
-import com.guxuede.gm.net.component.PlayerDataComponent;
 
 import static com.guxuede.gm.gdx.entityEdit.Mappers.actorStateCM;
 
@@ -34,7 +33,7 @@ public class SensorMovementSystem extends IteratingSystem {
     private final Vector2 temp = new Vector2();
 
     public SensorMovementSystem() {
-        super(Family.all(ActorStateComponent.class, PositionComponent.class, PlayerDataComponent.class).get());
+        super(Family.all(ActorStateComponent.class, PositionComponent.class).get());
         this.priority = 1;
     }
 
@@ -69,7 +68,7 @@ public class SensorMovementSystem extends IteratingSystem {
         TempObjects.temp0Vector2.set(nextPositionX,nextPositionY).sub(positionComponent.position).nor();
         positionComponent.position.set(nextPositionX, nextPositionY);
 
-        float angle = TempObjects.temp0Vector2.angle();
+        float angle = TempObjects.temp0Vector2.angleDeg();
         stateComponent.isMoving = !TempObjects.temp0Vector2.isZero();
         if(stateComponent.isMoving) {
             stateComponent.directionInDegrees = angle;

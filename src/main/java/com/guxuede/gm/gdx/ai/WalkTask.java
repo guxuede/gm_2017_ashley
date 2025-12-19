@@ -32,8 +32,8 @@ public class WalkTask extends LeafTask<Entity> {
 
 	@Override
 	public void start () {
-		System.out.println("WalkTask");
 		Entity dog = getObject();
+		System.out.println("WalkTask:" + dog);
 		Vector2 position = Mappers.positionCM.get(dog).position;
 		moveToAction = new ActorMoveToAction((position.x+ MathUtils.random(-200f,200f)), (position.y+ MathUtils.random(-200f,200f)));
 		Mappers.actionCM.get(dog).addAction(dog, moveToAction);
@@ -41,11 +41,13 @@ public class WalkTask extends LeafTask<Entity> {
 
 	@Override
 	public Status execute () {
-		if(!moveToAction.isComplete()){
-			return Status.RUNNING;
-		}else{
+		if(moveToAction.isComplete()){
 			return Status.SUCCEEDED;
+		}else{
+			return Status.RUNNING;
 		}
+//		return Status.RUNNING;
+
 	}
 
 	@Override

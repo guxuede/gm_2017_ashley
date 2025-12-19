@@ -31,10 +31,10 @@ public class RestTask extends LeafTask<Entity> {
 
 	@Override
 	public void start () {
-		System.out.println("RestTask");
 //		getObject().brainLog("YAWN - So tired...");
 		startTime = System.currentTimeMillis();
 		Entity dog = getObject();
+		System.out.println("RestTask:" + dog);
 		PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(dog);
 		ActorPlayAnimationPack playAnimationPack = new ActorPlayAnimationPack(playerDataComponent.id,"sit",4);
 		playerDataComponent.outBoundPack(playAnimationPack);
