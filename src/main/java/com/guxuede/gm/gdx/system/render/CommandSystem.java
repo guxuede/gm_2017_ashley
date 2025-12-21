@@ -10,9 +10,11 @@ import com.guxuede.gm.net.component.PlayerDataComponent;
 import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.net.client.registry.pack.PlayerLoginPack;
 import com.guxuede.samplegame.DesktopLauncher;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import picocli.CommandLine;
 
+@Slf4j
 public class CommandSystem extends EntitySystem {
 
     private static Engine engine;
@@ -34,7 +36,7 @@ public class CommandSystem extends EntitySystem {
                     PlayerCommandPack playerCommandPack = new PlayerCommandPack(playerDataComponent.id, command);
                     playerDataComponent.outBoundPack(playerCommandPack);
                 }else{
-                    System.out.println("还没有选择角色,无法执行远程命令");
+                    log.info("还没有选择角色,无法执行远程命令");
                 }
             }
         }else{
@@ -43,7 +45,7 @@ public class CommandSystem extends EntitySystem {
                 PlayerChatPack playerChatPack = new PlayerChatPack(playerDataComponent.id, playerDataComponent.userName, lineChat);
                 playerDataComponent.outBoundPack(playerChatPack);
             }else{
-                System.out.println("还没有选择角色,无法聊天");
+                log.info("还没有选择角色,无法聊天");
             }
         }
 
@@ -75,7 +77,7 @@ public class CommandSystem extends EntitySystem {
 
         @Override
         public void run() {
-            System.out.println("hi");
+            log.info("hi");
         }
     }
 

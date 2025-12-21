@@ -19,10 +19,12 @@ import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.net.client.registry.NetPack;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Handles a client-side channel.
  */
+@Slf4j
 public class PackageInboundHandler extends SimpleChannelInboundHandler<NetPack> {
 
     public GlobalNetPackSystem clientManager;
@@ -33,12 +35,12 @@ public class PackageInboundHandler extends SimpleChannelInboundHandler<NetPack> 
 
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("channelRegistered = [" + ctx + "]");
+        log.info("channelRegistered = [" + ctx + "]");
     }
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, NetPack msg) throws Exception {
-        System.out.println("received message:"  + msg);
+        log.info("received message:"  + msg);
         clientManager.inboundNetPack(msg);
     }
 

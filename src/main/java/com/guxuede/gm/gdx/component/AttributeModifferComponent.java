@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
 import com.guxuede.gm.gdx.modifier.Attribute;
 import com.guxuede.gm.gdx.modifier.AttributeModifier;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +13,8 @@ import java.util.Map;
 /**
  * Created by guxuede on 2017/5/29 .
  */
+
+@Slf4j
 public class AttributeModifferComponent implements Component {
 
     public final Map<Attribute,Array<AttributeModifier>> attributeModifiers = new HashMap<>();
@@ -33,7 +36,7 @@ public class AttributeModifferComponent implements Component {
             array.add(attributeModifier);
             attributeModifiers.put(attribute, array);
         }
-        System.out.println("add "+attributeModifiers);
+        log.info("add "+attributeModifiers);
     }
 
 
@@ -41,7 +44,7 @@ public class AttributeModifferComponent implements Component {
         if(attributeModifiers.containsKey(attribute)){
             attributeModifiers.get(attribute).removeValue(attributeModifier, true);
         }
-        System.out.println("remove "+attributeModifiers);
+        log.info("remove "+attributeModifiers);
     }
 
 }

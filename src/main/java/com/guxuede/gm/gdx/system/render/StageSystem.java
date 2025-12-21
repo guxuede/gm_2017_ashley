@@ -20,6 +20,7 @@ import com.guxuede.gm.gdx.basic.libgdx.InputListenerMultiplexer;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.component.ActorComponent;
 import com.guxuede.gm.gdx.component.ActorStateComponent;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import static com.guxuede.gm.gdx.entityEdit.Mappers.actorCM;
@@ -27,6 +28,7 @@ import static com.guxuede.gm.gdx.entityEdit.Mappers.actorCM;
 /**
  * Created by guxuede on 2017/5/29 .
  */
+@Slf4j
 public class StageSystem extends EntitySystem {
 
     private float speed = 5.0f;
@@ -194,7 +196,7 @@ public class StageSystem extends EntitySystem {
                     if(chatText.isVisible()) {
                         String text = chatText.getText();
                         if(StringUtils.isNoneBlank(text)){
-                            System.out.println("input box:" + text);
+                            log.info("input box:" + text);
                             getEngine().getSystem(CommandSystem.class).executeCommand(viewActor, text);
                         }
                     }

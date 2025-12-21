@@ -3,7 +3,9 @@ package com.guxuede.gm.gdx.modifier;
 import com.badlogic.ashley.core.Entity;
 import com.guxuede.gm.gdx.component.PositionComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class PositionXAttribute extends Attribute {
 
     public static final PositionXAttribute INSTANCE = new PositionXAttribute();
@@ -26,7 +28,7 @@ public class PositionXAttribute extends Attribute {
     public void plus(Entity entity, float v) {
         PositionComponent positionComponent = Mappers.positionCM.get(entity);
         positionComponent.position.x = positionComponent.position.x + v;
-        System.out.println("plus " + positionComponent.position.x);
+        log.info("plus " + positionComponent.position.x);
     }
 
 

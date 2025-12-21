@@ -8,11 +8,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.guxuede.gm.gdx.component.TiledMapDataComponent;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by guxuede on 2017/6/10 .
  */
+@Slf4j
 public class TiledMapManagerSystem extends IteratingSystem {
     private static final Family family = Family.all(TiledMapDataComponent.class).get();
 
@@ -48,7 +50,7 @@ public class TiledMapManagerSystem extends IteratingSystem {
             currentMapName = tiledMapDataComponent.mapName;
             currentTiledMapDataComponent = tiledMapDataComponent;
             renderer = new OrthogonalTiledMapRenderer(tiledMapDataComponent.tiledMap,spriteBatch);
-            System.out.println("renderer new map" + currentMapName);
+            log.info("renderer new map" + currentMapName);
         }
     }
 }

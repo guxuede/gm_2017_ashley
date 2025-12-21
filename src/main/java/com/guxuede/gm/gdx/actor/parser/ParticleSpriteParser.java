@@ -5,10 +5,12 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.JsonValue;
 import com.guxuede.gm.gdx.basic.libgdx.ParticleAnimation;
 import com.guxuede.gm.gdx.basic.libgdx.ParticleSprite;
+import lombok.extern.slf4j.Slf4j;
 
 import static com.guxuede.gm.gdx.system.render.ParticleEffectManagerSystem.effectsBorrowed;
 import static com.guxuede.gm.gdx.system.render.ParticleEffectManagerSystem.particleEffectPoolIntMap;
 
+@Slf4j
 public class ParticleSpriteParser extends AbstractSpriteParser {
 
 
@@ -48,7 +50,7 @@ public class ParticleSpriteParser extends AbstractSpriteParser {
                 ParticleEffectPool.PooledEffect effect = effectPool.obtain();
                 effectsBorrowed.add(effect);
                 ParticleSprite particleSprite = new ParticleSprite(effect);
-                System.out.println("obtain effect:" + effect);
+                log.info("obtain effect:" + effect);
                 return new ParticleAnimation(particleSprite);
             }
         };

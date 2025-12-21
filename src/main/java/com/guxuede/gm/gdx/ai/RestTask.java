@@ -22,9 +22,12 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.net.client.registry.pack.ActorPlayAnimationPack;
 import com.guxuede.gm.net.component.PlayerDataComponent;
+import lombok.extern.slf4j.Slf4j;
 
 /** @author implicit-invocation
  * @author davebaol */
+
+@Slf4j
 public class RestTask extends LeafTask<Entity> {
 
 	long startTime;
@@ -34,7 +37,7 @@ public class RestTask extends LeafTask<Entity> {
 //		getObject().brainLog("YAWN - So tired...");
 		startTime = System.currentTimeMillis();
 		Entity dog = getObject();
-		System.out.println("RestTask:" + dog);
+		log.info("RestTask:" + dog);
 		PlayerDataComponent playerDataComponent = Mappers.netPackCM.get(dog);
 		ActorPlayAnimationPack playAnimationPack = new ActorPlayAnimationPack(playerDataComponent.id,"sit",4);
 		playerDataComponent.outBoundPack(playAnimationPack);

@@ -25,7 +25,9 @@ import com.guxuede.gm.gdx.actions.SequenceAction;
 import com.guxuede.gm.gdx.component.SkillComponent;
 import com.guxuede.gm.gdx.component.skill.Skill;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class PlayTask extends LeafTask<Entity> {
 
 	long startTime;
@@ -35,7 +37,7 @@ public class PlayTask extends LeafTask<Entity> {
 	public void start () {
 		startTime = System.currentTimeMillis();
 		Entity dog = getObject();
-		System.out.println("PlayTask:" + dog);
+		log.info("PlayTask:" + dog);
 //		dog.brainLog("WOW - Lets play!");
 		SkillComponent playerDataComponent = Mappers.skillCM.get(dog);
 		if(playerDataComponent!=null){

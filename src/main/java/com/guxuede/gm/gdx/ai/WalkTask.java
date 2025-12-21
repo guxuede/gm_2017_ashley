@@ -23,9 +23,12 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.actions.movement.bysensor.ActorMoveToAction;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
+import lombok.extern.slf4j.Slf4j;
 
 /** @author implicit-invocation
  * @author davebaol */
+
+@Slf4j
 public class WalkTask extends LeafTask<Entity> {
 
 	ActorMoveToAction moveToAction;
@@ -33,7 +36,7 @@ public class WalkTask extends LeafTask<Entity> {
 	@Override
 	public void start () {
 		Entity dog = getObject();
-		System.out.println("WalkTask:" + dog);
+		log.info("WalkTask:" + dog);
 		Vector2 position = Mappers.positionCM.get(dog).position;
 		moveToAction = new ActorMoveToAction((position.x+ MathUtils.random(-200f,200f)), (position.y+ MathUtils.random(-200f,200f)));
 		Mappers.actionCM.get(dog).addAction(dog, moveToAction);

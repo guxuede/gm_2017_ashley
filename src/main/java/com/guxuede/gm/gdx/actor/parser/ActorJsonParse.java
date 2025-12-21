@@ -3,6 +3,7 @@ package com.guxuede.gm.gdx.actor.parser;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.helper.StringUtil;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.List;
 /**
  * Created by guxuede on 2016/5/27 .
  */
+
+@Slf4j
 public class ActorJsonParse {
 
 
@@ -142,7 +145,7 @@ public class ActorJsonParse {
                 "}";
 
 
-        System.out.println(json);
+        log.info(json);
 
 
 //        JsonWriter rootWriter = new JsonWriter(new PrintWriter(System.out));

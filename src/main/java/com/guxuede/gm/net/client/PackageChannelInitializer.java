@@ -15,6 +15,7 @@
  */
 package com.guxuede.gm.net.client;
 
+import com.guxuede.gm.net.client.registry.codec.ExceptionHandler;
 import com.guxuede.gm.net.system.GlobalNetPackSystem;
 import com.guxuede.gm.net.client.registry.codec.NetPackageDelimiterBasedFrameDecoder;
 import com.guxuede.gm.net.client.registry.codec.NetPackageDelimiterBasedFrameEncoder;
@@ -41,5 +42,6 @@ public class PackageChannelInitializer extends ChannelInitializer<SocketChannel>
         pipeline.addLast(new NetPackageDelimiterBasedFrameDecoder(1024, PACKAGE_DELIMITER));
         pipeline.addLast(new NetPackageDelimiterBasedFrameEncoder());
         pipeline.addLast(new PackageInboundHandler(clientManager));
+        pipeline.addLast(new ExceptionHandler());
     }
 }

@@ -4,8 +4,9 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 public class ParticleEffectManagerSystem  extends EntitySystem {
 
     public static IntMap<ParticleEffectPool> particleEffectPoolIntMap = new IntMap<>();
@@ -19,7 +20,7 @@ public class ParticleEffectManagerSystem  extends EntitySystem {
             ParticleEffectPool.PooledEffect effect = effectsBorrowed.get(i);
             effect.update(deltaTime);
             if (effect.isComplete()) {
-                System.out.println("free effect:" + effect);
+                log.info("free effect:" + effect);
                 effect.free();
                 effectsBorrowed.removeIndex(i);
             }

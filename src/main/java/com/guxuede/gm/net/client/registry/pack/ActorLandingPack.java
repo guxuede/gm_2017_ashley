@@ -14,9 +14,10 @@ import com.guxuede.gm.net.client.pack.utils.PackageUtils;
 import com.guxuede.gm.net.client.registry.NetPack;
 import com.guxuede.samplegame.DesktopLauncher;
 import io.netty.buffer.ByteBuf;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-
+@Slf4j
 public class ActorLandingPack extends NetPack {
     private String mapName;
     private String userName;
@@ -55,10 +56,10 @@ public class ActorLandingPack extends NetPack {
     @Override
     public void action(Engine engine, Entity entity) {
 
-        if(isAlreadyLanding(engine)){
-            System.out.println("已经登录了,不能再登录");
-            return;
-        }
+//        if(isAlreadyLanding(engine)){
+//            log.info("已经登录了,不能再登录");
+//            return;
+//        }
 
         if(StringUtils.equals(DesktopLauncher.currentUserName, userName)){
             //clear map

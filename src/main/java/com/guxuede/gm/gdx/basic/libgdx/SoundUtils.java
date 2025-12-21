@@ -3,10 +3,12 @@ package com.guxuede.gm.gdx.basic.libgdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by guxuede on 2016/9/3 .
  */
+@Slf4j
 public class SoundUtils {
 
     public static final long play(Sound sound, Actor actor) {
@@ -26,7 +28,7 @@ public class SoundUtils {
     public static final void set3dPan(Sound sound, long soundId, float soundX, float soundY, float screenX, float screenY, float screenR) {
         float pan = (soundX - screenX) / screenR;
         float volume = (float) (1f - MathUtils.distance(soundX, soundY, screenX, screenY) / screenR);
-        //System.out.println("volume = " + volume + "，pan = " + pan);
+        //log.info("volume = " + volume + "，pan = " + pan);
         sound.setPan(soundId, pan, volume < 0 ? 0 : volume);
     }
 }
