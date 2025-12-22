@@ -107,5 +107,55 @@
     "name" : "LpcActor4",
     "texture":"data/texture/actor/lpcc4universal",
     "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcWithJumpParser"
+  },
+  {
+    "name" : "LpcActor5",
+    "texture":"data/texture/actor/lpc20251222_1",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor6",
+    "texture":"data/texture/actor/lpc20251222_2",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor7",
+    "texture":"data/texture/actor/lpc20251222_3",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor8",
+    "texture":"data/texture/actor/lpc20251222_4",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor9",
+    "texture":"data/texture/actor/lpc20251222_5",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor10",
+    "texture":"data/texture/actor/lpc20251222_6",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor11",
+    "texture":"data/texture/actor/lpc20251222_7",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor12",
+    "texture":"data/texture/actor/lpc20251222_8",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor13",
+    "texture":"data/texture/actor/lpc20251222_9",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
+  },
+  {
+    "name" : "LpcActor14",
+    "texture":"data/texture/actor/lpc20251222_10",
+    "parser":"com.guxuede.gm.gdx.actor.parser.actor.LpcStyle2Parser"
   }
 ]

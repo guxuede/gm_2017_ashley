@@ -14,10 +14,10 @@ public class PackageUtils {
     }
 
     public static String readString(ByteBuf data){
-        int indexOf = indexOf(data, STRING_DELIMITER);
-        if(indexOf > -1){
-            String string = data.readBytes(indexOf).toString(CHARSET);
-            data.skipBytes(STRING_DELIMITER.capacity());
+        int stringLength = indexOf(data, STRING_DELIMITER);
+        if(stringLength > -1){
+            String string = data.slice(data.readerIndex(), stringLength).toString(CHARSET);
+            data.skipBytes(stringLength + STRING_DELIMITER.capacity());
             return string;
         }
         return null;

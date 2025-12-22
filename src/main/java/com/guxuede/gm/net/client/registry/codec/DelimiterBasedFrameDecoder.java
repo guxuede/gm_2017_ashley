@@ -202,8 +202,9 @@ public class DelimiterBasedFrameDecoder extends ByteToMessageDecoder {
                 return null;
             }
 
-            ByteBuf frame = buffer.readRetainedSlice(minFrameLength);
-            Object pack = parse(frame);
+//            ByteBuf frame = buffer.readRetainedSlice(minFrameLength);
+            Object pack = parse(buffer);
+//            frame.release();
             buffer.skipBytes(minDelimLength);
             return pack;
         } else {
