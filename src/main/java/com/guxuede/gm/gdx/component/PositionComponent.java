@@ -15,5 +15,6 @@ public class PositionComponent implements Component , Pool.Poolable {
     @Override
     public void reset() {
         position.set(0,0);
+        high = 0;
     }
 }

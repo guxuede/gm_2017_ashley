@@ -3,16 +3,20 @@ package com.guxuede.gm.gdx.system.physics;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.actions.A;
 import com.guxuede.gm.gdx.actions.ParallelAction;
 import com.guxuede.gm.gdx.actions.SequenceAction;
+import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actions.buff.AddAttributeModifierAction;
 import com.guxuede.gm.gdx.actions.buff.RemoveAttributeModifierAction;
 import com.guxuede.gm.gdx.actions.buff.TemporalActionAttributeDeltaModifierAction;
 import com.guxuede.gm.gdx.actions.buff.TemporalActionAttributeModifierAction;
 import com.guxuede.gm.gdx.component.*;
+import com.guxuede.gm.gdx.entityEdit.E;
+import com.guxuede.gm.gdx.entityEdit.EntityEditor;
 import com.guxuede.gm.gdx.entityEdit.Mappers;
 import com.guxuede.gm.gdx.modifier.AnyAttributeModifier;
 import com.guxuede.gm.gdx.modifier.HighAttribute;
@@ -59,6 +63,7 @@ public class HurtSystem extends IteratingSystem {
         bloodComponent.modify(-hurtComponent.hurtDamage);
         hurtComponent.hurtEntity.add(e);
         addEffect(e, positionComponent, tPosition);
+        addEffect1(tPosition.position.x, tPosition.position.y, tPosition.high, "" + Math.round(hurtComponent.hurtDamage), Color.RED);
     }
 
     private static void addEffect(Entity e, PositionComponent positionComponent, PositionComponent tPosition) {
@@ -96,4 +101,11 @@ public class HurtSystem extends IteratingSystem {
 
         );
     }
-}
+
+    public static void addEffect1(float x, float y, float h, String text, Color color) {
+        E.create().text(text, color,1).pos(x, y, h).actions(
+                A.sequence(A.parallel(A.scaleFromToAction(0.1f , 1.5f ,.5f), A.moveByAction(0,100,.5f)),
+                        A.alphaAction(0, 1f), A.removeEntityAction()
+                )
+        ).buildToWorld();
+    }}

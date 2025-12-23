@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.guxuede.gm.gdx.ResourceManager;
+import com.guxuede.gm.gdx.actions.appearance.*;
 import com.guxuede.gm.gdx.actions.damage.HealByAction;
 import com.guxuede.gm.gdx.actions.entity.CreateEffectsOnActorPositionAction;
 import com.guxuede.gm.gdx.actions.entity.CreateEffectsAction;
@@ -281,6 +282,45 @@ public final class A {
     static public GdxParallelAction gdxParallel () {
         return action(GdxParallelAction.class);
     }
+
+    static public ScaleByAction scaleByAction (float scale,float duration) {
+        ScaleByAction action = action(ScaleByAction.class);
+        action.setAmount(scale);
+        action.setDuration(duration);
+        return action;
+    }
+
+    static public ScaleToAction scaleToAction (float scale, float duration) {
+        ScaleToAction action = action(ScaleToAction.class);
+        action.setScale(scale);
+        action.setDuration(duration);
+        return action;
+    }
+    static public ScaleFromToAction scaleFromToAction (float from, float scale, float duration) {
+        ScaleFromToAction action = action(ScaleFromToAction.class);
+        action.setFrom(from);
+        action.setScale(scale);
+        action.setDuration(duration);
+        return action;
+    }
+
+    static public AlphaAction alphaAction (float alpha, float duration) {
+        AlphaAction action = action(AlphaAction.class);
+        action.setAlpha(alpha);
+        action.setDuration(duration);
+        return action;
+    }
+
+    static public MoveByAction moveByAction (float amountX, float amountY, float duration) {
+        MoveByAction action = action(MoveByAction.class);
+        action.setAmountX(amountX);
+        action.setAmountY(amountY);
+        action.setDuration(duration);
+        return action;
+    }
+
+
+
     //////////////////////////////////////////////////////////////工具类 END///////////////////////////////////////////////////////////////////////
 
     public static BlinkAction blink1(Entity owner, Vector2 pos, String effectName){
@@ -364,6 +404,8 @@ public final class A {
         sequenceAction.addAction(parallel(effectsActorAction(effectName,pos)));
         return sequenceAction;
     }
+
+
 
     /**
      * 在一条线上创建特效

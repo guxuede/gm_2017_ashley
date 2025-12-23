@@ -65,6 +65,7 @@ public class ResourceManager {
 //        parameter.size = 16;
         parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS + Gdx.files.internal("data/fonts/word.txt").readString();
         myFont = generator.generateFont(parameter);
+        myFont.getData().markupEnabled = true;
         generator.dispose(); // Dispose the generator to prevent memory leaks, the font remains valid
     }
 

@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package com.guxuede.gm.gdx.actions.movement;
+package com.guxuede.gm.gdx.actions.appearance;
 
 import com.badlogic.gdx.math.Vector2;
 import com.guxuede.gm.gdx.actions.TemporalAction;

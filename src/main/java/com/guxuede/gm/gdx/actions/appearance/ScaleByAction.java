@@ -12,7 +12,10 @@ public class ScaleByAction extends RelativeTemporalAction {
 
     private float amountX, amountY;
 
-    public ScaleByAction(float amountX,float amountY,float duration){
+	public ScaleByAction() {
+	}
+
+	public ScaleByAction(float amountX, float amountY, float duration){
         this.amountX = amountX;
         this.amountY = amountY;
         setDuration(duration);

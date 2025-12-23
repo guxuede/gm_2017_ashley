@@ -3,6 +3,7 @@ package com.guxuede.gm.gdx.entityEdit;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.guxuede.gm.gdx.ResourceManager;
@@ -12,6 +13,7 @@ import com.guxuede.gm.gdx.actions.animation.AnimationAction;
 import com.guxuede.gm.gdx.actions.appearance.ScaleByAction;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.AnimationHolder;
+import com.guxuede.gm.gdx.basic.libgdx.TextSprite;
 import com.guxuede.gm.gdx.component.*;
 import com.guxuede.gm.gdx.component.ai.AiComponent;
 
@@ -167,6 +169,19 @@ public abstract class EntityEditor<T extends EntityEditor>{
         return this;
     }
 
+    //---------------------------------------text----------------------------------------------------
+    public EntityEditor text(String text, Color color, float zIndex) {
+        PresentableComponent presentableComponent = edit.create(PresentableComponent.class);
+        presentableComponent.region = new TextSprite(text);//TODO poolable
+        presentableComponent.zIndex = zIndex;
+        presentableComponent.color.set(color);
+        entity.add(presentableComponent);
+        return this;
+    }
+    //-------------------------------------------------------------------------------------------
+
+
+
     public EntityEditor sensor() {
         SensorComponent sensorComponent = edit.create(SensorComponent.class);
         entity.add(sensorComponent);
@@ -201,6 +216,15 @@ public abstract class EntityEditor<T extends EntityEditor>{
         entity.add(positionComponent);
         return this;
     }
+
+    public EntityEditor pos(float x, float y, float h) {
+        PositionComponent positionComponent = edit.create(PositionComponent.class);
+        positionComponent.position.set(x, y);
+        positionComponent.high = h;
+        entity.add(positionComponent);
+        return this;
+    }
+
 
     public EntityEditor asActor(){
         entity.add(edit.create(ActorComponent.class));
