@@ -232,7 +232,14 @@
         "drawOffSetY": 20,
         "rotation": 270
       }
-    ]
+    ],
+    "sounds":
+      [
+        {
+        "name":"idle",
+        "sound": "fire_hited.wav"
+        }
+      ]
   },
   {
     "name": "hit",

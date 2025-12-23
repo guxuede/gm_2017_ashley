@@ -55,10 +55,6 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
                 boolean isLoop = soundJ.getBoolean("loop",false);
                 Sound sound = ResourceManager.getSoundOrLoad(soundFile);
                 if(sound!=null){
-                    if(!soundName.contains(",")){
-                        //animationHolder.getAnimation(S)
-                        //animationHolder.addSound(soundName,new SoundHolder(sound,isLoop));
-                    }else{
                         for(String sn : soundName.split(",")){
                             Animation<TextureRegion> animation = animationHolder.getAnimation(sn.hashCode());
                             if(animation!=null){
@@ -66,13 +62,9 @@ public class DefaultSpriteParser extends AbstractSpriteParser {
                                 if(sptite instanceof GdxSprite){
                                     ResourceManager.putSpriteSound(((GdxSprite) sptite).id,sound);
                                 }
-                                final TextureRegion sptite2 = animation.getKeyFrames()[2];
-                                if(sptite2 instanceof GdxSprite){
-                                    ResourceManager.putSpriteSound(((GdxSprite) sptite2).id,sound);
-                                }
                             }
                         }
-                    }
+
                 }
             }
         }

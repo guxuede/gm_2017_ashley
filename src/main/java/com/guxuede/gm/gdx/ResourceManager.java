@@ -13,14 +13,18 @@ import com.badlogic.gdx.ai.btree.decorator.Include;
 import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibrary;
 import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibraryManager;
 import com.badlogic.gdx.ai.btree.utils.BehaviorTreeParser;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.LongMap;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.guxuede.gm.gdx.actor.parser.ActorHolder;
 import com.guxuede.gm.gdx.actor.parser.ActorJsonParse;
 import com.guxuede.gm.gdx.actor.parser.ActorSkillParse;
@@ -46,12 +50,25 @@ import java.util.function.Function;
 @Slf4j
 public class ResourceManager {
 
+    private static AssetManager assetManager = new AssetManager();
     private static ScriptEngine scriptEngine;
     static {
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         scriptEngineManager.registerEngineName("nashorn",new NashornScriptEngineFactory());
         scriptEngine = new ScriptEngineManager().getEngineByName("nashorn");
     }
+
+    public static final BitmapFont myFont;
+    static {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/fonts/ARKai_T.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+//        parameter.size = 16;
+        parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS + Gdx.files.internal("data/fonts/word.txt").readString();
+        myFont = generator.generateFont(parameter);
+        generator.dispose(); // Dispose the generator to prevent memory leaks, the font remains valid
+    }
+
+
     private static final Map<String,Sound> soundMap = new HashMap<String, Sound>();
     private static final LongMap<Sound> spriteSoundMap = new LongMap<Sound>();
     private static final Map<String,Texture> TEXTURE_MAP = new HashMap<String, Texture>();
@@ -67,8 +84,17 @@ public class ResourceManager {
     }
     public static final Map<String, Skill> SKILLS = ActorSkillParse.parseSkill(Gdx.files.internal("data/skill/skill.html"));
 
-    public static Skin skin=new Skin(Gdx.files.internal("skin/kenney-pixel/skin.json"));
-    public static BitmapFont font = skin.getFont("default-font");
+    public static Skin skin;
+    static{
+        ObjectMap<String, Object> fontMap = new ObjectMap<String, Object>();
+        fontMap.put("default", myFont);
+        fontMap.put("default-font", myFont);
+        /* Create the SkinParameter and supply the ObjectMap to it */
+        SkinLoader.SkinParameter parameter = new SkinLoader.SkinParameter(fontMap);
+        assetManager.load("skin/kenney-pixel/skin.json", Skin.class, parameter);
+        assetManager.finishLoading();
+        skin = assetManager.get("skin/kenney-pixel/skin.json", Skin.class);
+    }
 
     public static Sprite shadow = new Sprite(getTextureRegion("data/shadow",96,96,32,32));
 
