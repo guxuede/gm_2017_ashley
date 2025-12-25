@@ -572,4 +572,7 @@ public final class A {
         return sequenceAction;
     }
 
+    public static Action hideMe(Entity owner){
+        return sequence(alphaAction(0,1), delay(5), alphaAction(1, 1));
+    }
 }

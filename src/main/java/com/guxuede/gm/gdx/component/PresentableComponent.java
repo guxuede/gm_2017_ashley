@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
 
+//TODO Presentable 如何做到Sprite 统一
 public class PresentableComponent implements Component, Pool.Poolable {
     public boolean visible = true;
     public float scaleX = 1, scaleY = 1;

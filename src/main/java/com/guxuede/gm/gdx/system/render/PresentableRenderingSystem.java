@@ -48,18 +48,18 @@ public class PresentableRenderingSystem extends SortedIteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        PositionComponent positionComponent = Mappers.positionCM.get(entity);
-        PresentableComponent presentableComponent = Mappers.presentableCM.get(entity);
-        TextureRegion textureRegion = presentableComponent.region;
-        if (textureRegion != null) {
-            if (textureRegion instanceof GdxSprite) {
-                GdxSprite sprite = (GdxSprite) textureRegion;
-                sprite.setPosition(positionComponent.position.x + presentableComponent.drawOffSetX, positionComponent.position.y + presentableComponent.drawOffSetY +  positionComponent.high);
-                sprite.draw(batch, alphaModulation, presentableComponent.rotation, presentableComponent.scaleX, presentableComponent.scaleY, presentableComponent.color);
+        PositionComponent p = Mappers.positionCM.get(entity);
+        PresentableComponent d = Mappers.presentableCM.get(entity);
+        TextureRegion t = d.region;
+        if (t != null) {
+            if (t instanceof GdxSprite) {
+                GdxSprite sprite = (GdxSprite) t;
+                sprite.setPosition(p.position.x + d.drawOffSetX, p.position.y + d.drawOffSetY +  p.high);
+                sprite.draw(batch, alphaModulation, d.rotation, d.scaleX, d.scaleY, d.color);
             } else {
-                tmpColor.set(presentableComponent.color).a*=alphaModulation;
+                tmpColor.set(d.color).a*=alphaModulation;
                 batch.setColor(tmpColor);
-                batch.draw(textureRegion, positionComponent.position.x + presentableComponent.drawOffSetX, positionComponent.position.y +  + presentableComponent.drawOffSetY +  positionComponent.high, presentableComponent.originX, presentableComponent.originY, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), presentableComponent.scaleX, presentableComponent.scaleY, presentableComponent.rotation);
+                batch.draw(t, p.position.x + d.drawOffSetX, p.position.y +  + d.drawOffSetY +  p.high, d.originX, d.originY, t.getRegionWidth(), t.getRegionHeight(), d.scaleX, d.scaleY, d.rotation);
             }
         }
     }

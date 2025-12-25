@@ -135,8 +135,8 @@ public class StageSystem extends EntitySystem {
             position = Mappers.positionCM.get(viewActor).position;
         }
         if(position!=null){
-            camera.position.x = position.x;
-            camera.position.y = position.y;
+            camera.position.x = Math.round(position.x);//fix map 1pixe issue
+            camera.position.y = Math.round(position.y);
             camera.update();
             spriteBatch.setProjectionMatrix(camera.combined);
         }else{

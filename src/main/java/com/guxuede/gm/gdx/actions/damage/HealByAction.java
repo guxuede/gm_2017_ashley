@@ -25,6 +25,7 @@ public class HealByAction extends RelativeTemporalAction {
         this.heal = heal;
     }
 
+    static Color C = new Color(0.0627451f, 0.49019608f, 0.0627451f, 1);
 
     @Override
     protected void updateRelative(float percentDelta) {
@@ -32,10 +33,10 @@ public class HealByAction extends RelativeTemporalAction {
         float delta = heal * percentDelta;
         bloodComponent.modify(delta);
 
-        if(System.currentTimeMillis() - lastEffectTime> 100){
+        if(System.currentTimeMillis() - lastEffectTime> 50){
             lastEffectTime = System.currentTimeMillis();
             PositionComponent positionComponent = Mappers.positionCM.get(target);
-            addEffect1(positionComponent.position.x + MathUtils.random(-50,50), positionComponent.position.y + MathUtils.random(-50,50),0, "1" , Color.GREEN);
+            addEffect1(positionComponent.position.x + MathUtils.random(-50,50), positionComponent.position.y + MathUtils.random(-50,50),0, "1" , C);
         }
     }
 

@@ -44,6 +44,8 @@ public class HurtSystem extends IteratingSystem {
         });
     }
 
+    static Color BLOOD = new Color(0.58f, -0.15f, 0.12f, 1);
+
     private static void processHurt(Entity e, HurtComponent hurtComponent, TeamComponent teamComponent, PositionComponent positionComponent) {
         TeamComponent tTeam = Mappers.teamCM.get(e);
         if(tTeam.id == teamComponent.id){//same team
@@ -63,7 +65,7 @@ public class HurtSystem extends IteratingSystem {
         bloodComponent.modify(-hurtComponent.hurtDamage);
         hurtComponent.hurtEntity.add(e);
         addEffect(e, positionComponent, tPosition);
-        addEffect1(tPosition.position.x, tPosition.position.y, tPosition.high, "" + Math.round(hurtComponent.hurtDamage), Color.RED);
+        addEffect1(tPosition.position.x, tPosition.position.y, tPosition.high, "" + Math.round(hurtComponent.hurtDamage), BLOOD);
     }
 
     private static void addEffect(Entity e, PositionComponent positionComponent, PositionComponent tPosition) {
@@ -104,7 +106,11 @@ public class HurtSystem extends IteratingSystem {
 
     public static void addEffect1(float x, float y, float h, String text, Color color) {
         E.create().text(text, color,1).pos(x, y, h).actions(
-                A.sequence(A.parallel(A.scaleFromToAction(0.1f , 1.5f ,.5f), A.moveByAction(0,100,.5f)),
+                A.sequence(A.parallel(
+                        A.sequence(
+                                A.scaleFromToAction(2f , 2f ,.2f),
+                                A.scaleFromToAction(0.5f , 0.5f ,.25f)
+                        ), A.moveByAction(0,100,.5f)),
                         A.alphaAction(0, 1f), A.removeEntityAction()
                 )
         ).buildToWorld();

@@ -123,4 +123,17 @@
         </script>
     </skill>
 
+    <skill id="hide" name="hide" hotKey="K" targetType="TARGET_TYPE_AREA" icon="BTNImmolationOn"
+           skillCooldownTime="6"
+           spellcastAnimation = "spellcast"
+           spellcastAnimationDuration="0"
+           actionDelay="1">
+        <description>
+            hide me
+        </description>
+        <script>
+            var af = Java.type('com.guxuede.gm.gdx.actions.A');
+            af.gdxSequence(af.alphaAction(0,1), af.delay(5), af.alphaAction(1, 1));
+        </script>
+    </skill>
 </skills>
